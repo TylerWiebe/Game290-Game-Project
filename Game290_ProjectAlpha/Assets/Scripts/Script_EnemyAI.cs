@@ -29,27 +29,32 @@ public class Script_EnemyAI : MonoBehaviour
     [SerializeField]
     private float roamDistance = 5f;
 
-    void Start ()
+    //allows enemy to attack if set to "true"
+    private bool enemyInRange = false;
+
+
+
+
+    void Start()
     {
         //assign the object with tag "Player" to be the enemy's target 
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
 
-    // Update is called once per frame
+
+
     void Update()
     {
         if (playerNotSeen == true)
         {
             StartCoroutine(PassiveBehaviour());
         }
-
         else
         {
             StartCoroutine(AggressiveBehaviour());
         }
     }
-
 
 
 
@@ -69,7 +74,7 @@ public class Script_EnemyAI : MonoBehaviour
             yield break;
         }
 
-        //walk
+        //walk left for specified seconds
         while ((walkingDirection == "left") || (walkingDirection == "Left"))
         {
             transform.Translate(Vector2.left * passiveSpeed * Time.deltaTime);
@@ -82,9 +87,12 @@ public class Script_EnemyAI : MonoBehaviour
             yield break;
         }
 
-        //pause and turn right
+        //pause
         yield return new WaitForSeconds(1);
     }
+
+
+
 
     //Agressive enemy behaviour triggered after enemy notices player
     IEnumerator AggressiveBehaviour()
@@ -93,6 +101,44 @@ public class Script_EnemyAI : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         //walk towards target position at specified speed
-        transform.position = Vector2.MoveTowards(transform.position, target.position, aggressiveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target.position, aggressiveSpeed * Time.deltaTime); 
+    }
+
+
+
+
+    //when a collision with player occurs, trigger attacks
+    IEnumerator OnTriggerEnter2D(Collider2D other)
+    {
+        if ((other.tag == "player") || (other.tag == "Player"))
+        {
+            enemyInRange = true;
+
+            //when enemy is in range attack
+            while (enemyInRange == true)
+            {
+                //attack every 1.5 seconds
+                yield return new WaitForSeconds(1.5f);
+                Attack();
+            }
+        }
+    }
+
+
+
+
+    //trigger when play leaves enemy range (stop attacking)
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        enemyInRange = false;
+    }
+
+
+
+
+    //temporary attack function
+    private void Attack()
+    {
+        Debug.Log("Attack");
     }
 }
