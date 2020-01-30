@@ -600,6 +600,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6012400469325524881, guid: cdc6ee0e5b241a14ca0d2de2e375c4dc,
+        type: 3}
+      propertyPath: stoppingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6012400469325524892, guid: cdc6ee0e5b241a14ca0d2de2e375c4dc,
         type: 3}
       propertyPath: m_Name
