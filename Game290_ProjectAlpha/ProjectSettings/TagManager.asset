@@ -44,6 +44,9 @@ TagManager:
   - name: Background
     uniqueID: 2193921203
     locked: 0
+  - name: Enemy
+    uniqueID: 3838843341
+    locked: 0
   - name: AlienBody
     uniqueID: 1728627391
     locked: 0
