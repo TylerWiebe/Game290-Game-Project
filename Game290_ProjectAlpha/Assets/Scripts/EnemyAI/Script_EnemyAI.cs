@@ -38,7 +38,7 @@ public class Script_EnemyAI : MonoBehaviour
     void Start()
     {
         //assign the object with tag "Player" to be the enemy's target 
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
 
@@ -64,7 +64,7 @@ public class Script_EnemyAI : MonoBehaviour
         if (roamDistance > 0)
         {
             //Walk right for specified seconds
-            while ((walkingDirection == "right") || (walkingDirection == "Right"))
+            if ((walkingDirection == "right") || (walkingDirection == "Right"))
             {
                 transform.Translate(Vector2.right * passiveSpeed * Time.deltaTime);
 
@@ -77,7 +77,7 @@ public class Script_EnemyAI : MonoBehaviour
             }
 
             //walk left for specified seconds
-            while ((walkingDirection == "left") || (walkingDirection == "Left"))
+            if ((walkingDirection == "left") || (walkingDirection == "Left"))
             {
                 transform.Translate(Vector2.left * passiveSpeed * Time.deltaTime);
 
@@ -86,6 +86,32 @@ public class Script_EnemyAI : MonoBehaviour
 
                 //change direction
                 walkingDirection = "right";
+                yield break;
+            }
+
+            //Walk right for specified seconds
+            if ((walkingDirection == "up") || (walkingDirection == "Up"))
+            {
+                transform.Translate(Vector2.up * passiveSpeed * Time.deltaTime);
+
+                //wait
+                yield return new WaitForSeconds(roamDistance);
+
+                //change direction
+                walkingDirection = "down";
+                yield break;
+            }
+
+            //Walk right for specified seconds
+            if ((walkingDirection == "down") || (walkingDirection == "Down"))
+            {
+                transform.Translate(Vector2.down * passiveSpeed * Time.deltaTime);
+
+                //wait
+                yield return new WaitForSeconds(roamDistance);
+
+                //change direction
+                walkingDirection = "up";
                 yield break;
             }
 
@@ -106,7 +132,7 @@ public class Script_EnemyAI : MonoBehaviour
         //walk towards target position at specified speed and stop if distance between is greater than certain amount
         if (Vector2.Distance(transform.position, target.position) > stoppingDistance)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target.position, aggressiveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, target.position, aggressiveSpeed * Time.smoothDeltaTime);
         }
     }
 
