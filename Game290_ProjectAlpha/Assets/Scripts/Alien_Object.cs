@@ -32,7 +32,7 @@ public class Alien_Object : MonoBehaviour
 
 
         mouse_position = Input.mousePosition;
-        Debug.Log(mouse_position);
+        //Debug.Log(mouse_position);
         alien_sprite_position = Camera.main.WorldToScreenPoint(myObject.transform.position);
         float deltaX = Input.GetAxis("Horizontal") * speed;
         float deltaY = Input.GetAxis("Vertical") * speed;
