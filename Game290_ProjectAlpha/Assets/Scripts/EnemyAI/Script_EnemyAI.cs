@@ -12,6 +12,16 @@ public class Script_EnemyAI : MonoBehaviour
     [SerializeField]
     private int aggressiveSpeed = 7;
 
+    //Randomization of AI passive walk direction
+    //dont need this if you are not using the randomization of walking direction
+    private int iter = 0;
+    private System.Random rand = new System.Random();
+    private int direction = 0;
+    private int walkTime = 100;
+    public int walkTime_LowerLimit = 100;
+    public int walkTime_UpperLimit = 250;
+
+
     //Speed of walking before seeing player
     [SerializeField]
     private int passiveSpeed = 5;
@@ -61,8 +71,65 @@ public class Script_EnemyAI : MonoBehaviour
     //Passive enemy behaviour (When enemy has not yet spotted player)
     IEnumerator PassiveBehaviour()
     {
+        
+        if (iter == walkTime)
+        {
+            iter = 0;
+            direction = rand.Next(0, 4);
+            walkTime = rand.Next(walkTime_LowerLimit, walkTime_UpperLimit);
+            Debug.Log(direction);
+        }
+        else
+        {
+            iter++;
+        }
+
         if (roamDistance > 0)
         {
+
+
+            while (direction == 0)
+            {
+                transform.Translate(Vector2.right * passiveSpeed * Time.deltaTime);
+
+                //wait
+                yield return new WaitForSeconds(roamDistance);
+                Debug.Log("right");
+                yield break;
+
+            }
+            while (direction == 1)
+            {
+                transform.Translate(Vector2.left * passiveSpeed * Time.deltaTime);
+
+                //wait
+                yield return new WaitForSeconds(roamDistance);
+                Debug.Log("left");
+                yield break;
+
+            }
+            while (direction == 2)
+            {
+                transform.Translate(Vector2.up * passiveSpeed * Time.deltaTime);
+
+                //wait
+                yield return new WaitForSeconds(roamDistance);
+                Debug.Log("up");
+                yield break;
+
+            }
+            while (direction == 3)
+            {
+                transform.Translate(Vector2.down * passiveSpeed * Time.deltaTime);
+
+                //wait
+                yield return new WaitForSeconds(roamDistance);
+                Debug.Log("down");
+                yield break;
+
+            }
+            //Original Script
+            /*
             //Walk right for specified seconds
             while ((walkingDirection == "right") || (walkingDirection == "Right"))
             {
@@ -88,6 +155,7 @@ public class Script_EnemyAI : MonoBehaviour
                 walkingDirection = "right";
                 yield break;
             }
+            */
 
             //pause
             yield return new WaitForSeconds(1);
