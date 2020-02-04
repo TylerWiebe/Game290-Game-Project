@@ -6,49 +6,236 @@ using System;
 
 public class Alien_Object : MonoBehaviour
 {
+
+    //Alien Sprite
     public Sprite alien_sprite;
+
+    //Alien Movement variables
     Vector3 mouse_position = new Vector3();
     Vector3 alien_sprite_position = new Vector3();
     float angle = 0f;
-    private GameObject myObject;
+
+    //Attached objects
+    private GameObject AlienHead;
     private GameObject alienBody;
     private GameObject myCamera;
     public float speed;
+
+    //ALIEN STATS
+    //Health Stats
+    private int Max_Health = 100;// actual maximum health
+    private int HEALTH_SCALE_CONST = 100; //this is the health constant between the three classes, the max health will be scaled off of this value
+    private int Current_Health_Percentage = 100; //this is the amount of health the player has left in percentage
+    private int Current_Health = 100; //This is the amount of health, numeric value
+
+    //Damage Stats
+    private int damage = 10;
+    private int num_ranged_charges = 4;
+    private int charge_size = 25;
+
+    //Variable Stats
+    public int strength = 0;
+    public int vitality = 0;
+
+    // Class status Variables
+    //an array to keep the order of the morph
+    // 0 = assassin
+    // 1 = bruiser
+    // 2 = sniper
+    private int[] Class_Order = new int[3];
+    private int Current_Class = 0;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        myObject = GameObject.Find("AlienHead"); //Need this to get alien object's sprite renderer
+        //Finding the desired GameObjects
+        AlienHead = GameObject.Find("AlienHead"); //Need this to get alien object's sprite renderer
         alienBody = GameObject.Find("AlienBody"); //Need this to get alien object's sprite renderer
         myCamera = GameObject.Find("Main Camera");
+
+        //Initializing Character
+        System.Random rand = new System.Random();
+        switch (rand.Next(0,6))
+        {
+            case 0:
+                Class_Order = new int[] { 0, 1, 2 };
+                Current_Class = 1;
+                break;
+            case 1:
+                Class_Order = new int[] { 0, 2, 1 };
+                Current_Class = 2;
+                break;
+            case 2:
+                Class_Order = new int[] { 1, 0, 2 };
+                Current_Class = 0;
+                break;
+            case 3:
+                Class_Order = new int[] { 1, 2, 0 };
+                Current_Class = 2;
+                break;
+            case 4:
+                Class_Order = new int[] { 2, 1, 0 };
+                Current_Class = 1;
+                break;
+            default:
+                Class_Order = new int[] { 2, 0, 1 };
+                Current_Class = 0;
+                break;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        
+        if(Current_Health <= 0)
+        {
+            Debug.Log("AlienDied");
+            Alien_Died();
+        }
+        if(Input.GetKeyUp("q"))
+        {
+            Debug.Log("MorphLeft");
+            morph_left();
+        }
+        if (Input.GetKeyUp("e"))
+        {
+            Debug.Log("MorphRight");
+            morph_right();
+        }
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            Debug.Log("AlienAttack");
+            attack();
+        }
+        moveAlien();
 
 
+
+    }
+
+    /// <summary>
+    /// Movement and rotation of the alien body and head
+    /// </summary>
+    private void moveAlien()
+    {
+        //Alien Movement and Aiming
         mouse_position = Input.mousePosition;
-        //Debug.Log(mouse_position);
-        alien_sprite_position = Camera.main.WorldToScreenPoint(myObject.transform.position);
-        float deltaX = Input.GetAxis("Horizontal") * speed;
-        float deltaY = Input.GetAxis("Vertical") * speed;
+        alien_sprite_position = Camera.main.WorldToScreenPoint(AlienHead.transform.position);
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        float deltaX = horizontal * speed;
+        float deltaY = vertical * speed;
         float nextX = transform.position.x + deltaX;
         float nextY = transform.position.y + deltaY;
 
         mouse_position.x = mouse_position.x - alien_sprite_position.x;
         mouse_position.y = mouse_position.y - alien_sprite_position.y;
 
-        myObject.transform.position = new Vector3(nextX, nextY, 0);
+        AlienHead.transform.position = new Vector3(nextX, nextY, 0);
         alienBody.transform.position = new Vector3(nextX, nextY, 0);
         myCamera.transform.position = new Vector3(nextX, nextY, -10);
 
+        //Call the walking animation
+        walking_Anim(horizontal, vertical);
 
         angle = Mathf.Atan2(mouse_position.y, mouse_position.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    /// <summary>
+    /// Rotates the morph queue to the right
+    /// Calls the morph_animation function
+    /// Updates the current_class
+    /// </summary>
+    private void morph_right()
+    {
+        int temp = Class_Order[2];
+        Class_Order[2] = Class_Order[1];
+        Class_Order[1] = Class_Order[0];
+        Class_Order[0] = temp;
+
+        //Call the morph Animation Change
+        int prev_class = Current_Class;
+        Current_Class = Class_Order[1];
+        morph_animation(prev_class, Current_Class);
+
+        updateAlienStats();
+    }
+    private void morph_left()
+    {
+        int temp = Class_Order[0];
+        Class_Order[0] = Class_Order[1];
+        Class_Order[1] = Class_Order[2];
+        Class_Order[2] = temp;
+
+        //call the morph animation change
+        int prev_class = Current_Class;
+        Current_Class = Class_Order[1];
+        morph_animation(prev_class, Current_Class);
+
+        updateAlienStats();
+    }
+
+    /// <summary>
+    /// This function is used to do a morph animation from one class into another
+    /// </summary>
+    /// <param name="prev_class">some value between 0-2 which is the previous class</param>
+    /// <param name="current_class">some value between 0-2 which is the current class</param>
+    private void morph_animation(int prev_class, int current_class)
+    {
 
     }
+
+    /// <summary>
+    /// This function will control which walking animations will be running
+    /// </summary>
+    /// <param name="Horizontal">a value between -1 and 1 that determines direction of horizontal movement</param>
+    /// <param name="Vertical">a value between -1 and 1 that determines direction of vertical movement</param>
+    private void walking_Anim(float Horizontal, float Vertical)
+    {
+
+    }
+
+    private void updateAlienStats()
+    {
+        //Debug.Log(Current_Class);
+        if (Current_Class == 0)
+        {
+            Max_Health = (int) Math.Round(HEALTH_SCALE_CONST * (vitality + 1) * 0.5);
+            Current_Health = (int) (Max_Health * (Current_Health_Percentage * 0.01));
+        }
+        else if (Current_Class == 1)
+        {
+            Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1) * 2.0);
+            Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
+
+        }
+        else
+        {
+            Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1.0));
+            Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
+
+        }
+        //Debug.Log(Current_Health);
+    }
+
+    /// <summary>
+    /// On alien death, do something
+    /// </summary>
+    private void Alien_Died()
+    {
+
+    }
+    
+    /// <summary>
+    /// On mouse1 down do some attack sequence
+    /// </summary>
+    private void attack()
+    {
+
+    }
+
 }

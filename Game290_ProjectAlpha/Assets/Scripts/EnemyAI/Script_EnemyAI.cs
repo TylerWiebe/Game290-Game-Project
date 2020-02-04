@@ -77,7 +77,7 @@ public class Script_EnemyAI : MonoBehaviour
             iter = 0;
             direction = rand.Next(0, 4);
             walkTime = rand.Next(walkTime_LowerLimit, walkTime_UpperLimit);
-            Debug.Log(direction);
+            //Debug.Log(direction);
         }
         else
         {
@@ -94,7 +94,7 @@ public class Script_EnemyAI : MonoBehaviour
 
                 //wait
                 yield return new WaitForSeconds(roamDistance);
-                Debug.Log("right");
+                //Debug.Log("right");
                 yield break;
 
             }
@@ -104,7 +104,7 @@ public class Script_EnemyAI : MonoBehaviour
 
                 //wait
                 yield return new WaitForSeconds(roamDistance);
-                Debug.Log("left");
+                //Debug.Log("left");
                 yield break;
 
             }
@@ -114,7 +114,7 @@ public class Script_EnemyAI : MonoBehaviour
 
                 //wait
                 yield return new WaitForSeconds(roamDistance);
-                Debug.Log("up");
+                //Debug.Log("up");
                 yield break;
 
             }
@@ -124,7 +124,7 @@ public class Script_EnemyAI : MonoBehaviour
 
                 //wait
                 yield return new WaitForSeconds(roamDistance);
-                Debug.Log("down");
+                //Debug.Log("down");
                 yield break;
 
             }
