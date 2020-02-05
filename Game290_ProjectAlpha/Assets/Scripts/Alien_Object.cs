@@ -13,7 +13,8 @@ public class Alien_Object : MonoBehaviour
     //Alien Movement variables
     Vector3 mouse_position = new Vector3();
     Vector3 alien_sprite_position = new Vector3();
-    float angle = 0f;
+    float HeadAngle = 0f;
+    float BodyAngle = 0f;
 
     //Attached objects
     private GameObject AlienHead;
@@ -141,8 +142,10 @@ public class Alien_Object : MonoBehaviour
         //Call the walking animation
         walking_Anim(horizontal, vertical);
 
-        angle = Mathf.Atan2(mouse_position.y, mouse_position.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        BodyAngle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg;
+        alienBody.transform.rotation = Quaternion.Euler(0, 0, BodyAngle);
+        HeadAngle = Mathf.Atan2(mouse_position.y, mouse_position.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, HeadAngle);
     }
 
     /// <summary>
@@ -238,4 +241,9 @@ public class Alien_Object : MonoBehaviour
 
     }
 
+    private void Deal_Damage_to_Alien(int damage)
+    {
+        Current_Health -= damage;
+        Current_Health_Percentage = Current_Health / Max_Health;
+    }
 }
