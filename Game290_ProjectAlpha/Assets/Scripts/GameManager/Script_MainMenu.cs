@@ -17,6 +17,18 @@ public class Script_MainMenu : MonoBehaviour
     [SerializeField]
     private Dropdown resolutionDropdown = null;
 
+    //holds scene transition manager object
+    [SerializeField]
+    private GameObject sceneTransitionManager = null;
+
+    //holds scene transition manager object
+    [SerializeField]
+    private GameObject mainMenu = null;
+
+    //holds scene transition manager object
+    [SerializeField]
+    private GameObject optionsMenu = null;
+
     void Start ()
     {
         //on start store available resolutions in an array
@@ -58,17 +70,27 @@ public class Script_MainMenu : MonoBehaviour
     //plays game by changing scenes
     public void PlayGame()
     {
-        //Load next Scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //reference SceneTransitionManager, find Script_SceneTransition and call function "NextScene"
+        sceneTransitionManager.GetComponent<Script_SceneTransition>().NextSceneCall(4);
     }
 
-    //Exits the game
+    //Call coroutine Exit
     public void ExitGame()
     {
-        Application.Quit();
+        StartCoroutine(Exit());
     }
 
+    //exits after transition and pause
+    IEnumerator Exit()
+    {
+        sceneTransitionManager.GetComponent<Script_SceneTransition>().TransitionCall(2);
 
+        //wait 1 second
+        yield return new WaitForSeconds(2);
+
+        //exit game
+        Application.Quit();
+    }
 
     /*
      * Options Menu
@@ -98,5 +120,36 @@ public class Script_MainMenu : MonoBehaviour
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
+    }
+
+
+
+
+    public void OnOptionsClick()
+    {
+        StartCoroutine(Wait(0));
+    }
+
+    public void OnBackClick()
+    {
+        StartCoroutine(Wait(1));
+    }
+
+    //add pause for options button clicks
+    IEnumerator Wait(int i)
+    {
+        if (i == 0)
+        {
+            yield return new WaitForSeconds(0.2f);
+            mainMenu.SetActive(false);
+            optionsMenu.SetActive(true);
+        }
+        
+        if (i == 1)
+        {
+            yield return new WaitForSeconds(0.2f);
+            mainMenu.SetActive(true);
+            optionsMenu.SetActive(false);
+        }
     }
 }

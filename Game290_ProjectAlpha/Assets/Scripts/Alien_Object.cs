@@ -6,6 +6,9 @@ using System;
 
 public class Alien_Object : MonoBehaviour
 {
+    //hold reference to object holding Script_PlayerDeath
+    [SerializeField]
+    private GameObject gameManager = null;
 
     //Alien Sprite
     public Sprite alien_sprite;
@@ -227,7 +230,8 @@ public class Alien_Object : MonoBehaviour
     /// </summary>
     private void Alien_Died()
     {
-
+        //call DeathScreen function from Script_PlayerDeath
+        gameManager.GetComponent<Script_PlayerDeath>().DeathScreen();
     }
     
     /// <summary>
