@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 //This script must be attached to the attackRange game object and must also be a child of the "enemy" game object.
-public class Script_EnemyAttack : MonoBehaviour
+public class melee_enemy_attack : MonoBehaviour
 {
     //allows enemy to attack if set to "true"
     private bool enemyInRange = false;
@@ -26,21 +26,15 @@ public class Script_EnemyAttack : MonoBehaviour
         }
     }
 
-
-
-
     //trigger when player leaves enemy range (stop attacking)
     private void OnTriggerExit2D(Collider2D other)
     {
         enemyInRange = false;
     }
 
-
-
-
     //temporary attack function
     private void Attack()
     {
-        Debug.Log("Attack");
+        Debug.Log("Melee Attack");
     }
 }

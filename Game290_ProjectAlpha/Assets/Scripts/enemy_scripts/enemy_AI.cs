@@ -6,7 +6,7 @@ using UnityEngine;
 //Enemy walks back and forth.  If player appears in sight, walk towards and attack player.
 //NOTE - Player game object must be tagged "Player"
 
-public class Script_EnemyAI : MonoBehaviour
+public class enemy_AI : MonoBehaviour
 {
     //Speed of walking after seeing player
     [SerializeField]
@@ -20,7 +20,6 @@ public class Script_EnemyAI : MonoBehaviour
     private int walkTime = 100;
     public int walkTime_LowerLimit = 100;
     public int walkTime_UpperLimit = 250;
-
 
     //Speed of walking before seeing player
     [SerializeField]
@@ -42,16 +41,11 @@ public class Script_EnemyAI : MonoBehaviour
     [SerializeField]
     private float stoppingDistance = 3f;
 
-
-
-
     void Start()
     {
         //assign the object with tag "Player" to be the enemy's target 
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
-
-
 
     //control behaviour type
     void Update()
@@ -66,8 +60,6 @@ public class Script_EnemyAI : MonoBehaviour
         }
     }
 
-
-
     //Passive enemy behaviour (When enemy has not yet spotted player)
     IEnumerator PassiveBehaviour()
     {
@@ -77,7 +69,7 @@ public class Script_EnemyAI : MonoBehaviour
             iter = 0;
             direction = rand.Next(0, 4);
             walkTime = rand.Next(walkTime_LowerLimit, walkTime_UpperLimit);
-            Debug.Log(direction);
+            //Debug.Log(direction);
         }
         else
         {
@@ -86,17 +78,14 @@ public class Script_EnemyAI : MonoBehaviour
 
         if (roamDistance > 0)
         {
-
-
             while (direction == 0)
             {
                 transform.Translate(Vector2.right * passiveSpeed * Time.deltaTime);
 
                 //wait
                 yield return new WaitForSeconds(roamDistance);
-                Debug.Log("right");
+                //Debug.Log("right");
                 yield break;
-
             }
             while (direction == 1)
             {
@@ -104,9 +93,8 @@ public class Script_EnemyAI : MonoBehaviour
 
                 //wait
                 yield return new WaitForSeconds(roamDistance);
-                Debug.Log("left");
+                //Debug.Log("left");
                 yield break;
-
             }
             while (direction == 2)
             {
@@ -114,9 +102,8 @@ public class Script_EnemyAI : MonoBehaviour
 
                 //wait
                 yield return new WaitForSeconds(roamDistance);
-                Debug.Log("up");
+                //Debug.Log("up");
                 yield break;
-
             }
             while (direction == 3)
             {
@@ -124,9 +111,8 @@ public class Script_EnemyAI : MonoBehaviour
 
                 //wait
                 yield return new WaitForSeconds(roamDistance);
-                Debug.Log("down");
+                //Debug.Log("down");
                 yield break;
-
             }
             //Original Script
             /*
@@ -188,9 +174,6 @@ public class Script_EnemyAI : MonoBehaviour
         }
     }
 
-
-
-
     //Agressive enemy behaviour triggered after enemy notices player
     IEnumerator AggressiveBehaviour()
     {
@@ -203,6 +186,4 @@ public class Script_EnemyAI : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, target.position, aggressiveSpeed * Time.smoothDeltaTime);
         }
     }
-
-
 }
