@@ -32,4 +32,15 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
         this.hit_points = hit_points;
     }
 
+    public void attacked(int damage)
+    {
+        hit_points -= damage;
+        if (hit_points <= 0)
+        {
+            //son be deded
+            Script_Enemy_Controller script_enemy_controller = GameObject.Find("GameManager").GetComponent<Script_Enemy_Controller>();
+            script_enemy_controller.destroy_enemy(this.gameObject);
+        }
+    }
+
 }
