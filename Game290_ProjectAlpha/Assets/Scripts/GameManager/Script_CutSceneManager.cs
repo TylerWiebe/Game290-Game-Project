@@ -9,6 +9,10 @@ public class Script_CutSceneManager : MonoBehaviour
     [SerializeField]
     private GameObject sceneTransitionManager = null;
 
+    /*
+    * Bring player end cutscene
+    */
+
     //Called by signal
     public void EndCutScene()
     {
@@ -31,6 +35,27 @@ public class Script_CutSceneManager : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         SceneManager.LoadScene("MainMenu");
+    }
+
+    /*
+     * Bring player to game scene
+     */
+
+    //Called by signal
+    public void ReviveCall()
+    {
+        StartCoroutine(Revive());
+    }
+
+    IEnumerator Revive()
+    {
+        //play fade out animation
+        sceneTransitionManager.GetComponent<Script_SceneTransition>().TransitionCall(4);
+
+        //wait for animation(1 second)
+        yield return new WaitForSeconds(2);
+
+        SceneManager.LoadScene("GameScene");
     }
 
 
