@@ -27,7 +27,7 @@ public class Script_SceneTransition : MonoBehaviour
      * Play transition but dont change scenes
      */
 
-    //sets a trigger to play the fade out animation
+    //sets a trigger to play the fade out animation & volume but dont go to next scene
     public void TransitionCall (int time)
     {
         StartCoroutine(Transition(time));
@@ -35,6 +35,9 @@ public class Script_SceneTransition : MonoBehaviour
 
     IEnumerator Transition(int time)
     {
+        //VolumeFade mixer volume
+        StartCoroutine(VolumeFadeOut());
+
         animator.SetTrigger("FadeOut");
 
         //wait for animation(1 second)
