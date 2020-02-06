@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ranged_enemy_object : MonoBehaviour
+public class Script_Ranged_Enemy_Object : MonoBehaviour
 {
     private int attack_damage;
     private int hit_points;
 
+    private GameObject enemy_body;
+    private GameObject enemy_attack_cone;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -28,4 +31,5 @@ public class ranged_enemy_object : MonoBehaviour
     {
         this.hit_points = hit_points;
     }
+
 }

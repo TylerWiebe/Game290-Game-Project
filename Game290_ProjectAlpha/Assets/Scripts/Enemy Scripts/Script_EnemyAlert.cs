@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemy_alert : MonoBehaviour
+public class Script_EnemyAlert : MonoBehaviour
 {
     //Attach this script to the enemyVisionrRange game object.
     //Note - the vision range game object must be a child of the "Enemy" game object
@@ -17,7 +17,7 @@ public class enemy_alert : MonoBehaviour
     private void OnTriggerEnter2D (Collider2D other)
     {
         //check if the collision was with the player and player hasn't been seen by enemy before
-        if (((other.tag == "player") || (other.tag == "Player")) && (gameObject.GetComponentInParent<enemy_AI>().playerNotSeen == true))
+        if (((other.tag == "player") || (other.tag == "Player")) && (gameObject.GetComponentInParent<Script_EnemyAI>().playerNotSeen == true))
         {
             //create alert indicator above enemy's head
             position = transform.position;
@@ -28,7 +28,7 @@ public class enemy_alert : MonoBehaviour
             Destroy(clone, 1.0f);
 
             //change the value of the enemy's playerNotSeen value (swap to aggressive mode)
-            gameObject.GetComponentInParent<enemy_AI>().playerNotSeen = false;
+            gameObject.GetComponentInParent<Script_EnemyAI>().playerNotSeen = false;
         }
     }
 }

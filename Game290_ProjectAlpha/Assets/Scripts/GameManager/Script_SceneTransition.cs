@@ -61,28 +61,13 @@ public class Script_SceneTransition : MonoBehaviour
         //wait for animation(1 second)
         yield return new WaitForSeconds(time);
 
-        if (SceneManager.GetActiveScene().buildIndex <= 2)
-        {
-            //Load next Scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
-        
-        else
-        {
-            //Load next Scene
-            SceneManager.LoadScene("MainMenu");
-        }
+        //Load next Scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 
-
-
-        /*
-         * Called to fade volume of mixer
-         */
-
-        //slowly decrease volume of mixer
-        IEnumerator VolumeFadeOut()
+    //slowly decrease volume of mixer
+    IEnumerator VolumeFadeOut()
     {
         int vol = 0;
         for (int i = 0; i < 8; i++)

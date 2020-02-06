@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 354973741034140198}
   - component: {fileID: 3661174851178172749}
-  - component: {fileID: 5613019148309452789}
+  - component: {fileID: 1714836741983831953}
   - component: {fileID: 7939659542883285304}
   m_Layer: 0
   m_Name: EnemyAttackRange
@@ -72,18 +72,18 @@ SpriteRenderer:
   m_SortingLayerID: -456123955
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: bc834c6581126f048ade8ec23f09d33b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e8c302796f43621418ed87d81b0d513b, type: 3}
   m_Color: {r: 0.90224755, g: 1, b: 0, a: 0.78431374}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 6.94, y: 5.68}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5613019148309452789
+--- !u!114 &1714836741983831953
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 960598955677639028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 992d615a57685a54cbb6f1b9528ee4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 20ae71781eee0664781287f8cae205e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!58 &7939659542883285304
@@ -122,11 +122,11 @@ GameObject:
   - component: {fileID: 3724678921228487347}
   - component: {fileID: 1684779901902944386}
   - component: {fileID: 5701325471697950221}
-  - component: {fileID: 6546200779599041884}
+  - component: {fileID: 5781563052975181942}
   - component: {fileID: 3936697249583275181}
   - component: {fileID: 7014446972430361369}
   m_Layer: 0
-  m_Name: prefab_ranged_enemy
+  m_Name: Prefab_Ranged_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,7 +218,7 @@ MonoBehaviour:
   walkingDirection: Right
   roamDistance: 5
   stoppingDistance: 3
---- !u!114 &6546200779599041884
+--- !u!114 &5781563052975181942
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5174167463473005377}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c4464ffad6532f4ba77e5069ea54759, type: 3}
+  m_Script: {fileID: 11500000, guid: 0239d271cc01e6d4d82e157055a0b5b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!58 &3936697249583275181

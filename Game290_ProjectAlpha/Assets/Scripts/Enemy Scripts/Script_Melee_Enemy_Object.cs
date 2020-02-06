@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class melee_enemy_object : MonoBehaviour
+public class Script_Melee_Enemy_Object : MonoBehaviour
 {
     private int attack_damage;
     private int hit_points;
