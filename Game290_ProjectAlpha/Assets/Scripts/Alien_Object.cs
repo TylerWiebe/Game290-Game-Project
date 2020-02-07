@@ -67,26 +67,32 @@ public class Alien_Object : MonoBehaviour
             case 0:
                 Class_Order = new int[] { 0, 1, 2 };
                 Current_Class = 1;
+                speed = 0.025f;
                 break;
             case 1:
                 Class_Order = new int[] { 0, 2, 1 };
                 Current_Class = 2;
+                speed = 0.05f;
                 break;
             case 2:
                 Class_Order = new int[] { 1, 0, 2 };
                 Current_Class = 0;
+                speed = 0.075f;
                 break;
             case 3:
                 Class_Order = new int[] { 1, 2, 0 };
                 Current_Class = 2;
+                speed = 0.05f;
                 break;
             case 4:
                 Class_Order = new int[] { 2, 1, 0 };
                 Current_Class = 1;
+                speed = 0.025f;
                 break;
             default:
                 Class_Order = new int[] { 2, 0, 1 };
                 Current_Class = 0;
+                speed = 0.075f;
                 break;
         }
     }
@@ -213,18 +219,19 @@ public class Alien_Object : MonoBehaviour
         {
             Max_Health = (int) Math.Round(HEALTH_SCALE_CONST * (vitality + 1) * 0.5);
             Current_Health = (int) (Max_Health * (Current_Health_Percentage * 0.01));
+            speed = 0.075f;
         }
         else if (Current_Class == 1)
         {
             Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1) * 2.0);
             Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
-
+            speed = 0.05f;
         }
         else
         {
             Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1.0));
             Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
-
+            speed = 0.025f;
         }
         //Debug.Log(Current_Health);
     }
