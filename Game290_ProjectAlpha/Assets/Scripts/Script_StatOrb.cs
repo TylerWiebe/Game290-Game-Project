@@ -21,6 +21,9 @@ public class Script_StatOrb : MonoBehaviour
             //freeze time
             Time.timeScale = 0f;
 
+            //remove stat orb
+            Destroy(this.gameObject);
+
             //pull up stat screen
             statWindow.SetActive(true);
         }
