@@ -164,6 +164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 4701577881204473788}
+  mixer: {fileID: 24100000, guid: 57bbf438637fb6446b2e1581d5e45b64, type: 2}
+  slider: {fileID: 4564038500080812804, guid: 8e841c0e67d05f04784e4121ffc20b62, type: 3}
 --- !u!1 &4701577881930112192
 GameObject:
   m_ObjectHideFlags: 0

@@ -31,8 +31,12 @@ public class Script_CutSceneManager : MonoBehaviour
         //play fade out animation
         sceneTransitionManager.GetComponent<Script_SceneTransition>().TransitionCall(4);
 
+
+        // ensure game is not paused (for transition play)
+        Time.timeScale = 1f;
+
         //wait for animation(1 second)
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(4);
 
         SceneManager.LoadScene("MainMenu");
     }
