@@ -108,7 +108,7 @@ public class Script_SceneTransition : MonoBehaviour
 
         while (vol < savedVolume)
         {
-            vol += 5;
+            vol += 8;
 
             mixer.SetFloat("volume", vol);
             yield return new WaitForSeconds(0.2f);

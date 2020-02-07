@@ -39,8 +39,8 @@ public class Alien_Object : MonoBehaviour
     private int charge_size = 25;
 
     //Variable Stats
-    public int strength = 0;
-    public int vitality = 0;
+    private int strength = 0;
+    private int vitality = 0;
 
     // Class status Variables
     //an array to keep the order of the morph
@@ -247,6 +247,44 @@ public class Alien_Object : MonoBehaviour
 
         SceneManager.LoadScene("DeathScreen");
     }
+
+    ///
+    ///Increase stat values on orb pickup
+    ///
+    public void IncreaseStat(int statIndex)
+    {
+        switch (statIndex)
+        {
+            //increase vitality
+            case 0:
+                vitality += 1;
+                Debug.Log("Vitality Up");
+                break;
+
+            //increase strength
+            case 1:
+                strength += 1;
+                Debug.Log("Strength Up");
+                break;
+
+            //increase number of ranged charges
+            case 2:
+                num_ranged_charges += 1;
+                Debug.Log("Ranged Charges Up");
+                break;
+
+            //increase charge size
+            case 3:
+                charge_size += 1;
+                Debug.Log("Charge Size Up");
+                break;
+
+            default:
+                Debug.Log("Invalid StatIndex on stat pickup");
+                break;
+        }
+    }
+
     
     /// <summary>
     /// On mouse1 down do some attack sequence
