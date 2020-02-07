@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 //This script must be attached to the attackRange game object and must also be a child of the "enemy" game object.
-public class Script_EnemyAttack : MonoBehaviour
+public class Script_Ranged_Enemy_Attack : MonoBehaviour
 {
     //allows enemy to attack if set to "true"
     private bool enemyInRange = false;
@@ -41,6 +41,6 @@ public class Script_EnemyAttack : MonoBehaviour
     //temporary attack function
     private void Attack()
     {
-        Debug.Log("Attack");
+        Debug.Log("Ranged Attack Triggered");
     }
 }

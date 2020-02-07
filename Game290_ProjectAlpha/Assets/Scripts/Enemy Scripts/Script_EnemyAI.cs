@@ -15,12 +15,14 @@ public class Script_EnemyAI : MonoBehaviour
     //Randomization of AI passive walk direction
     //dont need this if you are not using the randomization of walking direction
     private int iter = 0;
-    private System.Random rand = new System.Random();
     private int direction = 0;
     private int walkTime = 100;
     public int walkTime_LowerLimit = 100;
     public int walkTime_UpperLimit = 250;
 
+    //rotate body when in aggro variables
+    Vector3 enemy_position;
+    float angle = 0f;
 
     //Speed of walking before seeing player
     [SerializeField]
@@ -41,9 +43,6 @@ public class Script_EnemyAI : MonoBehaviour
 
     [SerializeField]
     private float stoppingDistance = 3f;
-
-
-
 
     void Start()
     {
@@ -75,9 +74,9 @@ public class Script_EnemyAI : MonoBehaviour
         if (iter == walkTime)
         {
             iter = 0;
-            direction = rand.Next(0, 4);
-            walkTime = rand.Next(walkTime_LowerLimit, walkTime_UpperLimit);
-            //Debug.Log(direction);
+            direction = UnityEngine.Random.Range(0, 4);
+            walkTime = UnityEngine.Random.Range(walkTime_LowerLimit, walkTime_UpperLimit);
+            Debug.Log(direction);
         }
         else
         {
@@ -86,47 +85,37 @@ public class Script_EnemyAI : MonoBehaviour
 
         if (roamDistance > 0)
         {
-
-
             while (direction == 0)
             {
                 transform.Translate(Vector2.right * passiveSpeed * Time.deltaTime);
-
+                rotate_body_passive(direction);
                 //wait
                 yield return new WaitForSeconds(roamDistance);
-                //Debug.Log("right");
                 yield break;
-
             }
             while (direction == 1)
             {
                 transform.Translate(Vector2.left * passiveSpeed * Time.deltaTime);
-
+                rotate_body_passive(direction);
                 //wait
                 yield return new WaitForSeconds(roamDistance);
-                //Debug.Log("left");
                 yield break;
-
             }
             while (direction == 2)
             {
                 transform.Translate(Vector2.up * passiveSpeed * Time.deltaTime);
-
+                rotate_body_passive(direction);
                 //wait
                 yield return new WaitForSeconds(roamDistance);
-                //Debug.Log("up");
                 yield break;
-
             }
             while (direction == 3)
             {
+                rotate_body_passive(direction);
                 transform.Translate(Vector2.down * passiveSpeed * Time.deltaTime);
-
                 //wait
                 yield return new WaitForSeconds(roamDistance);
-                //Debug.Log("down");
                 yield break;
-
             }
             //Original Script
             /*
@@ -188,9 +177,6 @@ public class Script_EnemyAI : MonoBehaviour
         }
     }
 
-
-
-
     //Agressive enemy behaviour triggered after enemy notices player
     IEnumerator AggressiveBehaviour()
     {
@@ -201,8 +187,24 @@ public class Script_EnemyAI : MonoBehaviour
         if (Vector2.Distance(transform.position, target.position) > stoppingDistance)
         {
             transform.position = Vector2.MoveTowards(transform.position, target.position, aggressiveSpeed * Time.smoothDeltaTime);
+            rotate_body_aggro();
         }
     }
 
-
+    //rotates the enemy to face the way they are moving whenst in passive mode
+    private void rotate_body_passive(int direction)
+    {
+        angle = direction * 90;
+        this.gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);   
+    }
+    
+    //rotates the enemy to face the player whenst in aggro mode
+    private void rotate_body_aggro()
+    {
+        enemy_position = target.transform.position;
+        enemy_position.x = enemy_position.x - this.gameObject.transform.position.x;
+        enemy_position.y = enemy_position.y - this.gameObject.transform.position.y;
+        angle = (Mathf.Atan2(enemy_position.y, enemy_position.x) * Mathf.Rad2Deg) - 90;
+        this.gameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
 }

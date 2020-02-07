@@ -7,10 +7,6 @@ using UnityEngine.UI;
 
 public class Script_MainMenu : MonoBehaviour
 {
-    //mixer reference
-    [SerializeField]
-    private AudioMixer mixer = null;
-
     //holds available resolutions as array
     private Resolution[] resolutions;
 
@@ -101,13 +97,6 @@ public class Script_MainMenu : MonoBehaviour
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-    }
-
-    //sets the volume slider value
-    public void SetVolume(float sliderValue)
-    {
-        //logarithm for smooth volume change
-        mixer.SetFloat("volume", Mathf.Log10(sliderValue) * 20);
     }
 
     //setss game graphical quality

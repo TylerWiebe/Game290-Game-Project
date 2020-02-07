@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Alien_Object : MonoBehaviour
 {
-    //hold reference to object holding Script_PlayerDeath
+    //hold reference to object holding Script_SceneTransition
     [SerializeField]
-    private GameObject gameManager = null;
+    private GameObject sceneTransitionManager = null;
 
     //Alien Sprite
     public Sprite alien_sprite;
@@ -236,12 +237,22 @@ public class Alien_Object : MonoBehaviour
     }
 
     /// <summary>
-    /// On alien death, do something
+    /// On alien death, call coroutine: Plays fade out animation and load DeathScreen scene
     /// </summary>
-    private void Alien_Died()
+    private void CallAlien_Died()
     {
-        //call DeathScreen function from Script_PlayerDeath
-        gameManager.GetComponent<Script_PlayerDeath>().DeathScreen();
+        StartCoroutine(Alien_Died());
+    }
+
+    IEnumerator Alien_Died()
+    {
+        //play fade out animation
+        sceneTransitionManager.GetComponent<Script_SceneTransition>().TransitionCall(4);
+
+        //wait for animation(1 second)
+        yield return new WaitForSeconds(2);
+
+        SceneManager.LoadScene("DeathScreen");
     }
     
     /// <summary>

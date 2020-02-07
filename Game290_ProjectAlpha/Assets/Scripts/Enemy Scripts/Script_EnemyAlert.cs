@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Script_EnemyAlert : MonoBehaviour
 {
-    //Attach this script to the enemyVisionrRange game object.
+    //Attach this script to the enemyVisionRange game object.
     //Note - the vision range game object must be a child of the "Enemy" game object
 
     //holds enemy alerted icon
