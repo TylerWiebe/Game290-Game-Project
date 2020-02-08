@@ -24,6 +24,7 @@ public class Alien_Object : MonoBehaviour
     private GameObject AlienHead;
     private GameObject alienBody;
     private GameObject myCamera;
+    public GameObject meleeAttack;
     public float speed;
 
     //ALIEN STATS
@@ -116,11 +117,11 @@ public class Alien_Object : MonoBehaviour
             Debug.Log("MorphRight");
             morph_right();
         }
-        if (Input.GetKeyUp(KeyCode.Mouse0))
-        {
-            Debug.Log("AlienAttack");
-            attack();
-        }
+        //if (Input.GetKeyUp(KeyCode.Mouse0))
+        //{
+        //   Debug.Log("AlienAttack");
+        //    attack();
+        //}
         moveAlien();
 
 
@@ -156,6 +157,9 @@ public class Alien_Object : MonoBehaviour
         alienBody.transform.rotation = Quaternion.Euler(0, 0, BodyAngle);
         HeadAngle = Mathf.Atan2(mouse_position.y, mouse_position.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, HeadAngle);
+
+        //meleeAttack.transform.position = new Vector3(nextX+deltaX, nextY+deltaY, 0);
+
     }
 
     /// <summary>
@@ -258,12 +262,12 @@ public class Alien_Object : MonoBehaviour
     /// <summary>
     /// On mouse1 down do some attack sequence
     /// </summary>
-    private void attack()
+    public int getDamage()
     {
-
+        return damage * ((strength + 1) * 10);
     }
 
-    private void Deal_Damage_to_Alien(int damage)
+    private void Deal_Damage_from_Alien(int damage)
     {
         Current_Health -= damage;
         Current_Health_Percentage = Current_Health / Max_Health;
