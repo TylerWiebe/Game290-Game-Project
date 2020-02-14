@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6012400469325524881}
   - component: {fileID: 6012400469325524880}
   - component: {fileID: 6012400469325524895}
+  - component: {fileID: 1944712882992667976}
   m_Layer: 8
   m_Name: Prefab_Melee_Enemy
   m_TagString: MeleeEnemy
@@ -99,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 437e69dc67a4591468dc8c91f1c2d533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hit_points: 105
 --- !u!114 &6012400469325524881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,6 +158,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1944712882992667976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6012400469325524892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552bb78d2d5860e45869668a5d56c375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statOrb: {fileID: 6866704549077001977, guid: 0fd407f8b7809334ca958fdaf926cc1c, type: 3}
 --- !u!1 &6012400469467545531
 GameObject:
   m_ObjectHideFlags: 0

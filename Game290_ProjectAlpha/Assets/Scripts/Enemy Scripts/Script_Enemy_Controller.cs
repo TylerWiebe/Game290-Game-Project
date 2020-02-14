@@ -104,6 +104,9 @@ public class Script_Enemy_Controller : MonoBehaviour
     //an enemy has been kilt by player
     public void destroy_enemy(GameObject temp_enemy)
     {
+        //spawn a stat orb with percent chance (5)
+        this.GetComponent<Script_SpawnStatOrb>().SpawnStatOrb(5);
+
         all_enemies.Remove(temp_enemy);
     }
 
