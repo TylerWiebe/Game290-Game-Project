@@ -41,6 +41,6 @@ public class Script_Melee_Enemy_Attack : MonoBehaviour
     //temporary attack function
     private void Attack()
     {
-        Debug.Log("Melee Attack Triggered");
+        //Debug.Log("Melee Attack Triggered");
     }
 }
