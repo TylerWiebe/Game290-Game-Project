@@ -125,9 +125,9 @@ GameObject:
   - component: {fileID: 5781563052975181942}
   - component: {fileID: 3936697249583275181}
   - component: {fileID: 7014446972430361369}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prefab_Ranged_Enemy
-  m_TagString: Untagged
+  m_TagString: RangedEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

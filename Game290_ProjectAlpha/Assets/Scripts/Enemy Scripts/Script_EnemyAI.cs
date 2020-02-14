@@ -76,7 +76,7 @@ public class Script_EnemyAI : MonoBehaviour
             iter = 0;
             direction = UnityEngine.Random.Range(0, 4);
             walkTime = UnityEngine.Random.Range(walkTime_LowerLimit, walkTime_UpperLimit);
-            Debug.Log(direction);
+            //Debug.Log(direction);
         }
         else
         {

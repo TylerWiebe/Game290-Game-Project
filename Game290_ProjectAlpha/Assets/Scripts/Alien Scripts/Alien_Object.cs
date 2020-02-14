@@ -96,6 +96,7 @@ public class Alien_Object : MonoBehaviour
                 speed = 0.075f;
                 break;
         }
+        meleeAttack.GetComponent<MeleeAttack>().setAttackForm(Current_Class);
     }
 
     // Update is called once per frame
@@ -126,6 +127,11 @@ public class Alien_Object : MonoBehaviour
 
 
 
+    }
+
+    public float getBodyAngle()
+    {
+        return BodyAngle;
     }
 
     /// <summary>
@@ -237,6 +243,7 @@ public class Alien_Object : MonoBehaviour
             Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
             speed = 0.025f;
         }
+        meleeAttack.GetComponent<MeleeAttack>().setAttackForm(Current_Class);
         //Debug.Log(Current_Health);
     }
 
@@ -310,4 +317,5 @@ public class Alien_Object : MonoBehaviour
         Current_Health -= damage;
         Current_Health_Percentage = Current_Health / Max_Health;
     }
+
 }

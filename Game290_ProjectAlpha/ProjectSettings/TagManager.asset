@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - RangedEnemy
+  - MeleeEnemy
   - enemy
   layers:
   - Default
@@ -14,7 +16,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Enemy
   - 
   - 
   - 

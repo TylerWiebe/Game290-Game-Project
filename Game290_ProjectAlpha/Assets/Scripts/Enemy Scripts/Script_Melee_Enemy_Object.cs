@@ -5,7 +5,7 @@ using UnityEngine;
 public class Script_Melee_Enemy_Object : MonoBehaviour
 {
     private int attack_damage;
-    private int hit_points;
+    public int hit_points;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,9 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
 
     public void attacked(int damage)
     {
+        Debug.Log("previous health"+ (damage).ToString());
         hit_points -= damage;
+        Debug.Log("next health" + (hit_points).ToString());
         if (hit_points <= 0)
         {
             //son be deded
