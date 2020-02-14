@@ -21,6 +21,11 @@ public class Script_SceneTransition : MonoBehaviour
 
     void Start()
     {
+        if (PlayerPrefs.GetFloat("SliderValue") == 1)
+        {
+            mixer.SetFloat("volume", -1);
+        }
+
         //reset volume
         StartCoroutine(VolumeFadeIn());
 
