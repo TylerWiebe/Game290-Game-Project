@@ -21,9 +21,6 @@ public class Script_StatOrb : MonoBehaviour
             //freeze time
             Time.timeScale = 0f;
 
-            //remove stat orb
-            Destroy(this.gameObject);
-
             //pull up stat screen
             statWindow.SetActive(true);
         }
@@ -34,9 +31,12 @@ public class Script_StatOrb : MonoBehaviour
     {
         player.GetComponent<Alien_Object>().IncreaseStat(statIndex);
 
-        //freeze time
+        //unfreeze time
         Time.timeScale = 1f;
 
         statWindow.SetActive(false);
+
+        //remove stat orb
+        Destroy(this.gameObject);
     }
 }

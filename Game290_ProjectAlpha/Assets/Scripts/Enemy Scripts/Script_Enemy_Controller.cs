@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Script_Enemy_Controller : MonoBehaviour
 {
+    //melee enemies' base stats
     public const int base_melee_attack_damage = 10;
     public const int base_melee_hit_points = 100;
 
@@ -46,6 +47,7 @@ public class Script_Enemy_Controller : MonoBehaviour
             GameObject temp = Resources.Load("Prefab_Ranged_Enemy") as GameObject;
             int x_pos = UnityEngine.Random.Range(-15, 15); //random x pos (could be looked up from a table later)
             int y_pos = UnityEngine.Random.Range(-15, 15); //random y pos (could be looked up from a table later)
+            temp.tag = "MeleeEnemy";
             Instantiate(temp, new Vector3(x_pos, y_pos, 0), Quaternion.identity); //load to scene
             seed_ranged_enemy_stats(temp, level_sequence_number); //seed ranged enemy stats
             all_enemies.Add(temp); //add enemy to list of all enemies
@@ -78,7 +80,11 @@ public class Script_Enemy_Controller : MonoBehaviour
         temp_script.set_attack_damage(base_melee_attack_damage + (melee_attack_damage_modifier * level_sequence_number));
         //set hit points
         temp_script.set_hit_points(base_melee_hit_points + (melee_hit_points_modifier * level_sequence_number));
-
+        //Debug.Log("Initial Hitpoints" + (base_melee_hit_points + (melee_hit_points_modifier * level_sequence_number)).ToString());
+        //set the layer
+        temp_gameObject.layer = LayerMask.NameToLayer("Enemy");
+        //set the tag
+        temp_gameObject.tag = "MeleeEnemy";
     }
     
     //seed ranged enemies' stats based on the level multipler
@@ -89,12 +95,18 @@ public class Script_Enemy_Controller : MonoBehaviour
         temp_script.set_attack_damage(base_ranged_attack_damage + (ranged_attack_damage_modifier * level_sequence_number));
         //set hit points
         temp_script.set_hit_points(base_ranged_hit_points + (ranged_hit_points_modifier * level_sequence_number));
-
+        //set the layer
+        temp_gameObject.layer = LayerMask.NameToLayer("Enemy");
+        //set the tag
+        temp_gameObject.tag = "RangedEnemy";
     }
 
     //an enemy has been kilt by player
     public void destroy_enemy(GameObject temp_enemy)
     {
+        //spawn a stat orb with percent chance (5)
+        this.GetComponent<Script_SpawnStatOrb>().SpawnStatOrb(5);
+
         all_enemies.Remove(temp_enemy);
     }
 
