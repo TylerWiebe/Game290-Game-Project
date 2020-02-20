@@ -27,6 +27,18 @@ public class Alien_Object : MonoBehaviour
     [SerializeField]
     private GameObject healthBar = null;
 
+    //Projectile charges
+    [SerializeField]
+    private GameObject chargeBar = null;
+
+    //Projectile charges
+    [SerializeField]
+    private GameObject assassinSkillBox = null;
+
+    //Projectile charges
+    [SerializeField]
+    private GameObject bruiserSkillBox = null;
+
     //Alien Sprite
     public Sprite alien_sprite;
 
@@ -53,6 +65,8 @@ public class Alien_Object : MonoBehaviour
     //Damage Stats
     private int damage = 10;
     private int num_ranged_charges = 4;
+    private int current_ranged_charges = 4;
+
     private int charge_size = 25;
 
     //Variable Stats
@@ -84,32 +98,32 @@ public class Alien_Object : MonoBehaviour
             case 0:
                 Class_Order = new int[] { 0, 1, 2 };
                 Current_Class = 1;
-                speed = 0.025f;
+                updateAlienStats();
                 break;
             case 1:
                 Class_Order = new int[] { 0, 2, 1 };
                 Current_Class = 2;
-                speed = 0.05f;
+                updateAlienStats();
                 break;
             case 2:
                 Class_Order = new int[] { 1, 0, 2 };
                 Current_Class = 0;
-                speed = 0.075f;
+                updateAlienStats();
                 break;
             case 3:
                 Class_Order = new int[] { 1, 2, 0 };
                 Current_Class = 2;
-                speed = 0.05f;
+                updateAlienStats();
                 break;
             case 4:
                 Class_Order = new int[] { 2, 1, 0 };
                 Current_Class = 1;
-                speed = 0.025f;
+                updateAlienStats();
                 break;
             default:
                 Class_Order = new int[] { 2, 0, 1 };
                 Current_Class = 0;
-                speed = 0.075f;
+                updateAlienStats();
                 break;
         }
         meleeAttack.GetComponent<MeleeAttack>().setAttackForm(Current_Class);
@@ -240,39 +254,70 @@ public class Alien_Object : MonoBehaviour
 
     private void updateAlienStats()
     {
-        //Debug.Log(Current_Class);
+        //assassin
         if (Current_Class == 0)
         {
             Max_Health = (int) Math.Round(HEALTH_SCALE_CONST * (vitality + 1) * 0.5);
             Current_Health = (int) (Max_Health * (Current_Health_Percentage * 0.01));
             speed = 0.075f;
 
-            //update healthbar Max Health
+            //update healthbar Max Health & current health
             healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(Max_Health);
-            //update healthbar with current health
             healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
+
+            //turn off charge bar
+            chargeBar.SetActive(false);
+            //turn off skill box
+            bruiserSkillBox.SetActive(false);
+
+            //turn on skill box
+            assassinSkillBox.SetActive(true);
+
+            //add skill
+
         }
+        //bruiser
         else if (Current_Class == 1)
         {
             Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1) * 2.0);
             Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
-            speed = 0.05f;
+            speed = 0.025f;
 
-            //update healthbar Max Health
+            //update healthbar Max Health & current health
             healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(Max_Health);
-            //update healthbar with current health
             healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
+
+            //turn off charge bar
+            chargeBar.SetActive(false);
+            //turn off skill box
+            assassinSkillBox.SetActive(false);
+
+            //turn on skill box
+            bruiserSkillBox.SetActive(true);
+
+            //add skill
         }
+        //ranged
         else
         {
             Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1.0));
             Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
-            speed = 0.025f;
+            speed = 0.05f;
 
-            //update healthbar Max Health
+            //update healthbar Max Health & current health
             healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(Max_Health);
-            //update healthbar with current health
             healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
+
+            //turn off skill box
+            assassinSkillBox.SetActive(false);
+            bruiserSkillBox.SetActive(false);
+
+            //add projectile charge bar
+            chargeBar.SetActive(true);
+            chargeBar.GetComponent<Script_ProjectileCharges>().SetMaxCharge(num_ranged_charges);
+            chargeBar.GetComponent<Script_ProjectileCharges>().SetCharge(current_ranged_charges);
+
+            //add skill
         }
         meleeAttack.GetComponent<MeleeAttack>().setAttackForm(Current_Class);
         //Debug.Log(Current_Health);
