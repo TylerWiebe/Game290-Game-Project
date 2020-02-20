@@ -11,6 +11,22 @@ public class Alien_Object : MonoBehaviour
     [SerializeField]
     private GameObject sceneTransitionManager = null;
 
+    //Class Icon 0
+    [SerializeField]
+    private GameObject classIcon0 = null;
+
+    //Class Icon 1
+    [SerializeField]
+    private GameObject classIcon1 = null;
+
+    //class Icon 2
+    [SerializeField]
+    private GameObject classIcon2 = null;
+
+    //HealthBar
+    [SerializeField]
+    private GameObject healthBar = null;
+
     //Alien Sprite
     public Sprite alien_sprite;
 
@@ -29,10 +45,10 @@ public class Alien_Object : MonoBehaviour
 
     //ALIEN STATS
     //Health Stats
-    private int Max_Health = 100;// actual maximum health
+    public int Max_Health = 100;// actual maximum health
     private int HEALTH_SCALE_CONST = 100; //this is the health constant between the three classes, the max health will be scaled off of this value
     private int Current_Health_Percentage = 100; //this is the amount of health the player has left in percentage
-    private int Current_Health = 100; //This is the amount of health, numeric value
+    public int Current_Health = 100; //This is the amount of health, numeric value
 
     //Damage Stats
     private int damage = 10;
@@ -230,18 +246,33 @@ public class Alien_Object : MonoBehaviour
             Max_Health = (int) Math.Round(HEALTH_SCALE_CONST * (vitality + 1) * 0.5);
             Current_Health = (int) (Max_Health * (Current_Health_Percentage * 0.01));
             speed = 0.075f;
+
+            //update healthbar Max Health
+            healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(Max_Health);
+            //update healthbar with current health
+            healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
         }
         else if (Current_Class == 1)
         {
             Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1) * 2.0);
             Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
             speed = 0.05f;
+
+            //update healthbar Max Health
+            healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(Max_Health);
+            //update healthbar with current health
+            healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
         }
         else
         {
             Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1.0));
             Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
             speed = 0.025f;
+
+            //update healthbar Max Health
+            healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(Max_Health);
+            //update healthbar with current health
+            healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
         }
         meleeAttack.GetComponent<MeleeAttack>().setAttackForm(Current_Class);
         //Debug.Log(Current_Health);
