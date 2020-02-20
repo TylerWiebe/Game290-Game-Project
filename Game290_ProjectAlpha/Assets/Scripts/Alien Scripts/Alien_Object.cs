@@ -33,11 +33,11 @@ public class Alien_Object : MonoBehaviour
 
     //Projectile charges
     [SerializeField]
-    private GameObject assassinSkillBox = null;
+    private GameObject assassinAttackBox = null;
 
     //Projectile charges
     [SerializeField]
-    private GameObject bruiserSkillBox = null;
+    private GameObject bruiserAttackBox = null;
 
     //Alien Sprite
     public Sprite alien_sprite;
@@ -148,6 +148,7 @@ public class Alien_Object : MonoBehaviour
             Debug.Log("MorphRight");
             morph_right();
         }
+
         //if (Input.GetKeyUp(KeyCode.Mouse0))
         //{
         //   Debug.Log("AlienAttack");
@@ -268,10 +269,10 @@ public class Alien_Object : MonoBehaviour
             //turn off charge bar
             chargeBar.SetActive(false);
             //turn off skill box
-            bruiserSkillBox.SetActive(false);
+            bruiserAttackBox.SetActive(false);
 
             //turn on skill box
-            assassinSkillBox.SetActive(true);
+            assassinAttackBox.SetActive(true);
 
             //add skill
 
@@ -290,10 +291,10 @@ public class Alien_Object : MonoBehaviour
             //turn off charge bar
             chargeBar.SetActive(false);
             //turn off skill box
-            assassinSkillBox.SetActive(false);
+            assassinAttackBox.SetActive(false);
 
             //turn on skill box
-            bruiserSkillBox.SetActive(true);
+            bruiserAttackBox.SetActive(true);
 
             //add skill
         }
@@ -309,8 +310,8 @@ public class Alien_Object : MonoBehaviour
             healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
 
             //turn off skill box
-            assassinSkillBox.SetActive(false);
-            bruiserSkillBox.SetActive(false);
+            assassinAttackBox.SetActive(false);
+            bruiserAttackBox.SetActive(false);
 
             //add projectile charge bar
             chargeBar.SetActive(true);

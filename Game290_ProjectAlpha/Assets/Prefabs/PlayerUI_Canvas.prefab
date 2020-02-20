@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 4601590270823725957}
   - component: {fileID: 8292948525066522180}
   m_Layer: 5
-  m_Name: assassinSkill
+  m_Name: assassinAttackBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1454,7 +1454,7 @@ GameObject:
   - component: {fileID: 6236314832416359496}
   - component: {fileID: 1612129202945354238}
   m_Layer: 5
-  m_Name: bruiserSkill
+  m_Name: bruiserAttackBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

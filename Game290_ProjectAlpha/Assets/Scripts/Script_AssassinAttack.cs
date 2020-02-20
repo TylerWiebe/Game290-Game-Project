@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Script_AssassinSkill : MonoBehaviour
+public class Script_AssassinAttack : MonoBehaviour
 {
     [SerializeField]
     private Image cooldownOverlay = null;
@@ -12,7 +12,7 @@ public class Script_AssassinSkill : MonoBehaviour
     private Text text = null;
 
     [SerializeField]
-    private float cooldown = 10;
+    private float cooldown = 0.5f;
     private float timeLeft;
     private bool onCooldown = false;
 
@@ -25,7 +25,7 @@ public class Script_AssassinSkill : MonoBehaviour
     void Update()
     {
         //use skill on spacebar press
-        if (Input.GetKeyDown(KeyCode.Space) && (onCooldown == false))
+        if (Input.GetKeyUp(KeyCode.Mouse0) && (onCooldown == false))
         {
             onCooldown = true;
 
@@ -42,7 +42,7 @@ public class Script_AssassinSkill : MonoBehaviour
             //decrease count by 1 every seconds
             timeLeft -= Time.deltaTime;
             //show first digit of float
-            text.text = timeLeft.ToString("f0");
+            text.text = timeLeft.ToString("f1");
 
             //turn off cooldown once fill is over 1
             if (cooldownOverlay.fillAmount >= 1)
