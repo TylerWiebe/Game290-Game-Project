@@ -10,10 +10,6 @@ public class Script_VolumeFader : MonoBehaviour
     [SerializeField]
     private AudioMixer mixer = null;
 
-    //mixer reference
-    [SerializeField]
-    private Slider slider = null;
-
 
     //sets the volume slider value
     public void SetVolume(float sliderValue)

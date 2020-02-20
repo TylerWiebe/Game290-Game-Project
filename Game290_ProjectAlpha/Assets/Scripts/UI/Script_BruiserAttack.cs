@@ -12,7 +12,7 @@ public class Script_BruiserAttack : MonoBehaviour
     private Text text = null;
 
     [SerializeField]
-    private float cooldown = 1;
+    private float cooldown = 1f;
     private float timeLeft;
     private bool onCooldown = false;
 

@@ -64,8 +64,8 @@ public class Alien_Object : MonoBehaviour
 
     //Damage Stats
     private int damage = 10;
-    private int num_ranged_charges = 4;
-    private int current_ranged_charges = 4;
+    public int num_ranged_charges = 4;
+    public int current_ranged_charges = 4;
 
     private int charge_size = 25;
 
