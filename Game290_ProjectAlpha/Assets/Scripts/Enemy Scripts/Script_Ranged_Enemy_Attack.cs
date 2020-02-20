@@ -60,6 +60,7 @@ public class Script_Ranged_Enemy_Attack : MonoBehaviour
         //Debug.Log(vector);
         //add a velocity to the projectile instance's rigidbody
         projectile_instance.GetComponent<Rigidbody2D>().velocity = vector * speed;
+        projectile_instance.transform.rotation = Quaternion.Euler(0, 0, theta * Mathf.Rad2Deg - 90);
 
     }
 }
