@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Script_Skill : MonoBehaviour
+public class Script_BruiserSkill : MonoBehaviour
 {
     [SerializeField]
     private Image cooldownOverlay = null;
@@ -13,9 +13,7 @@ public class Script_Skill : MonoBehaviour
 
     [SerializeField]
     private float cooldown = 5;
-
     private float timeLeft;
-
     private bool onCooldown = false;
 
     void Start ()
@@ -32,7 +30,7 @@ public class Script_Skill : MonoBehaviour
             onCooldown = true;
 
             //useSkill
-            Debug.Log("UseSkill");
+            Debug.Log("Use Bruiser Skill");
         }
 
         //run skill cooldown timer

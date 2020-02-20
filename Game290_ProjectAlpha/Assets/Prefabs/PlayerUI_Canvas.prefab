@@ -412,7 +412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4601590270823725959}
   - component: {fileID: 4601590270823725957}
-  - component: {fileID: 4601590270823725958}
+  - component: {fileID: 8292948525066522180}
   m_Layer: 5
   m_Name: assassinSkill
   m_TagString: Untagged
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4601590270823725958
+--- !u!114 &8292948525066522180
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -502,12 +502,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4601590270823725952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43a53dbedf79f2b4391f64fe6afefb20, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d3c7e7928acb47439cacc28e1bebb13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownOverlay: {fileID: 4601590270465855333}
   text: {fileID: 4601590270471492103}
-  cooldown: 5
+  cooldown: 10
 --- !u!1 &4601590270993993826
 GameObject:
   m_ObjectHideFlags: 0
