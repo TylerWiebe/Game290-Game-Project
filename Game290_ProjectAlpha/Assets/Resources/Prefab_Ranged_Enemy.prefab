@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ae71781eee0664781287f8cae205e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 1
 --- !u!58 &7939659542883285304
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -214,6 +215,7 @@ MonoBehaviour:
   aggressiveSpeed: 3
   walkTime_LowerLimit: 100
   walkTime_UpperLimit: 250
+  angle: 0
   passiveSpeed: 3
   playerNotSeen: 1
   walkingDirection: Right

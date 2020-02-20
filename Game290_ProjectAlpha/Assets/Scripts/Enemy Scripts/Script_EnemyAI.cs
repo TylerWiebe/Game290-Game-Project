@@ -22,7 +22,7 @@ public class Script_EnemyAI : MonoBehaviour
 
     //rotate body when in aggro variables
     Vector3 enemy_position;
-    float angle = 0f;
+    public float angle = 0f;
 
     //Speed of walking before seeing player
     [SerializeField]
