@@ -140,12 +140,12 @@ public class Alien_Object : MonoBehaviour
         }
         if(Input.GetKeyUp("q"))
         {
-            Debug.Log("MorphLeft");
+           //Debug.Log("MorphLeft");
             morph_left();
         }
         if (Input.GetKeyUp("e"))
         {
-            Debug.Log("MorphRight");
+            //Debug.Log("MorphRight");
             morph_right();
         }
 
@@ -391,7 +391,7 @@ public class Alien_Object : MonoBehaviour
 
     public void Deal_Damage_To_Alien(int damage)
     {
-        Debug.Log("oof");
+        //Debug.Log("oof");
         Current_Health -= damage;
         Current_Health_Percentage = Current_Health / Max_Health;
     }

@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 
 //This script must be attached to the attackRange game object and must also be a child of the "enemy" game object.
-public class Script_Ranged_Enemy_Attack : Script_Ranged_Enemy_Object
+public class Script_Ranged_Enemy_Attack : MonoBehaviour
 {
     //allows enemy to attack if set to "true"
     private bool enemyInRange = false;
@@ -62,7 +62,7 @@ public class Script_Ranged_Enemy_Attack : Script_Ranged_Enemy_Object
         projectile_instance.GetComponent<Rigidbody2D>().velocity = vector * speed;
         //rotate projectile to face the direction it is being shootedededed
         projectile_instance.transform.rotation = Quaternion.Euler(0, 0, theta * Mathf.Rad2Deg - 90);
-        //set the damage of the projectile
-        projectile_instance.GetComponent<Script_Ranged_Enemy_Projectile>().set_damage(get_attack_damage());
+        //set the damage of the projectile   
+        projectile_instance.GetComponent<Script_Ranged_Enemy_Projectile>().set_damage(this.gameObject.GetComponentInParent<Script_Ranged_Enemy_Object>().get_attack_damage());
     }
 }
