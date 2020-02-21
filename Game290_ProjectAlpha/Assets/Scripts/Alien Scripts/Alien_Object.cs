@@ -11,18 +11,6 @@ public class Alien_Object : MonoBehaviour
     [SerializeField]
     private GameObject sceneTransitionManager = null;
 
-    //Class Icon 0
-    [SerializeField]
-    private GameObject classIcon0 = null;
-
-    //Class Icon 1
-    [SerializeField]
-    private GameObject classIcon1 = null;
-
-    //class Icon 2
-    [SerializeField]
-    private GameObject classIcon2 = null;
-
     //HealthBar
     [SerializeField]
     private GameObject healthBar = null;
@@ -30,6 +18,10 @@ public class Alien_Object : MonoBehaviour
     //Projectile charges
     [SerializeField]
     private GameObject chargeBar = null;
+
+    //morpheQueue
+    [SerializeField]
+    private GameObject morphQueue = null;
 
     //Projectile charges
     [SerializeField]
@@ -98,31 +90,37 @@ public class Alien_Object : MonoBehaviour
             case 0:
                 Class_Order = new int[] { 0, 1, 2 };
                 Current_Class = 1;
+                morphQueue.GetComponent<Script_MorphUI>().SetQueue(0);
                 updateAlienStats();
                 break;
             case 1:
                 Class_Order = new int[] { 0, 2, 1 };
                 Current_Class = 2;
+                morphQueue.GetComponent<Script_MorphUI>().SetQueue(1);
                 updateAlienStats();
                 break;
             case 2:
                 Class_Order = new int[] { 1, 0, 2 };
                 Current_Class = 0;
+                morphQueue.GetComponent<Script_MorphUI>().SetQueue(2);
                 updateAlienStats();
                 break;
             case 3:
                 Class_Order = new int[] { 1, 2, 0 };
                 Current_Class = 2;
+                morphQueue.GetComponent<Script_MorphUI>().SetQueue(3);
                 updateAlienStats();
                 break;
             case 4:
                 Class_Order = new int[] { 2, 1, 0 };
                 Current_Class = 1;
+                morphQueue.GetComponent<Script_MorphUI>().SetQueue(4);
                 updateAlienStats();
                 break;
             default:
                 Class_Order = new int[] { 2, 0, 1 };
                 Current_Class = 0;
+                morphQueue.GetComponent<Script_MorphUI>().SetQueue(5);
                 updateAlienStats();
                 break;
         }
@@ -216,6 +214,7 @@ public class Alien_Object : MonoBehaviour
         Current_Class = Class_Order[1];
         morph_animation(prev_class, Current_Class);
 
+        morphQueue.GetComponent<Script_MorphUI>().MorphRight();
         updateAlienStats();
     }
     private void morph_left()
@@ -230,6 +229,7 @@ public class Alien_Object : MonoBehaviour
         Current_Class = Class_Order[1];
         morph_animation(prev_class, Current_Class);
 
+        morphQueue.GetComponent<Script_MorphUI>().MorphLeft();
         updateAlienStats();
     }
 

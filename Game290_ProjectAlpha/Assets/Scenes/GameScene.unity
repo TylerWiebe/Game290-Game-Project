@@ -365,6 +365,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124945808}
   m_CullTransparentMesh: 0
+--- !u!1 &127642875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4601590271604667751, guid: ab2f562b1863a0148ac43f739877bc60,
+    type: 3}
+  m_PrefabInstance: {fileID: 8353768748745311594}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &388205660
 GameObject:
   m_ObjectHideFlags: 0
@@ -1382,13 +1388,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneTransitionManager: {fileID: 1431985526}
-  classIcon0: {fileID: 0}
-  classIcon1: {fileID: 0}
-  classIcon2: {fileID: 0}
-  healthBar: {fileID: 0}
-  chargeBar: {fileID: 0}
-  assassinAttackBox: {fileID: 0}
-  bruiserAttackBox: {fileID: 0}
+  healthBar: {fileID: 2032605687}
+  chargeBar: {fileID: 127642875}
+  morphQueue: {fileID: 1167172882}
+  assassinAttackBox: {fileID: 1931909257}
+  bruiserAttackBox: {fileID: 1162418672}
   alien_sprite: {fileID: 21300000, guid: 4b694070497c5684ca502aea822e76e2, type: 3}
   meleeAttack: {fileID: 1380501762}
   speed: 0.075
@@ -1849,6 +1853,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1107254166}
   m_CullTransparentMesh: 0
+--- !u!1 &1162418672 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7429799265115296841, guid: ab2f562b1863a0148ac43f739877bc60,
+    type: 3}
+  m_PrefabInstance: {fileID: 8353768748745311594}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1167172882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 823091233278247357, guid: ab2f562b1863a0148ac43f739877bc60,
+    type: 3}
+  m_PrefabInstance: {fileID: 8353768748745311594}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1233814886
 GameObject:
   m_ObjectHideFlags: 0
@@ -3300,6 +3316,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1923481327}
   m_CullTransparentMesh: 0
+--- !u!1 &1931909257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4601590270823725952, guid: ab2f562b1863a0148ac43f739877bc60,
+    type: 3}
+  m_PrefabInstance: {fileID: 8353768748745311594}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1951191636
 GameObject:
   m_ObjectHideFlags: 0
@@ -3379,6 +3401,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951191636}
   m_CullTransparentMesh: 0
+--- !u!1 &2032605687 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4601590272419069120, guid: ab2f562b1863a0148ac43f739877bc60,
+    type: 3}
+  m_PrefabInstance: {fileID: 8353768748745311594}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2142252910
 GameObject:
   m_ObjectHideFlags: 0
