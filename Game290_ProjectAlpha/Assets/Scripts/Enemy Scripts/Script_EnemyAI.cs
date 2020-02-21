@@ -20,6 +20,8 @@ public class Script_EnemyAI : MonoBehaviour
     public int walkTime_LowerLimit = 100;
     public int walkTime_UpperLimit = 250;
 
+    private bool first_time = false; //used in aggro mode
+
     //rotate body when in aggro variables
     Vector3 enemy_position;
     public float angle = 0f;
@@ -62,6 +64,10 @@ public class Script_EnemyAI : MonoBehaviour
         else
         {
             StartCoroutine(AggressiveBehaviour());
+            //if (this.gameObject.tag == "RangedEnemy" && first_time == true)
+            //{
+            this.gameObject.GetComponentInChildren<Script_Ranged_Enemy_Attack>().set_playerNotSeen(false);
+            //    first_time = false;
         }
     }
 
@@ -75,6 +81,7 @@ public class Script_EnemyAI : MonoBehaviour
         {
             iter = 0;
             direction = UnityEngine.Random.Range(0, 4);
+            //direction = 3;
             walkTime = UnityEngine.Random.Range(walkTime_LowerLimit, walkTime_UpperLimit);
             //Debug.Log(direction);
         }
@@ -87,64 +94,74 @@ public class Script_EnemyAI : MonoBehaviour
         {
             while (direction == 0)
             {
-                transform.Translate(Vector2.right * passiveSpeed * Time.deltaTime);
-                rotate_body_passive(direction);
+                
+                //rotate right
+                if(this.gameObject.transform.rotation.z < (-0.7071068 + 0.05) && this.gameObject.transform.rotation.z > (-0.7071068 - 0.05))
+                {
+                    //do nothing
+                }
+                else if(this.gameObject.transform.rotation.z < -0.7071068)
+                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, 10f);
+                else if(this.gameObject.transform.rotation.z > -0.7071068)
+                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, -10f);
+                //move right
+                this.gameObject.transform.position += Vector3.right * passiveSpeed * Time.deltaTime;
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
             }
             while (direction == 1)
             {
-                transform.Translate(Vector2.left * passiveSpeed * Time.deltaTime);
-                rotate_body_passive(direction);
+                //rotate left
+                //rotate right
+                if (this.gameObject.transform.rotation.z < (0.7071068 + 0.05) && this.gameObject.transform.rotation.z > (0.7071068 - 0.05))
+                {
+                    //do nothing
+                }
+                else if (this.gameObject.transform.rotation.z < 0.7071068)
+                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, 10f);
+                else if (this.gameObject.transform.rotation.z > 0.7071068)
+                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, -10f);
+                //move left
+                this.gameObject.transform.position += Vector3.left * passiveSpeed * Time.deltaTime;
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
             }
             while (direction == 2)
             {
-                transform.Translate(Vector2.up * passiveSpeed * Time.deltaTime);
-                rotate_body_passive(direction);
+                //rotate up
+                if (this.gameObject.transform.rotation.z < (0 + 0.05) && this.gameObject.transform.rotation.z > (0 - 0.05))
+                {
+                    //do nothing
+                }
+                else if (this.gameObject.transform.rotation.z < 0)
+                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, 10f);
+                else if (this.gameObject.transform.rotation.z > 0)
+                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, -10f);
+                //move up
+                this.gameObject.transform.position += Vector3.up * passiveSpeed * Time.deltaTime;
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
             }
             while (direction == 3)
             {
-                rotate_body_passive(direction);
-                transform.Translate(Vector2.down * passiveSpeed * Time.deltaTime);
+                //rotate down
+                if (this.gameObject.transform.rotation.z < (1 + 0.05) && this.gameObject.transform.rotation.z > (1))
+                {
+                    //do nothing
+                }
+                else if(this.gameObject.transform.rotation.z < 1)
+                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, 10f);
+                else if (this.gameObject.transform.rotation.z > 1)
+                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, -10f);
+                //move down
+                this.gameObject.transform.position += Vector3.down * passiveSpeed * Time.deltaTime;
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
             }
-            //Original Script
-            /*
-            //Walk right for specified seconds
-            if ((walkingDirection == "right") || (walkingDirection == "Right"))
-            {
-                transform.Translate(Vector2.right * passiveSpeed * Time.deltaTime);
-
-                //wait
-                yield return new WaitForSeconds(roamDistance);
-
-                //change direction
-                walkingDirection = "left";
-                yield break;
-            }
-
-            //walk left for specified seconds
-            if ((walkingDirection == "left") || (walkingDirection == "Left"))
-            {
-                transform.Translate(Vector2.left * passiveSpeed * Time.deltaTime);
-
-                //wait
-                yield return new WaitForSeconds(roamDistance);
-
-                //change direction
-                walkingDirection = "right";
-                yield break;
-            }
-            */
 
             //Walk right for specified seconds
             if ((walkingDirection == "up") || (walkingDirection == "Up"))
@@ -189,13 +206,6 @@ public class Script_EnemyAI : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, target.position, aggressiveSpeed * Time.smoothDeltaTime);
             rotate_body_aggro();
         }
-    }
-
-    //rotates the enemy to face the way they are moving whenst in passive mode
-    private void rotate_body_passive(int direction)
-    {
-        angle = direction * 90;
-        this.gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);   
     }
     
     //rotates the enemy to face the player whenst in aggro mode
