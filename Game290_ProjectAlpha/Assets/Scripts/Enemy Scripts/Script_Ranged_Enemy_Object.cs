@@ -27,6 +27,12 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
         return attack_damage;
     }
 
+    public int get_hit_points()
+    {
+        return hit_points;
+    }
+
+
     public void set_attack_damage(int attack_damage)
     {
         this.attack_damage = attack_damage;

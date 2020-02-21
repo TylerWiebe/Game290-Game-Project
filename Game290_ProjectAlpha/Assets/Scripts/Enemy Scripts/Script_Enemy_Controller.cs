@@ -50,10 +50,11 @@ public class Script_Enemy_Controller : MonoBehaviour
             int x_pos = UnityEngine.Random.Range(-15, 15); //random x pos (could be looked up from a table later)
             int y_pos = UnityEngine.Random.Range(-15, 15); //random y pos (could be looked up from a table later)
             temp.tag = "MeleeEnemy";
-            Instantiate(temp, new Vector3(10, 10, 0), Quaternion.identity); //load to scene
+            GameObject temp_instance = Instantiate(temp, new Vector3(10, 10, 0), Quaternion.identity); //load to scene
             //Instantiate(temp, new Vector3(x_pos, y_pos, 0), Quaternion.identity); //load to scene
-            seed_ranged_enemy_stats(temp, level_sequence_number); //seed ranged enemy stats
-            all_enemies.Add(temp); //add enemy to list of all enemies
+            seed_ranged_enemy_stats(temp_instance, level_sequence_number); //seed ranged enemy stats
+            all_enemies.Add(temp_instance); //add enemy to list of all enemies
+            test = temp_instance;
         }
 
         //spawn number_of_melee_enemies melee enemies
@@ -64,10 +65,10 @@ public class Script_Enemy_Controller : MonoBehaviour
             int x_pos = UnityEngine.Random.Range(-15, 15); //random x pos (could be looked up from a table later)
             int y_pos = UnityEngine.Random.Range(-15, 15); //random y pos (could be looked up from a table later)
             temp.tag = "RangedEnemy";
-            Instantiate(temp, new Vector3(-10, -10, 0), Quaternion.identity); //load to scene
+            GameObject temp_instance = Instantiate(temp, new Vector3(-10, -10, 0), Quaternion.identity); //load to scene
             //Instantiate(temp, new Vector3(x_pos, y_pos, 0), Quaternion.identity); //load to scene
-            seed_melee_enemy_stats(temp, level_sequence_number); //seed melee enemy stats
-            all_enemies.Add(temp); //add enemy to list of all enemies
+            seed_melee_enemy_stats(temp_instance, level_sequence_number); //seed melee enemy stats
+            all_enemies.Add(temp_instance); //add enemy to list of all enemies
         }
     }
 
