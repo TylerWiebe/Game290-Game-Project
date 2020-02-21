@@ -93,64 +93,44 @@ public class Script_EnemyAI : MonoBehaviour
         {
             while (direction == 0)
             {
-                transform.Translate(Vector2.right * passiveSpeed * Time.deltaTime);
-                rotate_body_passive(direction);
+                //rotate right
+                this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 270);
+                //move right
+                this.gameObject.transform.position += Vector3.right * passiveSpeed * Time.deltaTime;
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
             }
             while (direction == 1)
             {
-                transform.Translate(Vector2.left * passiveSpeed * Time.deltaTime);
-                rotate_body_passive(direction);
+                //rotate left
+                this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
+                //move left
+                this.gameObject.transform.position += Vector3.left * passiveSpeed * Time.deltaTime;
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
             }
             while (direction == 2)
             {
-                transform.Translate(Vector2.up * passiveSpeed * Time.deltaTime);
-                rotate_body_passive(direction);
+                //rotate up
+                this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+                //move up
+                this.gameObject.transform.position += Vector3.up * passiveSpeed * Time.deltaTime;
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
             }
             while (direction == 3)
             {
-                rotate_body_passive(direction);
-                transform.Translate(Vector2.down * passiveSpeed * Time.deltaTime);
+                //rotate down
+                this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
+                //move down
+                this.gameObject.transform.position += Vector3.down * passiveSpeed * Time.deltaTime;
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
             }
-            //Original Script
-            /*
-            //Walk right for specified seconds
-            if ((walkingDirection == "right") || (walkingDirection == "Right"))
-            {
-                transform.Translate(Vector2.right * passiveSpeed * Time.deltaTime);
-
-                //wait
-                yield return new WaitForSeconds(roamDistance);
-
-                //change direction
-                walkingDirection = "left";
-                yield break;
-            }
-
-            //walk left for specified seconds
-            if ((walkingDirection == "left") || (walkingDirection == "Left"))
-            {
-                transform.Translate(Vector2.left * passiveSpeed * Time.deltaTime);
-
-                //wait
-                yield return new WaitForSeconds(roamDistance);
-
-                //change direction
-                walkingDirection = "right";
-                yield break;
-            }
-            */
 
             //Walk right for specified seconds
             if ((walkingDirection == "up") || (walkingDirection == "Up"))
@@ -195,13 +175,6 @@ public class Script_EnemyAI : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, target.position, aggressiveSpeed * Time.smoothDeltaTime);
             rotate_body_aggro();
         }
-    }
-
-    //rotates the enemy to face the way they are moving whenst in passive mode
-    private void rotate_body_passive(int direction)
-    {
-        angle = direction * 90;
-        this.gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);   
     }
     
     //rotates the enemy to face the player whenst in aggro mode
