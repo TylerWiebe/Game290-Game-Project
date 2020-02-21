@@ -81,6 +81,7 @@ public class Script_EnemyAI : MonoBehaviour
         {
             iter = 0;
             direction = UnityEngine.Random.Range(0, 4);
+            //direction = 3;
             walkTime = UnityEngine.Random.Range(walkTime_LowerLimit, walkTime_UpperLimit);
             //Debug.Log(direction);
         }
@@ -93,8 +94,16 @@ public class Script_EnemyAI : MonoBehaviour
         {
             while (direction == 0)
             {
+                
                 //rotate right
-                this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 270);
+                if(this.gameObject.transform.rotation.z < (-0.7071068 + 0.05) && this.gameObject.transform.rotation.z > (-0.7071068 - 0.05))
+                {
+                    //do nothing
+                }
+                else if(this.gameObject.transform.rotation.z < -0.7071068)
+                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, 10f);
+                else if(this.gameObject.transform.rotation.z > -0.7071068)
+                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, -10f);
                 //move right
                 this.gameObject.transform.position += Vector3.right * passiveSpeed * Time.deltaTime;
                 //wait
@@ -104,7 +113,15 @@ public class Script_EnemyAI : MonoBehaviour
             while (direction == 1)
             {
                 //rotate left
-                this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
+                //rotate right
+                if (this.gameObject.transform.rotation.z < (0.7071068 + 0.05) && this.gameObject.transform.rotation.z > (0.7071068 - 0.05))
+                {
+                    //do nothing
+                }
+                else if (this.gameObject.transform.rotation.z < 0.7071068)
+                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, 10f);
+                else if (this.gameObject.transform.rotation.z > 0.7071068)
+                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, -10f);
                 //move left
                 this.gameObject.transform.position += Vector3.left * passiveSpeed * Time.deltaTime;
                 //wait
@@ -114,7 +131,14 @@ public class Script_EnemyAI : MonoBehaviour
             while (direction == 2)
             {
                 //rotate up
-                this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+                if (this.gameObject.transform.rotation.z < (0 + 0.05) && this.gameObject.transform.rotation.z > (0 - 0.05))
+                {
+                    //do nothing
+                }
+                else if (this.gameObject.transform.rotation.z < 0)
+                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, 10f);
+                else if (this.gameObject.transform.rotation.z > 0)
+                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, -10f);
                 //move up
                 this.gameObject.transform.position += Vector3.up * passiveSpeed * Time.deltaTime;
                 //wait
@@ -124,7 +148,14 @@ public class Script_EnemyAI : MonoBehaviour
             while (direction == 3)
             {
                 //rotate down
-                this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
+                if (this.gameObject.transform.rotation.z < (1 + 0.05) && this.gameObject.transform.rotation.z > (1))
+                {
+                    //do nothing
+                }
+                else if(this.gameObject.transform.rotation.z < 1)
+                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, 10f);
+                else if (this.gameObject.transform.rotation.z > 1)
+                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, -10f);
                 //move down
                 this.gameObject.transform.position += Vector3.down * passiveSpeed * Time.deltaTime;
                 //wait
