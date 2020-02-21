@@ -39,6 +39,7 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
             //son be deded
             Script_Enemy_Controller script_enemy_controller = GameObject.Find("GameManager").GetComponent<Script_Enemy_Controller>();
             script_enemy_controller.destroy_enemy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }

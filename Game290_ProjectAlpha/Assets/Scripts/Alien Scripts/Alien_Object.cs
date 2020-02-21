@@ -38,7 +38,7 @@ public class Alien_Object : MonoBehaviour
     //Projectile charges
     [SerializeField]
     private GameObject bruiserAttackBox = null;
-
+    
     //Alien Sprite
     public Sprite alien_sprite;
 
@@ -52,7 +52,6 @@ public class Alien_Object : MonoBehaviour
     private GameObject AlienHead;
     private GameObject alienBody;
     private GameObject myCamera;
-    public GameObject meleeAttack;
     public float speed;
 
     //ALIEN STATS
@@ -126,7 +125,6 @@ public class Alien_Object : MonoBehaviour
                 updateAlienStats();
                 break;
         }
-        meleeAttack.GetComponent<MeleeAttack>().setAttackForm(Current_Class);
     }
 
     // Update is called once per frame
@@ -320,7 +318,6 @@ public class Alien_Object : MonoBehaviour
 
             //add skill
         }
-        meleeAttack.GetComponent<MeleeAttack>().setAttackForm(Current_Class);
         //Debug.Log(Current_Health);
     }
 
@@ -380,6 +377,10 @@ public class Alien_Object : MonoBehaviour
         }
     }
 
+    public int getCurrentClass()
+    {
+        return Current_Class;
+    }
     
     /// <summary>
     /// On mouse1 down do some attack sequence
@@ -387,6 +388,11 @@ public class Alien_Object : MonoBehaviour
     public int getDamage()
     {
         return damage * ((strength + 1) * 10);
+    }
+
+    public int getRangedCharges()
+    {
+        return current_ranged_charges;
     }
 
     public void Deal_Damage_To_Alien(int damage)

@@ -71,4 +71,8 @@ public class Script_ProjectileCharges : MonoBehaviour
             Debug.Log("Use Ranged Attack");
         }
     }
+    public int getRangedCharges()
+    {
+        return currentRangedCharges;
+    }
 }
