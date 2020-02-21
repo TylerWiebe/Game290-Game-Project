@@ -70,9 +70,9 @@ public class Script_MorphUI : MonoBehaviour
         int count = 0;
         while (count < 25)
         {
-            classIcon0.transform.position += new Vector3(-2, 0, 0);
-            classIcon1.transform.position += new Vector3(-2, 0, 0);
-            classIcon2.transform.position += new Vector3(-2, 0, 0);
+            classIcon0.transform.position += new Vector3(2, 0, 0);
+            classIcon1.transform.position += new Vector3(2, 0, 0);
+            classIcon2.transform.position += new Vector3(2, 0, 0);
 
             yield return new WaitForSeconds(.01f);
             count += 1;
@@ -89,9 +89,9 @@ public class Script_MorphUI : MonoBehaviour
         int count = 0;
         while (count < 25)
         {
-            classIcon0.transform.position += new Vector3(2, 0, 0);
-            classIcon1.transform.position += new Vector3(2, 0, 0);
-            classIcon2.transform.position += new Vector3(2, 0, 0);
+            classIcon0.transform.position += new Vector3(-2, 0, 0);
+            classIcon1.transform.position += new Vector3(-2, 0, 0);
+            classIcon2.transform.position += new Vector3(-2, 0, 0);
 
             yield return new WaitForSeconds(.01f);
             count += 1;
