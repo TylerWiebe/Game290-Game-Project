@@ -18,7 +18,7 @@ public class Script_ProjectileCharges : MonoBehaviour
     [SerializeField]
     private GameObject player = null;
 
-    //sets maximumCharges for the charge bar
+    //sets maximumCharges for the Healthbar
     public void SetMaxCharge(int maxCharge)
     {
         //set max
@@ -45,8 +45,6 @@ public class Script_ProjectileCharges : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SetCharge(currentRangedCharges);
-
         //regen shots
         if (currentRangedCharges < maxRangedCharges)
         {
@@ -56,6 +54,8 @@ public class Script_ProjectileCharges : MonoBehaviour
             if (timer >= 5)
             {
                 currentRangedCharges += 1;
+                SetCharge(currentRangedCharges);
+
                 timer = 0;
             }
         }
@@ -65,6 +65,7 @@ public class Script_ProjectileCharges : MonoBehaviour
         {
             //decrease total charges
             currentRangedCharges -= 1;
+            SetCharge(currentRangedCharges);
 
             //useSkill
             Debug.Log("Use Ranged Attack");
