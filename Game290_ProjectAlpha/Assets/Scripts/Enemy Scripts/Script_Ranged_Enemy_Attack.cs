@@ -8,9 +8,10 @@ using System.Threading;
 public class Script_Ranged_Enemy_Attack : MonoBehaviour
 {
     //allows enemy to attack if set to "true"
-    private bool enemyInRange = false;
     public float speed;
     private GameObject target;
+    private bool playerNotSeen = true;
+
 
     void Start()
     {
@@ -28,9 +29,8 @@ public class Script_Ranged_Enemy_Attack : MonoBehaviour
     //IEnumerator OnTriggerEnter2D(Collider2D other)
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if ((other.tag == "player") || (other.tag == "Player"))
+        if (((other.tag == "player") || (other.tag == "Player")) && playerNotSeen == false)
         {
-            enemyInRange = true;
             InvokeRepeating("Attack", 0f, 1.5f);
         }
     }
@@ -64,5 +64,10 @@ public class Script_Ranged_Enemy_Attack : MonoBehaviour
         projectile_instance.transform.rotation = Quaternion.Euler(0, 0, theta * Mathf.Rad2Deg - 90);
         //set the damage of the projectile   
         projectile_instance.GetComponent<Script_Ranged_Enemy_Projectile>().set_damage(this.gameObject.GetComponentInParent<Script_Ranged_Enemy_Object>().get_attack_damage());
+    }
+
+    public void set_playerNotSeen(bool playerNotSeen)
+    {
+        this.playerNotSeen = playerNotSeen;
     }
 }

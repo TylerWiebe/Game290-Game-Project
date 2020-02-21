@@ -20,6 +20,8 @@ public class Script_EnemyAI : MonoBehaviour
     public int walkTime_LowerLimit = 100;
     public int walkTime_UpperLimit = 250;
 
+    private bool first_time = false; //used in aggro mode
+
     //rotate body when in aggro variables
     Vector3 enemy_position;
     public float angle = 0f;
@@ -62,6 +64,10 @@ public class Script_EnemyAI : MonoBehaviour
         else
         {
             StartCoroutine(AggressiveBehaviour());
+            //if (this.gameObject.tag == "RangedEnemy" && first_time == true)
+            //{
+            this.gameObject.GetComponentInChildren<Script_Ranged_Enemy_Attack>().set_playerNotSeen(false);
+            //    first_time = false;
         }
     }
 
