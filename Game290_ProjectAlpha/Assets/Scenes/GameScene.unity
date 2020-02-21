@@ -3985,6 +3985,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.000002861023
       objectReference: {fileID: 0}
+    - target: {fileID: 6155391293533199493, guid: ab2f562b1863a0148ac43f739877bc60,
+        type: 3}
+      propertyPath: bruiserSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 16c873073b5643f47af8aac20bd64a8f,
+        type: 3}
+    - target: {fileID: 6155391293533199493, guid: ab2f562b1863a0148ac43f739877bc60,
+        type: 3}
+      propertyPath: rangedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 89a3e5160a3eb4c41846c67b9530a634,
+        type: 3}
     - target: {fileID: 6476416684915212704, guid: ab2f562b1863a0148ac43f739877bc60,
         type: 3}
       propertyPath: m_AnchoredPosition.x

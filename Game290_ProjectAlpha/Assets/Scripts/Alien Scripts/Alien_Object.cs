@@ -47,6 +47,7 @@ public class Alien_Object : MonoBehaviour
     public GameObject meleeAttack;
     public float speed;
 
+    public bool playerAlive = true;
     //ALIEN STATS
     //Health Stats
     public int Max_Health = 100;// actual maximum health
@@ -131,17 +132,18 @@ public class Alien_Object : MonoBehaviour
     void Update()
     {
 
-        if(Current_Health <= 0)
+        if((Current_Health <= 0) && (playerAlive))
         {
-            Debug.Log("AlienDied");
-            Alien_Died();
+            playerAlive = false;
+            //Debug.Log("AlienDied");
+            StartCoroutine(Alien_Died());
         }
-        if(Input.GetKeyUp("q"))
+        if((Input.GetKeyUp("q")) && (playerAlive))
         {
            //Debug.Log("MorphLeft");
             morph_left();
         }
-        if (Input.GetKeyUp("e"))
+        if ((Input.GetKeyUp("e")) && (playerAlive))
         {
             //Debug.Log("MorphRight");
             morph_right();
@@ -152,10 +154,10 @@ public class Alien_Object : MonoBehaviour
         //   Debug.Log("AlienAttack");
         //    attack();
         //}
-        moveAlien();
-
-
-
+        if (playerAlive)
+        {
+            moveAlien();
+        }
     }
 
     public float getBodyAngle()
@@ -327,11 +329,6 @@ public class Alien_Object : MonoBehaviour
     /// <summary>
     /// On alien death, call coroutine: Plays fade out animation and load DeathScreen scene
     /// </summary>
-    private void CallAlien_Died()
-    {
-        StartCoroutine(Alien_Died());
-    }
-
     IEnumerator Alien_Died()
     {
         //play fade out animation
@@ -394,6 +391,8 @@ public class Alien_Object : MonoBehaviour
         //Debug.Log("oof");
         Current_Health -= damage;
         Current_Health_Percentage = Current_Health / Max_Health;
+
+        healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
     }
 
 }
