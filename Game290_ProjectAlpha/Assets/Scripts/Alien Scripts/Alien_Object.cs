@@ -389,8 +389,9 @@ public class Alien_Object : MonoBehaviour
         return damage * ((strength + 1) * 10);
     }
 
-    private void Deal_Damage_from_Alien(int damage)
+    public void Deal_Damage_To_Alien(int damage)
     {
+        Debug.Log("oof");
         Current_Health -= damage;
         Current_Health_Percentage = Current_Health / Max_Health;
     }
