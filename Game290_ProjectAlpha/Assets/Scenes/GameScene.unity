@@ -1390,12 +1390,12 @@ MonoBehaviour:
   sceneTransitionManager: {fileID: 1431985526}
   healthBar: {fileID: 2032605687}
   chargeBar: {fileID: 127642875}
-  morphQueue: {fileID: 1167172882}
   assassinAttackBox: {fileID: 1931909257}
   bruiserAttackBox: {fileID: 1162418672}
   alien_sprite: {fileID: 21300000, guid: 4b694070497c5684ca502aea822e76e2, type: 3}
   meleeAttack: {fileID: 1380501762}
   speed: 0.075
+  playerAlive: 1
   Max_Health: 100
   Current_Health: 100
   num_ranged_charges: 4
@@ -1856,12 +1856,6 @@ CanvasRenderer:
 --- !u!1 &1162418672 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7429799265115296841, guid: ab2f562b1863a0148ac43f739877bc60,
-    type: 3}
-  m_PrefabInstance: {fileID: 8353768748745311594}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1167172882 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 823091233278247357, guid: ab2f562b1863a0148ac43f739877bc60,
     type: 3}
   m_PrefabInstance: {fileID: 8353768748745311594}
   m_PrefabAsset: {fileID: 0}
@@ -3960,6 +3954,36 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 617563616035201563, guid: ab2f562b1863a0148ac43f739877bc60,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897815190310286506, guid: ab2f562b1863a0148ac43f739877bc60,
+        type: 3}
+      propertyPath: m_EdgeRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897815190310286506, guid: ab2f562b1863a0148ac43f739877bc60,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897815190310286506, guid: ab2f562b1863a0148ac43f739877bc60,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601590270578561808, guid: ab2f562b1863a0148ac43f739877bc60,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerUI_Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4601590270578561812, guid: ab2f562b1863a0148ac43f739877bc60,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4601590271300183949, guid: ab2f562b1863a0148ac43f739877bc60,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -3989,14 +4013,12 @@ PrefabInstance:
         type: 3}
       propertyPath: bruiserSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 16c873073b5643f47af8aac20bd64a8f,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 6155391293533199493, guid: ab2f562b1863a0148ac43f739877bc60,
         type: 3}
       propertyPath: rangedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 89a3e5160a3eb4c41846c67b9530a634,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 6476416684915212704, guid: ab2f562b1863a0148ac43f739877bc60,
         type: 3}
       propertyPath: m_AnchoredPosition.x

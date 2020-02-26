@@ -20,7 +20,6 @@ public class Alien_Object : MonoBehaviour
     private GameObject chargeBar = null;
 
     //morpheQueue
-    [SerializeField]
     private GameObject morphQueue = null;
 
     //Projectile charges
@@ -80,6 +79,7 @@ public class Alien_Object : MonoBehaviour
     void Start()
     {
         //Finding the desired GameObjects
+        morphQueue = GameObject.Find("MorphQueue");
         AlienHead = GameObject.Find("AlienHead"); //Need this to get alien object's sprite renderer
         alienBody = GameObject.Find("AlienBody"); //Need this to get alien object's sprite renderer
         myCamera = GameObject.Find("Main Camera");
