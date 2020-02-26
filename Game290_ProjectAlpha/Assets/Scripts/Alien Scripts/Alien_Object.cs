@@ -8,27 +8,26 @@ using UnityEngine.SceneManagement;
 public class Alien_Object : MonoBehaviour
 {
     //hold reference to object holding Script_SceneTransition
-    [SerializeField]
-    private GameObject sceneTransitionManager = null;
+    private GameObject sceneTransitionManager;
+    private GameObject gameManager;
+
+    //PlayerUI_Canvas
+    private GameObject playerUICanvas;
 
     //HealthBar
-    [SerializeField]
-    private GameObject healthBar = null;
+    private GameObject healthBar;
 
     //Projectile charges
-    [SerializeField]
-    private GameObject chargeBar = null;
+    private GameObject chargeBar;
 
     //morpheQueue
-    private GameObject morphQueue = null;
+    private GameObject morphQueue;
+
+    //attack cooldownBox for assassin
+    private GameObject assassinAttackBox;
 
     //Projectile charges
-    [SerializeField]
-    private GameObject assassinAttackBox = null;
-
-    //Projectile charges
-    [SerializeField]
-    private GameObject bruiserAttackBox = null;
+    private GameObject bruiserAttackBox;
 
     //Alien Sprite
     public Sprite alien_sprite;
@@ -79,7 +78,15 @@ public class Alien_Object : MonoBehaviour
     void Start()
     {
         //Finding the desired GameObjects
-        morphQueue = GameObject.Find("MorphQueue");
+        gameManager = GameObject.Find("GameManager");
+        sceneTransitionManager = GameObject.Find("SceneTransitionManager");
+        playerUICanvas = GameObject.Find("PlayerUI_Canvas");
+        healthBar = playerUICanvas.transform.Find("HealthBar").gameObject;
+        chargeBar = playerUICanvas.transform.Find("ProjectileCharges").gameObject;
+        morphQueue = playerUICanvas.transform.Find("MorphQueue").gameObject;
+        assassinAttackBox = playerUICanvas.transform.Find("assassinAttackBox").gameObject;
+        bruiserAttackBox = playerUICanvas.transform.Find("bruiserAttackBox").gameObject;
+
         AlienHead = GameObject.Find("AlienHead"); //Need this to get alien object's sprite renderer
         alienBody = GameObject.Find("AlienBody"); //Need this to get alien object's sprite renderer
         myCamera = GameObject.Find("Main Camera");
@@ -154,7 +161,7 @@ public class Alien_Object : MonoBehaviour
         //   Debug.Log("AlienAttack");
         //    attack();
         //}
-        if (playerAlive)
+        if (playerAlive & Script_PauseMenu.gameIsPaused == false)
         {
             moveAlien();
         }
@@ -183,9 +190,13 @@ public class Alien_Object : MonoBehaviour
         mouse_position.x = mouse_position.x - alien_sprite_position.x;
         mouse_position.y = mouse_position.y - alien_sprite_position.y;
 
-        AlienHead.transform.position = new Vector3(nextX, nextY, 0);
-        alienBody.transform.position = new Vector3(nextX, nextY, 0);
-        myCamera.transform.position = new Vector3(nextX, nextY, -10);
+        //if alien position + (x, y) wont be inside a wall's collider --- allow move
+        if (true)
+        {
+            AlienHead.transform.position = new Vector3(nextX, nextY, 0);
+            alienBody.transform.position = new Vector3(nextX, nextY, 0);
+            myCamera.transform.position = new Vector3(nextX, nextY, -10);
+        }
 
         //Call the walking animation
         walking_Anim(horizontal, vertical);

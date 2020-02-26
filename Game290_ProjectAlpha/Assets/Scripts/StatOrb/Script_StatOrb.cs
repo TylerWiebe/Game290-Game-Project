@@ -18,6 +18,8 @@ public class Script_StatOrb : MonoBehaviour
         //check if the collision was with the player
         if ((other.tag == "player") || (other.tag == "Player"))
         {
+            Script_PauseMenu.gameIsPaused = true;
+
             //freeze time
             Time.timeScale = 0f;
 
@@ -29,7 +31,10 @@ public class Script_StatOrb : MonoBehaviour
     //call on button press (stat index determines stat to be leveled)
     public void IncreaseStat(int statIndex)
     {
+
         player.GetComponent<Alien_Object>().IncreaseStat(statIndex);
+
+        Script_PauseMenu.gameIsPaused = false;
 
         //unfreeze time
         Time.timeScale = 1f;

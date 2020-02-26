@@ -25,16 +25,15 @@ public class Script_BruiserAttack : MonoBehaviour
     void Update()
     {
         //use skill on spacebar press
-        if (Input.GetKeyUp(KeyCode.Mouse0) && (onCooldown == false))
+        if (Input.GetKeyUp(KeyCode.Mouse0) && (onCooldown == false) && (Script_PauseMenu.gameIsPaused == false))
         {
             onCooldown = true;
 
-            //useSkill
-            Debug.Log("Use Bruiser Skill");
+            //use attack
         }
 
         //run skill cooldown timer
-        if (onCooldown == true)
+        if (onCooldown == true && (Script_PauseMenu.gameIsPaused == false))
         {
             //increase fill amount by 1 every second
             cooldownOverlay.fillAmount += 1 / cooldown * Time.deltaTime;
