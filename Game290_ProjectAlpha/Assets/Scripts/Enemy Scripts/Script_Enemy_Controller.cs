@@ -81,7 +81,7 @@ public class Script_Enemy_Controller : MonoBehaviour
     {
         Script_Melee_Enemy_Object temp_script = temp_gameObject.GetComponent<Script_Melee_Enemy_Object>(); //get melee_enemy_object script
         //set attack damage
-        temp_script.set_attack_damage(base_melee_attack_damage + (melee_attack_damage_modifier * level_sequence_number));
+        temp_script.GetComponentInChildren<Script_Melee_Enemy_Attack>().set_attack_damage(base_melee_attack_damage + (melee_attack_damage_modifier * level_sequence_number));
         //set hit points
         temp_script.set_hit_points(base_melee_hit_points + (melee_hit_points_modifier * level_sequence_number));
         //Debug.Log("Initial Hitpoints" + (base_melee_hit_points + (melee_hit_points_modifier * level_sequence_number)).ToString());
