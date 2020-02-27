@@ -9,6 +9,7 @@ TagManager:
   - enemy
   - ClassIcon
   - PlayerUI_Canvas
+  - Wall
   layers:
   - Default
   - TransparentFX
