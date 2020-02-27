@@ -5,7 +5,7 @@ using UnityEngine;
 public class Script_Ranged_Enemy_Object : MonoBehaviour
 {
     private int attack_damage;
-    private int hit_points;
+    private float hit_points;
 
     private GameObject enemy_body;
     private GameObject enemy_attack_cone;
@@ -27,7 +27,7 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
         return attack_damage;
     }
 
-    public int get_hit_points()
+    public float get_hit_points()
     {
         return hit_points;
     }
@@ -38,12 +38,12 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
         this.attack_damage = attack_damage;
     }
 
-    public void set_hit_points(int hit_points)
+    public void set_hit_points(float hit_points)
     {
         this.hit_points = hit_points;
     }
 
-    public void attacked(int damage)
+    public void attacked(float damage)
     {
         hit_points -= damage;
         if (hit_points <= 0)

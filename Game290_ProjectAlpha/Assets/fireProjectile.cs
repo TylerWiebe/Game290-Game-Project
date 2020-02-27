@@ -21,7 +21,7 @@ public class fireProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (myAlienObjectScript.getCurrentClass() == 2 && Input.GetMouseButtonDown(0) )
+        if (myAlienObjectScript.getCurrentClass() == 2 && Input.GetMouseButtonDown(0) && myChargeScript.getRangedCharges() > 0)
         {
             Debug.Log("shot projectile");
             shoot();

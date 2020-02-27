@@ -5,7 +5,7 @@ using UnityEngine;
 public class Script_Melee_Enemy_Object : MonoBehaviour
 {
     private int attack_damage;
-    public int hit_points;
+    public float hit_points;
 
     // Start is called before the first frame update
     void Start()
@@ -24,12 +24,12 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
         this.attack_damage = attack_damage;
     }
 
-    public void set_hit_points(int hit_points)
+    public void set_hit_points(float hit_points)
     {
         this.hit_points = hit_points;
     }
 
-    public void attacked(int damage)
+    public void attacked(float damage)
     {
         Debug.Log("previous health"+ (damage).ToString());
         hit_points -= damage;
