@@ -12,12 +12,14 @@ public class AnimationController : MonoBehaviour
     void Start()
     {
         alienHead = GameObject.Find("AlienHead");
+        animHead = alienHead.GetComponent<Animator>();
         myAlienObject = alienHead.GetComponent<Alien_Object>();
     }
 
 
     public void update_alien_morph_state()
     {
+        Debug.Log("updatedAlienMorphStatus");
         int currentClass = myAlienObject.getCurrentClass();
         anim.SetBool("morph", false);
         anim.SetInteger("CurrentClass", currentClass);
@@ -25,6 +27,7 @@ public class AnimationController : MonoBehaviour
 
     public void morph_ended()
     {
+        Debug.Log("morphEnded");
         bool temp = true;
         int currentClass = myAlienObject.getCurrentClass();
         if (currentClass == 2)
@@ -40,6 +43,8 @@ public class AnimationController : MonoBehaviour
 
     public void morph_started()
     {
+
+        Debug.Log("morphStarted");
         bool temp = false;
         myAlienObject.setCanMove(temp);
     }

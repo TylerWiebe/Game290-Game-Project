@@ -77,6 +77,7 @@ public class Alien_Object : MonoBehaviour
     //Animations
     public Animator animHead;
     public Animator animBody;
+
     public AnimationClip assassinMorph;
     public AnimationClip assassinAttack;
     public AnimationClip bruiserMorph;
@@ -100,6 +101,8 @@ public class Alien_Object : MonoBehaviour
         alienBody = GameObject.Find("AlienBody"); //Need this to get alien object's sprite renderer
         myCamera = GameObject.Find("Main Camera");
 
+        animHead = AlienHead.GetComponent<Animator>();
+        animBody = alienBody.GetComponent<Animator>();
 
         //Initializing Character
         System.Random rand = new System.Random();
