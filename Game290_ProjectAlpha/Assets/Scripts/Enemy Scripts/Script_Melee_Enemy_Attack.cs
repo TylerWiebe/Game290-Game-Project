@@ -4,43 +4,41 @@ using UnityEngine;
 
 
 //This script must be attached to the attackRange game object and must also be a child of the "enemy" game object.
-public class Script_Melee_Enemy_Attack : MonoBehaviour
+public class Script_Melee_Enemy_Attack : Script_Melee_Enemy_Object
 {
-    //allows enemy to attack if set to "true"
-    private bool enemyInRange = false;
+    private int attack_damage;
+
 
     //when a collision with player occurs, trigger attacks
     IEnumerator OnTriggerEnter2D(Collider2D other)
     {
         if ((other.tag == "player") || (other.tag == "Player"))
         {
-            enemyInRange = true;
-
-            //when enemy is in range attack
-            while (enemyInRange == true)
-            {
-                Attack();
-                //attack every 1.5 seconds
-                yield return new WaitForSeconds(1.5f);
-            }
+            InvokeRepeating("Attack", 0f, 1.5f);
         }
+        yield break;
     }
-
-
 
 
     //trigger when player leaves enemy range (stop attacking)
     private void OnTriggerExit2D(Collider2D other)
     {
-        enemyInRange = false;
+        //enemyInRange = false;
+        if ((other.tag == "player") || (other.tag == "Player"))
+        {
+            CancelInvoke();
+        }
     }
-
-
-
 
     //temporary attack function
     private void Attack()
     {
-        //Debug.Log("Melee Attack Triggered");
+        GameObject player = GameObject.Find("AlienHead");
+        player.GetComponent<Alien_Object>().Deal_Damage_To_Alien(attack_damage);
+    }
+
+    public void set_attack_damage(int attack_damage)
+    {
+        this.attack_damage = attack_damage;
     }
 }

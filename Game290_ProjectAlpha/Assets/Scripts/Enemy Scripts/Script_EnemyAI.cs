@@ -66,7 +66,7 @@ public class Script_EnemyAI : MonoBehaviour
             StartCoroutine(AggressiveBehaviour());
             //if (this.gameObject.tag == "RangedEnemy" && first_time == true)
             //{
-            this.gameObject.GetComponentInChildren<Script_Ranged_Enemy_Attack>().set_playerNotSeen(false);
+            //this.gameObject.GetComponentInChildren<Script_Ranged_Enemy_Attack>().set_playerNotSeen(false);
             //    first_time = false;
         }
     }
@@ -81,7 +81,6 @@ public class Script_EnemyAI : MonoBehaviour
         {
             iter = 0;
             direction = UnityEngine.Random.Range(0, 4);
-            //direction = 3;
             walkTime = UnityEngine.Random.Range(walkTime_LowerLimit, walkTime_UpperLimit);
             //Debug.Log(direction);
         }

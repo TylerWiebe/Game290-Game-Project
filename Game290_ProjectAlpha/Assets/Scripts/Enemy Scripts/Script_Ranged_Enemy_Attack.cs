@@ -38,7 +38,6 @@ public class Script_Ranged_Enemy_Attack : MonoBehaviour
     //trigger when player leaves enemy range (stop attacking)
     private void OnTriggerExit2D(Collider2D other)
     {
-        //enemyInRange = false;
         if ((other.tag == "player") || (other.tag == "Player"))
         {
             CancelInvoke();
