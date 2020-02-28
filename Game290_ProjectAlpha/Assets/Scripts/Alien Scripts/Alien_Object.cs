@@ -188,8 +188,23 @@ public class Alien_Object : MonoBehaviour
         mouse_position.x = mouse_position.x - alien_sprite_position.x;
         mouse_position.y = mouse_position.y - alien_sprite_position.y;
 
-        //if alien position + (x, y) wont be inside a wall's collider --- allow move
-        if (true)
+        //get target position (coordinate of player + 1 unit in the direction it is facing)
+        //Use a raycast
+        // if raycast hits a wall collider don't allow movement
+
+        //calculate a target position a certain distance away
+        float distance = 1f;
+        float x = distance * Mathf.Cos(BodyAngle * Mathf.Deg2Rad);
+        float y = distance * Mathf.Sin(BodyAngle * Mathf.Deg2Rad);
+        Vector3 targetPosition = AlienHead.transform.position;
+        targetPosition.x += x;
+        targetPosition.y += y;
+
+        //Raycast parameters(startingPosition, direction, distance)
+        RaycastHit2D rayCastHit = Physics2D.Raycast(AlienHead.transform.position, targetPosition, speed * Time.deltaTime);
+
+        //if raycast did not hit collider with tag "Wall" ---> Allow Movement
+        if (!(rayCastHit.collider.tag == "Wall"))
         {
             AlienHead.transform.position = new Vector3(nextX, nextY, 0);
             alienBody.transform.position = new Vector3(nextX, nextY, 0);

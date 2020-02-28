@@ -36,10 +36,10 @@ public class Script_StatOrb : MonoBehaviour
 
         Script_PauseMenu.gameIsPaused = false;
 
+        statWindow.SetActive(false);
+
         //unfreeze time
         Time.timeScale = 1f;
-
-        statWindow.SetActive(false);
 
         //remove stat orb
         Destroy(this.gameObject);
