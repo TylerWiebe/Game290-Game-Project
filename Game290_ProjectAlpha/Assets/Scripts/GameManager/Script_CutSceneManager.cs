@@ -59,7 +59,7 @@ public class Script_CutSceneManager : MonoBehaviour
         //wait for animation(1 second)
         yield return new WaitForSeconds(2);
 
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("Level_1");
     }
 
 

@@ -50,7 +50,7 @@ public class MeleeAttack : MonoBehaviour
                     i++;
                 }
                 attackTime = attackLength;
-                Debug.Log("set Attack Length");
+                //Debug.Log("set Attack Length");
 
             }
 

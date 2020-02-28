@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 //Controls Enemy behaviour for both passive and alerted phases.  
 //Enemy walks back and forth.  If player appears in sight, walk towards and attack player.
@@ -20,9 +21,11 @@ public class Script_EnemyAI : MonoBehaviour
     public int walkTime_LowerLimit = 100;
     public int walkTime_UpperLimit = 250;
 
+    private bool first_time = false; //used in aggro mode
+
     //rotate body when in aggro variables
     Vector3 enemy_position;
-    float angle = 0f;
+    public float angle = 0f;
 
     //Speed of walking before seeing player
     [SerializeField]
@@ -42,15 +45,28 @@ public class Script_EnemyAI : MonoBehaviour
     private float roamDistance = 5f;
 
     [SerializeField]
-    private float stoppingDistance = 3f;
+    private float stoppingDistance;
+
+    //Stop player from pushing enemy
+    public Rigidbody2D rigidBody;
+
 
     void Start()
     {
         //assign the object with tag "Player" to be the enemy's target 
         target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        //Get rigidbody
+        rigidBody = this.gameObject.GetComponent<Rigidbody2D>();
+        rigidBody.bodyType = RigidbodyType2D.Kinematic;
+
+
+        //set stopping distance
+        if (this.gameObject.tag == "RangedEnemy")
+            stoppingDistance = transform.GetComponentInChildren<Script_Ranged_Enemy_Attack>().stoppingDistance;
+        else
+            stoppingDistance = transform.GetComponentInChildren<Script_Melee_Enemy_Attack>().stoppingDistance;
     }
-
-
 
     //control behaviour type
     void Update()
@@ -62,6 +78,10 @@ public class Script_EnemyAI : MonoBehaviour
         else
         {
             StartCoroutine(AggressiveBehaviour());
+            //if (this.gameObject.tag == "RangedEnemy" && first_time == true)
+            //{
+            //this.gameObject.GetComponentInChildren<Script_Ranged_Enemy_Attack>().set_playerNotSeen(false);
+            //    first_time = false;
         }
     }
 
@@ -76,7 +96,6 @@ public class Script_EnemyAI : MonoBehaviour
             iter = 0;
             direction = UnityEngine.Random.Range(0, 4);
             walkTime = UnityEngine.Random.Range(walkTime_LowerLimit, walkTime_UpperLimit);
-            //Debug.Log(direction);
         }
         else
         {
@@ -87,65 +106,83 @@ public class Script_EnemyAI : MonoBehaviour
         {
             while (direction == 0)
             {
-                transform.Translate(Vector2.right * passiveSpeed * Time.deltaTime);
-                rotate_body_passive(direction);
+                //rotate right
+                if (rigidBody.rotation < (270 - 10) && rigidBody.rotation > (270 + 10))
+                {
+                    rigidBody.rotation = 270;
+                }
+
+                else if(rigidBody.rotation < 270)
+                    rigidBody.rotation += 10f;
+                else if(rigidBody.rotation > 270)
+                    rigidBody.rotation += -10f;
+
+                //move right
+                rigidBody.velocity = Vector2.right * passiveSpeed;
+                
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
             }
             while (direction == 1)
             {
-                transform.Translate(Vector2.left * passiveSpeed * Time.deltaTime);
-                rotate_body_passive(direction);
+                //rotate left
+                if (rigidBody.rotation < (90 + 10) && rigidBody.rotation > (90 - 10))
+                {
+                    rigidBody.rotation = 90;
+                }
+                else if (rigidBody.rotation < 90)
+                    rigidBody.rotation += 10f;
+                else if (rigidBody.rotation > 90)
+                    rigidBody.rotation += -10f;
+
+                //move left
+                rigidBody.velocity = Vector2.left * passiveSpeed;
+
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
             }
             while (direction == 2)
             {
-                transform.Translate(Vector2.up * passiveSpeed * Time.deltaTime);
-                rotate_body_passive(direction);
+                //rotate up
+                if (rigidBody.rotation < (0 + 10) && rigidBody.rotation > (0 - 10))
+                {
+                    rigidBody.rotation = 0;
+                }
+                else if (rigidBody.rotation < 0)
+                    rigidBody.rotation += 10;
+                else if (rigidBody.rotation > 0)
+                    rigidBody.rotation += -10f;
+
+                //move up
+                rigidBody.velocity = Vector2.up * passiveSpeed;
+                
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
             }
             while (direction == 3)
             {
-                rotate_body_passive(direction);
-                transform.Translate(Vector2.down * passiveSpeed * Time.deltaTime);
+                //rotate down
+                if (rigidBody.rotation < (180 + 10) && rigidBody.rotation > (180 - 10))
+                {
+                    rigidBody.rotation = 180;
+                }
+                else if(rigidBody.rotation < 180)
+                    rigidBody.rotation += 10;
+                else if (rigidBody.rotation > 180)
+                    rigidBody.rotation += -10f;
+
+                //move down
+                rigidBody.velocity = Vector2.down * passiveSpeed;
+
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
             }
-            //Original Script
+
             /*
-            //Walk right for specified seconds
-            if ((walkingDirection == "right") || (walkingDirection == "Right"))
-            {
-                transform.Translate(Vector2.right * passiveSpeed * Time.deltaTime);
-
-                //wait
-                yield return new WaitForSeconds(roamDistance);
-
-                //change direction
-                walkingDirection = "left";
-                yield break;
-            }
-
-            //walk left for specified seconds
-            if ((walkingDirection == "left") || (walkingDirection == "Left"))
-            {
-                transform.Translate(Vector2.left * passiveSpeed * Time.deltaTime);
-
-                //wait
-                yield return new WaitForSeconds(roamDistance);
-
-                //change direction
-                walkingDirection = "right";
-                yield break;
-            }
-            */
-
             //Walk right for specified seconds
             if ((walkingDirection == "up") || (walkingDirection == "Up"))
             {
@@ -171,7 +208,7 @@ public class Script_EnemyAI : MonoBehaviour
                 walkingDirection = "up";
                 yield break;
             }
-
+            */
             //pause
             yield return new WaitForSeconds(1);
         }
@@ -180,31 +217,37 @@ public class Script_EnemyAI : MonoBehaviour
     //Agressive enemy behaviour triggered after enemy notices player
     IEnumerator AggressiveBehaviour()
     {
-        //pause
-        yield return new WaitForSeconds(1);
+        calculateAngle();
+        rotate_body_aggro();
 
         //walk towards target position at specified speed and stop if distance between is greater than certain amount
         if (Vector2.Distance(transform.position, target.position) > stoppingDistance)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target.position, aggressiveSpeed * Time.smoothDeltaTime);
-            rotate_body_aggro();
+            float theta = (angle + 90) * Mathf.Deg2Rad;
+            float v1 = (float)(aggressiveSpeed * Math.Cos(theta)); //find x velocity
+            float v2 = (float)(aggressiveSpeed * Math.Sin(theta)); //find y velocity
+            Vector3 vector = new Vector3(v1, v2, 0f); //create a vector of x and y velocities
+            rigidBody.velocity = vector;
         }
+        else
+        {
+            rigidBody.velocity = Vector3.zero;
+        }
+        //pause
+        yield return new WaitForSeconds(1);
     }
 
-    //rotates the enemy to face the way they are moving whenst in passive mode
-    private void rotate_body_passive(int direction)
-    {
-        angle = direction * 90;
-        this.gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);   
-    }
-    
-    //rotates the enemy to face the player whenst in aggro mode
-    private void rotate_body_aggro()
+    private void calculateAngle()
     {
         enemy_position = target.transform.position;
         enemy_position.x = enemy_position.x - this.gameObject.transform.position.x;
         enemy_position.y = enemy_position.y - this.gameObject.transform.position.y;
         angle = (Mathf.Atan2(enemy_position.y, enemy_position.x) * Mathf.Rad2Deg) - 90;
-        this.gameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    //rotates the enemy to face the player whenst in aggro mode
+    private void rotate_body_aggro()
+    {
+        rigidBody.rotation = angle;
     }
 }

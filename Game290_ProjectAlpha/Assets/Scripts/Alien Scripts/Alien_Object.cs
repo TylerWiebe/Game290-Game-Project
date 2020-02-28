@@ -8,8 +8,26 @@ using UnityEngine.SceneManagement;
 public class Alien_Object : MonoBehaviour
 {
     //hold reference to object holding Script_SceneTransition
-    [SerializeField]
-    private GameObject sceneTransitionManager = null;
+    private GameObject sceneTransitionManager;
+    private GameObject gameManager;
+
+    //PlayerUI_Canvas
+    private GameObject playerUICanvas;
+
+    //HealthBar
+    private GameObject healthBar;
+
+    //Projectile charges
+    private GameObject chargeBar;
+
+    //morpheQueue
+    private GameObject morphQueue;
+
+    //attack cooldownBox for assassin
+    private GameObject assassinAttackBox;
+
+    //Projectile charges
+    private GameObject bruiserAttackBox;
 
     //Alien Sprite
     public Sprite alien_sprite;
@@ -27,16 +45,19 @@ public class Alien_Object : MonoBehaviour
     public GameObject meleeAttack;
     public float speed;
 
+    public bool playerAlive = true;
     //ALIEN STATS
     //Health Stats
-    private int Max_Health = 100;// actual maximum health
+    public int Max_Health = 100;// actual maximum health
     private int HEALTH_SCALE_CONST = 100; //this is the health constant between the three classes, the max health will be scaled off of this value
     private int Current_Health_Percentage = 100; //this is the amount of health the player has left in percentage
-    private int Current_Health = 100; //This is the amount of health, numeric value
+    public int Current_Health = 100; //This is the amount of health, numeric value
 
     //Damage Stats
     private int damage = 10;
-    private int num_ranged_charges = 4;
+    public int num_ranged_charges = 4;
+    public int current_ranged_charges = 4;
+
     private int charge_size = 25;
 
     //Variable Stats
@@ -51,12 +72,19 @@ public class Alien_Object : MonoBehaviour
     private int[] Class_Order = new int[3];
     private int Current_Class = 0;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
         //Finding the desired GameObjects
+        gameManager = GameObject.Find("GameManager");
+        sceneTransitionManager = GameObject.Find("SceneTransitionManager");
+        playerUICanvas = GameObject.Find("PlayerUI_Canvas");
+        healthBar = playerUICanvas.transform.Find("HealthBar").gameObject;
+        chargeBar = playerUICanvas.transform.Find("ProjectileCharges").gameObject;
+        morphQueue = playerUICanvas.transform.Find("MorphQueue").gameObject;
+        assassinAttackBox = playerUICanvas.transform.Find("assassinAttackBox").gameObject;
+        bruiserAttackBox = playerUICanvas.transform.Find("bruiserAttackBox").gameObject;
+
         AlienHead = GameObject.Find("AlienHead"); //Need this to get alien object's sprite renderer
         alienBody = GameObject.Find("AlienBody"); //Need this to get alien object's sprite renderer
         myCamera = GameObject.Find("Main Camera");
@@ -68,32 +96,38 @@ public class Alien_Object : MonoBehaviour
             case 0:
                 Class_Order = new int[] { 0, 1, 2 };
                 Current_Class = 1;
-                speed = 0.025f;
+                morphQueue.GetComponent<Script_MorphUI>().SetQueue(0);
+                updateAlienStats();
                 break;
             case 1:
                 Class_Order = new int[] { 0, 2, 1 };
                 Current_Class = 2;
-                speed = 0.05f;
+                morphQueue.GetComponent<Script_MorphUI>().SetQueue(1);
+                updateAlienStats();
                 break;
             case 2:
                 Class_Order = new int[] { 1, 0, 2 };
                 Current_Class = 0;
-                speed = 0.075f;
+                morphQueue.GetComponent<Script_MorphUI>().SetQueue(2);
+                updateAlienStats();
                 break;
             case 3:
                 Class_Order = new int[] { 1, 2, 0 };
                 Current_Class = 2;
-                speed = 0.05f;
+                morphQueue.GetComponent<Script_MorphUI>().SetQueue(3);
+                updateAlienStats();
                 break;
             case 4:
                 Class_Order = new int[] { 2, 1, 0 };
                 Current_Class = 1;
-                speed = 0.025f;
+                morphQueue.GetComponent<Script_MorphUI>().SetQueue(4);
+                updateAlienStats();
                 break;
             default:
                 Class_Order = new int[] { 2, 0, 1 };
                 Current_Class = 0;
-                speed = 0.075f;
+                morphQueue.GetComponent<Script_MorphUI>().SetQueue(5);
+                updateAlienStats();
                 break;
         }
         meleeAttack.GetComponent<MeleeAttack>().setAttackForm(Current_Class);
@@ -103,30 +137,32 @@ public class Alien_Object : MonoBehaviour
     void Update()
     {
 
-        if(Current_Health <= 0)
+        if((Current_Health <= 0) && (playerAlive))
         {
-            Debug.Log("AlienDied");
-            Alien_Died();
+            playerAlive = false;
+            //Debug.Log("AlienDied");
+            StartCoroutine(Alien_Died());
         }
-        if(Input.GetKeyUp("q"))
+        if((Input.GetKeyUp("q")) && (playerAlive))
         {
-            Debug.Log("MorphLeft");
+           //Debug.Log("MorphLeft");
             morph_left();
         }
-        if (Input.GetKeyUp("e"))
+        if ((Input.GetKeyUp("e")) && (playerAlive))
         {
-            Debug.Log("MorphRight");
+            //Debug.Log("MorphRight");
             morph_right();
         }
+
         //if (Input.GetKeyUp(KeyCode.Mouse0))
         //{
         //   Debug.Log("AlienAttack");
         //    attack();
         //}
-        moveAlien();
-
-
-
+        if (playerAlive & Script_PauseMenu.gameIsPaused == false)
+        {
+            moveAlien();
+        }
     }
 
     public float getBodyAngle()
@@ -152,9 +188,28 @@ public class Alien_Object : MonoBehaviour
         mouse_position.x = mouse_position.x - alien_sprite_position.x;
         mouse_position.y = mouse_position.y - alien_sprite_position.y;
 
-        AlienHead.transform.position = new Vector3(nextX, nextY, 0);
-        alienBody.transform.position = new Vector3(nextX, nextY, 0);
-        myCamera.transform.position = new Vector3(nextX, nextY, -10);
+        //get target position (coordinate of player + 1 unit in the direction it is facing)
+        //Use a raycast
+        // if raycast hits a wall collider don't allow movement
+
+        //calculate a target position a certain distance away
+        float distance = 1f;
+        float x = distance * Mathf.Cos(BodyAngle * Mathf.Deg2Rad);
+        float y = distance * Mathf.Sin(BodyAngle * Mathf.Deg2Rad);
+        Vector3 targetPosition = AlienHead.transform.position;
+        targetPosition.x += x;
+        targetPosition.y += y;
+
+        //Raycast parameters(startingPosition, direction, distance)
+        RaycastHit2D rayCastHit = Physics2D.Raycast(AlienHead.transform.position, targetPosition, speed * Time.deltaTime);
+
+        //if raycast did not hit collider with tag "Wall" ---> Allow Movement
+        if (!(rayCastHit.collider.tag == "Wall"))
+        {
+            AlienHead.transform.position = new Vector3(nextX, nextY, 0);
+            alienBody.transform.position = new Vector3(nextX, nextY, 0);
+            myCamera.transform.position = new Vector3(nextX, nextY, -10);
+        }
 
         //Call the walking animation
         walking_Anim(horizontal, vertical);
@@ -185,6 +240,7 @@ public class Alien_Object : MonoBehaviour
         Current_Class = Class_Order[1];
         morph_animation(prev_class, Current_Class);
 
+        morphQueue.GetComponent<Script_MorphUI>().MorphRight();
         updateAlienStats();
     }
     private void morph_left()
@@ -199,6 +255,7 @@ public class Alien_Object : MonoBehaviour
         Current_Class = Class_Order[1];
         morph_animation(prev_class, Current_Class);
 
+        morphQueue.GetComponent<Script_MorphUI>().MorphLeft();
         updateAlienStats();
     }
 
@@ -224,24 +281,70 @@ public class Alien_Object : MonoBehaviour
 
     private void updateAlienStats()
     {
-        //Debug.Log(Current_Class);
+        //assassin
         if (Current_Class == 0)
         {
             Max_Health = (int) Math.Round(HEALTH_SCALE_CONST * (vitality + 1) * 0.5);
             Current_Health = (int) (Max_Health * (Current_Health_Percentage * 0.01));
             speed = 0.075f;
+
+            //update healthbar Max Health & current health
+            healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(Max_Health);
+            healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
+
+            //turn off charge bar
+            chargeBar.SetActive(false);
+            //turn off skill box
+            bruiserAttackBox.SetActive(false);
+
+            //turn on skill box
+            assassinAttackBox.SetActive(true);
+
+            //add skill
+
         }
+        //bruiser
         else if (Current_Class == 1)
         {
             Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1) * 2.0);
             Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
-            speed = 0.05f;
+            speed = 0.025f;
+
+            //update healthbar Max Health & current health
+            healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(Max_Health);
+            healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
+
+            //turn off charge bar
+            chargeBar.SetActive(false);
+            //turn off skill box
+            assassinAttackBox.SetActive(false);
+
+            //turn on skill box
+            bruiserAttackBox.SetActive(true);
+
+            //add skill
         }
+        //ranged
         else
         {
             Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1.0));
             Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
-            speed = 0.025f;
+            speed = 0.05f;
+
+            //update healthbar Max Health & current health
+            healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(Max_Health);
+            healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
+
+            //turn off skill box
+            assassinAttackBox.SetActive(false);
+            bruiserAttackBox.SetActive(false);
+
+            //add projectile charge bar
+            chargeBar.SetActive(true);
+            chargeBar.GetComponent<Script_ProjectileCharges>().SetMaxCharge(num_ranged_charges);
+            chargeBar.GetComponent<Script_ProjectileCharges>().SetCharge(current_ranged_charges);
+
+            //add skill
         }
         meleeAttack.GetComponent<MeleeAttack>().setAttackForm(Current_Class);
         //Debug.Log(Current_Health);
@@ -250,11 +353,6 @@ public class Alien_Object : MonoBehaviour
     /// <summary>
     /// On alien death, call coroutine: Plays fade out animation and load DeathScreen scene
     /// </summary>
-    private void CallAlien_Died()
-    {
-        StartCoroutine(Alien_Died());
-    }
-
     IEnumerator Alien_Died()
     {
         //play fade out animation
@@ -312,10 +410,13 @@ public class Alien_Object : MonoBehaviour
         return damage * ((strength + 1) * 10);
     }
 
-    private void Deal_Damage_from_Alien(int damage)
+    public void Deal_Damage_To_Alien(int damage)
     {
+        //Debug.Log("oof");
         Current_Health -= damage;
         Current_Health_Percentage = Current_Health / Max_Health;
+
+        healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
     }
 
 }
