@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 //Controls Enemy behaviour for both passive and alerted phases.  
 //Enemy walks back and forth.  If player appears in sight, walk towards and attack player.
@@ -44,15 +45,28 @@ public class Script_EnemyAI : MonoBehaviour
     private float roamDistance = 5f;
 
     [SerializeField]
-    private float stoppingDistance = 3f;
+    private float stoppingDistance;
+
+    //Stop player from pushing enemy
+    public Rigidbody2D rigidBody;
+
 
     void Start()
     {
         //assign the object with tag "Player" to be the enemy's target 
         target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        //Get rigidbody
+        rigidBody = this.gameObject.GetComponent<Rigidbody2D>();
+        rigidBody.bodyType = RigidbodyType2D.Kinematic;
+
+
+        //set stopping distance
+        if (this.gameObject.tag == "RangedEnemy")
+            stoppingDistance = transform.GetComponentInChildren<Script_Ranged_Enemy_Attack>().stoppingDistance;
+        else
+            stoppingDistance = transform.GetComponentInChildren<Script_Melee_Enemy_Attack>().stoppingDistance;
     }
-
-
 
     //control behaviour type
     void Update()
@@ -82,7 +96,6 @@ public class Script_EnemyAI : MonoBehaviour
             iter = 0;
             direction = UnityEngine.Random.Range(0, 4);
             walkTime = UnityEngine.Random.Range(walkTime_LowerLimit, walkTime_UpperLimit);
-            //Debug.Log(direction);
         }
         else
         {
@@ -93,18 +106,20 @@ public class Script_EnemyAI : MonoBehaviour
         {
             while (direction == 0)
             {
-                
                 //rotate right
-                if(this.gameObject.transform.rotation.z < (-0.7071068 + 0.05) && this.gameObject.transform.rotation.z > (-0.7071068 - 0.05))
+                if (rigidBody.rotation < (270 - 10) && rigidBody.rotation > (270 + 10))
                 {
-                    //do nothing
+                    rigidBody.rotation = 270;
                 }
-                else if(this.gameObject.transform.rotation.z < -0.7071068)
-                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, 10f);
-                else if(this.gameObject.transform.rotation.z > -0.7071068)
-                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, -10f);
+
+                else if(rigidBody.rotation < 270)
+                    rigidBody.rotation += 10f;
+                else if(rigidBody.rotation > 270)
+                    rigidBody.rotation += -10f;
+
                 //move right
-                this.gameObject.transform.position += Vector3.right * passiveSpeed * Time.deltaTime;
+                rigidBody.velocity = Vector2.right * passiveSpeed;
+                
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
@@ -112,17 +127,18 @@ public class Script_EnemyAI : MonoBehaviour
             while (direction == 1)
             {
                 //rotate left
-                //rotate right
-                if (this.gameObject.transform.rotation.z < (0.7071068 + 0.05) && this.gameObject.transform.rotation.z > (0.7071068 - 0.05))
+                if (rigidBody.rotation < (90 + 10) && rigidBody.rotation > (90 - 10))
                 {
-                    //do nothing
+                    rigidBody.rotation = 90;
                 }
-                else if (this.gameObject.transform.rotation.z < 0.7071068)
-                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, 10f);
-                else if (this.gameObject.transform.rotation.z > 0.7071068)
-                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, -10f);
+                else if (rigidBody.rotation < 90)
+                    rigidBody.rotation += 10f;
+                else if (rigidBody.rotation > 90)
+                    rigidBody.rotation += -10f;
+
                 //move left
-                this.gameObject.transform.position += Vector3.left * passiveSpeed * Time.deltaTime;
+                rigidBody.velocity = Vector2.left * passiveSpeed;
+
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
@@ -130,16 +146,18 @@ public class Script_EnemyAI : MonoBehaviour
             while (direction == 2)
             {
                 //rotate up
-                if (this.gameObject.transform.rotation.z < (0 + 0.05) && this.gameObject.transform.rotation.z > (0 - 0.05))
+                if (rigidBody.rotation < (0 + 10) && rigidBody.rotation > (0 - 10))
                 {
-                    //do nothing
+                    rigidBody.rotation = 0;
                 }
-                else if (this.gameObject.transform.rotation.z < 0)
-                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, 10f);
-                else if (this.gameObject.transform.rotation.z > 0)
-                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, -10f);
+                else if (rigidBody.rotation < 0)
+                    rigidBody.rotation += 10;
+                else if (rigidBody.rotation > 0)
+                    rigidBody.rotation += -10f;
+
                 //move up
-                this.gameObject.transform.position += Vector3.up * passiveSpeed * Time.deltaTime;
+                rigidBody.velocity = Vector2.up * passiveSpeed;
+                
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
@@ -147,21 +165,24 @@ public class Script_EnemyAI : MonoBehaviour
             while (direction == 3)
             {
                 //rotate down
-                if (this.gameObject.transform.rotation.z < (1 + 0.05) && this.gameObject.transform.rotation.z > (1))
+                if (rigidBody.rotation < (180 + 10) && rigidBody.rotation > (180 - 10))
                 {
-                    //do nothing
+                    rigidBody.rotation = 180;
                 }
-                else if(this.gameObject.transform.rotation.z < 1)
-                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, 10f);
-                else if (this.gameObject.transform.rotation.z > 1)
-                    this.gameObject.transform.rotation = this.gameObject.transform.rotation * Quaternion.Euler(0, 0, -10f);
+                else if(rigidBody.rotation < 180)
+                    rigidBody.rotation += 10;
+                else if (rigidBody.rotation > 180)
+                    rigidBody.rotation += -10f;
+
                 //move down
-                this.gameObject.transform.position += Vector3.down * passiveSpeed * Time.deltaTime;
+                rigidBody.velocity = Vector2.down * passiveSpeed;
+
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
             }
 
+            /*
             //Walk right for specified seconds
             if ((walkingDirection == "up") || (walkingDirection == "Up"))
             {
@@ -187,7 +208,7 @@ public class Script_EnemyAI : MonoBehaviour
                 walkingDirection = "up";
                 yield break;
             }
-
+            */
             //pause
             yield return new WaitForSeconds(1);
         }
@@ -196,24 +217,37 @@ public class Script_EnemyAI : MonoBehaviour
     //Agressive enemy behaviour triggered after enemy notices player
     IEnumerator AggressiveBehaviour()
     {
-        //pause
-        yield return new WaitForSeconds(1);
+        calculateAngle();
+        rotate_body_aggro();
 
         //walk towards target position at specified speed and stop if distance between is greater than certain amount
         if (Vector2.Distance(transform.position, target.position) > stoppingDistance)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target.position, aggressiveSpeed * Time.smoothDeltaTime);
-            rotate_body_aggro();
+            float theta = (angle + 90) * Mathf.Deg2Rad;
+            float v1 = (float)(aggressiveSpeed * Math.Cos(theta)); //find x velocity
+            float v2 = (float)(aggressiveSpeed * Math.Sin(theta)); //find y velocity
+            Vector3 vector = new Vector3(v1, v2, 0f); //create a vector of x and y velocities
+            rigidBody.velocity = vector;
         }
+        else
+        {
+            rigidBody.velocity = Vector3.zero;
+        }
+        //pause
+        yield return new WaitForSeconds(1);
     }
-    
-    //rotates the enemy to face the player whenst in aggro mode
-    private void rotate_body_aggro()
+
+    private void calculateAngle()
     {
         enemy_position = target.transform.position;
         enemy_position.x = enemy_position.x - this.gameObject.transform.position.x;
         enemy_position.y = enemy_position.y - this.gameObject.transform.position.y;
         angle = (Mathf.Atan2(enemy_position.y, enemy_position.x) * Mathf.Rad2Deg) - 90;
-        this.gameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    //rotates the enemy to face the player whenst in aggro mode
+    private void rotate_body_aggro()
+    {
+        rigidBody.rotation = angle;
     }
 }

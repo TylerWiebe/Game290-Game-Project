@@ -11,6 +11,7 @@ public class Script_Ranged_Enemy_Attack : MonoBehaviour
     public float speed;
     private GameObject target;
     private bool playerNotSeen = true;
+    public float stoppingDistance = 7f;
 
 
     void Start()

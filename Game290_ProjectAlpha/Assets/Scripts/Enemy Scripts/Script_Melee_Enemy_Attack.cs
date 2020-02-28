@@ -7,6 +7,7 @@ using UnityEngine;
 public class Script_Melee_Enemy_Attack : Script_Melee_Enemy_Object
 {
     private int attack_damage;
+    public float stoppingDistance = 1.5f;
 
 
     //when a collision with player occurs, trigger attacks
@@ -14,7 +15,7 @@ public class Script_Melee_Enemy_Attack : Script_Melee_Enemy_Object
     {
         if ((other.tag == "player") || (other.tag == "Player"))
         {
-            InvokeRepeating("Attack", 0f, 1.5f);
+            InvokeRepeating("Attack", 2f, 1.5f);
         }
         yield break;
     }

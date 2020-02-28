@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5625315820770704247}
   - component: {fileID: 216756994242035387}
-  - component: {fileID: 4979291131455304359}
   - component: {fileID: 922744460123204340}
   - component: {fileID: 2977842070874066483}
   m_Layer: 8
@@ -84,27 +83,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &4979291131455304359
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5346039312986687661}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 0.0001
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &922744460123204340
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -143,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992d615a57685a54cbb6f1b9528ee4c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hit_points: 0
 --- !u!1 &6012400469325524892
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,6 +136,7 @@ GameObject:
   - component: {fileID: 6012400469325524881}
   - component: {fileID: 6012400469325524880}
   - component: {fileID: 1944712882992667976}
+  - component: {fileID: 2843420104297914808}
   m_Layer: 8
   m_Name: Prefab_Melee_Enemy
   m_TagString: MeleeEnemy
@@ -265,6 +245,7 @@ MonoBehaviour:
   walkingDirection: Right
   roamDistance: 2
   stoppingDistance: 1.3
+  rigidBody: {fileID: 0}
 --- !u!58 &6012400469325524880
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -294,6 +275,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statOrb: {fileID: 6866704549077001977, guid: 0fd407f8b7809334ca958fdaf926cc1c, type: 3}
+--- !u!50 &2843420104297914808
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6012400469325524892}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1000000
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &6012400469467545531
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,8 +419,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6012400469569529117}
   - component: {fileID: 6012400469569529118}
-  - component: {fileID: 6012400469569529119}
-  - component: {fileID: 4870633020887978775}
   - component: {fileID: 7411384494986489897}
   m_Layer: 0
   m_Name: EnemyAttackRange
@@ -491,43 +491,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &6012400469569529119
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6012400469569529116}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
---- !u!50 &4870633020887978775
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6012400469569529116}
-  m_BodyType: 0
-  m_Simulated: 0
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!60 &7411384494986489897
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -72,8 +72,6 @@ public class Alien_Object : MonoBehaviour
     private int[] Class_Order = new int[3];
     private int Current_Class = 0;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
