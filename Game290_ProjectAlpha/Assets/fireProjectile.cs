@@ -11,6 +11,8 @@ public class fireProjectile : MonoBehaviour
 
     public float bulletForce = 20f;
 
+    public Animator anim;
+
     private Alien_Object myAlienObjectScript;
     private void Start()
     {
@@ -23,8 +25,7 @@ public class fireProjectile : MonoBehaviour
     {
         if (myAlienObjectScript.getCurrentClass() == 2 && Input.GetMouseButtonDown(0) && myChargeScript.getRangedCharges() > 0)
         {
-            Debug.Log("shot projectile");
-            shoot();
+            anim.SetBool("is_attacking", true);
         }
     }
 
@@ -33,5 +34,7 @@ public class fireProjectile : MonoBehaviour
         GameObject myProjectile = (GameObject)Instantiate(projectile, shootLocation.position, shootLocation.rotation);
         Rigidbody2D rb = myProjectile.GetComponent<Rigidbody2D>();
         rb.AddForce(shootLocation.up * bulletForce, ForceMode2D.Impulse);
+        anim.SetBool("is_attacking", false);
+
     }
 }

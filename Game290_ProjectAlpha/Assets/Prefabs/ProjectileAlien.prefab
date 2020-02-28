@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8404708801581121476}
   - component: {fileID: 2917417309848294182}
   - component: {fileID: 7150262607470366988}
+  - component: {fileID: 8040205033052992999}
   m_Layer: 8
   m_Name: ProjectileAlien
   m_TagString: Untagged
@@ -133,3 +134,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ffc3d6ff2553714895f45b27c7bb5f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ttd: 2
+  damageMultiplier: 2
+--- !u!95 &8040205033052992999
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2739205307369432115}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ed38f19636e6dc54a8ae8e30637e5aeb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

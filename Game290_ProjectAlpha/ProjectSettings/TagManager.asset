@@ -7,6 +7,9 @@ TagManager:
   - RangedEnemy
   - MeleeEnemy
   - enemy
+  - ClassIcon
+  - PlayerUI_Canvas
+  - Wall
   layers:
   - Default
   - TransparentFX

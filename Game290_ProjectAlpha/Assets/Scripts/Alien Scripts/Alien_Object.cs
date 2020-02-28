@@ -8,37 +8,27 @@ using UnityEngine.SceneManagement;
 public class Alien_Object : MonoBehaviour
 {
     //hold reference to object holding Script_SceneTransition
-    [SerializeField]
-    private GameObject sceneTransitionManager = null;
+    private GameObject sceneTransitionManager;
+    private GameObject gameManager;
 
-    //Class Icon 0
-    [SerializeField]
-    private GameObject classIcon0 = null;
-
-    //Class Icon 1
-    [SerializeField]
-    private GameObject classIcon1 = null;
-
-    //class Icon 2
-    [SerializeField]
-    private GameObject classIcon2 = null;
+    //PlayerUI_Canvas
+    private GameObject playerUICanvas;
 
     //HealthBar
-    [SerializeField]
-    private GameObject healthBar = null;
+    private GameObject healthBar;
 
     //Projectile charges
-    [SerializeField]
-    private GameObject chargeBar = null;
+    private GameObject chargeBar;
+
+    //morpheQueue
+    private GameObject morphQueue;
+
+    //attack cooldownBox for assassin
+    private GameObject assassinAttackBox;
 
     //Projectile charges
-    [SerializeField]
-    private GameObject assassinAttackBox = null;
-
-    //Projectile charges
-    [SerializeField]
     private GameObject bruiserAttackBox = null;
-    
+
     //Alien Sprite
     public Sprite alien_sprite;
 
@@ -54,6 +44,7 @@ public class Alien_Object : MonoBehaviour
     private GameObject myCamera;
     public float speed;
 
+    public bool playerAlive = true;
     //ALIEN STATS
     //Health Stats
     public int Max_Health = 100;// actual maximum health
@@ -80,82 +71,111 @@ public class Alien_Object : MonoBehaviour
     private int[] Class_Order = new int[3];
     private int Current_Class = 0;
 
+    //control variables
+    private bool alienCanMove = true;
 
+    //Animations
+    public Animator animHead;
+    public Animator animBody;
+    public AnimationClip assassinMorph;
+    public AnimationClip assassinAttack;
+    public AnimationClip bruiserMorph;
+    public AnimationClip bruiserAttack;
+    public AnimationClip rangedMorph;
+    public AnimationClip rangedAttack;
 
     // Start is called before the first frame update
     void Start()
     {
         //Finding the desired GameObjects
+        gameManager = GameObject.Find("GameManager");
+        sceneTransitionManager = GameObject.Find("SceneTransitionManager");
+        playerUICanvas = GameObject.Find("PlayerUI_Canvas");
+        healthBar = playerUICanvas.transform.Find("HealthBar").gameObject;
+        chargeBar = playerUICanvas.transform.Find("ProjectileCharges").gameObject;
+        morphQueue = playerUICanvas.transform.Find("MorphQueue").gameObject;
+        assassinAttackBox = playerUICanvas.transform.Find("assassinAttackBox").gameObject;
+        bruiserAttackBox = playerUICanvas.transform.Find("bruiserAttackBox").gameObject;
+
         AlienHead = GameObject.Find("AlienHead"); //Need this to get alien object's sprite renderer
         alienBody = GameObject.Find("AlienBody"); //Need this to get alien object's sprite renderer
         myCamera = GameObject.Find("Main Camera");
 
+
         //Initializing Character
         System.Random rand = new System.Random();
-        switch (rand.Next(0,6))
+        switch (rand.Next(0, 6))
         {
             case 0:
                 Class_Order = new int[] { 0, 1, 2 };
                 Current_Class = 1;
+                morphQueue.GetComponent<Script_MorphUI>().SetQueue(0);
                 updateAlienStats();
                 break;
             case 1:
                 Class_Order = new int[] { 0, 2, 1 };
                 Current_Class = 2;
+                morphQueue.GetComponent<Script_MorphUI>().SetQueue(1);
                 updateAlienStats();
                 break;
             case 2:
                 Class_Order = new int[] { 1, 0, 2 };
                 Current_Class = 0;
+                morphQueue.GetComponent<Script_MorphUI>().SetQueue(2);
                 updateAlienStats();
                 break;
             case 3:
                 Class_Order = new int[] { 1, 2, 0 };
                 Current_Class = 2;
+                morphQueue.GetComponent<Script_MorphUI>().SetQueue(3);
                 updateAlienStats();
                 break;
             case 4:
                 Class_Order = new int[] { 2, 1, 0 };
                 Current_Class = 1;
+                morphQueue.GetComponent<Script_MorphUI>().SetQueue(4);
                 updateAlienStats();
                 break;
             default:
                 Class_Order = new int[] { 2, 0, 1 };
                 Current_Class = 0;
+                morphQueue.GetComponent<Script_MorphUI>().SetQueue(5);
                 updateAlienStats();
                 break;
         }
+        animBody.SetInteger("CurrentClass", Current_Class);
     }
+
 
     // Update is called once per frame
     void Update()
     {
 
-        if(Current_Health <= 0)
+        if ((Current_Health <= 0) && (playerAlive))
         {
-            Debug.Log("AlienDied");
-            Alien_Died();
+            playerAlive = false;
+            //Debug.Log("AlienDied");
+            StartCoroutine(Alien_Died());
         }
-        if(Input.GetKeyUp("q"))
+        if ((Input.GetKeyUp("q")) && (playerAlive))
         {
-           //Debug.Log("MorphLeft");
+            //Debug.Log("MorphLeft");
             morph_left();
         }
-        if (Input.GetKeyUp("e"))
+        if ((Input.GetKeyUp("e")) && (playerAlive))
         {
             //Debug.Log("MorphRight");
             morph_right();
         }
 
-        //if (Input.GetKeyUp(KeyCode.Mouse0))
-        //{
-        //   Debug.Log("AlienAttack");
-        //    attack();
-        //}
-        moveAlien();
-
-
-
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            attack();
+        }
+        if (playerAlive & Script_PauseMenu.gameIsPaused == false)
+        {
+            moveAlien();
+        }
     }
 
     public float getBodyAngle()
@@ -168,33 +188,79 @@ public class Alien_Object : MonoBehaviour
     /// </summary>
     private void moveAlien()
     {
-        //Alien Movement and Aiming
-        mouse_position = Input.mousePosition;
-        alien_sprite_position = Camera.main.WorldToScreenPoint(AlienHead.transform.position);
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        float deltaX = horizontal * speed;
-        float deltaY = vertical * speed;
-        float nextX = transform.position.x + deltaX;
-        float nextY = transform.position.y + deltaY;
+        if (alienCanMove)
+        { 
+            //Alien Movement and Aiming
+            mouse_position = Input.mousePosition;
+            alien_sprite_position = Camera.main.WorldToScreenPoint(AlienHead.transform.position);
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
+            float deltaX = horizontal * speed;
+            float deltaY = vertical * speed;
+            float nextX = transform.position.x + deltaX;
+            float nextY = transform.position.y + deltaY;
 
-        mouse_position.x = mouse_position.x - alien_sprite_position.x;
-        mouse_position.y = mouse_position.y - alien_sprite_position.y;
+            mouse_position.x = mouse_position.x - alien_sprite_position.x;
+            mouse_position.y = mouse_position.y - alien_sprite_position.y;
 
-        AlienHead.transform.position = new Vector3(nextX, nextY, 0);
-        alienBody.transform.position = new Vector3(nextX, nextY, 0);
-        myCamera.transform.position = new Vector3(nextX, nextY, -10);
+            //get target position (coordinate of player + 1 unit in the direction it is facing)
+            //Use a raycast
+            // if raycast hits a wall collider don't allow movement
 
-        //Call the walking animation
-        walking_Anim(horizontal, vertical);
+            //calculate a target position a certain distance away
+            float distance = 1f;
+            float x = distance * Mathf.Cos(BodyAngle * Mathf.Deg2Rad);
+            float y = distance * Mathf.Sin(BodyAngle * Mathf.Deg2Rad);
+            Vector3 targetPosition = AlienHead.transform.position;
+            targetPosition.x += x;
+            targetPosition.y += y;
 
-        BodyAngle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg;
-        alienBody.transform.rotation = Quaternion.Euler(0, 0, BodyAngle);
-        HeadAngle = Mathf.Atan2(mouse_position.y, mouse_position.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, HeadAngle);
+            //Raycast parameters(startingPosition, direction, distance)
+            RaycastHit2D rayCastHit = Physics2D.Raycast(AlienHead.transform.position, targetPosition, speed * Time.deltaTime);
 
-        //meleeAttack.transform.position = new Vector3(nextX+deltaX, nextY+deltaY, 0);
+            //if raycast did not hit collider with tag "Wall" ---> Allow Movement
+            if (!(rayCastHit.collider.tag == "Wall"))
+            {
+                //Alien Movement and Aiming
+                
+                //mouse_position = Input.mousePosition;
+                //alien_sprite_position = Camera.main.WorldToScreenPoint(AlienHead.transform.position);
+                //float horizontal = Input.GetAxis("Horizontal");
+                //float vertical = Input.GetAxis("Vertical");
+               // float deltaX = horizontal * speed;
+                //float deltaY = vertical * speed;
+                //float nextX = transform.position.x + deltaX;
+                //float nextY = transform.position.y + deltaY;
 
+                //mouse_position.x = mouse_position.x - alien_sprite_position.x;
+                //mouse_position.y = mouse_position.y - alien_sprite_position.y;
+
+                if (Math.Abs(deltaX) > 0 || Math.Abs(deltaY) > 0)
+                {
+                    animBody.SetBool("isWalking", true);
+                }
+                else
+                {
+                    animBody.SetBool("isWalking", false);
+                }
+                //if alien position + (x, y) wont be inside a wall's collider --- allow move
+                if (true)
+                {
+                    AlienHead.transform.position = new Vector3(nextX, nextY, 0);
+                    alienBody.transform.position = new Vector3(nextX, nextY, 0);
+                    myCamera.transform.position = new Vector3(nextX, nextY, -10);
+                }
+
+
+                BodyAngle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg - 90;
+                alienBody.transform.rotation = Quaternion.Euler(0, 0, BodyAngle);
+                HeadAngle = Mathf.Atan2(mouse_position.y, mouse_position.x) * Mathf.Rad2Deg - 90;
+                transform.rotation = Quaternion.Euler(0, 0, HeadAngle);
+
+                //meleeAttack.transform.position = new Vector3(nextX+deltaX, nextY+deltaY, 0);
+            }
+        }
+        
     }
 
     /// <summary>
@@ -209,26 +275,29 @@ public class Alien_Object : MonoBehaviour
         Class_Order[1] = Class_Order[0];
         Class_Order[0] = temp;
 
-        //Call the morph Animation Change
-        int prev_class = Current_Class;
         Current_Class = Class_Order[1];
-        morph_animation(prev_class, Current_Class);
 
+        morphQueue.GetComponent<Script_MorphUI>().MorphRight();
         updateAlienStats();
+        morph_animation();
     }
+
+    
+
     private void morph_left()
     {
+
         int temp = Class_Order[0];
         Class_Order[0] = Class_Order[1];
         Class_Order[1] = Class_Order[2];
         Class_Order[2] = temp;
 
-        //call the morph animation change
-        int prev_class = Current_Class;
         Current_Class = Class_Order[1];
-        morph_animation(prev_class, Current_Class);
+        
 
+        morphQueue.GetComponent<Script_MorphUI>().MorphLeft();
         updateAlienStats();
+        morph_animation();
     }
 
     /// <summary>
@@ -236,20 +305,14 @@ public class Alien_Object : MonoBehaviour
     /// </summary>
     /// <param name="prev_class">some value between 0-2 which is the previous class</param>
     /// <param name="current_class">some value between 0-2 which is the current class</param>
-    private void morph_animation(int prev_class, int current_class)
+    private void morph_animation()
     {
-
+        Debug.Log(alienCanMove);
+        //set animation constraints such that the animaions play.
+        animBody.SetBool("morph", true);
+        animBody.SetInteger("CurrentClass", Current_Class);
     }
 
-    /// <summary>
-    /// This function will control which walking animations will be running
-    /// </summary>
-    /// <param name="Horizontal">a value between -1 and 1 that determines direction of horizontal movement</param>
-    /// <param name="Vertical">a value between -1 and 1 that determines direction of vertical movement</param>
-    private void walking_Anim(float Horizontal, float Vertical)
-    {
-
-    }
 
     private void updateAlienStats()
     {
@@ -324,11 +387,6 @@ public class Alien_Object : MonoBehaviour
     /// <summary>
     /// On alien death, call coroutine: Plays fade out animation and load DeathScreen scene
     /// </summary>
-    private void CallAlien_Died()
-    {
-        StartCoroutine(Alien_Died());
-    }
-
     IEnumerator Alien_Died()
     {
         Debug.Log("the alien has died");
@@ -382,6 +440,10 @@ public class Alien_Object : MonoBehaviour
     {
         return Current_Class;
     }
+    public void setCanMove(bool temp)
+    {
+        alienCanMove = temp;
+    }
     
     /// <summary>
     /// On mouse1 down do some attack sequence
@@ -401,6 +463,22 @@ public class Alien_Object : MonoBehaviour
         //Debug.Log("oof");
         Current_Health -= damage;
         Current_Health_Percentage = Current_Health / Max_Health;
+
+        healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
+    }
+
+    public void attack()
+    {
+        if (Current_Class == 2)
+        {
+            animHead.SetBool("Is_attacking", true);
+        }
+        animBody.SetBool("isAttacking", true);
+
+    }
+    public void finishAttack()
+    {
+        animHead.SetBool("Is_attacking", false);
     }
 
 }

@@ -4,29 +4,17 @@ using UnityEngine;
 
 public class Script_Melee_Enemy_Object : MonoBehaviour
 {
-    private int attack_damage;
     public float hit_points;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void set_attack_damage(int attack_damage)
-    {
-        this.attack_damage = attack_damage;
-    }
 
     public void set_hit_points(float hit_points)
     {
         this.hit_points = hit_points;
+    }
+
+    public float get_hit_points()
+    {
+        return hit_points;
     }
 
     public void attacked(float damage)

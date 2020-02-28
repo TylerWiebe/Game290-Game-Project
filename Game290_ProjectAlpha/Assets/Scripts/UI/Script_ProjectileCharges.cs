@@ -46,7 +46,7 @@ public class Script_ProjectileCharges : MonoBehaviour
     void Update()
     {
         //regen shots
-        if (currentRangedCharges < maxRangedCharges)
+        if ((currentRangedCharges) < (maxRangedCharges) && (Script_PauseMenu.gameIsPaused == false))
         {
             //timer
             timer += regen * Time.deltaTime;
@@ -61,14 +61,14 @@ public class Script_ProjectileCharges : MonoBehaviour
         }
 
         //use attack on click
-        if (Input.GetKeyUp(KeyCode.Mouse0) && (currentRangedCharges >= 1))
+        if ((Input.GetKeyUp(KeyCode.Mouse0)) && (currentRangedCharges >= 1) && (Script_PauseMenu.gameIsPaused == false))
         {
             //decrease total charges
             currentRangedCharges -= 1;
             SetCharge(currentRangedCharges);
 
             //useSkill
-            Debug.Log("Use Ranged Attack");
+            //Debug.Log("Use Ranged Attack");
         }
     }
     public int getRangedCharges()
