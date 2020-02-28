@@ -27,7 +27,7 @@ public class Alien_Object : MonoBehaviour
     private GameObject assassinAttackBox;
 
     //Projectile charges
-    private GameObject bruiserAttackBox = null;
+    private GameObject bruiserAttackBox;
 
     //Alien Sprite
     public Sprite alien_sprite;
@@ -83,7 +83,6 @@ public class Alien_Object : MonoBehaviour
     public AnimationClip bruiserAttack;
     public AnimationClip rangedMorph;
     public AnimationClip rangedAttack;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -157,6 +156,7 @@ public class Alien_Object : MonoBehaviour
             //Debug.Log("AlienDied");
             StartCoroutine(Alien_Died());
         }
+
         if ((Input.GetKeyUp("q")) && (playerAlive))
         {
             //Debug.Log("MorphLeft");
@@ -260,7 +260,6 @@ public class Alien_Object : MonoBehaviour
                 //meleeAttack.transform.position = new Vector3(nextX+deltaX, nextY+deltaY, 0);
             }
         }
-        
     }
 
     /// <summary>
