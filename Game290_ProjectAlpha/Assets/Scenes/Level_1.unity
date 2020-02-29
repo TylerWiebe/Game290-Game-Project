@@ -3212,7 +3212,17 @@ PrefabInstance:
     - target: {fileID: 2028618158181371385, guid: adf9fadc7249a694eaa1f0fcd6c93f65,
         type: 3}
       propertyPath: bulletForce
-      value: 0.2
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5089851827563027705, guid: adf9fadc7249a694eaa1f0fcd6c93f65,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -587891133
+      objectReference: {fileID: 0}
+    - target: {fileID: 5089851827563027705, guid: adf9fadc7249a694eaa1f0fcd6c93f65,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8427071332964567468, guid: adf9fadc7249a694eaa1f0fcd6c93f65,
         type: 3}
@@ -3660,6 +3670,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6122084364445526854, guid: 5f28ef9ebc15ba94798e9369011c5851,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1728627391
+      objectReference: {fileID: 0}
+    - target: {fileID: 6122084364445526854, guid: 5f28ef9ebc15ba94798e9369011c5851,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6990527146445610009, guid: 5f28ef9ebc15ba94798e9369011c5851,
         type: 3}

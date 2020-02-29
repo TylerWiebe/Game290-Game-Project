@@ -73,6 +73,8 @@ public class Alien_Object : MonoBehaviour
 
     //control variables
     private bool alienCanMove = true;
+    private bool doMouseRotate = true;
+
 
     //Animations
     public Animator animHead;
@@ -181,10 +183,6 @@ public class Alien_Object : MonoBehaviour
         }
     }
 
-    public float getBodyAngle()
-    {
-        return BodyAngle;
-    }
 
     /// <summary>
     /// Movement and rotation of the alien body and head
@@ -256,9 +254,12 @@ public class Alien_Object : MonoBehaviour
 
 
                 BodyAngle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg - 90;
-                alienBody.transform.rotation = Quaternion.Euler(0, 0, BodyAngle);
-                HeadAngle = Mathf.Atan2(mouse_position.y, mouse_position.x) * Mathf.Rad2Deg - 90;
-                transform.rotation = Quaternion.Euler(0, 0, HeadAngle);
+                if (doMouseRotate)
+                {
+                    alienBody.transform.rotation = Quaternion.Euler(0, 0, BodyAngle);
+                    HeadAngle = Mathf.Atan2(mouse_position.y, mouse_position.x) * Mathf.Rad2Deg - 90;
+                    transform.rotation = Quaternion.Euler(0, 0, HeadAngle);
+                }
 
                 //meleeAttack.transform.position = new Vector3(nextX+deltaX, nextY+deltaY, 0);
             }
@@ -309,7 +310,6 @@ public class Alien_Object : MonoBehaviour
     /// <param name="current_class">some value between 0-2 which is the current class</param>
     private void morph_animation()
     {
-        Debug.Log(alienCanMove);
         //set animation constraints such that the animaions play.
         animBody.SetBool("morph", true);
         animBody.SetInteger("CurrentClass", Current_Class);
@@ -391,7 +391,7 @@ public class Alien_Object : MonoBehaviour
     /// </summary>
     IEnumerator Alien_Died()
     {
-        Debug.Log("the alien has died");
+        //Debug.Log("the alien has died");
         //play fade out animation
         sceneTransitionManager.GetComponent<Script_SceneTransition>().TransitionCall(4);
 
@@ -460,6 +460,11 @@ public class Alien_Object : MonoBehaviour
         return current_ranged_charges;
     }
 
+    public void setDoMouseRotation(bool temp)
+    {
+        doMouseRotate = temp;
+    }
+
     public void Deal_Damage_To_Alien(int damage)
     {
         //Debug.Log("oof");
@@ -482,5 +487,8 @@ public class Alien_Object : MonoBehaviour
     {
         animHead.SetBool("Is_attacking", false);
     }
-
+    public float getBodyAngle()
+    {
+        return BodyAngle;
+    }
 }
