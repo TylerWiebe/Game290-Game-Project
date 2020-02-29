@@ -4,31 +4,54 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
+    private bool rangedMorphing;
+
     private GameObject alienHead;
+    private GameObject alienBody;
     private Alien_Object myAlienObject;
     public Animator anim;
     public Animator animHead;
     // Start is called before the first frame update
     void Start()
     {
+        rangedMorphing = false;
+        alienHead = GameObject.Find("AlienBody");
         alienHead = GameObject.Find("AlienHead");
         animHead = alienHead.GetComponent<Animator>();
         myAlienObject = alienHead.GetComponent<Alien_Object>();
     }
 
+    void update()
+    {
+        Debug.Log("should be fixed");
+        if (rangedMorphing)
+        {
+            alienHead.transform.rotation = alienBody.transform.rotation;
+        }
+    }
 
     public void update_alien_morph_state()
     {
-        Debug.Log("updatedAlienMorphStatus");
         int currentClass = myAlienObject.getCurrentClass();
         anim.SetBool("morph", false);
         anim.SetInteger("CurrentClass", currentClass);
+        if (rangedMorphing)
+        {
+            rangedMorphing = false;
+            alienHead.GetComponent<Alien_Object>().setDoMouseRotation(true);
+        }
     }
 
     public void morph_ended()
     {
-        Debug.Log("morphEnded");
         bool temp = true;
+        int currentClass = myAlienObject.getCurrentClass();
+        
+        myAlienObject.setCanMove(temp);
+    }
+
+    public void morphRanged()
+    {
         int currentClass = myAlienObject.getCurrentClass();
         if (currentClass == 2)
         {
@@ -38,7 +61,12 @@ public class AnimationController : MonoBehaviour
         {
             animHead.SetBool("isRanged", false);
         }
-        myAlienObject.setCanMove(temp);
+    }
+
+    private void ranged_cannon_morph_anim_sync()
+    {
+        rangedMorphing = true;
+        alienHead.GetComponent<Alien_Object>().setDoMouseRotation(false);
     }
 
     public void morph_started()
@@ -51,7 +79,6 @@ public class AnimationController : MonoBehaviour
 
         }
         Debug.Log("morphStarted");
-        bool temp = false;
         myAlienObject.setCanMove(temp);
     }
 
