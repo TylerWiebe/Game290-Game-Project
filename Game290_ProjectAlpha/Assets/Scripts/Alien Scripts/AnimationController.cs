@@ -44,6 +44,12 @@ public class AnimationController : MonoBehaviour
     public void morph_started()
     {
 
+        int currentClass = myAlienObject.getCurrentClass();
+        if (currentClass != 2)
+        {
+            animHead.SetBool("isRanged", false);
+
+        }
         Debug.Log("morphStarted");
         bool temp = false;
         myAlienObject.setCanMove(temp);
