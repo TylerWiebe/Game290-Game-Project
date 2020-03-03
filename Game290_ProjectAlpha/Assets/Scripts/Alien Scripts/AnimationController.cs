@@ -79,7 +79,7 @@ public class AnimationController : MonoBehaviour
 
         }
         Debug.Log("morphStarted");
-        myAlienObject.setCanMove(temp);
+        myAlienObject.setCanMove(false);
     }
 
     public void finishedAttack()
