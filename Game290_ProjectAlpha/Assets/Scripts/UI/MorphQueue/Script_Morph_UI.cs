@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Script_MorphUI : MonoBehaviour
+public class Script_Morph_UI : MonoBehaviour
 {
     private GameObject morphQueue;
     private Vector3 morphQueueEulerAngles;
@@ -54,8 +54,8 @@ public class Script_MorphUI : MonoBehaviour
 
         //load sprites from resources folder
         assassinSprite = Resources.Load<Sprite>("art_assassin_character_idle4");
-        bruiserSprite = Resources.Load<Sprite>("art_assassin_character_morph5");
-        rangedSprite = Resources.Load<Sprite>("art_ranged_character_egg_morph1");
+        bruiserSprite = Resources.Load<Sprite>("Doot");
+        rangedSprite = Resources.Load<Sprite>("art_ranged_character_idle2");
     }
 
     void Update()

@@ -55,7 +55,7 @@ public class Alien_Object : MonoBehaviour
     //Damage Stats
     private int damage = 10;
     public int num_ranged_charges = 4;
-    public int current_ranged_charges = 4;
+    public float current_ranged_charges = 4;
 
     private int charge_size = 25;
 
@@ -113,37 +113,37 @@ public class Alien_Object : MonoBehaviour
             case 0:
                 Class_Order = new int[] { 0, 1, 2 };
                 Current_Class = 1;
-                morphQueue.GetComponent<Script_MorphUI>().SetQueue(0);
+                morphQueue.GetComponent<Script_Morph_UI>().SetQueue(0);
                 updateAlienStats();
                 break;
             case 1:
                 Class_Order = new int[] { 0, 2, 1 };
                 Current_Class = 2;
-                morphQueue.GetComponent<Script_MorphUI>().SetQueue(1);
+                morphQueue.GetComponent<Script_Morph_UI>().SetQueue(1);
                 updateAlienStats();
                 break;
             case 2:
                 Class_Order = new int[] { 1, 0, 2 };
                 Current_Class = 0;
-                morphQueue.GetComponent<Script_MorphUI>().SetQueue(2);
+                morphQueue.GetComponent<Script_Morph_UI>().SetQueue(2);
                 updateAlienStats();
                 break;
             case 3:
                 Class_Order = new int[] { 1, 2, 0 };
                 Current_Class = 2;
-                morphQueue.GetComponent<Script_MorphUI>().SetQueue(3);
+                morphQueue.GetComponent<Script_Morph_UI>().SetQueue(3);
                 updateAlienStats();
                 break;
             case 4:
                 Class_Order = new int[] { 2, 1, 0 };
                 Current_Class = 1;
-                morphQueue.GetComponent<Script_MorphUI>().SetQueue(4);
+                morphQueue.GetComponent<Script_Morph_UI>().SetQueue(4);
                 updateAlienStats();
                 break;
             default:
                 Class_Order = new int[] { 2, 0, 1 };
                 Current_Class = 0;
-                morphQueue.GetComponent<Script_MorphUI>().SetQueue(5);
+                morphQueue.GetComponent<Script_Morph_UI>().SetQueue(5);
                 updateAlienStats();
                 break;
         }
@@ -280,7 +280,7 @@ public class Alien_Object : MonoBehaviour
 
         Current_Class = Class_Order[1];
 
-        morphQueue.GetComponent<Script_MorphUI>().MorphRight();
+        morphQueue.GetComponent<Script_Morph_UI>().MorphRight();
         updateAlienStats();
         morph_animation();
     }
@@ -298,7 +298,7 @@ public class Alien_Object : MonoBehaviour
         Current_Class = Class_Order[1];
         
 
-        morphQueue.GetComponent<Script_MorphUI>().MorphLeft();
+        morphQueue.GetComponent<Script_Morph_UI>().MorphLeft();
         updateAlienStats();
         morph_animation();
     }
@@ -453,11 +453,6 @@ public class Alien_Object : MonoBehaviour
     public int getDamage()
     {
         return damage * ((strength + 1) * 10);
-    }
-
-    public int getRangedCharges()
-    {
-        return current_ranged_charges;
     }
 
     public void setDoMouseRotation(bool temp)
