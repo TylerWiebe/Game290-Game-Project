@@ -30,7 +30,7 @@ public class Script_Ranged_Enemy_Attack : MonoBehaviour
     //IEnumerator OnTriggerEnter2D(Collider2D other)
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (((other.tag == "player") || (other.tag == "Player")) && playerNotSeen == false)
+        if (((other.tag == "player") || (other.tag == "Player")))
         {
             InvokeRepeating("Attack", 0f, 1.5f);
         }

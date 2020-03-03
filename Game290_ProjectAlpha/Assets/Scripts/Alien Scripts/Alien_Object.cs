@@ -74,6 +74,9 @@ public class Alien_Object : MonoBehaviour
     //control variables
     private bool alienCanMove = true;
 
+    //rigidbody for movement
+    public Rigidbody2D rigidBodyBody;
+
     //Animations
     public Animator animHead;
     public Animator animBody;
@@ -100,6 +103,8 @@ public class Alien_Object : MonoBehaviour
         AlienHead = GameObject.Find("AlienHead"); //Need this to get alien object's sprite renderer
         alienBody = GameObject.Find("AlienBody"); //Need this to get alien object's sprite renderer
         myCamera = GameObject.Find("Main Camera");
+
+        rigidBodyBody = alienBody.GetComponent<Rigidbody2D>();
 
         animHead = AlienHead.GetComponent<Animator>();
         animBody = alienBody.GetComponent<Animator>();
@@ -203,65 +208,35 @@ public class Alien_Object : MonoBehaviour
             float nextX = transform.position.x + deltaX;
             float nextY = transform.position.y + deltaY;
 
+            //move alien
+            rigidBodyBody.MovePosition(new Vector2(nextX, nextY));
+
+
             mouse_position.x = mouse_position.x - alien_sprite_position.x;
             mouse_position.y = mouse_position.y - alien_sprite_position.y;
 
-            //get target position (coordinate of player + 1 unit in the direction it is facing)
-            //Use a raycast
-            // if raycast hits a wall collider don't allow movement
-
-            //calculate a target position a certain distance away
-            float distance = 1f;
-            float x = distance * Mathf.Cos(BodyAngle * Mathf.Deg2Rad);
-            float y = distance * Mathf.Sin(BodyAngle * Mathf.Deg2Rad);
-            Vector3 targetPosition = AlienHead.transform.position;
-            targetPosition.x += x;
-            targetPosition.y += y;
-
-            //Raycast parameters(startingPosition, direction, distance)
-            RaycastHit2D rayCastHit = Physics2D.Raycast(AlienHead.transform.position, targetPosition, speed * Time.deltaTime);
-
-            //if raycast did not hit collider with tag "Wall" ---> Allow Movement
-            if (!(rayCastHit.collider.tag == "Wall"))
+            
+            if (Math.Abs(deltaX) > 0 || Math.Abs(deltaY) > 0)
             {
-                //Alien Movement and Aiming
-                
-                //mouse_position = Input.mousePosition;
-                //alien_sprite_position = Camera.main.WorldToScreenPoint(AlienHead.transform.position);
-                //float horizontal = Input.GetAxis("Horizontal");
-                //float vertical = Input.GetAxis("Vertical");
-               // float deltaX = horizontal * speed;
-                //float deltaY = vertical * speed;
-                //float nextX = transform.position.x + deltaX;
-                //float nextY = transform.position.y + deltaY;
-
-                //mouse_position.x = mouse_position.x - alien_sprite_position.x;
-                //mouse_position.y = mouse_position.y - alien_sprite_position.y;
-
-                if (Math.Abs(deltaX) > 0 || Math.Abs(deltaY) > 0)
-                {
-                    animBody.SetBool("isWalking", true);
-                }
-                else
-                {
-                    animBody.SetBool("isWalking", false);
-                }
-                //if alien position + (x, y) wont be inside a wall's collider --- allow move
-                if (true)
-                {
-                    AlienHead.transform.position = new Vector3(nextX, nextY, 0);
-                    alienBody.transform.position = new Vector3(nextX, nextY, 0);
-                    myCamera.transform.position = new Vector3(nextX, nextY, -10);
-                }
-
-
-                BodyAngle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg - 90;
-                alienBody.transform.rotation = Quaternion.Euler(0, 0, BodyAngle);
-                HeadAngle = Mathf.Atan2(mouse_position.y, mouse_position.x) * Mathf.Rad2Deg - 90;
-                transform.rotation = Quaternion.Euler(0, 0, HeadAngle);
-
-                //meleeAttack.transform.position = new Vector3(nextX+deltaX, nextY+deltaY, 0);
+                animBody.SetBool("isWalking", true);
             }
+            else
+            {
+                animBody.SetBool("isWalking", false);
+            }
+          
+          
+            AlienHead.transform.position = new Vector3(nextX, nextY, 0);
+            //alienBody.transform.position = new Vector3(nextX, nextY, 0);
+            myCamera.transform.position = new Vector3(nextX, nextY, -10);
+
+
+
+            BodyAngle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg - 90;
+            alienBody.transform.rotation = Quaternion.Euler(0, 0, BodyAngle);
+            HeadAngle = Mathf.Atan2(mouse_position.y, mouse_position.x) * Mathf.Rad2Deg - 90;
+            transform.rotation = Quaternion.Euler(0, 0, HeadAngle);
+            //meleeAttack.transform.position = new Vector3(nextX+deltaX, nextY+deltaY, 0);
         }
     }
 
