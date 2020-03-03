@@ -9,16 +9,55 @@ public class Script_ProjectileCharges : MonoBehaviour
     [SerializeField]
     private Slider slider = null;
 
-    private int currentRangedCharges;
-    private int maxRangedCharges;
+    //public float currentRangedCharges;
+    //public int maxRangedCharges;
     private int regen = 4;
 
     private float timer = 0;
 
-    [SerializeField]
-    private GameObject player = null;
+    private GameObject player;
+    private Alien_Object playerScript;
 
-    //sets maximumCharges for the Healthbar
+    void Start()
+    {
+        player = GameObject.Find("AlienHead");
+        playerScript = player.GetComponent<Alien_Object>();
+
+        SetCharge(playerScript.current_ranged_charges);
+        SetMaxCharge(playerScript.num_ranged_charges);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //regen shots
+        if ((playerScript.current_ranged_charges) < (playerScript.num_ranged_charges) && (Script_PauseMenu.gameIsPaused == false))
+        {
+            //timer
+            timer += regen * Time.deltaTime;
+
+            if (timer >= 0.1f)
+            {
+                playerScript.current_ranged_charges += 0.02f;
+                SetCharge(playerScript.current_ranged_charges);
+
+                timer = 0;
+            }
+        }
+
+        //use attack on click
+        if ((Input.GetKeyUp(KeyCode.Mouse0)) && (playerScript.current_ranged_charges >= 1) && (Script_PauseMenu.gameIsPaused == false))
+        {
+            //decrease total charges
+            playerScript.current_ranged_charges -= 1;
+            SetCharge(playerScript.current_ranged_charges);
+
+            //useSkill
+            //Debug.Log("Use Ranged Attack");
+        }
+    }
+
+    //sets maximumCharges for the chargebar
     public void SetMaxCharge(int maxCharge)
     {
         //set max
@@ -26,53 +65,14 @@ public class Script_ProjectileCharges : MonoBehaviour
     }
 
     //sets value of chargeBar through slider
-    public void SetCharge(int charge)
+    public void SetCharge(float charge)
     {
         //set current health
         slider.value = charge;
     }
 
-
-    void Start()
+    public float getRangedCharges()
     {
-        currentRangedCharges = player.GetComponent<Alien_Object>().current_ranged_charges;
-        maxRangedCharges = player.GetComponent<Alien_Object>().num_ranged_charges;
-
-        SetCharge(currentRangedCharges);
-        SetMaxCharge(maxRangedCharges);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //regen shots
-        if ((currentRangedCharges) < (maxRangedCharges) && (Script_PauseMenu.gameIsPaused == false))
-        {
-            //timer
-            timer += regen * Time.deltaTime;
-
-            if (timer >= 5)
-            {
-                currentRangedCharges += 1;
-                SetCharge(currentRangedCharges);
-
-                timer = 0;
-            }
-        }
-
-        //use attack on click
-        if ((Input.GetKeyUp(KeyCode.Mouse0)) && (currentRangedCharges >= 1) && (Script_PauseMenu.gameIsPaused == false))
-        {
-            //decrease total charges
-            currentRangedCharges -= 1;
-            SetCharge(currentRangedCharges);
-
-            //useSkill
-            //Debug.Log("Use Ranged Attack");
-        }
-    }
-    public int getRangedCharges()
-    {
-        return currentRangedCharges;
+        return playerScript.current_ranged_charges;
     }
 }

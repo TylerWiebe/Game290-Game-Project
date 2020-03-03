@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Script_StatOrb : MonoBehaviour
 {
-    //reference to stat window
-    [SerializeField]
-    private GameObject statWindow = null;
+    private GameObject menu_Canvas;
+    private GameObject statWindow;
+    private GameObject player;
 
-    //reference to alienBody object
-    [SerializeField]
-    private GameObject player = null;
+    void Start()
+    {
+        menu_Canvas = GameObject.Find("Menu_Canvas");
+        statWindow = menu_Canvas.transform.Find("StatWindow").gameObject;
+        player = GameObject.Find("AlienHead");
+    }
 
     //on collision with stat orb
     private void OnTriggerEnter2D(Collider2D other)

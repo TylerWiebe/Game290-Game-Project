@@ -20,21 +20,15 @@ public class fireProjectile : MonoBehaviour
         myChargeScript = chargeBar.GetComponent<Script_ProjectileCharges>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (myAlienObjectScript.getCurrentClass() == 2 && Input.GetMouseButtonDown(0) && myChargeScript.getRangedCharges() > 0)
-        {
-            anim.SetBool("is_attacking", true);
-        }
-    }
 
     private void shoot()
     {
-        GameObject myProjectile = (GameObject)Instantiate(projectile, shootLocation.position, shootLocation.rotation);
-        Rigidbody2D rb = myProjectile.GetComponent<Rigidbody2D>();
-        rb.AddForce(shootLocation.up * bulletForce, ForceMode2D.Impulse);
-        anim.SetBool("is_attacking", false);
-
+        if (myChargeScript.getRangedCharges() > 0)
+        {
+            GameObject myProjectile = (GameObject)Instantiate(projectile, shootLocation.position, shootLocation.rotation);
+            Rigidbody2D rb = myProjectile.GetComponent<Rigidbody2D>();
+            rb.AddForce(shootLocation.up * bulletForce, ForceMode2D.Impulse);
+            anim.SetBool("is_attacking", false);
+        }
     }
 }
