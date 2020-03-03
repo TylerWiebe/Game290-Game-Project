@@ -78,6 +78,7 @@ public class Alien_Object : MonoBehaviour
 
     //rigidbody for movement
     public Rigidbody2D rigidBodyBody;
+    public Rigidbody2D rigidBodyHead;
 
     //Animations
     public Animator animHead;
@@ -107,6 +108,7 @@ public class Alien_Object : MonoBehaviour
         myCamera = GameObject.Find("Main Camera");
 
         rigidBodyBody = alienBody.GetComponent<Rigidbody2D>();
+        rigidBodyHead = AlienHead.GetComponent<Rigidbody2D>();
 
         animHead = AlienHead.GetComponent<Animator>();
         animBody = alienBody.GetComponent<Animator>();
@@ -195,7 +197,7 @@ public class Alien_Object : MonoBehaviour
     private void moveAlien()
     {
         if (alienCanMove)
-        { 
+        {
             //Alien Movement and Aiming
             mouse_position = Input.mousePosition;
             alien_sprite_position = Camera.main.WorldToScreenPoint(AlienHead.transform.position);
@@ -208,12 +210,17 @@ public class Alien_Object : MonoBehaviour
 
             //move alien
             rigidBodyBody.MovePosition(new Vector2(nextX, nextY));
+            rigidBodyHead.MovePosition(new Vector2(nextX, nextY));
+
+            //AlienHead.transform.position = new Vector3(nextX, nextY, 0);
+            //alienBody.transform.position = new Vector3(nextX, nextY, 0);
+            myCamera.transform.position = new Vector3(nextX, nextY, -10);
 
 
             mouse_position.x = mouse_position.x - alien_sprite_position.x;
             mouse_position.y = mouse_position.y - alien_sprite_position.y;
 
-            
+
             if (Math.Abs(deltaX) > 0 || Math.Abs(deltaY) > 0)
             {
                 animBody.SetBool("isWalking", true);
@@ -222,11 +229,6 @@ public class Alien_Object : MonoBehaviour
             {
                 animBody.SetBool("isWalking", false);
             }
-          
-          
-            AlienHead.transform.position = new Vector3(nextX, nextY, 0);
-            //alienBody.transform.position = new Vector3(nextX, nextY, 0);
-            myCamera.transform.position = new Vector3(nextX, nextY, -10);
 
             //rotate body
             BodyAngle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg - 90;
@@ -257,7 +259,7 @@ public class Alien_Object : MonoBehaviour
         morph_animation();
     }
 
-    
+
 
     private void morph_left()
     {
@@ -268,7 +270,7 @@ public class Alien_Object : MonoBehaviour
         Class_Order[2] = temp;
 
         Current_Class = Class_Order[1];
-        
+
 
         morphQueue.GetComponent<Script_Morph_UI>().MorphLeft();
         updateAlienStats();
@@ -293,8 +295,8 @@ public class Alien_Object : MonoBehaviour
         //assassin
         if (Current_Class == 0)
         {
-            Max_Health = (int) Math.Round(HEALTH_SCALE_CONST * (vitality + 1) * 0.5);
-            Current_Health = (int) (Max_Health * (Current_Health_Percentage * 0.01));
+            Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1) * 0.5);
+            Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
             speed = 0.075f;
 
             //update healthbar Max Health & current health
@@ -418,7 +420,7 @@ public class Alien_Object : MonoBehaviour
     {
         alienCanMove = temp;
     }
-    
+
     /// <summary>
     /// On mouse1 down do some attack sequence
     /// </summary>
