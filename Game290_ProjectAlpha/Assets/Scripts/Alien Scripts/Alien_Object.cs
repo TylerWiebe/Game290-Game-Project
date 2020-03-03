@@ -55,7 +55,7 @@ public class Alien_Object : MonoBehaviour
     //Damage Stats
     private int damage = 10;
     public int num_ranged_charges = 4;
-    public int current_ranged_charges = 4;
+    public float current_ranged_charges = 4;
 
     private int charge_size = 25;
 
@@ -453,11 +453,6 @@ public class Alien_Object : MonoBehaviour
     public int getDamage()
     {
         return damage * ((strength + 1) * 10);
-    }
-
-    public int getRangedCharges()
-    {
-        return current_ranged_charges;
     }
 
     public void setDoMouseRotation(bool temp)

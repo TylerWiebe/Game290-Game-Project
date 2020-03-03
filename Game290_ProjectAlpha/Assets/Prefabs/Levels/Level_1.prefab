@@ -349,9 +349,6 @@ MonoBehaviour:
   classIcon0: {fileID: 1337938440580509282}
   classIcon1: {fileID: 7229802852981843071}
   classIcon2: {fileID: 6162319860245269480}
-  assassinSprite: {fileID: 21300000, guid: fcd71a016ffc2c8409831b7af1450f4c, type: 3}
-  bruiserSprite: {fileID: 21300000, guid: 2528ab546c0747346b6ef31f7cb08697, type: 3}
-  rangedSprite: {fileID: 21300000, guid: 8f8f83c8254baa242ae01392d849d170, type: 3}
 --- !u!1 &6162319860245269480
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,7 +1236,7 @@ RectTransform:
   - {fileID: 8536586902982140625}
   - {fileID: 8536586903950141720}
   m_Father: {fileID: 8536586902857156173}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1778,8 +1775,8 @@ Transform:
   m_LocalPosition: {x: -0.006867707, y: 0.89253163, z: -1.231213}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8536586902634506164}
   - {fileID: 8536586903353639551}
+  - {fileID: 8536586902634506164}
   - {fileID: 8536586902132391832}
   - {fileID: 183227247445607987}
   - {fileID: 8536586903093908817}
@@ -3019,7 +3016,7 @@ Transform:
   - {fileID: 550978405476761710}
   - {fileID: 3815917470851447004}
   m_Father: {fileID: 8536586902857156173}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8536586903353639538
 MonoBehaviour:
@@ -4517,6 +4514,11 @@ PrefabInstance:
       propertyPath: slider
       value: 
       objectReference: {fileID: 5273350516353934582}
+    - target: {fileID: 5250668770113395319, guid: d0341cbc83b2ea3488a22fef458559e2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5683388990426626843, guid: d0341cbc83b2ea3488a22fef458559e2,
         type: 3}
       propertyPath: m_LocalPosition.x
