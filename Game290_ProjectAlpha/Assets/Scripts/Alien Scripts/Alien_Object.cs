@@ -184,12 +184,15 @@ public class Alien_Object : MonoBehaviour
         {
             attack();
         }
+    }
+
+    void FixedUpdate()
+    {
         if (playerAlive & Script_PauseMenu.gameIsPaused == false)
         {
             moveAlien();
         }
     }
-
 
     /// <summary>
     /// Movement and rotation of the alien body and head
