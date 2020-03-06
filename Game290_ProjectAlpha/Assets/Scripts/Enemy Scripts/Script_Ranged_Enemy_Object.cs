@@ -48,6 +48,7 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
         hit_points -= damage;
         if (hit_points <= 0)
         {
+            Debug.Log("ranged Should be ded");
             //son be deded
             Script_Enemy_Controller script_enemy_controller = GameObject.Find("GameManager").GetComponent<Script_Enemy_Controller>();
             script_enemy_controller.destroy_enemy(this.gameObject);

@@ -9,7 +9,7 @@ public class fireProjectile : MonoBehaviour
     public GameObject chargeBar;
     private Script_ProjectileCharges myChargeScript;
 
-    public float bulletForce = 20f;
+    public float bulletForce;
 
     public Animator anim;
 

@@ -84,6 +84,8 @@ MonoBehaviour:
   Current_Health: 100
   num_ranged_charges: 4
   current_ranged_charges: 4
+  rigidBodyBody: {fileID: 0}
+  rigidBodyHead: {fileID: 0}
   animHead: {fileID: 2030617053574908381}
   animBody: {fileID: -3640405606799898791, guid: 5f28ef9ebc15ba94798e9369011c5851,
     type: 3}
@@ -109,7 +111,7 @@ MonoBehaviour:
   projectile: {fileID: 2739205307369432115, guid: 0e3624fbce835cf49b37c45a7a12d628,
     type: 3}
   chargeBar: {fileID: 0}
-  bulletForce: 2
+  bulletForce: 0.1
   anim: {fileID: 2030617053574908381}
 --- !u!95 &2030617053574908381
 Animator:

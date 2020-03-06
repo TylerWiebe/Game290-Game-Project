@@ -1758,7 +1758,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8536586902857156173}
   m_Layer: 0
-  m_Name: Level_1
+  m_Name: Base_Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2994,6 +2994,7 @@ GameObject:
   - component: {fileID: 8536586903353639551}
   - component: {fileID: 8536586903353639538}
   - component: {fileID: 8536586903353639537}
+  - component: {fileID: 6200573823684620526}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3045,6 +3046,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 8536586903239222991}
+--- !u!114 &6200573823684620526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8536586903353639550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552bb78d2d5860e45869668a5d56c375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statOrb: {fileID: 6866704549077001977, guid: 0fd407f8b7809334ca958fdaf926cc1c, type: 3}
 --- !u!1 &8536586903457576708
 GameObject:
   m_ObjectHideFlags: 0
@@ -4479,12 +4493,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fd407f8b7809334ca958fdaf926cc1c, type: 3}
---- !u!4 &8536586903383383821 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6866704549077001982, guid: 0fd407f8b7809334ca958fdaf926cc1c,
-    type: 3}
-  m_PrefabInstance: {fileID: 2968826430187649523}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8536586903383383822 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6866704549077001981, guid: 0fd407f8b7809334ca958fdaf926cc1c,
@@ -4497,6 +4505,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c6ce2c15bf8f274aa1ec9cadecb43f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &8536586903383383821 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6866704549077001982, guid: 0fd407f8b7809334ca958fdaf926cc1c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2968826430187649523}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5294548555621743477
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5100,7 +5114,7 @@ PrefabInstance:
     - target: {fileID: 5089851827563027705, guid: adf9fadc7249a694eaa1f0fcd6c93f65,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8427071332964567468, guid: adf9fadc7249a694eaa1f0fcd6c93f65,
         type: 3}

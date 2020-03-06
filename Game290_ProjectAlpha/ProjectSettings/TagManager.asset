@@ -56,6 +56,9 @@ TagManager:
   - name: AlienBody
     uniqueID: 1728627391
     locked: 0
+  - name: Projectile
+    uniqueID: 597851995
+    locked: 0
   - name: AlienHead
     uniqueID: 3707076163
     locked: 0
