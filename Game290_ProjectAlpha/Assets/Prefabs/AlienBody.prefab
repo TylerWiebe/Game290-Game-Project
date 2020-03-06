@@ -83,12 +83,12 @@ Rigidbody2D:
   m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Constraints: 0
 --- !u!61 &3179349462814011423
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -196,9 +196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78fcc4b547cc7104cbc2d9e7ff2bd558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alienHead: {fileID: 8427071332964567469, guid: adf9fadc7249a694eaa1f0fcd6c93f65,
-    type: 3}
   anim: {fileID: -3640405606799898791}
+  animHead: {fileID: 0}
 --- !u!114 &6742976308273734977
 MonoBehaviour:
   m_ObjectHideFlags: 0
