@@ -226,6 +226,7 @@ public class Alien_Object : MonoBehaviour
 
             if (Math.Abs(deltaX) > 0 || Math.Abs(deltaY) > 0)
             {
+                BodyAngle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg - 90;
                 animBody.SetBool("isWalking", true);
             }
             else
@@ -234,7 +235,8 @@ public class Alien_Object : MonoBehaviour
             }
 
             //rotate body
-            BodyAngle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg - 90;
+
+           
             alienBody.transform.rotation = Quaternion.Euler(0, 0, BodyAngle);
             HeadAngle = Mathf.Atan2(mouse_position.y, mouse_position.x) * Mathf.Rad2Deg - 90;
             transform.rotation = Quaternion.Euler(0, 0, HeadAngle);

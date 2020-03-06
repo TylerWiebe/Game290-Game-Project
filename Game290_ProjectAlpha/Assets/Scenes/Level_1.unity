@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 1443413936}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -234,8 +234,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2101046093
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 375bd22a2195cf84195a259d41da4756, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -325,6 +325,11 @@ PrefabInstance:
       propertyPath: chargeBar
       value: 
       objectReference: {fileID: 1019215795}
+    - target: {fileID: 7664869246112809574, guid: c48305ff06fe6b34aabb2cff1f7d82cc,
+        type: 3}
+      propertyPath: bulletForce
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 8536586902634506160, guid: c48305ff06fe6b34aabb2cff1f7d82cc,
         type: 3}
       propertyPath: m_IsActive
@@ -415,6 +420,12 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8536586903353639538, guid: c48305ff06fe6b34aabb2cff1f7d82cc,
+        type: 3}
+      propertyPath: test
+      value: 
+      objectReference: {fileID: 6866704549077001977, guid: 0fd407f8b7809334ca958fdaf926cc1c,
+        type: 3}
     - target: {fileID: 8536586903353639550, guid: c48305ff06fe6b34aabb2cff1f7d82cc,
         type: 3}
       propertyPath: m_IsActive

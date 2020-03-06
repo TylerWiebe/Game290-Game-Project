@@ -28,5 +28,9 @@ public class OnHit : MonoBehaviour
             collision.gameObject.GetComponent<Script_Ranged_Enemy_Object>().attacked(GameObject.Find("AlienHead").GetComponent<Alien_Object>().getDamage() * damageMultiplier);
             Destroy(gameObject);
         }
+        else if (collision.gameObject.tag == "Wall")
+        {
+            Destroy(gameObject);
+        }
     }
 }
