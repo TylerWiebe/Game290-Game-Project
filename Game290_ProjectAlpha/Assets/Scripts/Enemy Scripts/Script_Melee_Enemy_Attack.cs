@@ -11,31 +11,37 @@ public class Script_Melee_Enemy_Attack : Script_Melee_Enemy_Object
 
 
     //when a collision with player occurs, trigger attacks
-    IEnumerator OnTriggerEnter2D(Collider2D other)
+    IEnumerator OnTriggerStay2D(Collider2D other)
     {
         if ((other.tag == "player") || (other.tag == "Player"))
         {
-            InvokeRepeating("Attack", 2f, 1.5f);
+            //need this check such that multiple attacks are not queued making it so the boi never attacks
+            if (!this.transform.GetComponentInParent<Animator>().GetBool("isAttacking"))
+            {
+                //stop the enemy from moving
+                this.transform.parent.gameObject.GetComponent<Script_EnemyAI>().canMove = false;
+                //wait time for attack
+                yield return new WaitForSeconds(0.25f);
+                //call animation
+                this.transform.GetComponentInParent<Animator>().SetBool("isAttacking", true);
+            }
         }
         yield break;
     }
 
-
-    //trigger when player leaves enemy range (stop attacking)
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        //enemyInRange = false;
-        if ((other.tag == "player") || (other.tag == "Player"))
-        {
-            CancelInvoke();
-        }
-    }
-
     //temporary attack function
-    private void Attack()
+    public void Attack()
     {
-        GameObject player = GameObject.Find("AlienHead");
-        player.GetComponent<Alien_Object>().Deal_Damage_To_Alien(attack_damage);
+        //deal damage to the player if they are still in the attack hit box
+        if (this.transform.GetComponent<Collider2D>().IsTouching(GameObject.Find("AlienBody").GetComponent<BoxCollider2D>()))
+        {
+            GameObject.Find("AlienHead").GetComponent<Alien_Object>().Deal_Damage_To_Alien(attack_damage);
+        }
+        //allow enemy to move
+        this.transform.parent.gameObject.GetComponent<Script_EnemyAI>().canMove = true;
+        //stop attacking, if the play does not leave the attack range, another attakc will be launched right away
+        this.transform.GetComponentInParent<Animator>().SetBool("isAttacking", false);
+
     }
 
     public void set_attack_damage(int attack_damage)
