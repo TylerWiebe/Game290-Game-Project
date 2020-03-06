@@ -251,8 +251,24 @@ public class Script_EnemyAI : MonoBehaviour
         rigidBody.rotation = angle;
     }
 
+    private void destroyEnemy()
+    {
+        if (this.gameObject.tag == "RangedEnemy")
+        {
+            //this.transform.GetComponentInChildren<Script_Ranged_Enemy_Attack>().destroy();
+        }
+        else
+            this.transform.GetComponentInChildren<Script_Melee_Enemy_Attack>().destroy();
+    }
+
+    //make enemy attack
     private void Attack()
     {
-        this.transform.GetComponentInChildren<Script_Melee_Enemy_Attack>().Attack();
+        if (this.gameObject.tag == "RangedEnemy")
+        {
+            //this.transform.GetComponentInChildren<Script_Ranged_Enemy_Attack>().Attack();
+        }
+        else
+            this.transform.GetComponentInChildren<Script_Melee_Enemy_Attack>().Attack();
     }
 }
