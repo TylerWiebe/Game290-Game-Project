@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -456123955
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 8e1e3aea183a27445b611de5c63092ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -247,6 +247,7 @@ MonoBehaviour:
   roamDistance: 2
   stoppingDistance: 1.3
   rigidBody: {fileID: 0}
+  canMove: 1
 --- !u!58 &6012400469325524880
 CircleCollider2D:
   m_ObjectHideFlags: 0
