@@ -213,11 +213,13 @@ public class Alien_Object : MonoBehaviour
 
             //move alien
             rigidBodyBody.MovePosition(new Vector2(nextX, nextY));
-            rigidBodyHead.MovePosition(new Vector2(nextX, nextY));
+            rigidBodyHead.MovePosition(new Vector2(alienBody.transform.position.x, alienBody.transform.position.y));
+
 
             //AlienHead.transform.position = new Vector3(nextX, nextY, 0);
             //alienBody.transform.position = new Vector3(nextX, nextY, 0);
-            myCamera.transform.position = new Vector3(nextX, nextY, -10);
+            //AlienHead.transform.position = alienBody.transform.position;
+            myCamera.transform.position = new Vector3(alienBody.transform.position.x, alienBody.transform.position.y, -10);
 
 
             mouse_position.x = mouse_position.x - alien_sprite_position.x;
