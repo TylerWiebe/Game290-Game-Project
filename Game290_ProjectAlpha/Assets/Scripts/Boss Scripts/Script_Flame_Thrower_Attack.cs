@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class Script_Flame_Thrower_Attack : MonoBehaviour
 {
+    //reference hit box script
+    Script_Flame_Thrower_Hit_Box hit_box = null;
+
+    //### State Variables ###
     //controls when the script can attack
-    private bool canAttack = false;
-
-    //player game object
-    Alien_Object target = null;
-
+    private bool attacking = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        //set enemy game object variable
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Alien_Object>();
+        hit_box = GameObject.Find("boss_flame_thrower_hit_box").GetComponent<Script_Flame_Thrower_Hit_Box>();
     }
 
     // Update is called once per frame
@@ -24,44 +23,19 @@ public class Script_Flame_Thrower_Attack : MonoBehaviour
         
     }
 
+    //stop attack
     public void startAttack()
     {
         //use flame thrower
-        canAttack = true;
-        Debug.Log("Flame Thrower On");
+        this.transform.GetComponent<Animator>().SetBool("isAttacking", true);
+        hit_box.canAttack = true;
     }
 
+    //stop attack
     public void stopAttack()
     {
         //no use flame thrower
-        canAttack = false;
-        Debug.Log("Flame Thrower Off");
+        hit_box.canAttack = false;
+        this.transform.GetComponent<Animator>().SetBool("isAttacking", false);
     }
-
-    //attack enemy with the flame thrower if they get in range
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        //if collision with the player
-        if (((other.tag == "player") || (other.tag == "Player")) && canAttack)
-        {
-            //do one point of damage very 0.05 seconds
-            InvokeRepeating("attack", 0f, 0.05f);
-        }
-    }
-
-    //trigger when player leaves enemy range (stop attacking)
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if ((other.tag == "player") || (other.tag == "Player") && canAttack)
-        {
-            CancelInvoke();
-        }
-    }
-
-    //deal one point of damage to the player every time called
-    private void attack()
-    {
-        target.Deal_Damage_To_Alien(1);
-    }
-
 }

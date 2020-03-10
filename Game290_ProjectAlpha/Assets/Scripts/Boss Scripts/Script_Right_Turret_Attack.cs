@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Script_Gun_Attack : MonoBehaviour
+public class Script_Right_Turret_Attack : MonoBehaviour
 {
-    //controls when the script can attack
-    private bool canAttack = false;
-
     //player game object
     GameObject target = null;
 
@@ -21,40 +18,31 @@ public class Script_Gun_Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    //shot five projectiles in a line
-    public void shootLeftGun()
+    //call shooting animation for the right turret attack
+    public void startRightTurretAttackAnimation()
     {
-        spawnAndShootProject("LeftBarrel", -34);
-        spawnAndShootProject("LeftBarrel", -30);
-        spawnAndShootProject("LeftBarrel", -26);
-
-        spawnAndShootProject("LeftBarrel", -4);
-        spawnAndShootProject("LeftBarrel", 0);
-        spawnAndShootProject("LeftBarrel", 4);
-
-        spawnAndShootProject("LeftBarrel", 26);
-        spawnAndShootProject("LeftBarrel", 30);
-        spawnAndShootProject("LeftBarrel", 36);
+        this.transform.GetComponent<Animator>().SetBool("rightTurretAttacking", true);
     }
 
-    public void shootRightGun()
+    //shoot five projectiles in a line
+    public void shootRightTurret()
     {
-        spawnAndShootProject("RightBarrel", -36);
-        spawnAndShootProject("RightBarrel", -30);
-        spawnAndShootProject("RightBarrel", -26);
+        spawnAndShootProject("boss_turret_right_barrel", -36);
+        spawnAndShootProject("boss_turret_right_barrel", -30);
+        spawnAndShootProject("boss_turret_right_barrel", -26);
 
-        spawnAndShootProject("RightBarrel", -4);
-        spawnAndShootProject("RightBarrel", 0);
-        spawnAndShootProject("RightBarrel", 4);
+        spawnAndShootProject("boss_turret_right_barrel", -4);
+        spawnAndShootProject("boss_turret_right_barrel", 0);
+        spawnAndShootProject("boss_turret_right_barrel", 4);
 
-        spawnAndShootProject("RightBarrel", 26);
-        spawnAndShootProject("RightBarrel", 30);
-        spawnAndShootProject("RightBarrel", 34);
+        spawnAndShootProject("boss_turret_right_barrel", 26);
+        spawnAndShootProject("boss_turret_right_barrel", 30);
+        spawnAndShootProject("boss_turret_right_barrel", 34);
+        this.transform.GetComponent<Animator>().SetBool("rightTurretAttacking", false);
     }
-
 
     //spawn and shoot a projectile at the desingated barrel
     private void spawnAndShootProject(String barrel, int shift)
@@ -67,7 +55,7 @@ public class Script_Gun_Attack : MonoBehaviour
         GameObject projectile_instance = Instantiate(projectile, new Vector3(barrelVector.x, barrelVector.y, 0), Quaternion.identity);
         //calculate angle to shoot projectile
         //float theta = calculateAngle() * Mathf.Deg2Rad;
-        float theta = (this.gameObject.GetComponentInParent<Script_BossAI>().theta + 180 + shift) * Mathf.Deg2Rad;
+        float theta = (this.gameObject.GetComponentInParent<Script_BossAI>().theta - 90 + shift) * Mathf.Deg2Rad;
         //calculate the velocity vector of the boi
         Vector3 vector = new Vector3((float)(10 * Math.Cos(theta)), (float)(10 * Math.Sin(theta)), 0f); //create a vector of x and y velocities
         //set damage of the projectile
@@ -86,5 +74,4 @@ public class Script_Gun_Attack : MonoBehaviour
         targetPosition.y = targetPosition.y - this.gameObject.transform.position.y;
         return (Mathf.Atan2(targetPosition.y, targetPosition.x) * Mathf.Rad2Deg) - 10;
     }
-
 }

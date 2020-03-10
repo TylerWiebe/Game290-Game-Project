@@ -15,7 +15,9 @@ public class Script_BossAI : MonoBehaviour
     GameObject target = null;
 
     //shotgun attack script
-    Script_Gun_Attack gun_attack;
+    Script_Left_Turret_Attack left_turret;
+    Script_Right_Turret_Attack right_turret;
+
 
     //flame thrower attack script
     Script_Flame_Thrower_Attack flame_thrower_attack;
@@ -29,36 +31,37 @@ public class Script_BossAI : MonoBehaviour
 
         //set enemy game object variable
         target = GameObject.FindGameObjectWithTag("Player");
-        
-        //set shotgun attack script
-        gun_attack = this.gameObject.GetComponentInChildren<Script_Gun_Attack>();
+
+        //set turret attack script
+        left_turret = this.gameObject.GetComponentInChildren<Script_Left_Turret_Attack>();
+        right_turret = this.gameObject.GetComponentInChildren<Script_Right_Turret_Attack>();
+
         //set flame thrower attack script
         flame_thrower_attack = this.gameObject.GetComponentInChildren<Script_Flame_Thrower_Attack>();
 
-        //start left shotgun attack
-        InvokeRepeating("leftGunAttack", 0f, 5f);
+        //start left turret attack
+        InvokeRepeating("leftTurretAttack", 0f, 5f);
 
-        //start right shotgun attack
-        InvokeRepeating("rightGunAttack", 2.5f, 5f);
+        //start right turret attack
+        InvokeRepeating("rightTurretAttack", 2.5f, 5f);
 
         //resume flame thrower attack
-        InvokeRepeating("resumeFlameThrowerAttack", 0f, 20f);
+        InvokeRepeating("resumeFlameThrowerAttack", 0f, 10f);
 
         //suspend flame thrower attack
-        InvokeRepeating("suspendFlameThrowerAttack", 5f, 25f);
-
+        InvokeRepeating("suspendFlameThrowerAttack", 5f, 10f);
+    }
+    
+    //shoot left turret
+    private void leftTurretAttack()
+    {
+        left_turret.startLeftTurretAttackAnimation();
     }
 
-    //shoot left shotgun
-    private void leftGunAttack()
+    //shoot right turret
+    private void rightTurretAttack()
     {
-        gun_attack.shootLeftGun();
-    }
-
-    //shoot right shotgun
-    private void rightGunAttack()
-    {
-        gun_attack.shootRightGun();
+        right_turret.startRightTurretAttackAnimation();
     }
 
     //resume flame thrower attack
@@ -73,9 +76,6 @@ public class Script_BossAI : MonoBehaviour
         flame_thrower_attack.stopAttack();
     }
 
-
-
-
     // Update is called once per frame
     void Update()
     {
@@ -89,7 +89,7 @@ public class Script_BossAI : MonoBehaviour
         Vector3 targetPosition = target.transform.position;
         targetPosition.x = targetPosition.x - this.gameObject.transform.position.x;
         targetPosition.y = targetPosition.y - this.gameObject.transform.position.y;
-        theta = (Mathf.Atan2(targetPosition.y, targetPosition.x) * Mathf.Rad2Deg) - (2 * 90);
+        theta = (Mathf.Atan2(targetPosition.y, targetPosition.x) * Mathf.Rad2Deg) + 90;
         return theta;
     }
     

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Script_Ranged_Enemy_Projectile : MonoBehaviour
+public class Script_Boss_Projectile: MonoBehaviour
 {
     private long start_time;
     private int damage;
@@ -27,7 +27,7 @@ public class Script_Ranged_Enemy_Projectile : MonoBehaviour
         if ((other.tag == "player") || (other.tag == "Player"))
         {
             GameObject player = GameObject.Find("AlienHead");
-            player.GetComponent<Alien_Object>().Deal_Damage_To_Alien(damage); 
+            player.GetComponent<Alien_Object>().Deal_Damage_To_Alien(damage);
             yield break;
         }
     }
