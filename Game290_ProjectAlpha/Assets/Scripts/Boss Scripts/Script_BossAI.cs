@@ -8,23 +8,17 @@ public class Script_BossAI : MonoBehaviour
     //boss's rigidbody
     private Rigidbody2D rigidBody;
 
+    //calculate the angle that the boss should be facing
+    public float theta;
+
     //player game object
     GameObject target = null;
 
     //shotgun attack script
-    Script_Shotgun_Attack shotgun_attack;
+    Script_Gun_Attack gun_attack;
 
     //flame thrower attack script
     Script_Flame_Thrower_Attack flame_thrower_attack;
-
-
-    //active weapon
-    /*
-     * Shotgun = 1
-     * Flamethrower = 2
-     * Laser = 3
-     */
-    private int weapon = 1;
 
 
     // Start is called before the first frame update
@@ -36,14 +30,51 @@ public class Script_BossAI : MonoBehaviour
         //set enemy game object variable
         target = GameObject.FindGameObjectWithTag("Player");
         
-        //check weapon change condition every 2.5 seconds
-        InvokeRepeating("chooseWeapon", 0f, 2.5f);
-
         //set shotgun attack script
-        shotgun_attack = this.gameObject.GetComponentInChildren<Script_Shotgun_Attack>();
+        gun_attack = this.gameObject.GetComponentInChildren<Script_Gun_Attack>();
         //set flame thrower attack script
         flame_thrower_attack = this.gameObject.GetComponentInChildren<Script_Flame_Thrower_Attack>();
+
+        //start left shotgun attack
+        InvokeRepeating("leftGunAttack", 0f, 5f);
+
+        //start right shotgun attack
+        InvokeRepeating("rightGunAttack", 2.5f, 5f);
+
+        //resume flame thrower attack
+        InvokeRepeating("resumeFlameThrowerAttack", 0f, 20f);
+
+        //suspend flame thrower attack
+        InvokeRepeating("suspendFlameThrowerAttack", 5f, 25f);
+
     }
+
+    //shoot left shotgun
+    private void leftGunAttack()
+    {
+        gun_attack.shootLeftGun();
+    }
+
+    //shoot right shotgun
+    private void rightGunAttack()
+    {
+        gun_attack.shootRightGun();
+    }
+
+    //resume flame thrower attack
+    private void resumeFlameThrowerAttack()
+    {
+        flame_thrower_attack.startAttack();
+    }
+
+    //suspend flame thrower attack
+    private void suspendFlameThrowerAttack()
+    {
+        flame_thrower_attack.stopAttack();
+    }
+
+
+
 
     // Update is called once per frame
     void Update()
@@ -52,35 +83,14 @@ public class Script_BossAI : MonoBehaviour
         rigidBody.rotation = calculateAngle();
     }
 
-    //select which weapon to use based on player's distance from boss
-    private void chooseWeapon()
-    {
-        //flamethrower for close range
-        Vector3 targetPosition = target.transform.position;
-        Vector3 bossPosition = this.gameObject.transform.position;
-        if (Math.Pow(targetPosition.x - bossPosition.x, 2) + Math.Pow(targetPosition.y - bossPosition.y, 2) < 80) //range condition
-        {
-            weapon = 2;
-            shotgun_attack.stopAttack(); //stop attacking with the shotgun
-            flame_thrower_attack.startAttack(); //start attacking with the flame thrower
-        }
-        //shotgun for long range
-        else
-        {
-            weapon = 1;
-            flame_thrower_attack.stopAttack();  //stop attacking with the flame thrower
-            shotgun_attack.startAttack(); //start attacking with the shotgun
-        }
-
-    }
-
     //calculate the angle of rotation paying respect to the offset shift
     private float calculateAngle()
     {
         Vector3 targetPosition = target.transform.position;
         targetPosition.x = targetPosition.x - this.gameObject.transform.position.x;
         targetPosition.y = targetPosition.y - this.gameObject.transform.position.y;
-        return (Mathf.Atan2(targetPosition.y, targetPosition.x) * Mathf.Rad2Deg) - (weapon * 90);
+        theta = (Mathf.Atan2(targetPosition.y, targetPosition.x) * Mathf.Rad2Deg) - (2 * 90);
+        return theta;
     }
     
 }

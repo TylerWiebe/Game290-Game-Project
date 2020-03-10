@@ -28,12 +28,14 @@ public class Script_Flame_Thrower_Attack : MonoBehaviour
     {
         //use flame thrower
         canAttack = true;
+        Debug.Log("Flame Thrower On");
     }
 
     public void stopAttack()
     {
         //no use flame thrower
         canAttack = false;
+        Debug.Log("Flame Thrower Off");
     }
 
     //attack enemy with the flame thrower if they get in range
