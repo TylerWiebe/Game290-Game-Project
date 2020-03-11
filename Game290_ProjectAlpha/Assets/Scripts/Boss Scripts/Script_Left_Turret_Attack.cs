@@ -48,7 +48,7 @@ public class Script_Left_Turret_Attack : MonoBehaviour
     private void spawnAndShootProject(String barrel, int shift)
     {
         //get projectile from resource folder
-        GameObject projectile = Resources.Load("Ranged_Enemy_Projectile") as GameObject;
+        GameObject projectile = Resources.Load("boss_projectile") as GameObject;
         //get position of spawn point
         Vector3 barrelVector = GameObject.Find(barrel).transform.position;
         //instantiate proctile resource folder
@@ -61,7 +61,7 @@ public class Script_Left_Turret_Attack : MonoBehaviour
         //set damage of the projectile
         projectile_instance.GetComponent<Script_Ranged_Enemy_Projectile>().set_damage(10);
         //set rotatopm of the projectile
-        projectile_instance.transform.rotation = Quaternion.Euler(0, 0, theta * Mathf.Rad2Deg - 90);
+        projectile_instance.transform.rotation = Quaternion.Euler(0, 0, theta * Mathf.Rad2Deg + 90);
         //set velocity of the projectile
         projectile_instance.GetComponent<Rigidbody2D>().velocity = vector;
     }
