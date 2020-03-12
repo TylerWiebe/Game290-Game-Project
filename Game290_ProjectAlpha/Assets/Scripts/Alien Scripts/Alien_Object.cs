@@ -30,7 +30,7 @@ public class Alien_Object : MonoBehaviour
     private GameObject bruiserAttackBox;
 
     //Alien Sprite
-    public Sprite alien_sprite;
+    public Sprite alien_spriteq;
 
     //Alien Movement variables
     Vector3 mouse_position = new Vector3();
@@ -352,6 +352,7 @@ public class Alien_Object : MonoBehaviour
 
             //add skill
         }
+        animBody.SetInteger("CurrentClass", Current_Class);
         //Debug.Log(Current_Health);
     }
 

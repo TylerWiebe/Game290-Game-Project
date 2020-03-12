@@ -84,7 +84,7 @@ MonoBehaviour:
   Current_Health: 100
   num_ranged_charges: 4
   current_ranged_charges: 4
-  rigidBodyBody: {fileID: 0}
+  rigidBodyBody: {fileID: 3179349462814011422}
   animHead: {fileID: 6399150236129906075}
   animBody: {fileID: -3640405606799898791}
 --- !u!114 &8201943440944722034

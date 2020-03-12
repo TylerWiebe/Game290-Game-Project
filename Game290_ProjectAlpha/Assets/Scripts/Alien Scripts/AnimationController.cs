@@ -46,7 +46,7 @@ public class AnimationController : MonoBehaviour
     {
         bool temp = true;
         int currentClass = myAlienObject.getCurrentClass();
-        
+
         myAlienObject.setCanMove(temp);
     }
 
