@@ -19,15 +19,20 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
 
     public void attacked(float damage)
     {
-        Debug.Log("previous health"+ (damage).ToString());
         hit_points -= damage;
-        Debug.Log("next health" + (hit_points).ToString());
         if (hit_points <= 0)
         {
-            Debug.Log("melee should be ded");            //son be deded
-            Script_Enemy_Controller script_enemy_controller = GameObject.Find("GameManager").GetComponent<Script_Enemy_Controller>();
-            script_enemy_controller.destroy_enemy(this.gameObject);
-            Destroy(gameObject);
+            Debug.Log("Your mom gay");
+            this.transform.GetComponentInParent<Script_EnemyAI>().canMove = false;
+            this.transform.GetComponentInParent<Animator>().SetBool("isDead", true);
         }
+    }
+
+    public void destroy()
+    {
+        Debug.Log("melee should be ded"); //son be deded
+        Script_Enemy_Controller script_enemy_controller = GameObject.Find("GameManager").GetComponent<Script_Enemy_Controller>();
+        script_enemy_controller.destroy_enemy(this.gameObject);
+        Destroy(gameObject);
     }
 }

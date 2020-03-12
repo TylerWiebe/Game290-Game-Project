@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  stoppingDistance: 7
 --- !u!58 &7939659542883285304
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -292,6 +293,8 @@ MonoBehaviour:
   walkingDirection: Right
   roamDistance: 5
   stoppingDistance: 3
+  rigidBody: {fileID: 0}
+  canMove: 1
 --- !u!114 &5781563052975181942
 MonoBehaviour:
   m_ObjectHideFlags: 0

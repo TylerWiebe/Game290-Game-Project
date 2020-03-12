@@ -54,7 +54,7 @@ public class Script_Morph_UI : MonoBehaviour
 
         //load sprites from resources folder
         assassinSprite = Resources.Load<Sprite>("art_assassin_character_idle4");
-        bruiserSprite = Resources.Load<Sprite>("Doot");
+        bruiserSprite = Resources.Load<Sprite>("Brawler Idle animation1");
         rangedSprite = Resources.Load<Sprite>("art_ranged_character_idle2");
     }
 

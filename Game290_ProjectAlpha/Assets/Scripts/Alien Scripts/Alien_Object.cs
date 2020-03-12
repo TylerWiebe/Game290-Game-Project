@@ -292,7 +292,7 @@ public class Alien_Object : MonoBehaviour
         {
             Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1) * 0.5);
             Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
-            speed = 0.075f;
+            speed = 0.075f * 2f; //0.075
 
             //update healthbar Max Health & current health
             healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(Max_Health);
@@ -314,7 +314,7 @@ public class Alien_Object : MonoBehaviour
         {
             Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1) * 2.0);
             Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
-            speed = 0.025f;
+            speed = 0.025f * 2f; //0.025
 
             //update healthbar Max Health & current health
             healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(Max_Health);
@@ -335,7 +335,7 @@ public class Alien_Object : MonoBehaviour
         {
             Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1.0));
             Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
-            speed = 0.05f;
+            speed = 0.050f * 2f;
 
             //update healthbar Max Health & current health
             healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(Max_Health);

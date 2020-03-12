@@ -50,8 +50,8 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Enemy
-    uniqueID: 3838843341
+  - name: Boss Body
+    uniqueID: 2962679401
     locked: 0
   - name: AlienBody
     uniqueID: 1728627391

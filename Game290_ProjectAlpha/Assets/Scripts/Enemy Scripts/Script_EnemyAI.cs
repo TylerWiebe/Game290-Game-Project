@@ -50,6 +50,8 @@ public class Script_EnemyAI : MonoBehaviour
     //Stop player from pushing enemy
     public Rigidbody2D rigidBody;
 
+    //stop enemy when attacking
+    public bool canMove = true;
 
     void Start()
     {
@@ -84,8 +86,6 @@ public class Script_EnemyAI : MonoBehaviour
             //    first_time = false;
         }
     }
-
-
 
     //Passive enemy behaviour (When enemy has not yet spotted player)
     IEnumerator PassiveBehaviour()
@@ -221,7 +221,7 @@ public class Script_EnemyAI : MonoBehaviour
         rotate_body_aggro();
 
         //walk towards target position at specified speed and stop if distance between is greater than certain amount
-        if (Vector2.Distance(transform.position, target.position) > stoppingDistance)
+        if (Vector2.Distance(transform.position, target.position) > stoppingDistance && canMove)
         {
             float theta = (angle + 90) * Mathf.Deg2Rad;
             float v1 = (float)(aggressiveSpeed * Math.Cos(theta)); //find x velocity
@@ -249,5 +249,26 @@ public class Script_EnemyAI : MonoBehaviour
     private void rotate_body_aggro()
     {
         rigidBody.rotation = angle;
+    }
+
+    private void destroyEnemy()
+    {
+        if (this.gameObject.tag == "RangedEnemy")
+        {
+            //this.transform.GetComponentInChildren<Script_Ranged_Enemy_Attack>().destroy();
+        }
+        else
+            this.transform.GetComponentInChildren<Script_Melee_Enemy_Attack>().destroy();
+    }
+
+    //make enemy attack
+    private void Attack()
+    {
+        if (this.gameObject.tag == "RangedEnemy")
+        {
+            //this.transform.GetComponentInChildren<Script_Ranged_Enemy_Attack>().Attack();
+        }
+        else
+            this.transform.GetComponentInChildren<Script_Melee_Enemy_Attack>().Attack();
     }
 }

@@ -34,7 +34,10 @@ public class Script_Ranged_Enemy_Projectile : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-
+        if ((other.tag == "player") || (other.tag == "Player"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void set_damage(int damage)
