@@ -78,18 +78,10 @@ public class Alien_Object : MonoBehaviour
 
     //rigidbody for movement
     public Rigidbody2D rigidBodyBody;
-    public Rigidbody2D rigidBodyHead;
 
     //Animations
     public Animator animHead;
     public Animator animBody;
-
-    public AnimationClip assassinMorph;
-    public AnimationClip assassinAttack;
-    public AnimationClip bruiserMorph;
-    public AnimationClip bruiserAttack;
-    public AnimationClip rangedMorph;
-    public AnimationClip rangedAttack;
     // Start is called before the first frame update
     void Start()
     {
@@ -108,7 +100,6 @@ public class Alien_Object : MonoBehaviour
         myCamera = GameObject.Find("Main Camera");
 
         rigidBodyBody = alienBody.GetComponent<Rigidbody2D>();
-        rigidBodyHead = AlienHead.GetComponent<Rigidbody2D>();
 
         animHead = AlienHead.GetComponent<Animator>();
         animBody = alienBody.GetComponent<Animator>();
@@ -213,7 +204,6 @@ public class Alien_Object : MonoBehaviour
 
             //move alien
             rigidBodyBody.MovePosition(new Vector2(nextX, nextY));
-            rigidBodyHead.MovePosition(new Vector2(nextX, nextY));
 
             //AlienHead.transform.position = new Vector3(nextX, nextY, 0);
             //alienBody.transform.position = new Vector3(nextX, nextY, 0);

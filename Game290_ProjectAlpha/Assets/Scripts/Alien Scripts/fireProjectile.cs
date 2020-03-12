@@ -6,7 +6,8 @@ public class fireProjectile : MonoBehaviour
 {
     public Transform shootLocation;
     public GameObject projectile;
-    public GameObject chargeBar;
+    public GameObject UI_Object;
+    private GameObject chargeBar;
     private Script_ProjectileCharges myChargeScript;
 
     public float bulletForce;
@@ -16,6 +17,7 @@ public class fireProjectile : MonoBehaviour
     private Alien_Object myAlienObjectScript;
     private void Start()
     {
+        chargeBar = UI_Object.transform.Find("ProjectileCharges").gameObject;
         myAlienObjectScript = this.gameObject.GetComponent<Alien_Object>();
         myChargeScript = chargeBar.GetComponent<Script_ProjectileCharges>();
     }

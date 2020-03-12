@@ -121,33 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &999160773 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 183227247445607986, guid: c48305ff06fe6b34aabb2cff1f7d82cc,
-    type: 3}
-  m_PrefabInstance: {fileID: 8536586902423193368}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &999160779
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999160773}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 0.0001
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &1019215795 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8536586903950142183, guid: c48305ff06fe6b34aabb2cff1f7d82cc,
