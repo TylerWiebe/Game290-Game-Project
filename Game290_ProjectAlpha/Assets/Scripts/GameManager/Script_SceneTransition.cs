@@ -107,16 +107,17 @@ public class Script_SceneTransition : MonoBehaviour
         //set volume
         mixer.SetFloat("volume", -80);
 
-        int vol = -80;
+        float vol = -80f;
 
         float savedVolume = PlayerPrefs.GetFloat("MasterVolume");
 
+        float temp = 0;
         while (vol < savedVolume)
         {
-            vol += 8;
-
+            vol += 2 + temp;
+            temp += 0.25f;
             mixer.SetFloat("volume", vol);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }

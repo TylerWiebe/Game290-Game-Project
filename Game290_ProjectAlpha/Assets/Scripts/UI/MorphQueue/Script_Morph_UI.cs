@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Script_Morph_UI : MonoBehaviour
 {
-    private GameObject morphQueue;
-    private Vector3 morphQueueEulerAngles;
+    private GameObject morphWheel;
+    private Vector3 morphWheelEulerAngles;
     //class icon gameobjects
     public GameObject classIcon0;
     public GameObject classIcon1;
@@ -32,10 +32,13 @@ public class Script_Morph_UI : MonoBehaviour
 
     private int angle = 0;
 
+    [SerializeField]
+    int rotationSpeed = 10;
+
     void Start()
     {
-        morphQueue = GameObject.Find("MorphQueue");
-        morphQueueEulerAngles = morphQueue.transform.rotation.eulerAngles;
+        morphWheel = GameObject.Find("MorphWheel");
+        morphWheelEulerAngles = morphWheel.transform.rotation.eulerAngles;
 
         //Reference Class Icon Game Objects
         classIcon0 = GameObject.Find("Form0");
@@ -65,11 +68,11 @@ public class Script_Morph_UI : MonoBehaviour
             //angle to rotate to
             Vector3 endAngleEuler = new Vector3(0, 0, angle);
 
-            if (Vector3.Distance(morphQueue.transform.eulerAngles, endAngleEuler) > 2f)
+            if (Vector3.Distance(morphWheel.transform.eulerAngles, endAngleEuler) > 2f)
             {
                 //MathF.LerpAngle treats values as degrees and increases instead of decreases the value
-                float zLerp = Mathf.LerpAngle(morphQueue.transform.rotation.eulerAngles.z, endAngleEuler.z, Time.deltaTime * 10);
-                morphQueue.transform.eulerAngles = new Vector3(0, 0, zLerp);
+                float zLerp = Mathf.LerpAngle(morphWheel.transform.rotation.eulerAngles.z, endAngleEuler.z, Time.deltaTime * rotationSpeed);
+                morphWheel.transform.eulerAngles = new Vector3(0, 0, zLerp);
 
                 //keep class icons facing up
                 classIcon0.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -79,7 +82,7 @@ public class Script_Morph_UI : MonoBehaviour
             else
             {
                 //hard set the rotation of morphQUeue
-                morphQueue.transform.eulerAngles = endAngleEuler;
+                morphWheel.transform.eulerAngles = endAngleEuler;
                 needsToRotateLeft = false;
             }
         }
@@ -89,9 +92,9 @@ public class Script_Morph_UI : MonoBehaviour
             //angle to rotate to
             Vector3 endAngleEuler = new Vector3(0, 0, angle);
 
-            if (Vector3.Distance(morphQueue.transform.eulerAngles, endAngleEuler) > 2f)
+            if (Vector3.Distance(morphWheel.transform.eulerAngles, endAngleEuler) > 2f)
             {
-                morphQueue.transform.eulerAngles = Vector3.Lerp(morphQueue.transform.rotation.eulerAngles, endAngleEuler, Time.deltaTime * 10);
+                morphWheel.transform.eulerAngles = Vector3.Lerp(morphWheel.transform.rotation.eulerAngles, endAngleEuler, Time.deltaTime * rotationSpeed);
 
                 //keep class icons facing up
                 classIcon0.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -100,7 +103,7 @@ public class Script_Morph_UI : MonoBehaviour
             }
             else
             {
-                morphQueue.transform.eulerAngles = endAngleEuler;
+                morphWheel.transform.eulerAngles = endAngleEuler;
                 needsToRotateRight = false;
             }
         }

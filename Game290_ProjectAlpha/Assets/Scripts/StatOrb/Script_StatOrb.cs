@@ -12,7 +12,7 @@ public class Script_StatOrb : MonoBehaviour
     {
         menu_Canvas = GameObject.Find("Menu_Canvas");
         statWindow = menu_Canvas.transform.Find("StatWindow").gameObject;
-        player = GameObject.Find("AlienHead");
+        player = GameObject.FindWithTag("Player");
     }
 
     //on collision with stat orb
@@ -45,6 +45,6 @@ public class Script_StatOrb : MonoBehaviour
         Time.timeScale = 1f;
 
         //remove stat orb
-        Destroy(this.gameObject);
+        DestroyImmediate(this.gameObject, true);
     }
 }
