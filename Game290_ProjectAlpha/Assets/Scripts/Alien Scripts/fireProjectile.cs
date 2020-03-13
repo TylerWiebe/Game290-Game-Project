@@ -17,14 +17,15 @@ public class fireProjectile : MonoBehaviour
     private Alien_Object myAlienObjectScript;
     private void Start()
     {
-        chargeBar = UI_Object.transform.Find("ProjectileCharges").gameObject;
-        myAlienObjectScript = this.gameObject.GetComponent<Alien_Object>();
-        myChargeScript = chargeBar.GetComponent<Script_ProjectileCharges>();
+        
     }
 
 
     private void shoot()
     {
+        chargeBar = UI_Object.transform.Find("ProjectileCharges").gameObject;
+        myAlienObjectScript = this.gameObject.GetComponent<Alien_Object>();
+        myChargeScript = chargeBar.GetComponent<Script_ProjectileCharges>();
         if (myChargeScript.getRangedCharges() > 0)
         {
             GameObject myProjectile = (GameObject)Instantiate(projectile, shootLocation.position, shootLocation.rotation);

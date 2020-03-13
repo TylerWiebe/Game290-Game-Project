@@ -50,12 +50,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 823091233278247357}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b48965fa5f231b4448cbbe32f23eff0f, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f31efce2b307c245afd3448cbf450a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   classIcon0: {fileID: 0}
   classIcon1: {fileID: 0}
   classIcon2: {fileID: 0}
+  assassinSprite: {fileID: 21300000, guid: fcd71a016ffc2c8409831b7af1450f4c, type: 3}
+  bruiserSprite: {fileID: 21300000, guid: f0b2096b84757a442bd68f24c926027e, type: 3}
+  rangedSprite: {fileID: 21300000, guid: 8f8f83c8254baa242ae01392d849d170, type: 3}
 --- !u!1 &859349284567294294
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,7 +907,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 4601590271604667748}
-  player: {fileID: 8427071332964567469, guid: adf9fadc7249a694eaa1f0fcd6c93f65, type: 3}
 --- !u!1 &4601590272027291458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,6 +1228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 4601590272419069125}
+  playerScript: {fileID: 0}
 --- !u!1 &4601590272438525902
 GameObject:
   m_ObjectHideFlags: 0

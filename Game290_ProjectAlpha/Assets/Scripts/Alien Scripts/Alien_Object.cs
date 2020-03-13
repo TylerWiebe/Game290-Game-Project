@@ -112,40 +112,46 @@ public class Alien_Object : MonoBehaviour
                 Class_Order = new int[] { 0, 1, 2 };
                 Current_Class = 1;
                 morphQueue.GetComponent<Script_Morph_UI>().SetQueue(0);
+                animHead.SetInteger("IsRanged", 0);
                 updateAlienStats();
                 break;
             case 1:
                 Class_Order = new int[] { 0, 2, 1 };
                 Current_Class = 2;
                 morphQueue.GetComponent<Script_Morph_UI>().SetQueue(1);
+                animHead.SetInteger("IsRanged", 1);
                 updateAlienStats();
                 break;
             case 2:
                 Class_Order = new int[] { 1, 0, 2 };
                 Current_Class = 0;
                 morphQueue.GetComponent<Script_Morph_UI>().SetQueue(2);
+                animHead.SetInteger("IsRanged", 0);
                 updateAlienStats();
                 break;
             case 3:
                 Class_Order = new int[] { 1, 2, 0 };
                 Current_Class = 2;
                 morphQueue.GetComponent<Script_Morph_UI>().SetQueue(3);
+                animHead.SetInteger("IsRanged", 1);
                 updateAlienStats();
                 break;
             case 4:
                 Class_Order = new int[] { 2, 1, 0 };
                 Current_Class = 1;
                 morphQueue.GetComponent<Script_Morph_UI>().SetQueue(4);
+                animHead.SetInteger("IsRanged", 0);
                 updateAlienStats();
                 break;
             default:
                 Class_Order = new int[] { 2, 0, 1 };
                 Current_Class = 0;
                 morphQueue.GetComponent<Script_Morph_UI>().SetQueue(5);
+                animHead.SetInteger("IsRanged", 0);
+
                 updateAlienStats();
                 break;
         }
-        animBody.SetInteger("CurrentClass", Current_Class);
     }
 
 
@@ -254,7 +260,10 @@ public class Alien_Object : MonoBehaviour
         morph_animation();
     }
 
-
+    private void RangedStartSetFalse()
+    {
+        animHead.SetBool("GameStartedAsRanged", false);
+    }
 
     private void morph_left()
     {
@@ -298,6 +307,8 @@ public class Alien_Object : MonoBehaviour
             healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(Max_Health);
             healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
 
+            animHead.SetInteger("IsRanged", 0);
+
             //turn off charge bar
             chargeBar.SetActive(false);
             //turn off skill box
@@ -320,6 +331,9 @@ public class Alien_Object : MonoBehaviour
             healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(Max_Health);
             healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
 
+
+            animHead.SetInteger("IsRanged", 0);
+
             //turn off charge bar
             chargeBar.SetActive(false);
             //turn off skill box
@@ -337,6 +351,9 @@ public class Alien_Object : MonoBehaviour
             Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
             speed = 0.050f * 2f;
 
+            animHead.SetBool("isRanged", true);
+            animHead.SetInteger("IsRanged", 1);
+
             //update healthbar Max Health & current health
             healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(Max_Health);
             healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
@@ -352,7 +369,7 @@ public class Alien_Object : MonoBehaviour
 
             //add skill
         }
-        animBody.SetInteger("CurrentClass", Current_Class);
+        this.gameObject.GetComponent<Animator>().SetInteger("CurrentClass", Current_Class);
         //Debug.Log(Current_Health);
     }
 

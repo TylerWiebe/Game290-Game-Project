@@ -23,9 +23,9 @@ public class Script_Morph_UI : MonoBehaviour
     private Vector3 position2;
 
     //hold icon sprites
-    private Sprite assassinSprite;
-    private Sprite bruiserSprite;
-    private Sprite rangedSprite;
+    public Sprite assassinSprite;
+    public Sprite bruiserSprite;
+    public Sprite rangedSprite;
 
     private bool needsToRotateRight = false;
     private bool needsToRotateLeft = false;

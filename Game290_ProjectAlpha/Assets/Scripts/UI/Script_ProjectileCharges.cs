@@ -22,7 +22,7 @@ public class Script_ProjectileCharges : MonoBehaviour
     {
         player = GameObject.Find("AlienHead");
         playerScript = player.GetComponent<Alien_Object>();
-
+        Debug.Log(playerScript);
         SetCharge(playerScript.current_ranged_charges);
         SetMaxCharge(playerScript.num_ranged_charges);
     }
@@ -73,6 +73,8 @@ public class Script_ProjectileCharges : MonoBehaviour
 
     public float getRangedCharges()
     {
+        player = GameObject.Find("AlienHead");
+        playerScript = player.GetComponent<Alien_Object>();
         return playerScript.current_ranged_charges;
     }
 }
