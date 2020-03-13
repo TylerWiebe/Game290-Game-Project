@@ -83,6 +83,7 @@ public class Script_EnemyAI : MonoBehaviour
         }
         else
         {
+            swapMusicScript.alertedEnemiesCount += 1;
             //change to combat music
             if (swapMusicScript.isPlayingCombatMusic == false)
             {

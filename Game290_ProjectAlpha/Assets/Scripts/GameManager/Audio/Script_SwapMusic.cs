@@ -6,7 +6,7 @@ public class Script_SwapMusic : MonoBehaviour
 {
     //boolean conditions
     public bool isPlayingCombatMusic = false;
-    private int alertedEnemies = 0;
+    public int alertedEnemiesCount = 0;
 
     private GameObject music;
 
@@ -54,6 +54,7 @@ public class Script_SwapMusic : MonoBehaviour
 
    IEnumerator SwapToIdleMusic()
     {
+        isPlayingCombatMusic = false;
         InvokeRepeating("FadeOutCombatMusic", 0, 0.25f);
         InvokeRepeating("FadeInIdleMusic", 0, 0.25f);
         yield return new WaitForSeconds(0);

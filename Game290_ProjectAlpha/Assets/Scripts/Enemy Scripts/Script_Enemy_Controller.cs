@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Script_Enemy_Controller : MonoBehaviour
 {
+    private int spawnChance = 100;
+
     //melee enemies' base stats
     public const int base_melee_attack_damage = 10;
     public const int base_melee_hit_points = 100;
@@ -106,10 +108,12 @@ public class Script_Enemy_Controller : MonoBehaviour
     }
 
     //an enemy has been kilt by player
-    public void destroy_enemy(GameObject temp_enemy)
+    public void destroy_enemy(GameObject temp_enemy, Vector3 position)
     {
-        //spawn a stat orb with percent chance (5)
-        this.GetComponent<Script_SpawnStatOrb>().SpawnStatOrb(5);
+        //enemyAlertedCount -= 1;
+
+        //spawn a stat orb with percent chance (spawnChance)
+        this.GetComponent<Script_SpawnStatOrb>().SpawnStatOrb(spawnChance, position);
 
         all_enemies.Remove(temp_enemy);
     }
