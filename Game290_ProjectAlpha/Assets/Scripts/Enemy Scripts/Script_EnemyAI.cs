@@ -53,6 +53,9 @@ public class Script_EnemyAI : MonoBehaviour
     //stop enemy when attacking
     public bool canMove = true;
 
+    //script responsible for swapping music from between idle & combat
+    private Script_SwapMusic swapMusicScript;
+
     void Start()
     {
         //assign the object with tag "Player" to be the enemy's target 
@@ -62,6 +65,7 @@ public class Script_EnemyAI : MonoBehaviour
         rigidBody = this.gameObject.GetComponent<Rigidbody2D>();
         rigidBody.bodyType = RigidbodyType2D.Kinematic;
 
+        swapMusicScript = GameObject.Find("Music").GetComponent<Script_SwapMusic>();
 
         //set stopping distance
         if (this.gameObject.tag == "RangedEnemy")
@@ -79,6 +83,13 @@ public class Script_EnemyAI : MonoBehaviour
         }
         else
         {
+            //change to combat music
+            if (swapMusicScript.isPlayingCombatMusic == false)
+            {
+                swapMusicScript.isPlayingCombatMusic = true;
+                swapMusicScript.PlayCombatMusic();
+            }
+
             StartCoroutine(AggressiveBehaviour());
             //if (this.gameObject.tag == "RangedEnemy" && first_time == true)
             //{
