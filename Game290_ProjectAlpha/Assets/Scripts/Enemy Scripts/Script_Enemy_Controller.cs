@@ -25,11 +25,15 @@ public class Script_Enemy_Controller : MonoBehaviour
     //list of all enemies on the scene
     private List<GameObject> all_enemies = new List<GameObject>();
 
+    private Script_SwapMusic swapMusicScript;
+
     public GameObject test;
 
     // Start is called before the first frame update
     void Start()
     {
+        swapMusicScript = GameObject.Find("Music").GetComponent<Script_SwapMusic>();
+
         //Need to adjust level sequence nummber
         int level_sequence_number = 1;
         
@@ -110,12 +114,12 @@ public class Script_Enemy_Controller : MonoBehaviour
     //an enemy has been kilt by player
     public void destroy_enemy(GameObject temp_enemy, Vector3 position)
     {
-        //enemyAlertedCount -= 1;
-
         //spawn a stat orb with percent chance (spawnChance)
         this.GetComponent<Script_SpawnStatOrb>().SpawnStatOrb(spawnChance, position);
 
         all_enemies.Remove(temp_enemy);
+
+        swapMusicScript.alertedEnemiesCount -= 1;
     }
 
     //returns the "all_enemmies" list containing all the enemies that are alive
