@@ -52,6 +52,7 @@ public class Script_EnemyAI : MonoBehaviour
 
     //stop enemy when attacking
     public bool canMove = true;
+    public bool canRotate = true;
 
     //script responsible for swapping music from between idle & combat
     private Script_SwapMusic swapMusicScript;
@@ -260,17 +261,18 @@ public class Script_EnemyAI : MonoBehaviour
     //rotates the enemy to face the player whenst in aggro mode
     private void rotate_body_aggro()
     {
-        rigidBody.rotation = angle;
+        if(canRotate)
+            rigidBody.rotation = angle;
     }
 
     private void destroyEnemy()
     {
         if (this.gameObject.tag == "RangedEnemy")
         {
-            //this.transform.GetComponentInChildren<Script_Ranged_Enemy_Attack>().destroy();
+            this.transform.GetComponentInChildren<Script_Ranged_Enemy_Object>().destroy();
         }
         else
-            this.transform.GetComponentInChildren<Script_Melee_Enemy_Attack>().destroy();
+            this.transform.GetComponentInChildren<Script_Melee_Enemy_Object>().destroy();
     }
 
     //make enemy attack
@@ -278,7 +280,7 @@ public class Script_EnemyAI : MonoBehaviour
     {
         if (this.gameObject.tag == "RangedEnemy")
         {
-            //this.transform.GetComponentInChildren<Script_Ranged_Enemy_Attack>().Attack();
+            this.transform.GetComponentInChildren<Script_Ranged_Enemy_Attack>().Attack();
         }
         else
             this.transform.GetComponentInChildren<Script_Melee_Enemy_Attack>().Attack();

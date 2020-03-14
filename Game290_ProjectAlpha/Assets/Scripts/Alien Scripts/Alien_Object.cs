@@ -170,18 +170,15 @@ public class Alien_Object : MonoBehaviour
         if ((Current_Health <= 0) && (playerAlive))
         {
             playerAlive = false;
-            //Debug.Log("AlienDied");
             StartCoroutine(Alien_Died());
         }
 
         if ((Input.GetKeyUp("q")) && (playerAlive))
         {
-            //Debug.Log("MorphLeft");
             morph_left();
         }
         if ((Input.GetKeyUp("e")) && (playerAlive))
         {
-            //Debug.Log("MorphRight");
             morph_right();
         }
 

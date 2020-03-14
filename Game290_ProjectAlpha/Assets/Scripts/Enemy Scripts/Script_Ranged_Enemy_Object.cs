@@ -48,12 +48,17 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
         hit_points -= damage;
         if (hit_points <= 0)
         {
-            Debug.Log("ranged Should be ded");
-            //son be deded
-            Script_Enemy_Controller script_enemy_controller = GameObject.Find("GameManager").GetComponent<Script_Enemy_Controller>();
-            script_enemy_controller.destroy_enemy(this.gameObject, transform.position);
-            Destroy(gameObject);
+            this.transform.GetComponentInParent<Script_EnemyAI>().canMove = false;
+            this.transform.GetComponentInParent<Script_EnemyAI>().canRotate = false;
+            this.transform.GetComponentInParent<Animator>().SetBool("isAttacking", false);
+            this.transform.GetComponentInParent<Animator>().SetBool("isDead", true);
         }
     }
 
+    public void destroy()
+    {
+        Script_Enemy_Controller script_enemy_controller = GameObject.Find("GameManager").GetComponent<Script_Enemy_Controller>();
+        script_enemy_controller.destroy_enemy(this.gameObject, transform.position);
+        Destroy(gameObject);
+    }
 }

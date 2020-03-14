@@ -22,7 +22,6 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
         hit_points -= damage;
         if (hit_points <= 0)
         {
-            Debug.Log("Your mom gay");
             this.transform.GetComponentInParent<Script_EnemyAI>().canMove = false;
             this.transform.GetComponentInParent<Animator>().SetBool("isDead", true);
         }
