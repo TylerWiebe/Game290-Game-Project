@@ -29,7 +29,6 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
 
     public void destroy()
     {
-        Debug.Log("melee should be ded"); //son be deded
         Script_Enemy_Controller script_enemy_controller = GameObject.Find("GameManager").GetComponent<Script_Enemy_Controller>();
         script_enemy_controller.destroy_enemy(this.gameObject, transform.position);
         Destroy(gameObject);
