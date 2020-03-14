@@ -23,6 +23,8 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
         if (hit_points <= 0)
         {
             this.transform.GetComponentInParent<Script_EnemyAI>().canMove = false;
+            this.transform.GetComponentInParent<Script_EnemyAI>().canRotate = false;
+            this.transform.GetComponentInParent<Animator>().SetBool("isAttacking", false);
             this.transform.GetComponentInParent<Animator>().SetBool("isDead", true);
         }
     }
