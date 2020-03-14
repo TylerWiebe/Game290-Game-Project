@@ -779,6 +779,7 @@ GameObject:
   - component: {fileID: 1171866314}
   - component: {fileID: 1171866316}
   - component: {fileID: 1171866317}
+  - component: {fileID: 1171866318}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -891,6 +892,46 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!60 &1171866318
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171866313}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4, y: 4}
+    newSize: {x: 4, y: 4}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.7984295, y: 0.82167053}
+      - {x: -1.3233032, y: 0.6685276}
+      - {x: -1.3233032, y: -0.65772533}
+      - {x: -0.72776127, y: -0.79679585}
+      - {x: -0.3687849, y: -1.3051443}
+      - {x: 0.3914938, y: -1.3212004}
+      - {x: 0.75753593, y: -0.8530779}
+      - {x: 1.2951612, y: -0.73429585}
+      - {x: 1.3142929, y: -0.5723715}
+      - {x: 1.3233023, y: 0.66557693}
+      - {x: 1.3689976, y: 0.7042923}
+      - {x: 1.3246956, y: 0.7128372}
+      - {x: 0.8339596, y: 0.7857208}
+      - {x: 0.49228, y: 1.3446293}
+      - {x: -0.5417614, y: 1.350399}
 --- !u!1 &1375529156
 GameObject:
   m_ObjectHideFlags: 0
