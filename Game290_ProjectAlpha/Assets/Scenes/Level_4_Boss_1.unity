@@ -440,8 +440,9 @@ GameObject:
   m_Component:
   - component: {fileID: 868312452}
   - component: {fileID: 868312453}
+  - component: {fileID: 868312454}
   m_Layer: 0
-  m_Name: boss_enemy_spawn_point_3
+  m_Name: boss_enemy_spawn_point_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -455,11 +456,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868312451}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10, y: 0, z: 0}
+  m_LocalPosition: {x: -10, y: 0, z: 40.691406}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
-  m_Father: {fileID: 1171866315}
-  m_RootOrder: 9
+  m_Father: {fileID: 1408196774}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &868312453
 SpriteRenderer:
@@ -511,6 +512,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &868312454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868312451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47c8e0ff35459e8418db18fbed53cec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level_sequence_number: 4
 --- !u!1001 &888449503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -668,8 +682,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1167654929}
   - component: {fileID: 1167654930}
+  - component: {fileID: 1167654931}
   m_Layer: 0
-  m_Name: boss_enemy_spawn_point_2
+  m_Name: boss_enemy_spawn_point_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -683,11 +698,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167654928}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 0, y: 10, z: 40.691406}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
-  m_Father: {fileID: 1171866315}
-  m_RootOrder: 8
+  m_Father: {fileID: 1408196774}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1167654930
 SpriteRenderer:
@@ -739,6 +754,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1167654931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167654928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47c8e0ff35459e8418db18fbed53cec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level_sequence_number: 4
 --- !u!1 &1171866313
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,10 +854,6 @@ Transform:
   - {fileID: 1375529157}
   - {fileID: 1614779040}
   - {fileID: 1723892203}
-  - {fileID: 1467760339}
-  - {fileID: 1167654929}
-  - {fileID: 868312452}
-  - {fileID: 1730631689}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1023,9 +1047,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408196772}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.162329, y: 16.320211, z: -40.691406}
+  m_LocalPosition: {x: -13.72, y: 16.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1467760339}
+  - {fileID: 1167654929}
+  - {fileID: 868312452}
+  - {fileID: 1730631689}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1039,8 +1067,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1467760339}
   - component: {fileID: 1467760340}
+  - component: {fileID: 1467760341}
   m_Layer: 0
-  m_Name: boss_enemy_spawn_point_1
+  m_Name: boss_enemy_spawn_point_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1054,11 +1083,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1467760338}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: 0, z: 0}
+  m_LocalPosition: {x: 10, y: 0, z: 40.691406}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
-  m_Father: {fileID: 1171866315}
-  m_RootOrder: 7
+  m_Father: {fileID: 1408196774}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1467760340
 SpriteRenderer:
@@ -1110,6 +1139,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1467760341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467760338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47c8e0ff35459e8418db18fbed53cec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level_sequence_number: 4
 --- !u!1 &1564068349
 GameObject:
   m_ObjectHideFlags: 0
@@ -1471,8 +1513,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1730631689}
   - component: {fileID: 1730631690}
+  - component: {fileID: 1730631691}
   m_Layer: 0
-  m_Name: boss_enemy_spawn_point_4
+  m_Name: boss_enemy_spawn_point_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1486,11 +1529,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730631688}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -10, z: 0}
+  m_LocalPosition: {x: 0, y: -10, z: 40.691406}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
-  m_Father: {fileID: 1171866315}
-  m_RootOrder: 10
+  m_Father: {fileID: 1408196774}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1730631690
 SpriteRenderer:
@@ -1542,6 +1585,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1730631691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730631688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47c8e0ff35459e8418db18fbed53cec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level_sequence_number: 4
 --- !u!1 &1847724277
 GameObject:
   m_ObjectHideFlags: 0

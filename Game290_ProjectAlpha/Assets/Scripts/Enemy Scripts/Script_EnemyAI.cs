@@ -122,7 +122,7 @@ public class Script_EnemyAI : MonoBehaviour
             iter++;
         }
 
-        if (roamDistance > 0)
+        if (roamDistance > 0 && canMove)
         {
             while (direction == 0)
             {
