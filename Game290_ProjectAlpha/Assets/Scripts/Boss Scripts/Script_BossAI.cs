@@ -18,10 +18,14 @@ public class Script_BossAI : MonoBehaviour
     Script_Left_Turret_Attack left_turret;
     Script_Right_Turret_Attack right_turret;
 
-
     //flame thrower attack script
     Script_Flame_Thrower_Attack flame_thrower_attack;
 
+    //summon enemies script
+    Script_Spawn_Enemies spawn_point_0;
+    Script_Spawn_Enemies spawn_point_1;
+    Script_Spawn_Enemies spawn_point_2;
+    Script_Spawn_Enemies spawn_point_3;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +43,12 @@ public class Script_BossAI : MonoBehaviour
         //set flame thrower attack script
         flame_thrower_attack = this.gameObject.GetComponentInChildren<Script_Flame_Thrower_Attack>();
 
+        //set summoning scripts
+        spawn_point_0 = GameObject.Find("boss_enemy_spawn_point_0").GetComponent<Script_Spawn_Enemies>();
+        spawn_point_1 = GameObject.Find("boss_enemy_spawn_point_1").GetComponent<Script_Spawn_Enemies>();
+        spawn_point_2 = GameObject.Find("boss_enemy_spawn_point_2").GetComponent<Script_Spawn_Enemies>();
+        spawn_point_3 = GameObject.Find("boss_enemy_spawn_point_3").GetComponent<Script_Spawn_Enemies>();
+
         //start left turret attack
         InvokeRepeating("leftTurretAttack", 0f, 5f);
 
@@ -50,6 +60,9 @@ public class Script_BossAI : MonoBehaviour
 
         //suspend flame thrower attack
         InvokeRepeating("suspendFlameThrowerAttack", 5f, 10f);
+
+        //summon enemies
+        InvokeRepeating("summonEnemies", 0f, 30f);
     }
     
     //shoot left turret
@@ -74,6 +87,15 @@ public class Script_BossAI : MonoBehaviour
     private void suspendFlameThrowerAttack()
     {
         flame_thrower_attack.stopAttack();
+    }
+
+    //summon enemies at spawn points
+    private void summonEnemies()
+    {
+        spawn_point_0.chooseEnemyToSpawn();
+        spawn_point_1.chooseEnemyToSpawn();
+        spawn_point_2.chooseEnemyToSpawn();
+        spawn_point_3.chooseEnemyToSpawn();
     }
 
     // Update is called once per frame
