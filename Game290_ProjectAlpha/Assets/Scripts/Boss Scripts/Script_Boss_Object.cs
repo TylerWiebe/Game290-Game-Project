@@ -22,7 +22,8 @@ public class Script_Boss_Object : MonoBehaviour
     public void damageBoss(int damage)
     {
         hitPoints -= damage;
-        //call destruction/dying animation
+        if (hitPoints <= 0)
+            destroyBoss();
     }
 
     //called by destruction/dying animation upon completion of animation
