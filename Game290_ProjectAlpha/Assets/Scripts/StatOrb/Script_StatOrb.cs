@@ -6,13 +6,11 @@ public class Script_StatOrb : MonoBehaviour
 {
     private GameObject menu_Canvas;
     private GameObject statWindow;
-    private GameObject player;
 
     void Start()
     {
         menu_Canvas = GameObject.Find("Menu_Canvas");
         statWindow = menu_Canvas.transform.Find("StatWindow").gameObject;
-        player = GameObject.FindWithTag("Player");
     }
 
     //on collision with stat orb
@@ -28,23 +26,9 @@ public class Script_StatOrb : MonoBehaviour
 
             //pull up stat screen
             statWindow.SetActive(true);
+
+            //remove stat orb
+            Destroy(this.gameObject);
         }
-    }
-
-    //call on button press (stat index determines stat to be leveled)
-    public void IncreaseStat(int statIndex)
-    {
-
-        player.GetComponent<Alien_Object>().IncreaseStat(statIndex);
-
-        Script_PauseMenu.gameIsPaused = false;
-
-        statWindow.SetActive(false);
-
-        //unfreeze time
-        Time.timeScale = 1f;
-
-        //remove stat orb
-        DestroyImmediate(this.gameObject, true);
     }
 }

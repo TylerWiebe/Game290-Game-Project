@@ -106,7 +106,7 @@ public class Alien_Object : MonoBehaviour
 
         Class_Order = new int[] { 0, 2, 1 };
         Current_Class = 2;
-        morphQueue.GetComponent<Script_Morph_UI>().SetQueue(1);
+        //morphQueue.GetComponent<Script_Morph_UI>().SetQueue(1);
         animHead.SetInteger("IsRanged", 1);
         updateAlienStats();
 

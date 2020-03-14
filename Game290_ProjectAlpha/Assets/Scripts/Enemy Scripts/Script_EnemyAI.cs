@@ -9,6 +9,9 @@ using System;
 
 public class Script_EnemyAI : MonoBehaviour
 {
+    //control condition in update function allowing only 1 enemy to be added to count
+    private bool needToAddToEnemyCount = true;
+
     //Speed of walking after seeing player
     [SerializeField]
     private int aggressiveSpeed = 7;
@@ -84,9 +87,13 @@ public class Script_EnemyAI : MonoBehaviour
         }
         else
         {
-            swapMusicScript.alertedEnemiesCount += 1;
+            if (needToAddToEnemyCount)
+            {
+                swapMusicScript.alertedEnemiesCount += 1;
+                needToAddToEnemyCount = false;
+            }
             //change to combat music
-            if (swapMusicScript.isPlayingCombatMusic == false)
+            if ((swapMusicScript.isPlayingCombatMusic == false) & (swapMusicScript.alertedEnemiesCount >= 1))
             {
                 swapMusicScript.isPlayingCombatMusic = true;
                 swapMusicScript.PlayCombatMusic();
