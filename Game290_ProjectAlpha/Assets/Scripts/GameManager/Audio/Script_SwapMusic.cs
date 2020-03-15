@@ -12,7 +12,6 @@ public class Script_SwapMusic : MonoBehaviour
 
     //reference to Audio Source components
     private AudioSource idleMusic;
-    private AudioSource introCombatMusic;
     private AudioSource combatMusic;
 
     // Start is called before the first frame update
@@ -21,13 +20,15 @@ public class Script_SwapMusic : MonoBehaviour
         music = GameObject.Find("Music");
 
         idleMusic = music.transform.Find("IdleMusic").gameObject.GetComponent<AudioSource>();
-        introCombatMusic = music.transform.Find("IntroCombatMusic").gameObject.GetComponent<AudioSource>();
         combatMusic = music.transform.Find("CombatMusic").gameObject.GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        //if no alerted enemies swap to idle music
+        if ((alertedEnemiesCount == 0) & (isPlayingCombatMusic))
+        {
+            PlayIdleMusic();
+        }
     }
     
 
@@ -36,52 +37,33 @@ public class Script_SwapMusic : MonoBehaviour
     public void PlayCombatMusic()
     {
         {
-            StartCoroutine(SwapToCombatMusic());
+            InvokeRepeating("FadeOutIdleMusic", 0, 0.25f);
+            InvokeRepeating("FadeInCombatMusic", 0, 0.25f);
         }
     }
 
     public void PlayIdleMusic()
     {
         {
-            StartCoroutine(SwapToIdleMusic());
+            isPlayingCombatMusic = false;
+            InvokeRepeating("FadeOutCombatMusic", 0, 0.25f);
+            InvokeRepeating("FadeInIdleMusic", 0, 0.25f);
         }
     }
 
 
-
-
-
-
-   IEnumerator SwapToIdleMusic()
-    {
-        isPlayingCombatMusic = false;
-        InvokeRepeating("FadeOutCombatMusic", 0, 0.25f);
-        InvokeRepeating("FadeInIdleMusic", 0, 0.25f);
-        yield return new WaitForSeconds(0);
-    }
-
-    IEnumerator SwapToCombatMusic()
-    {
-        InvokeRepeating("FadeOutIdleMusic", 0, 0.25f);
-
-        introCombatMusic.Play(0);
-        InvokeRepeating("FadeInIntroCombatMusic", 0, 0.25f);
-
-        yield return new WaitForSeconds(7);
-
-        combatMusic.Play(0);
-        InvokeRepeating("FadeInCombatMusic", 0, 0.25f);
-    }
-
-
-
-
+    //Idle Music Functions
 
     void FadeOutIdleMusic()
     {
         if (idleMusic.volume > 0)
         {
             idleMusic.volume -= 0.1f;
+        }
+
+        else if (idleMusic.volume == 0)
+        {
+            CancelInvoke();
         }
     }
 
@@ -91,21 +73,26 @@ public class Script_SwapMusic : MonoBehaviour
         {
             idleMusic.volume += 0.1f;
         }
-    }
 
-    void FadeInIntroCombatMusic()
-    {
-        if (introCombatMusic.volume < 1)
+        else if (idleMusic.volume == 1)
         {
-            introCombatMusic.volume += 0.1f;
+            CancelInvoke();
         }
     }
+
+
+    //combat Music Functions
 
     void FadeInCombatMusic()
     {
         if (combatMusic.volume < 1)
         {
             combatMusic.volume += 0.1f;
+        }
+
+        else if (combatMusic.volume == 1)
+        {
+            CancelInvoke();
         }
     }
 
@@ -114,6 +101,11 @@ public class Script_SwapMusic : MonoBehaviour
         if (combatMusic.volume > 0)
         {
             combatMusic.volume -= 0.1f;
+        }
+
+        else if (idleMusic.volume == 0)
+        {
+            CancelInvoke();
         }
     }
 }

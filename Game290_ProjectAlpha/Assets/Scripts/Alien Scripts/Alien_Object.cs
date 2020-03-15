@@ -106,7 +106,7 @@ public class Alien_Object : MonoBehaviour
 
         Class_Order = new int[] { 0, 2, 1 };
         Current_Class = 2;
-        morphQueue.GetComponent<Script_Morph_UI>().SetQueue(1);
+        //morphQueue.GetComponent<Script_Morph_UI>().SetQueue(1);
         animHead.SetInteger("IsRanged", 1);
         updateAlienStats();
 
@@ -170,18 +170,15 @@ public class Alien_Object : MonoBehaviour
         if ((Current_Health <= 0) && (playerAlive))
         {
             playerAlive = false;
-            //Debug.Log("AlienDied");
             StartCoroutine(Alien_Died());
         }
 
         if ((Input.GetKeyUp("q")) && (playerAlive))
         {
-            //Debug.Log("MorphLeft");
             morph_left();
         }
         if ((Input.GetKeyUp("e")) && (playerAlive))
         {
-            //Debug.Log("MorphRight");
             morph_right();
         }
 
@@ -217,12 +214,16 @@ public class Alien_Object : MonoBehaviour
             float nextY = transform.position.y + deltaY;
 
             //move alien
-            rigidBodyBody.MovePosition(new Vector2(nextX, nextY));
-
-            //AlienHead.transform.position = new Vector3(nextX, nextY, 0);
-            //alienBody.transform.position = new Vector3(nextX, nextY, 0);
-            myCamera.transform.position = new Vector3(nextX, nextY, -10);
-
+            if (!(horizontal == 0 && vertical == 0))
+            {
+                rigidBodyBody.MovePosition(new Vector2(nextX, nextY));
+                myCamera.transform.position = new Vector3(nextX, nextY, -10);
+            }
+            else
+            {
+                rigidBodyBody.velocity = Vector2.zero;
+                Debug.Log("No input and position = " + transform.position + " and velocity = " + rigidBodyBody.velocity);
+            }
 
             mouse_position.x = mouse_position.x - alien_sprite_position.x;
             mouse_position.y = mouse_position.y - alien_sprite_position.y;

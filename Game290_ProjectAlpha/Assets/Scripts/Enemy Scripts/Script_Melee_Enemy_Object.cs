@@ -24,17 +24,25 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
         hit_points -= damage;
         if (hit_points <= 0)
         {
-            Debug.Log("Your mom gay");
+            //stop enemy from moving when dead
             this.transform.GetComponentInParent<Script_EnemyAI>().canMove = false;
+            
+            //set the enemy's velocity to zero when it dies
+            this.transform.GetComponentInParent<Script_EnemyAI>().rigidBody.velocity = Vector3.zero;
+
+            //stop enemy from rotating
+            this.transform.GetComponentInParent<Script_EnemyAI>().canRotate = false;
+
+            //stop enemy from attacking if it is mid attack
+            this.transform.GetComponentInParent<Animator>().SetBool("isAttacking", false);
+
+            //call the death animation
             this.transform.GetComponentInParent<Animator>().SetBool("isDead", true);
         }
     }
 
     public void destroy()
     {
-        Debug.Log("melee should be ded"); //son be deded
-        Script_Enemy_Controller script_enemy_controller = GameObject.Find("GameManager").GetComponent<Script_Enemy_Controller>();
-        script_enemy_controller.destroy_enemy(this.gameObject, transform.position);
         Destroy(gameObject);
     }
 }

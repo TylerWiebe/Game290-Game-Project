@@ -6,6 +6,7 @@ public class Script_Flame_Thrower_Hit_Box : MonoBehaviour
 {
     //controls when the script can attack
     public bool canAttack = false;
+    private int count = 0;
 
     //player game object
     Alien_Object target = null;
@@ -14,7 +15,7 @@ public class Script_Flame_Thrower_Hit_Box : MonoBehaviour
     void Start()
     {
         //set enemy game object variable
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Alien_Object>();
+        target = GameObject.Find("AlienBody").GetComponentInChildren<Alien_Object>();
     }
 
     // Update is called once per frame
@@ -24,22 +25,19 @@ public class Script_Flame_Thrower_Hit_Box : MonoBehaviour
     }
 
     //attack enemy with the flame thrower if they get in range
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         //if collision with the player
         if (((other.tag == "player") || (other.tag == "Player")) && canAttack)
         {
             //do one point of damage very 0.05 seconds
-            InvokeRepeating("attack", 0f, 0.05f);
-        }
-    }
-
-    //trigger when player leaves enemy range (stop attacking)
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if ((other.tag == "player") || (other.tag == "Player"))
-        {
-            CancelInvoke();
+            if (count == 4)
+            {
+                attack();
+                count = 0;
+            }
+            else
+                count++;
         }
     }
 

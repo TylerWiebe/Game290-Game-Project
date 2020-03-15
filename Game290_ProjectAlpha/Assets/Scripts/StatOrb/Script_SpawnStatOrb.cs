@@ -8,6 +8,8 @@ public class Script_SpawnStatOrb : MonoBehaviour
     [SerializeField]
     private GameObject statOrb = null;
 
+    public GameObject cloneOrb;
+
     //when called determine whether to spawn a stat orb
     public void SpawnStatOrb(int spawnChance, Vector3 position)
     {
@@ -15,7 +17,7 @@ public class Script_SpawnStatOrb : MonoBehaviour
         if (Random.Range(0, 100) <= spawnChance)
         {
             //instantiate statOrb
-            Instantiate(statOrb, position, transform.rotation);
+            GameObject cloneOrb = Instantiate(statOrb, position, transform.rotation);
         }
     }
 }
