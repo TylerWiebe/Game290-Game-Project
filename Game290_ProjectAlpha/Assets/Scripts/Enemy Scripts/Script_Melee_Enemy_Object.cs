@@ -19,6 +19,8 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
 
     public void attacked(float damage)
     {
+
+        Debug.Log("GotHitMelee");
         hit_points -= damage;
         if (hit_points <= 0)
         {

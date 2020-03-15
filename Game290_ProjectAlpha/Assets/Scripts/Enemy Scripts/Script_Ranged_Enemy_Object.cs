@@ -45,6 +45,7 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
 
     public void attacked(float damage)
     {
+        Debug.Log("GotHit");
         hit_points -= damage;
         if (hit_points <= 0)
         {
