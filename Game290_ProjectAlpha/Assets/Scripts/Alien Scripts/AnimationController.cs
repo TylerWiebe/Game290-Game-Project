@@ -10,7 +10,7 @@ public class AnimationController : MonoBehaviour
     private GameObject alienBody;
     private Alien_Object myAlienObject;
     public Animator anim;
-    public Animator animHead;
+    private Animator animHead;
     // Start is called before the first frame update
     void Start()
     {

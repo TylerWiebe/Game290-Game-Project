@@ -13,7 +13,6 @@ public class Script_Ranged_Enemy_Attack : MonoBehaviour
     private bool playerNotSeen = true;
     public float stoppingDistance = 7f;
 
-
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
@@ -25,28 +24,23 @@ public class Script_Ranged_Enemy_Attack : MonoBehaviour
 
     }
 
-
     //when a collision with player occurs, trigger attacks
     //IEnumerator OnTriggerEnter2D(Collider2D other)
-    private void OnTriggerEnter2D(Collider2D other)
+    IEnumerator OnTriggerStay2D(Collider2D other)
     {
         if (((other.tag == "player") || (other.tag == "Player")))
         {
-            InvokeRepeating("Attack", 0f, 1.5f);
+            //stop the enemy from moving
+            this.transform.parent.gameObject.GetComponent<Script_EnemyAI>().canMove = false;
+            //wait time for attack
+            yield return new WaitForSeconds(0.25f);
+            //call animation
+            this.transform.GetComponentInParent<Animator>().SetBool("isAttacking", true);
         }
     }
 
-    //trigger when player leaves enemy range (stop attacking)
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if ((other.tag == "player") || (other.tag == "Player"))
-        {
-            CancelInvoke();
-        }
-    }
-
-    //temporary attack function
-    private void Attack()
+    //attack function called by animation
+    public void Attack()
     {
         GameObject projectile = Resources.Load("Ranged_Enemy_Projectile") as GameObject;
         GameObject projectile_instance = Instantiate(projectile, new Vector3(this.gameObject.transform.parent.gameObject.transform.position.x, this.gameObject.transform.parent.gameObject.transform.position.y, 0), Quaternion.identity);
@@ -64,6 +58,11 @@ public class Script_Ranged_Enemy_Attack : MonoBehaviour
         projectile_instance.transform.rotation = Quaternion.Euler(0, 0, theta * Mathf.Rad2Deg - 90);
         //set the damage of the projectile   
         projectile_instance.GetComponent<Script_Ranged_Enemy_Projectile>().set_damage(this.gameObject.GetComponentInParent<Script_Ranged_Enemy_Object>().get_attack_damage());
+
+        //allow enemy to move
+        this.transform.parent.gameObject.GetComponent<Script_EnemyAI>().canMove = true;
+        //stop attacking, if the play does not leave the attack range, another attakc will be launched right away
+        this.transform.GetComponentInParent<Animator>().SetBool("isAttacking", false);
     }
 
     public void set_playerNotSeen(bool playerNotSeen)

@@ -9,6 +9,9 @@ using System;
 
 public class Script_EnemyAI : MonoBehaviour
 {
+    //control condition in update function allowing only 1 enemy to be added to count
+    private bool needToAddToEnemyCount = true;
+
     //Speed of walking after seeing player
     [SerializeField]
     private int aggressiveSpeed = 7;
@@ -52,6 +55,7 @@ public class Script_EnemyAI : MonoBehaviour
 
     //stop enemy when attacking
     public bool canMove = true;
+    public bool canRotate = true;
 
     //script responsible for swapping music from between idle & combat
     private Script_SwapMusic swapMusicScript;
@@ -83,9 +87,13 @@ public class Script_EnemyAI : MonoBehaviour
         }
         else
         {
-            swapMusicScript.alertedEnemiesCount += 1;
+            if (needToAddToEnemyCount)
+            {
+                swapMusicScript.alertedEnemiesCount += 1;
+                needToAddToEnemyCount = false;
+            }
             //change to combat music
-            if (swapMusicScript.isPlayingCombatMusic == false)
+            if ((swapMusicScript.isPlayingCombatMusic == false) & (swapMusicScript.alertedEnemiesCount >= 1))
             {
                 swapMusicScript.isPlayingCombatMusic = true;
                 swapMusicScript.PlayCombatMusic();
@@ -114,7 +122,7 @@ public class Script_EnemyAI : MonoBehaviour
             iter++;
         }
 
-        if (roamDistance > 0)
+        if (roamDistance > 0 && canMove)
         {
             while (direction == 0)
             {
@@ -260,17 +268,18 @@ public class Script_EnemyAI : MonoBehaviour
     //rotates the enemy to face the player whenst in aggro mode
     private void rotate_body_aggro()
     {
-        rigidBody.rotation = angle;
+        if(canRotate)
+            rigidBody.rotation = angle;
     }
 
     private void destroyEnemy()
     {
         if (this.gameObject.tag == "RangedEnemy")
         {
-            //this.transform.GetComponentInChildren<Script_Ranged_Enemy_Attack>().destroy();
+            this.transform.GetComponentInChildren<Script_Ranged_Enemy_Object>().destroy();
         }
         else
-            this.transform.GetComponentInChildren<Script_Melee_Enemy_Attack>().destroy();
+            this.transform.GetComponentInChildren<Script_Melee_Enemy_Object>().destroy();
     }
 
     //make enemy attack
@@ -278,7 +287,7 @@ public class Script_EnemyAI : MonoBehaviour
     {
         if (this.gameObject.tag == "RangedEnemy")
         {
-            //this.transform.GetComponentInChildren<Script_Ranged_Enemy_Attack>().Attack();
+            this.transform.GetComponentInChildren<Script_Ranged_Enemy_Attack>().Attack();
         }
         else
             this.transform.GetComponentInChildren<Script_Melee_Enemy_Attack>().Attack();

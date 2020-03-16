@@ -13,9 +13,9 @@ public class Script_Morph_UI : MonoBehaviour
     public GameObject classIcon2;
 
     //Image component reference
-    private Image image0;
-    private Image image1;
-    private Image image2;
+    //private Image image0;
+    //private Image image1;
+    //private Image image2;
 
     //game object positions 
     private Vector3 position0;
@@ -46,9 +46,9 @@ public class Script_Morph_UI : MonoBehaviour
         classIcon2 = GameObject.Find("Form2");
 
         //reference image components
-        image0 = classIcon0.GetComponent<Image>();
-        image1 = classIcon1.GetComponent<Image>();
-        image2 = classIcon2.GetComponent<Image>();
+        //image0 = classIcon0.GetComponent<Image>();
+        //image1 = classIcon1.GetComponent<Image>();
+        //image2 = classIcon2.GetComponent<Image>();
 
         //store positions
         position0 = classIcon0.transform.position;
@@ -56,9 +56,9 @@ public class Script_Morph_UI : MonoBehaviour
         position2 = classIcon2.transform.position;
 
         //load sprites from resources folder
-        assassinSprite = Resources.Load<Sprite>("art_assassin_character_idle4");
-        bruiserSprite = Resources.Load<Sprite>("Brawler Idle animation1");
-        rangedSprite = Resources.Load<Sprite>("art_ranged_character_idle2");
+        //assassinSprite = Resources.Load<Sprite>("art_assassin_character_idle4");
+        //bruiserSprite = Resources.Load<Sprite>("Brawler Idle animation1");
+        //rangedSprite = Resources.Load<Sprite>("art_ranged_character_idle2");
     }
 
     void Update()
@@ -148,7 +148,7 @@ public class Script_Morph_UI : MonoBehaviour
     }
 
 
-    //sets up queue when player spawns in
+    /***sets up queue when player spawns in
     public void SetQueue(int orderIndex)
     {
         switch (orderIndex)
@@ -192,4 +192,5 @@ public class Script_Morph_UI : MonoBehaviour
                 break;
         }
     }
+            ***/
 }

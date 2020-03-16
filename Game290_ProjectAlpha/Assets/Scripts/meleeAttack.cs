@@ -8,7 +8,7 @@ public class meleeAttack : MonoBehaviour
     public LayerMask enemies;
 
     //a reference to the alien head to get alien damage
-    public GameObject alienHead;
+    private GameObject alienHead;
 
     //assassin attack variables
     public GameObject assassinHitPoint;
@@ -21,7 +21,7 @@ public class meleeAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        alienHead = GameObject.Find("AlienHead");
     }
 
     // Update is called once per frame
@@ -32,6 +32,7 @@ public class meleeAttack : MonoBehaviour
 
     public void attackAssassin()
     {
+        Debug.Log("assassinAttackAttempt");
         Collider2D[] collisions = Physics2D.OverlapCircleAll(assassinHitPoint.transform.position, assassinAttackRadius, enemies);
         bool temp = true;
         foreach (Collider2D collider in collisions)
@@ -50,16 +51,17 @@ public class meleeAttack : MonoBehaviour
     }
 
 
-    // This function can be used to draw the hit box of the melee attacks
-    /*
+    //This function can be used to draw the hit box of the melee attacks
+    
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(bruiserHitPoint.transform.position, bruiserAttackRadius);
     }
-    */
+    
 
     public void attackBruiser()
     {
+        Debug.Log("triedAttacking");
         Collider2D[] collisions = Physics2D.OverlapCircleAll(bruiserHitPoint.transform.position, bruiserAttackRadius, enemies);
         foreach (Collider2D collider in collisions)
         {
