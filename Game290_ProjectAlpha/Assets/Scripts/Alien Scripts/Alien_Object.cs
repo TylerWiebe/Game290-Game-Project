@@ -75,6 +75,9 @@ public class Alien_Object : MonoBehaviour
     private bool alienCanMove = true;
     private bool doMouseRotate = true;
 
+    //Camera Settings
+    public int cameraSize;
+
 
     //rigidbody for movement
     public Rigidbody2D rigidBodyBody;
@@ -97,7 +100,7 @@ public class Alien_Object : MonoBehaviour
 
         AlienHead = GameObject.Find("AlienHead"); //Need this to get alien object's sprite renderer
         alienBody = GameObject.Find("AlienBody"); //Need this to get alien object's sprite renderer
-        myCamera = GameObject.Find("Main Camera");
+        myCamera = GameObject.Find("MainCamera");
 
         rigidBodyBody = alienBody.GetComponent<Rigidbody2D>();
 
@@ -166,7 +169,8 @@ public class Alien_Object : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Camera myCam = GameObject.Find("MainCamera").GetComponent<Camera>();
+        myCam.orthographicSize = cameraSize;
         if ((Current_Health <= 0) && (playerAlive))
         {
             playerAlive = false;
