@@ -406,11 +406,16 @@ public class Alien_Object : MonoBehaviour
     IEnumerator Alien_Died()
     {
         //Debug.Log("current health: " + Current_Health.ToString());
+        animHead.SetInteger("IsRanged", 0);
+        animBody.SetBool("hasDied", true);
+        animBody.SetBool("morph", true);
+
         //play fade out animation
         sceneTransitionManager.GetComponent<Script_SceneTransition>().TransitionCall(1);
 
+
         //wait for animation(1 second)
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
 
         SceneManager.LoadScene("DeathScreen");
     }
