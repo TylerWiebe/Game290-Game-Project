@@ -278,7 +278,7 @@ public class Script_EnemyAI : MonoBehaviour
                     direction = 2;
                     break;
             }
-            Debug.Log("Dis niggrumps done hit a wall!");
+            //Debug.Log("Dis niggrumps done hit a wall!");
         }
         yield break;
     }

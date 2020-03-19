@@ -5,7 +5,7 @@ using UnityEngine;
 public class Script_Boss_Object : MonoBehaviour
 {
     private GameObject gate;
-    private int hitPoints = 1000;
+    private float hitPoints = 1000;
     private AudioSource bossSting;
     private AudioSource bossMusicIdle;
     private AudioSource bossMusicCombat;
@@ -27,7 +27,7 @@ public class Script_Boss_Object : MonoBehaviour
     }
 
     //damage boss
-    public void damageBoss(int damage)
+    public void damageBoss(float damage)
     {
         hitPoints -= damage;
         if (hitPoints <= 0)
