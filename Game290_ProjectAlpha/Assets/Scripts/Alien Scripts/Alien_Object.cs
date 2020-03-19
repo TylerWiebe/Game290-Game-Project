@@ -309,7 +309,7 @@ public class Alien_Object : MonoBehaviour
 
     private void updateAlienStats()
     {
-        Debug.Log(Current_Health_Percentage);
+        //Debug.Log(Current_Health_Percentage);
         //assassin
         if (Current_Class == 0)
         {
@@ -393,7 +393,7 @@ public class Alien_Object : MonoBehaviour
             //add skill
         }
         this.gameObject.GetComponent<Animator>().SetInteger("CurrentClass", Current_Class);
-        Debug.Log(Current_Health);
+        //Debug.Log(Current_Health);
     }
     private void RangedStartSetFalse()
     {
@@ -405,7 +405,7 @@ public class Alien_Object : MonoBehaviour
     /// </summary>
     IEnumerator Alien_Died()
     {
-        Debug.Log("current health: " + Current_Health.ToString());
+        //Debug.Log("current health: " + Current_Health.ToString());
         //play fade out animation
         sceneTransitionManager.GetComponent<Script_SceneTransition>().TransitionCall(1);
 
@@ -481,9 +481,7 @@ public class Alien_Object : MonoBehaviour
 
         Current_Health -= FDamage;
 
-        Debug.Log("before Health percentage: " + Current_Health_Percentage.ToString());
         Current_Health_Percentage = (Current_Health / Max_Health);
-        Debug.Log("after Health percentage: " + Current_Health_Percentage.ToString());
 
         int curHP = (int)Current_Health;
 

@@ -31,6 +31,7 @@ public class OnHit : MonoBehaviour
         else if (collision.gameObject.tag == "Boss")
         {
             collision.gameObject.GetComponent<Script_Boss_Object>().damageBoss(GameObject.Find("AlienHead").GetComponent<Alien_Object>().getDamage() * damageMultiplier);
+            Destroy(gameObject);
         }
         else if (collision.gameObject.tag == "Wall")
         {

@@ -29,6 +29,7 @@ public class Script_Boss_Object : MonoBehaviour
     //damage boss
     public void damageBoss(float damage)
     {
+        Debug.Log("current Boss HP: " + hitPoints.ToString());
         hitPoints -= damage;
         if (hitPoints <= 0)
             destroyBoss();
