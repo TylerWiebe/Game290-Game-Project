@@ -30,8 +30,11 @@ public class Script_Boss_Object : MonoBehaviour
     //called by destruction/dying animation upon completion of animation
     public void destroyBoss()
     {
-        //spawn door at position of boss at death
-        Instantiate(doorPrefab, this.transform.position, Quaternion.identity);
+        //spawn door above position of boss at death
+        Instantiate(doorPrefab, this.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+
+        //spawn stat orb
+        this.GetComponent<Script_SpawnStatOrb>().SpawnStatOrb(100, this.transform.position);
 
         Destroy(gameObject);
     }

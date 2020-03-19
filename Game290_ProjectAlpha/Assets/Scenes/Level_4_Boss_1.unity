@@ -819,6 +819,7 @@ GameObject:
   - component: {fileID: 1171866319}
   - component: {fileID: 1171866317}
   - component: {fileID: 1171866318}
+  - component: {fileID: 1171866320}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -983,7 +984,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d66efb4e063b4964a8caf922478fd4de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossIsAlive: 1
+--- !u!114 &1171866320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171866313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552bb78d2d5860e45869668a5d56c375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statOrb: {fileID: 6866704549077001977, guid: 0fd407f8b7809334ca958fdaf926cc1c, type: 3}
+  cloneOrb: {fileID: 0}
 --- !u!1 &1375529156
 GameObject:
   m_ObjectHideFlags: 0
