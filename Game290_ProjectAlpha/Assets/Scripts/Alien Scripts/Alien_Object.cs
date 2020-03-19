@@ -389,7 +389,7 @@ public class Alien_Object : MonoBehaviour
     {
         //Debug.Log("the alien has died");
         //play fade out animation
-        sceneTransitionManager.GetComponent<Script_SceneTransition>().TransitionCall(4);
+        sceneTransitionManager.GetComponent<Script_SceneTransition>().TransitionCall(1);
 
         //wait for animation(1 second)
         yield return new WaitForSeconds(2);
