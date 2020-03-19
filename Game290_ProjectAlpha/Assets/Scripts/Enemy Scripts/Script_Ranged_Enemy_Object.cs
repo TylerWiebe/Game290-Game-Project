@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Script_Ranged_Enemy_Object : MonoBehaviour
 {
+    //stat orb spawn chance
+    private int spawnChance = 20;
+    private Script_SwapMusic swapMusicScript;
+
     private int attack_damage;
     private float hit_points;
 
@@ -13,7 +17,7 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        swapMusicScript = GameObject.Find("Music").GetComponent<Script_SwapMusic>();
     }
 
     // Update is called once per frame
@@ -68,6 +72,9 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
 
     public void destroy()
     {
+        gameObject.GetComponent<Script_SpawnStatOrb>().SpawnStatOrb(spawnChance, gameObject.transform.position);
+        swapMusicScript.alertedEnemiesCount -= 1;
+
         Destroy(gameObject);
     }
 }
