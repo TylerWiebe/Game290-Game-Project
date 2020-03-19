@@ -222,7 +222,6 @@ public class Alien_Object : MonoBehaviour
             else
             {
                 rigidBodyBody.velocity = Vector2.zero;
-                Debug.Log("No input and position = " + transform.position + " and velocity = " + rigidBodyBody.velocity);
             }
 
             mouse_position.x = mouse_position.x - alien_sprite_position.x;
@@ -321,10 +320,10 @@ public class Alien_Object : MonoBehaviour
             //turn off charge bar
             chargeBar.SetActive(false);
             //turn off skill box
-            bruiserAttackBox.SetActive(false);
+            //bruiserAttackBox.SetActive(false);
 
             //turn on skill box
-            assassinAttackBox.SetActive(true);
+            //assassinAttackBox.SetActive(true);
 
             //add skill
 
@@ -346,10 +345,10 @@ public class Alien_Object : MonoBehaviour
             //turn off charge bar
             chargeBar.SetActive(false);
             //turn off skill box
-            assassinAttackBox.SetActive(false);
+            //assassinAttackBox.SetActive(false);
 
             //turn on skill box
-            bruiserAttackBox.SetActive(true);
+            //bruiserAttackBox.SetActive(true);
 
             //add skill
         }
@@ -368,8 +367,8 @@ public class Alien_Object : MonoBehaviour
             healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
 
             //turn off skill box
-            assassinAttackBox.SetActive(false);
-            bruiserAttackBox.SetActive(false);
+            //assassinAttackBox.SetActive(false);
+            //bruiserAttackBox.SetActive(false);
 
             //add projectile charge bar
             chargeBar.SetActive(true);
@@ -389,7 +388,7 @@ public class Alien_Object : MonoBehaviour
     {
         //Debug.Log("the alien has died");
         //play fade out animation
-        sceneTransitionManager.GetComponent<Script_SceneTransition>().TransitionCall(4);
+        sceneTransitionManager.GetComponent<Script_SceneTransition>().TransitionCall(1);
 
         //wait for animation(1 second)
         yield return new WaitForSeconds(2);
@@ -458,7 +457,6 @@ public class Alien_Object : MonoBehaviour
 
     public void Deal_Damage_To_Alien(int damage)
     {
-        //Debug.Log("oof");
         Current_Health -= damage;
         Current_Health_Percentage = Current_Health / Max_Health;
 

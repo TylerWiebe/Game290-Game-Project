@@ -68,6 +68,8 @@ public class Script_SceneTransition : MonoBehaviour
 
     IEnumerator NextScene(int time)
     {
+        yield return new WaitForSeconds(3);
+
         //VolumeFade mixer volume
         StartCoroutine(VolumeFadeOut());
 
