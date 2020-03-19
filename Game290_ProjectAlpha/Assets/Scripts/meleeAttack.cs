@@ -47,6 +47,11 @@ public class meleeAttack : MonoBehaviour
                 collider.gameObject.GetComponent<Script_Ranged_Enemy_Object>().attacked(alienHead.GetComponent<Alien_Object>().getDamage());
                 temp = false;
             }
+            else if (collider.gameObject.tag == "Boss" && temp)
+            {
+                collider.gameObject.GetComponent<Script_Boss_Object>().damageBoss(alienHead.GetComponent<Alien_Object>().getDamage());
+                temp = false;
+            }
         }
     }
 
@@ -72,6 +77,10 @@ public class meleeAttack : MonoBehaviour
             else if (collider.gameObject.tag == "RangedEnemy")
             {
                 collider.gameObject.GetComponent<Script_Ranged_Enemy_Object>().attacked(alienHead.GetComponent<Alien_Object>().getDamage());
+            }
+            else if (collider.gameObject.tag == "Boss")
+            {
+                collider.gameObject.GetComponent<Script_Boss_Object>().damageBoss(alienHead.GetComponent<Alien_Object>().getDamage());
             }
         }
     }
