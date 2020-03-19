@@ -5,7 +5,7 @@ using UnityEngine;
 //This script must be attached to the attackRange game object and must also be a child of the "enemy" game object.
 public class Script_Melee_Enemy_Attack : Script_Melee_Enemy_Object
 {
-    private int attack_damage;
+    private int attack_damage = 20;
     public float stoppingDistance = 1.5f;
 
     //when a collision with player occurs, trigger attacks

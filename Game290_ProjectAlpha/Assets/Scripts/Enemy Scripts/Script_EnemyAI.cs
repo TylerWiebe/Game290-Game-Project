@@ -67,7 +67,6 @@ public class Script_EnemyAI : MonoBehaviour
 
         //Get rigidbody
         rigidBody = this.gameObject.GetComponent<Rigidbody2D>();
-        rigidBody.bodyType = RigidbodyType2D.Kinematic;
 
         swapMusicScript = GameObject.Find("Music").GetComponent<Script_SwapMusic>();
 
@@ -126,112 +125,106 @@ public class Script_EnemyAI : MonoBehaviour
         {
             while (direction == 0)
             {
-                //rotate right
-                if (rigidBody.rotation < (270 - 10) && rigidBody.rotation > (270 + 10))
-                {
-                    rigidBody.rotation = 270;
-                }
-
-                else if(rigidBody.rotation < 270)
-                    rigidBody.rotation += 10f;
-                else if(rigidBody.rotation > 270)
-                    rigidBody.rotation += -10f;
-
-                //move right
-                rigidBody.velocity = Vector2.right * passiveSpeed;
-                
+                walkRight();
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
             }
             while (direction == 1)
             {
-                //rotate left
-                if (rigidBody.rotation < (90 + 10) && rigidBody.rotation > (90 - 10))
-                {
-                    rigidBody.rotation = 90;
-                }
-                else if (rigidBody.rotation < 90)
-                    rigidBody.rotation += 10f;
-                else if (rigidBody.rotation > 90)
-                    rigidBody.rotation += -10f;
-
-                //move left
-                rigidBody.velocity = Vector2.left * passiveSpeed;
-
+                walkLeft();
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
             }
             while (direction == 2)
             {
-                //rotate up
-                if (rigidBody.rotation < (0 + 10) && rigidBody.rotation > (0 - 10))
-                {
-                    rigidBody.rotation = 0;
-                }
-                else if (rigidBody.rotation < 0)
-                    rigidBody.rotation += 10;
-                else if (rigidBody.rotation > 0)
-                    rigidBody.rotation += -10f;
-
-                //move up
-                rigidBody.velocity = Vector2.up * passiveSpeed;
-                
+                walkUp();               
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
             }
             while (direction == 3)
             {
-                //rotate down
-                if (rigidBody.rotation < (180 + 10) && rigidBody.rotation > (180 - 10))
-                {
-                    rigidBody.rotation = 180;
-                }
-                else if(rigidBody.rotation < 180)
-                    rigidBody.rotation += 10;
-                else if (rigidBody.rotation > 180)
-                    rigidBody.rotation += -10f;
-
-                //move down
-                rigidBody.velocity = Vector2.down * passiveSpeed;
-
+                walkDown();
                 //wait
                 yield return new WaitForSeconds(roamDistance);
                 yield break;
             }
 
-            /*
-            //Walk right for specified seconds
-            if ((walkingDirection == "up") || (walkingDirection == "Up"))
-            {
-                transform.Translate(Vector2.up * passiveSpeed * Time.deltaTime);
-
-                //wait
-                yield return new WaitForSeconds(roamDistance);
-
-                //change direction
-                walkingDirection = "down";
-                yield break;
-            }
-
-            //Walk right for specified seconds
-            if ((walkingDirection == "down") || (walkingDirection == "Down"))
-            {
-                transform.Translate(Vector2.down * passiveSpeed * Time.deltaTime);
-
-                //wait
-                yield return new WaitForSeconds(roamDistance);
-
-                //change direction
-                walkingDirection = "up";
-                yield break;
-            }
-            */
             //pause
             yield return new WaitForSeconds(1);
         }
+    }
+
+    //make the enemy walk right during passive behaviour
+    private void walkRight()
+    {
+        //rotate right
+        if (rigidBody.rotation < (270 - 10) && rigidBody.rotation > (270 + 10))
+        {
+            rigidBody.rotation = 270;
+        }
+
+        else if (rigidBody.rotation < 270)
+            rigidBody.rotation += 10f;
+        else if (rigidBody.rotation > 270)
+            rigidBody.rotation += -10f;
+
+        //move right
+        rigidBody.velocity = Vector2.right * passiveSpeed;
+    }
+
+    //make the enemy walk left during passive behaviour
+    private void walkLeft()
+    {
+        //rotate left
+        if (rigidBody.rotation < (90 + 10) && rigidBody.rotation > (90 - 10))
+        {
+            rigidBody.rotation = 90;
+        }
+        else if (rigidBody.rotation < 90)
+            rigidBody.rotation += 10f;
+        else if (rigidBody.rotation > 90)
+            rigidBody.rotation += -10f;
+
+        //move left
+        rigidBody.velocity = Vector2.left * passiveSpeed;
+
+    }
+
+    //make the enemy walk up during passive behaviour
+    private void walkUp()
+    {
+        //rotate up
+        if (rigidBody.rotation < (0 + 10) && rigidBody.rotation > (0 - 10))
+        {
+            rigidBody.rotation = 0;
+        }
+        else if (rigidBody.rotation < 0)
+            rigidBody.rotation += 10;
+        else if (rigidBody.rotation > 0)
+            rigidBody.rotation += -10f;
+
+        //move up
+        rigidBody.velocity = Vector2.up * passiveSpeed;
+    }
+
+    //make the enemy walk down during passive behaviour
+    private void walkDown()
+    {
+        //rotate down
+        if (rigidBody.rotation < (180 + 10) && rigidBody.rotation > (180 - 10))
+        {
+            rigidBody.rotation = 180;
+        }
+        else if (rigidBody.rotation < 180)
+            rigidBody.rotation += 10;
+        else if (rigidBody.rotation > 180)
+            rigidBody.rotation += -10f;
+
+        //move down
+        rigidBody.velocity = Vector2.down * passiveSpeed;
     }
 
     //Agressive enemy behaviour triggered after enemy notices player
@@ -257,6 +250,40 @@ public class Script_EnemyAI : MonoBehaviour
         yield return new WaitForSeconds(1);
     }
 
+    //if runs into a wall during passive behaviour, just pick a new direction to yas in
+    IEnumerator OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Wall") && playerNotSeen)
+        {
+            switch (direction)
+            {
+                //walking right into a wall, go left
+                case 0:
+                    walkLeft();
+                    direction = 1;
+                    break;
+                //walking left into a wall, go right
+                case 1:
+                    walkRight();
+                    direction = 0;
+                    break;
+                //walking up into a wall, go down
+                case 2:
+                    walkDown();
+                    direction = 3;
+                    break;
+                //walking down into a wall, go up
+                case 3:
+                    walkUp();
+                    direction = 2;
+                    break;
+            }
+        }
+        yield break;
+    }
+
+
+    //
     private void calculateAngle()
     {
         enemy_position = target.transform.position;

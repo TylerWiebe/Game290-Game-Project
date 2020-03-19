@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Script_Melee_Enemy_Object : MonoBehaviour
 {
-    public float hit_points;
-
+    public float hit_points = 100;
 
     public void set_hit_points(float hit_points)
     {

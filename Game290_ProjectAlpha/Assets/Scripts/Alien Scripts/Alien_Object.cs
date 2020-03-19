@@ -222,7 +222,6 @@ public class Alien_Object : MonoBehaviour
             else
             {
                 rigidBodyBody.velocity = Vector2.zero;
-                Debug.Log("No input and position = " + transform.position + " and velocity = " + rigidBodyBody.velocity);
             }
 
             mouse_position.x = mouse_position.x - alien_sprite_position.x;
@@ -458,7 +457,6 @@ public class Alien_Object : MonoBehaviour
 
     public void Deal_Damage_To_Alien(int damage)
     {
-        //Debug.Log("oof");
         Current_Health -= damage;
         Current_Health_Percentage = Current_Health / Max_Health;
 

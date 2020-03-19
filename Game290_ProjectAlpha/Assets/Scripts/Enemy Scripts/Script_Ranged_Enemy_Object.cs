@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Script_Ranged_Enemy_Object : MonoBehaviour
 {
-    private int attack_damage;
-    private float hit_points;
+    public int attack_damage = 50;
+    public float hit_points = 50;
 
     private GameObject enemy_body;
     private GameObject enemy_attack_cone;
