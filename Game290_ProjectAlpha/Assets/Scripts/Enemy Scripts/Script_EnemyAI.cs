@@ -161,7 +161,7 @@ public class Script_EnemyAI : MonoBehaviour
     private void walkRight()
     {
         //rotate right
-        if (rigidBody.rotation < (270 - 10) && rigidBody.rotation > (270 + 10))
+        if (rigidBody.rotation < (270 - 10) && rigidBody.rotation > (270 + 10) && canRotate)
         {
             rigidBody.rotation = 270;
         }
@@ -179,7 +179,7 @@ public class Script_EnemyAI : MonoBehaviour
     private void walkLeft()
     {
         //rotate left
-        if (rigidBody.rotation < (90 + 10) && rigidBody.rotation > (90 - 10))
+        if (rigidBody.rotation < (90 + 10) && rigidBody.rotation > (90 - 10) && canRotate)
         {
             rigidBody.rotation = 90;
         }
@@ -197,7 +197,7 @@ public class Script_EnemyAI : MonoBehaviour
     private void walkUp()
     {
         //rotate up
-        if (rigidBody.rotation < (0 + 10) && rigidBody.rotation > (0 - 10))
+        if (rigidBody.rotation < (0 + 10) && rigidBody.rotation > (0 - 10) && canRotate)
         {
             rigidBody.rotation = 0;
         }
@@ -214,7 +214,7 @@ public class Script_EnemyAI : MonoBehaviour
     private void walkDown()
     {
         //rotate down
-        if (rigidBody.rotation < (180 + 10) && rigidBody.rotation > (180 - 10))
+        if (rigidBody.rotation < (180 + 10) && rigidBody.rotation > (180 - 10) && canRotate)
         {
             rigidBody.rotation = 180;
         }
@@ -278,12 +278,12 @@ public class Script_EnemyAI : MonoBehaviour
                     direction = 2;
                     break;
             }
+            Debug.Log("Dis niggrumps done hit a wall!");
         }
         yield break;
     }
 
-
-    //
+    //calculates the angle that the enemy should rotate to when in aggro mode
     private void calculateAngle()
     {
         enemy_position = target.transform.position;
@@ -295,10 +295,11 @@ public class Script_EnemyAI : MonoBehaviour
     //rotates the enemy to face the player whenst in aggro mode
     private void rotate_body_aggro()
     {
-        if(canRotate)
+        if(canRotate == true)
             rigidBody.rotation = angle;
     }
 
+    //destroy enemy when it's hitpoints fall below 1
     private void destroyEnemy()
     {
         if (this.gameObject.tag == "RangedEnemy")
