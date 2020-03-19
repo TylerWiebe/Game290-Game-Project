@@ -27,16 +27,14 @@ public class Script_Ranged_Enemy_Projectile : MonoBehaviour
         if ((other.tag == "player") || (other.tag == "Player"))
         {
             GameObject player = GameObject.Find("AlienHead");
-            player.GetComponent<Alien_Object>().Deal_Damage_To_Alien(damage); 
+            player.GetComponent<Alien_Object>().Deal_Damage_To_Alien(damage);
+            Destroy(this.gameObject);
             yield break;
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if ((other.tag == "player") || (other.tag == "Player"))
+        else if (other.tag == "Wall")
         {
             Destroy(this.gameObject);
+            yield break;
         }
     }
 

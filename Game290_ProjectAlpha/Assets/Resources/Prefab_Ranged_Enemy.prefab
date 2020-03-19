@@ -296,6 +296,7 @@ MonoBehaviour:
   stoppingDistance: 3
   rigidBody: {fileID: 0}
   canMove: 1
+  canRotate: 1
 --- !u!114 &5781563052975181942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,6 +309,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0239d271cc01e6d4d82e157055a0b5b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attack_damage: 50
+  hit_points: 50
 --- !u!58 &3936697249583275181
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -336,9 +339,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 1000000
   m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 10000
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -358,6 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statOrb: {fileID: 6866704549077001977, guid: 0fd407f8b7809334ca958fdaf926cc1c, type: 3}
+  cloneOrb: {fileID: 0}
 --- !u!95 &6488515251769433636
 Animator:
   serializedVersion: 3
