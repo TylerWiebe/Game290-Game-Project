@@ -10,8 +10,6 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
     private int spawnChance = 15;
     private Script_SwapMusic swapMusicScript;
 
-    public float hit_points;
-
     void Start()
     {
         swapMusicScript = GameObject.Find("Music").GetComponent<Script_SwapMusic>();
