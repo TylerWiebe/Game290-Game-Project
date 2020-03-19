@@ -6,6 +6,17 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
 {
     public float hit_points = 100;
 
+    //stat orb spawn chance
+    private int spawnChance = 15;
+    private Script_SwapMusic swapMusicScript;
+
+    public float hit_points;
+
+    void Start()
+    {
+        swapMusicScript = GameObject.Find("Music").GetComponent<Script_SwapMusic>();
+    }
+
     public void set_hit_points(float hit_points)
     {
         this.hit_points = hit_points;
@@ -18,6 +29,8 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
 
     public void attacked(float damage)
     {
+
+        Debug.Log("GotHitMelee");
         hit_points -= damage;
         if (hit_points <= 0)
         {
@@ -40,6 +53,9 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
 
     public void destroy()
     {
+        gameObject.GetComponent<Script_SpawnStatOrb>().SpawnStatOrb(spawnChance, gameObject.transform.position);
+        swapMusicScript.alertedEnemiesCount -= 1;
+
         Destroy(gameObject);
     }
 }
