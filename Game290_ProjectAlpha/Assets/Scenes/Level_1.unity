@@ -2792,6 +2792,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2977842070874066483, guid: cdc6ee0e5b241a14ca0d2de2e375c4dc,
+        type: 3}
+      propertyPath: hit_points
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6012400469325524892, guid: cdc6ee0e5b241a14ca0d2de2e375c4dc,
         type: 3}
       propertyPath: m_Name
@@ -3242,7 +3247,7 @@ GameObject:
   - component: {fileID: 672194194}
   m_Layer: 0
   m_Name: Walls
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

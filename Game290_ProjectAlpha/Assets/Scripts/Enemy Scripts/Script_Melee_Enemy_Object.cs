@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Script_Melee_Enemy_Object : MonoBehaviour
 {
-    public float hit_points = 100;
+    public float hit_points;
 
     //stat orb spawn chance
     private int spawnChance = 15;
