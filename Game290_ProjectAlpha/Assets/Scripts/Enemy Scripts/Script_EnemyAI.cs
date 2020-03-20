@@ -107,20 +107,20 @@ public class Script_EnemyAI : MonoBehaviour
             //Player has been seen, so operate enemy in aggressive behaviour
             else
             {
-                /*
+                
                 //Music stuff
-                if (needToAddToEnemyCount)
+                if (swapMusicScript != null && needToAddToEnemyCount)
                 {
                     swapMusicScript.alertedEnemiesCount += 1;
                     needToAddToEnemyCount = false;
                 }
                 //change to combat music
-                if ((swapMusicScript.isPlayingCombatMusic == false) & (swapMusicScript.alertedEnemiesCount >= 1))
+                if (swapMusicScript != null && (swapMusicScript.isPlayingCombatMusic == false) & (swapMusicScript.alertedEnemiesCount >= 1))
                 {
                     swapMusicScript.isPlayingCombatMusic = true;
                     swapMusicScript.PlayCombatMusic();
                 }
-                */
+                
 
                 //Start aggressive behaviour
                 StartCoroutine(AggressiveBehaviour());
