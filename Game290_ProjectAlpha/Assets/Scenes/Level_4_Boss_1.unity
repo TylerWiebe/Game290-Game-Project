@@ -239,7 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 453739709}
   - component: {fileID: 453739708}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: boss_base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 570219164}
   - component: {fileID: 570219165}
   - component: {fileID: 570219166}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: boss_turret_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 757531661}
   - component: {fileID: 757531662}
   - component: {fileID: 757531663}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: boss_turret_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -979,9 +979,9 @@ GameObject:
   - component: {fileID: 1171866317}
   - component: {fileID: 1171866318}
   - component: {fileID: 1171866320}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1295,7 +1295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1375529157}
   - component: {fileID: 1375529158}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: boss_turret_right_barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1639,7 +1639,7 @@ GameObject:
   - component: {fileID: 1614779042}
   - component: {fileID: 1614779041}
   - component: {fileID: 1614779043}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: boss_flame_thrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1753,7 +1753,7 @@ GameObject:
   - component: {fileID: 1723892206}
   - component: {fileID: 1723892205}
   - component: {fileID: 1723892204}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: boss_flame_thrower_hit_box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2002,7 +2002,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1847724278}
   - component: {fileID: 1847724279}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: boss_turret_left_barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -32,7 +32,7 @@ public class meleeAttack : MonoBehaviour
 
     public void attackAssassin()
     {
-        Debug.Log("assassinAttackAttempt");
+        //Debug.Log("assassinAttackAttempt");
         Collider2D[] collisions = Physics2D.OverlapCircleAll(assassinHitPoint.transform.position, assassinAttackRadius, enemies);
         bool temp = true;
         foreach (Collider2D collider in collisions)
@@ -49,6 +49,8 @@ public class meleeAttack : MonoBehaviour
             }
             else if (collider.gameObject.tag == "Boss" && temp)
             {
+               
+                Debug.Log("hitBoss");
                 collider.gameObject.GetComponent<Script_Boss_Object>().damageBoss(alienHead.GetComponent<Alien_Object>().getDamage());
                 temp = false;
             }

@@ -84,6 +84,7 @@ MonoBehaviour:
   Current_Health: 100
   num_ranged_charges: 4
   current_ranged_charges: 4
+  cameraSize: 10
   rigidBodyBody: {fileID: 3179349462814011422}
   animHead: {fileID: 6399150236129906075}
   animBody: {fileID: -3640405606799898791}
@@ -343,7 +344,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: -3640405606799898791}
-  animHead: {fileID: 0}
 --- !u!114 &6742976308273734977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,8 +359,6 @@ MonoBehaviour:
   enemies:
     serializedVersion: 2
     m_Bits: 256
-  alienHead: {fileID: 8427071332964567469, guid: adf9fadc7249a694eaa1f0fcd6c93f65,
-    type: 3}
   assassinHitPoint: {fileID: 723962903423910267}
   assassinAttackRadius: 0.25
   bruiserHitPoint: {fileID: 8752252584088674661}
