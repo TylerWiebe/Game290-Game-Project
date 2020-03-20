@@ -10,6 +10,7 @@ TagManager:
   - ClassIcon
   - PlayerUI_Canvas
   - Wall
+  - Boss
   layers:
   - Default
   - TransparentFX

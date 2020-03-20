@@ -17,7 +17,7 @@ public class Script_SpawnStatOrb : MonoBehaviour
         if (Random.Range(0, 100) <= spawnChance)
         {
             //instantiate statOrb
-            GameObject cloneOrb = Instantiate(statOrb, position, transform.rotation);
+            GameObject cloneOrb = Instantiate(statOrb, position, this.transform.rotation);
         }
     }
 }

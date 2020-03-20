@@ -22,21 +22,19 @@ public class Script_Boss_Projectile: MonoBehaviour
     }
 
 
-    IEnumerator OnTriggerEnter2D(Collider2D other)
+    IEnumerator OnTriggerEnter2D(Collision2D collision)
     {
-        if ((other.tag == "player") || (other.tag == "Player"))
+        if ((collision.gameObject.tag == "player") || (collision.gameObject.tag == "Player"))
         {
             GameObject player = GameObject.Find("AlienHead");
             player.GetComponent<Alien_Object>().Deal_Damage_To_Alien(damage);
+            Destroy(this.gameObject);
             yield break;
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if ((other.tag == "player") || (other.tag == "Player"))
+        else if (collision.gameObject.tag == "Wall")
         {
             Destroy(this.gameObject);
+            yield break;
         }
     }
 
