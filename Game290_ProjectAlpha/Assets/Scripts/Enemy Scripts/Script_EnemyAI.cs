@@ -19,7 +19,7 @@ public class Script_EnemyAI : MonoBehaviour
     //Randomization of AI passive walk direction
     //dont need this if you are not using the randomization of walking direction
     private int iter = 0;
-    private int direction = 0;
+    public int direction = 0;
     private int walkTime = 100;
     public int walkTime_LowerLimit = 100;
     public int walkTime_UpperLimit = 250;
@@ -36,6 +36,12 @@ public class Script_EnemyAI : MonoBehaviour
 
     //Whether player has been spotted or not
     public bool playerNotSeen = true;
+
+    //Whether the enemy has reached the end of it's zone
+    public bool reachedBounds = false;
+
+    //reset position
+    Script_Enemy_Center center;
 
     //holds the game object enemy chases
     private Transform target;
@@ -68,6 +74,9 @@ public class Script_EnemyAI : MonoBehaviour
         //Get rigidbody
         rigidBody = this.gameObject.GetComponent<Rigidbody2D>();
 
+        //get the reset position
+        center = this.gameObject.transform.parent.GetComponentInChildren<Script_Enemy_Center>();
+
         swapMusicScript = GameObject.Find("Music").GetComponent<Script_SwapMusic>();
 
         //set stopping distance
@@ -80,30 +89,59 @@ public class Script_EnemyAI : MonoBehaviour
     //control behaviour type
     void Update()
     {
-        if (playerNotSeen == true)
+        //If enemy reaches the boundary of its room
+        if (reachedBounds)
         {
-            StartCoroutine(PassiveBehaviour());
+            //Start return to center behaviour
+            StartCoroutine(ReturnToCenter());
         }
+        //If is walking within the boundary of its room
         else
         {
-            if (needToAddToEnemyCount)
+            //Player has not been see, so operate enemy in passive behaviour
+            if (playerNotSeen == true)
             {
-                swapMusicScript.alertedEnemiesCount += 1;
-                needToAddToEnemyCount = false;
+                //Start passive behaviour
+                StartCoroutine(PassiveBehaviour());
             }
-            //change to combat music
-            if ((swapMusicScript.isPlayingCombatMusic == false) & (swapMusicScript.alertedEnemiesCount >= 1))
+            //Player has been seen, so operate enemy in aggressive behaviour
+            else
             {
-                swapMusicScript.isPlayingCombatMusic = true;
-                swapMusicScript.PlayCombatMusic();
-            }
+                //Music stuff
+                if (needToAddToEnemyCount)
+                {
+                    swapMusicScript.alertedEnemiesCount += 1;
+                    needToAddToEnemyCount = false;
+                }
+                //change to combat music
+                if ((swapMusicScript.isPlayingCombatMusic == false) & (swapMusicScript.alertedEnemiesCount >= 1))
+                {
+                    swapMusicScript.isPlayingCombatMusic = true;
+                    swapMusicScript.PlayCombatMusic();
+                }
 
-            StartCoroutine(AggressiveBehaviour());
-            //if (this.gameObject.tag == "RangedEnemy" && first_time == true)
-            //{
-            //this.gameObject.GetComponentInChildren<Script_Ranged_Enemy_Attack>().set_playerNotSeen(false);
-            //    first_time = false;
+                //Start aggressive behaviour
+                StartCoroutine(AggressiveBehaviour());
+            }
         }
+    }
+
+    IEnumerator ReturnToCenter()
+    {
+        if (canMove && reachedBounds)
+        {
+            calculateAngle(center.getPosition());
+            rotate_body();
+
+            float theta = (angle + 90) * Mathf.Deg2Rad;
+            float v1 = (float)(aggressiveSpeed * Math.Cos(theta)); //find x velocity
+            float v2 = (float)(aggressiveSpeed * Math.Sin(theta)); //find y velocity
+            Vector3 vector = new Vector3(v1, v2, 0f); //create a vector of x and y velocities
+            rigidBody.velocity = vector;
+        }
+            //reachedBounds = false;
+            //playerNotSeen = true;
+        yield return new WaitForSeconds(1);
     }
 
     //Passive enemy behaviour (When enemy has not yet spotted player)
@@ -158,7 +196,7 @@ public class Script_EnemyAI : MonoBehaviour
     }
 
     //make the enemy walk right during passive behaviour
-    private void walkRight()
+    public void walkRight()
     {
         //rotate right
         if (rigidBody.rotation < (270 - 10) && rigidBody.rotation > (270 + 10) && canRotate)
@@ -176,7 +214,7 @@ public class Script_EnemyAI : MonoBehaviour
     }
 
     //make the enemy walk left during passive behaviour
-    private void walkLeft()
+    public void walkLeft()
     {
         //rotate left
         if (rigidBody.rotation < (90 + 10) && rigidBody.rotation > (90 - 10) && canRotate)
@@ -194,7 +232,7 @@ public class Script_EnemyAI : MonoBehaviour
     }
 
     //make the enemy walk up during passive behaviour
-    private void walkUp()
+    public void walkUp()
     {
         //rotate up
         if (rigidBody.rotation < (0 + 10) && rigidBody.rotation > (0 - 10) && canRotate)
@@ -211,7 +249,7 @@ public class Script_EnemyAI : MonoBehaviour
     }
 
     //make the enemy walk down during passive behaviour
-    private void walkDown()
+    public void walkDown()
     {
         //rotate down
         if (rigidBody.rotation < (180 + 10) && rigidBody.rotation > (180 - 10) && canRotate)
@@ -230,8 +268,8 @@ public class Script_EnemyAI : MonoBehaviour
     //Agressive enemy behaviour triggered after enemy notices player
     IEnumerator AggressiveBehaviour()
     {
-        calculateAngle();
-        rotate_body_aggro();
+        calculateAngle(this.target);
+        rotate_body();
 
         //walk towards target position at specified speed and stop if distance between is greater than certain amount
         if (Vector2.Distance(transform.position, target.position) > stoppingDistance && canMove)
@@ -250,50 +288,17 @@ public class Script_EnemyAI : MonoBehaviour
         yield return new WaitForSeconds(1);
     }
 
-    //if runs into a wall during passive behaviour, just pick a new direction to yas in
-    IEnumerator OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Wall") && playerNotSeen)
-        {
-            switch (direction)
-            {
-                //walking right into a wall, go left
-                case 0:
-                    walkLeft();
-                    direction = 1;
-                    break;
-                //walking left into a wall, go right
-                case 1:
-                    walkRight();
-                    direction = 0;
-                    break;
-                //walking up into a wall, go down
-                case 2:
-                    walkDown();
-                    direction = 3;
-                    break;
-                //walking down into a wall, go up
-                case 3:
-                    walkUp();
-                    direction = 2;
-                    break;
-            }
-            Debug.Log("Dis niggrumps done hit a wall!");
-        }
-        yield break;
-    }
-
     //calculates the angle that the enemy should rotate to when in aggro mode
-    private void calculateAngle()
+    private void calculateAngle(Transform position)
     {
-        enemy_position = target.transform.position;
+        enemy_position = position.transform.position;
         enemy_position.x = enemy_position.x - this.gameObject.transform.position.x;
         enemy_position.y = enemy_position.y - this.gameObject.transform.position.y;
         angle = (Mathf.Atan2(enemy_position.y, enemy_position.x) * Mathf.Rad2Deg) - 90;
     }
 
     //rotates the enemy to face the player whenst in aggro mode
-    private void rotate_body_aggro()
+    private void rotate_body()
     {
         if(canRotate == true)
             rigidBody.rotation = angle;

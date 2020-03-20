@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 216756994242035387}
   - component: {fileID: 922744460123204340}
   - component: {fileID: 2977842070874066483}
+  - component: {fileID: 3401166210357244787}
   m_Layer: 8
   m_Name: Weapon
   m_TagString: Untagged
@@ -122,7 +123,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hit_points: 0
+  attack_damage: 0
   stoppingDistance: 1.5
+--- !u!114 &3401166210357244787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5346039312986687661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 909724a0e5591fc4685e7ee62df0ef32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6012400469325524892
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,11 +252,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aggressiveSpeed: 3
+  direction: 0
   walkTime_LowerLimit: 100
   walkTime_UpperLimit: 250
   angle: 0
   passiveSpeed: 2
   playerNotSeen: 1
+  reachedBounds: 0
   walkingDirection: Right
   roamDistance: 2
   stoppingDistance: 1.3

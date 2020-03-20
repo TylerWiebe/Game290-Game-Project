@@ -10,7 +10,6 @@ public class Script_Ranged_Enemy_Attack : MonoBehaviour
     //allows enemy to attack if set to "true"
     public float speed;
     private GameObject target;
-    private bool playerSeen = false;
     public float stoppingDistance = 7f;
 
     void Start()
@@ -28,7 +27,7 @@ public class Script_Ranged_Enemy_Attack : MonoBehaviour
     //IEnumerator OnTriggerEnter2D(Collider2D other)
     IEnumerator OnTriggerStay2D(Collider2D other)
     {
-        if (((other.tag == "player") || (other.tag == "Player")) && playerSeen)
+        if (((other.tag == "player") || (other.tag == "Player")) && !this.gameObject.GetComponentInParent<Script_EnemyAI>().playerNotSeen)
         {
             //stop the enemy from moving
             this.transform.parent.gameObject.GetComponent<Script_EnemyAI>().canMove = false;
@@ -63,10 +62,5 @@ public class Script_Ranged_Enemy_Attack : MonoBehaviour
         this.transform.parent.gameObject.GetComponent<Script_EnemyAI>().canMove = true;
         //stop attacking, if the play does not leave the attack range, another attakc will be launched right away
         this.transform.GetComponentInParent<Animator>().SetBool("isAttacking", false);
-    }
-
-    public void playerHasBeenSeen()
-    {
-        playerSeen = true;
     }
 }

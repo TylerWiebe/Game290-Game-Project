@@ -29,14 +29,7 @@ public class Script_EnemyAlert : MonoBehaviour
 
             //change the value of the enemy's playerNotSeen value (swap to aggressive mode)
             gameObject.GetComponentInParent<Script_EnemyAI>().playerNotSeen = false;
-
-            gameObject.transform.parent.GetComponentInChildren<Script_Ranged_Enemy_Attack>().playerHasBeenSeen();
-
-
-            //set playerSeen in ranged enemy
-            if (gameObject.tag == "RangedEnemy")
-                gameObject.transform.parent.GetComponentInChildren<Script_Ranged_Enemy_Attack>().playerHasBeenSeen();
-
+            gameObject.GetComponentInParent<Script_EnemyAI>().reachedBounds = false;
         }
     }
 }
