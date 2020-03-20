@@ -58,9 +58,10 @@ public class Script_Spawn_Enemies : MonoBehaviour
 
         //aggro enemy right away
         temp_instance.GetComponent<Script_EnemyAI>().playerNotSeen = false;
+        temp_instance.GetComponent<Script_EnemyAI>().reachedBounds = false;
 
         //set the layer
-        temp_instance.layer = LayerMask.NameToLayer("Enemy");
+        //temp_instance.layer = LayerMask.NameToLayer("Enemy");
 
         //set the tag
         temp_instance.tag = "MeleeEnemy";
@@ -90,9 +91,10 @@ public class Script_Spawn_Enemies : MonoBehaviour
 
         //aggro enemy right away
         temp_instance.GetComponent<Script_EnemyAI>().playerNotSeen = false;
+        temp_instance.GetComponent<Script_EnemyAI>().reachedBounds = false;
 
         //set the layer
-        temp_instance.layer = LayerMask.NameToLayer("Enemy");
+        //temp_instance.layer = LayerMask.NameToLayer("Enemy");
 
         //set the tag
         temp_instance.tag = "RangedEnemy";
