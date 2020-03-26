@@ -21,8 +21,8 @@ public class Script_HealthBar : MonoBehaviour
         player = GameObject.Find("AlienHead");
         playerScript = player.GetComponent<Alien_Object>();
 
-        int maxHP = (int)playerScript.Max_Health;
-        int currHP = (int)playerScript.Current_Health;
+        int maxHP = (int)playerScript.get_max_health();
+        int currHP = (int)playerScript.get_current_health();
 
         SetMaxHealth(maxHP);
         SetHealth(currHP);
@@ -31,10 +31,10 @@ public class Script_HealthBar : MonoBehaviour
     void Update()
     {
         //regen health
-        if ((playerScript.Current_Health) < (playerScript.Max_Health) && (Script_PauseMenu.gameIsPaused == false))
+        if ((playerScript.get_current_health()) < (playerScript.get_max_health()) && (Script_PauseMenu.gameIsPaused == false))
         {
-            int maxHP = (int)playerScript.Max_Health;
-            int currHP = (int)playerScript.Current_Health;
+            int maxHP = (int)playerScript.get_max_health();
+            int currHP = (int)playerScript.get_current_health();
 
             SetMaxHealth(maxHP);
             SetHealth(currHP);
@@ -46,7 +46,7 @@ public class Script_HealthBar : MonoBehaviour
             if (timer >= 2)
             {
 
-                playerScript.Current_Health += 1;
+                playerScript.set_current_health(1);
                 playerScript.setHPPercentage();
                 SetHealth(currHP);
 

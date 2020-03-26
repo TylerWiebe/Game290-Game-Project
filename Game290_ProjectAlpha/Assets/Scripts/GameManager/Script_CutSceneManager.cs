@@ -65,6 +65,7 @@ public class Script_CutSceneManager : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         SceneManager.LoadScene("Level_1");
+        //GameObject.Find("AlienHead").GetComponent<Alien_Object>().resetAlien();
     }
 
 

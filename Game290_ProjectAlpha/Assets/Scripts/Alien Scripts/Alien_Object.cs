@@ -47,29 +47,29 @@ public class Alien_Object : MonoBehaviour
     public bool playerAlive = true;
     //ALIEN STATS
     //Health Stats
-    public float Max_Health = 100;// actual maximum health
-    private float HEALTH_SCALE_CONST = 100; //this is the health constant between the three classes, the max health will be scaled off of this value
-    private float Current_Health_Percentage = 1; //this is the amount of health the player has left in percentage
-    public float Current_Health = 100; //This is the amount of health, numeric value
+    public static float Max_Health = 100;// actual maximum health
+    private static float HEALTH_SCALE_CONST = 100; //this is the health constant between the three classes, the max health will be scaled off of this value
+    private static float Current_Health_Percentage = 1; //this is the amount of health the player has left in percentage
+    public static float Current_Health = 100; //This is the amount of health, numeric value
 
     //Damage Stats
-    private int damage = 10;
-    public int num_ranged_charges = 4;
-    public float current_ranged_charges = 4;
+    private static int damage = 10;
+    public static int num_ranged_charges = 4;
+    public static float current_ranged_charges = 4;
 
-    private int charge_size = 25;
+    private static int charge_size = 25;
 
     //Variable Stats
-    private int strength = 0;
-    private int vitality = 0;
+    private static int strength = 0;
+    private static int vitality = 0;
 
     // Class status Variables
     //an array to keep the order of the morph
     // 0 = assassin
     // 1 = bruiser
     // 2 = sniper
-    private int[] Class_Order = new int[3];
-    private int Current_Class = 0;
+    private static int[] Class_Order = new int[3];
+    private static int Current_Class = 0;
 
     //control variables
     private bool alienCanMove = true;
@@ -88,6 +88,7 @@ public class Alien_Object : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(vitality);
         //Finding the desired GameObjects
         gameManager = GameObject.Find("GameManager");
         sceneTransitionManager = GameObject.Find("SceneTransitionManager");
@@ -107,8 +108,9 @@ public class Alien_Object : MonoBehaviour
         animHead = AlienHead.GetComponent<Animator>();
         animBody = alienBody.GetComponent<Animator>();
 
-        Class_Order = new int[] { 0, 2, 1 };
-        Current_Class = 2;
+        resetAlien();
+        //Class_Order = new int[] { 0, 2, 1 };
+        //Current_Class = 2;
         //morphQueue.GetComponent<Script_Morph_UI>().SetQueue(1);
         animHead.SetInteger("IsRanged", 1);
         updateAlienStats();
@@ -455,6 +457,7 @@ public class Alien_Object : MonoBehaviour
                 Debug.Log("Invalid StatIndex on stat pickup");
                 break;
         }
+        updateAlienStats();
     }
 
     public int getCurrentClass()
@@ -514,5 +517,59 @@ public class Alien_Object : MonoBehaviour
     public void setHPPercentage()
     {
         Current_Health_Percentage = Current_Health / Max_Health;
+    }
+    
+    public float get_Current_ranged_charges()
+    {
+        return current_ranged_charges;
+    }
+    public void set_Current_ranged_charges(float x)
+    {
+        current_ranged_charges += x;
+    }
+
+    public int get_num_ranged_charges()
+    {
+        return num_ranged_charges;
+    }
+
+    public float get_max_health()
+    {
+        return Max_Health;
+    }
+
+    public float get_current_health()
+    {
+        return Current_Health;
+    }
+    public void set_current_health(float x)
+    {
+        Current_Health += x;
+    }
+
+
+    public void resetAlien()
+    {
+        //ALIEN STATS RESET
+        //Health Stats
+        Max_Health = 100;
+        HEALTH_SCALE_CONST = 100; 
+        Current_Health_Percentage = 1; 
+        Current_Health = 100; 
+
+        //Damage Stats
+        damage = 10;
+        num_ranged_charges = 4;
+        current_ranged_charges = 4;
+
+        charge_size = 25;
+
+        //Variable Stats
+        strength = 0;
+        vitality = 0;
+
+        //Class reordering
+        Class_Order = new int[] { 0, 2, 1 };
+        Current_Class = 2;
     }
 }

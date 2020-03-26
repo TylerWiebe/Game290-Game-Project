@@ -5,7 +5,8 @@ using UnityEngine;
 public class Script_Boss_Object : MonoBehaviour
 {
     private GameObject gate;
-    private float hitPoints = 1000;
+    public float maxHitPoints = 1000;
+    private float hitPoints;
     private AudioSource bossSting;
     private AudioSource bossMusicIdle;
     private AudioSource bossMusicCombat;
@@ -13,6 +14,7 @@ public class Script_Boss_Object : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        hitPoints = maxHitPoints;
         gate = GameObject.Find("Gate");
 
         bossSting = GameObject.Find("BossSting").GetComponent<AudioSource>();
@@ -66,5 +68,14 @@ public class Script_Boss_Object : MonoBehaviour
             Destroy(gameObject);
             CancelInvoke();
         }
+    }
+
+    public float getHitPoints()
+    {
+        return hitPoints;
+    }
+    public float getMaxHitPoints()
+    {
+        return maxHitPoints;
     }
 }
