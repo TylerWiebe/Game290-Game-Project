@@ -9,6 +9,11 @@ public class Script_CutSceneManager : MonoBehaviour
     [SerializeField]
     private GameObject sceneTransitionManager = null;
 
+    [SerializeField]
+    private AudioSource winAudio;
+
+    private bool hasCollided = false;
+
     /*
     * Bring player end cutscene
     */
@@ -60,6 +65,7 @@ public class Script_CutSceneManager : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         SceneManager.LoadScene("Level_1");
+        //GameObject.Find("AlienHead").GetComponent<Alien_Object>().resetAlien();
     }
 
 
@@ -67,8 +73,12 @@ public class Script_CutSceneManager : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         //check if the collision was with the player
-        if ((other.tag == "player") || (other.tag == "Player"))
+        if (((other.tag == "player") || (other.tag == "Player")) & (hasCollided == false))
         {
+            hasCollided = true;
+
+            winAudio.Play();
+
             //play fade out animation & final cutscene
             sceneTransitionManager.GetComponent<Script_SceneTransition>().NextSceneCall(4);
         }

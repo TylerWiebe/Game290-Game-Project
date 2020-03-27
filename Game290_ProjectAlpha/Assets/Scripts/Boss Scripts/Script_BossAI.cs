@@ -27,6 +27,15 @@ public class Script_BossAI : MonoBehaviour
     Script_Spawn_Enemies spawn_point_2;
     Script_Spawn_Enemies spawn_point_3;
 
+    //gameobject's audio player
+    AudioSource audioSource;
+
+    //turret shoot sound
+    public AudioClip flameThrowerSFX;
+
+    //SFX volume
+    public float sfxVolume;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +58,9 @@ public class Script_BossAI : MonoBehaviour
         spawn_point_2 = GameObject.Find("boss_enemy_spawn_point_2").GetComponent<Script_Spawn_Enemies>();
         spawn_point_3 = GameObject.Find("boss_enemy_spawn_point_3").GetComponent<Script_Spawn_Enemies>();
 
+        //set audioSource to the gameobject's "audio controller"
+        audioSource = GetComponent<AudioSource>();
+
         //start left turret attack
         InvokeRepeating("leftTurretAttack", 0f, 5f);
 
@@ -56,10 +68,10 @@ public class Script_BossAI : MonoBehaviour
         InvokeRepeating("rightTurretAttack", 2.5f, 5f);
 
         //resume flame thrower attack
-        InvokeRepeating("resumeFlameThrowerAttack", 0f, 10f);
+        InvokeRepeating("resumeFlameThrowerAttack", 0f, 20f);
 
         //suspend flame thrower attack
-        InvokeRepeating("suspendFlameThrowerAttack", 5f, 10f);
+        InvokeRepeating("suspendFlameThrowerAttack", 10f, 20f);
 
         //summon enemies
         InvokeRepeating("summonEnemies", 0f, 30f);
@@ -81,6 +93,7 @@ public class Script_BossAI : MonoBehaviour
     private void resumeFlameThrowerAttack()
     {
         flame_thrower_attack.startAttack();
+        audioSource.PlayOneShot(flameThrowerSFX, sfxVolume);
     }
 
     //suspend flame thrower attack

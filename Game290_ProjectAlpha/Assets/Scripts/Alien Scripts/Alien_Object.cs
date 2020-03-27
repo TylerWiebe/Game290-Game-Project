@@ -47,33 +47,36 @@ public class Alien_Object : MonoBehaviour
     public bool playerAlive = true;
     //ALIEN STATS
     //Health Stats
-    public int Max_Health = 100;// actual maximum health
-    private int HEALTH_SCALE_CONST = 100; //this is the health constant between the three classes, the max health will be scaled off of this value
-    private int Current_Health_Percentage = 100; //this is the amount of health the player has left in percentage
-    public int Current_Health = 100; //This is the amount of health, numeric value
+    public static float Max_Health = 100;// actual maximum health
+    private static float HEALTH_SCALE_CONST = 100; //this is the health constant between the three classes, the max health will be scaled off of this value
+    private static float Current_Health_Percentage = 1; //this is the amount of health the player has left in percentage
+    public static float Current_Health = 100; //This is the amount of health, numeric value
 
     //Damage Stats
-    private int damage = 10;
-    public int num_ranged_charges = 4;
-    public float current_ranged_charges = 4;
+    private static int damage = 10;
+    public static int num_ranged_charges = 4;
+    public static float current_ranged_charges = 4;
 
-    private int charge_size = 25;
+    private static int charge_size = 25;
 
     //Variable Stats
-    private int strength = 0;
-    private int vitality = 0;
+    private static int strength = 0;
+    private static int vitality = 0;
 
     // Class status Variables
     //an array to keep the order of the morph
     // 0 = assassin
     // 1 = bruiser
     // 2 = sniper
-    private int[] Class_Order = new int[3];
-    private int Current_Class = 0;
+    private static int[] Class_Order = new int[3];
+    private static int Current_Class = 0;
 
     //control variables
     private bool alienCanMove = true;
     private bool doMouseRotate = true;
+
+    //Camera Settings
+    public int cameraSize;
 
 
     //rigidbody for movement
@@ -85,6 +88,7 @@ public class Alien_Object : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(vitality);
         //Finding the desired GameObjects
         gameManager = GameObject.Find("GameManager");
         sceneTransitionManager = GameObject.Find("SceneTransitionManager");
@@ -97,15 +101,16 @@ public class Alien_Object : MonoBehaviour
 
         AlienHead = GameObject.Find("AlienHead"); //Need this to get alien object's sprite renderer
         alienBody = GameObject.Find("AlienBody"); //Need this to get alien object's sprite renderer
-        myCamera = GameObject.Find("Main Camera");
+        myCamera = GameObject.Find("MainCamera");
 
         rigidBodyBody = alienBody.GetComponent<Rigidbody2D>();
 
         animHead = AlienHead.GetComponent<Animator>();
         animBody = alienBody.GetComponent<Animator>();
 
-        Class_Order = new int[] { 0, 2, 1 };
-        Current_Class = 2;
+        resetAlien();
+        //Class_Order = new int[] { 0, 2, 1 };
+        //Current_Class = 2;
         //morphQueue.GetComponent<Script_Morph_UI>().SetQueue(1);
         animHead.SetInteger("IsRanged", 1);
         updateAlienStats();
@@ -166,7 +171,8 @@ public class Alien_Object : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Camera myCam = GameObject.Find("MainCamera").GetComponent<Camera>();
+        myCam.orthographicSize = cameraSize;
         if ((Current_Health <= 0) && (playerAlive))
         {
             playerAlive = false;
@@ -222,7 +228,6 @@ public class Alien_Object : MonoBehaviour
             else
             {
                 rigidBodyBody.velocity = Vector2.zero;
-                Debug.Log("No input and position = " + transform.position + " and velocity = " + rigidBodyBody.velocity);
             }
 
             mouse_position.x = mouse_position.x - alien_sprite_position.x;
@@ -269,11 +274,11 @@ public class Alien_Object : MonoBehaviour
         morph_animation();
     }
 
-    private void RangedStartSetFalse()
-    {
-        animHead.SetBool("GameStartedAsRanged", false);
-    }
-
+    /// <summary>
+    /// Rotates the morph queue to the left
+    /// Calls the morph_animation function
+    /// Updates the current_class
+    /// </summary>
     private void morph_left()
     {
 
@@ -290,6 +295,7 @@ public class Alien_Object : MonoBehaviour
         morph_animation();
     }
 
+
     /// <summary>
     /// This function is used to do a morph animation from one class into another
     /// </summary>
@@ -305,16 +311,20 @@ public class Alien_Object : MonoBehaviour
 
     private void updateAlienStats()
     {
+        //Debug.Log(Current_Health_Percentage);
         //assassin
         if (Current_Class == 0)
         {
             Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1) * 0.5);
-            Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
+            Current_Health = (int)(Max_Health * (Current_Health_Percentage));
             speed = 0.075f * 2f; //0.075
 
+            int maxHP = (int) Max_Health;
+            int curHP = (int) Current_Health;
+
             //update healthbar Max Health & current health
-            healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(Max_Health);
-            healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
+            healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(maxHP);
+            healthBar.GetComponent<Script_HealthBar>().SetHealth(curHP);
 
             animHead.SetInteger("IsRanged", 0);
 
@@ -333,12 +343,15 @@ public class Alien_Object : MonoBehaviour
         else if (Current_Class == 1)
         {
             Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1) * 2.0);
-            Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
+            Current_Health = (int)(Max_Health * (Current_Health_Percentage));
             speed = 0.025f * 2f; //0.025
 
+            int maxHP = (int)Max_Health;
+            int curHP = (int)Current_Health;
+
             //update healthbar Max Health & current health
-            healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(Max_Health);
-            healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
+            healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(maxHP);
+            healthBar.GetComponent<Script_HealthBar>().SetHealth(curHP);
 
 
             animHead.SetInteger("IsRanged", 0);
@@ -356,16 +369,19 @@ public class Alien_Object : MonoBehaviour
         //ranged
         else
         {
-            Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1.0));
-            Current_Health = (int)(Max_Health * (Current_Health_Percentage * 0.01));
+            Max_Health = (float)Math.Round(HEALTH_SCALE_CONST * (vitality + 1.0));
+            Current_Health = (float)(Max_Health * (Current_Health_Percentage));
             speed = 0.050f * 2f;
 
             animHead.SetBool("isRanged", true);
             animHead.SetInteger("IsRanged", 1);
 
+            int maxHP = (int)Max_Health;
+            int curHP = (int)Current_Health;
+
             //update healthbar Max Health & current health
-            healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(Max_Health);
-            healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
+            healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(maxHP);
+            healthBar.GetComponent<Script_HealthBar>().SetHealth(curHP);
 
             //turn off skill box
             //assassinAttackBox.SetActive(false);
@@ -381,18 +397,27 @@ public class Alien_Object : MonoBehaviour
         this.gameObject.GetComponent<Animator>().SetInteger("CurrentClass", Current_Class);
         //Debug.Log(Current_Health);
     }
+    private void RangedStartSetFalse()
+    {
+        animHead.SetBool("GameStartedAsRanged", false);
+    }
 
     /// <summary>
     /// On alien death, call coroutine: Plays fade out animation and load DeathScreen scene
     /// </summary>
     IEnumerator Alien_Died()
     {
-        //Debug.Log("the alien has died");
+        //Debug.Log("current health: " + Current_Health.ToString());
+        animHead.SetInteger("IsRanged", 0);
+        animBody.SetBool("hasDied", true);
+        animBody.SetBool("morph", true);
+
         //play fade out animation
-        sceneTransitionManager.GetComponent<Script_SceneTransition>().TransitionCall(4);
+        sceneTransitionManager.GetComponent<Script_SceneTransition>().TransitionCall(1);
+
 
         //wait for animation(1 second)
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
 
         SceneManager.LoadScene("DeathScreen");
     }
@@ -432,6 +457,7 @@ public class Alien_Object : MonoBehaviour
                 Debug.Log("Invalid StatIndex on stat pickup");
                 break;
         }
+        updateAlienStats();
     }
 
     public int getCurrentClass()
@@ -458,11 +484,32 @@ public class Alien_Object : MonoBehaviour
 
     public void Deal_Damage_To_Alien(int damage)
     {
-        //Debug.Log("oof");
-        Current_Health -= damage;
-        Current_Health_Percentage = Current_Health / Max_Health;
 
-        healthBar.GetComponent<Script_HealthBar>().SetHealth(Current_Health);
+        if (Current_Class == 0)
+        {
+
+            transform.parent.GetComponent<SFX_Controller>().AssassinHurt();
+        }
+        else if (Current_Class == 1)
+        {
+
+            transform.parent.GetComponent<SFX_Controller>().BruiserHurt();
+        }
+        else if (Current_Class == 2)
+        {
+
+            transform.parent.GetComponent<SFX_Controller>().SniperHurt();
+        }
+
+        float FDamage = (float) damage;
+
+        Current_Health -= FDamage;
+
+        Current_Health_Percentage = (Current_Health / Max_Health);
+
+        int curHP = (int)Current_Health;
+
+        healthBar.GetComponent<Script_HealthBar>().SetHealth(curHP);
     }
 
     public void attack()
@@ -470,7 +517,7 @@ public class Alien_Object : MonoBehaviour
         if (Current_Class == 2)
         {
             animHead.SetBool("Is_attacking", true);
-        }
+            transform.parent.GetComponent<SFX_Controller>().SniperAttack();        }
         animBody.SetBool("isAttacking", true);
 
     }
@@ -481,5 +528,64 @@ public class Alien_Object : MonoBehaviour
     public float getBodyAngle()
     {
         return BodyAngle;
+    }
+
+    public void setHPPercentage()
+    {
+        Current_Health_Percentage = Current_Health / Max_Health;
+    }
+    
+    public float get_Current_ranged_charges()
+    {
+        return current_ranged_charges;
+    }
+    public void set_Current_ranged_charges(float x)
+    {
+        current_ranged_charges += x;
+    }
+
+    public int get_num_ranged_charges()
+    {
+        return num_ranged_charges;
+    }
+
+    public float get_max_health()
+    {
+        return Max_Health;
+    }
+
+    public float get_current_health()
+    {
+        return Current_Health;
+    }
+    public void set_current_health(float x)
+    {
+        Current_Health += x;
+    }
+
+
+    public void resetAlien()
+    {
+        //ALIEN STATS RESET
+        //Health Stats
+        Max_Health = 100;
+        HEALTH_SCALE_CONST = 100; 
+        Current_Health_Percentage = 1; 
+        Current_Health = 100; 
+
+        //Damage Stats
+        damage = 10;
+        num_ranged_charges = 4;
+        current_ranged_charges = 4;
+
+        charge_size = 25;
+
+        //Variable Stats
+        strength = 0;
+        vitality = 0;
+
+        //Class reordering
+        Class_Order = new int[] { 0, 2, 1 };
+        Current_Class = 2;
     }
 }

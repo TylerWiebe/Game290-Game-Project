@@ -50,6 +50,9 @@ public class Script_SceneTransition : MonoBehaviour
         //VolumeFade mixer volume
         StartCoroutine(VolumeFadeOut());
 
+        //wait for animation
+        yield return new WaitForSeconds(time);
+
         animator.SetTrigger("FadeOut");
 
         //wait for animation
@@ -68,6 +71,8 @@ public class Script_SceneTransition : MonoBehaviour
 
     IEnumerator NextScene(int time)
     {
+        yield return new WaitForSeconds(3);
+
         //VolumeFade mixer volume
         StartCoroutine(VolumeFadeOut());
 

@@ -5,8 +5,24 @@ using UnityEngine;
 //This script must be attached to the attackRange game object and must also be a child of the "enemy" game object.
 public class Script_Melee_Enemy_Attack : Script_Melee_Enemy_Object
 {
-    private int attack_damage;
+    public int attack_damage;
     public float stoppingDistance = 1.5f;
+
+    //gameobject's audio player
+    AudioSource audioSource;
+
+    //turret shoot sound
+    public AudioClip slimeAttackSFX;
+
+    //SFX volume
+    public float sfxVolume;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        //set audioSource to the gameobject's "audio controller"
+        audioSource = GetComponent<AudioSource>();
+    }
 
     //when a collision with player occurs, trigger attacks
     IEnumerator OnTriggerStay2D(Collider2D other)
@@ -39,7 +55,13 @@ public class Script_Melee_Enemy_Attack : Script_Melee_Enemy_Object
         this.transform.parent.gameObject.GetComponent<Script_EnemyAI>().canMove = true;
         //stop attacking, if the play does not leave the attack range, another attakc will be launched right away
         this.transform.GetComponentInParent<Animator>().SetBool("isAttacking", false);
+        playSlimeAttackSFX();
+    }
 
+    //play slime attacking sound
+    public void playSlimeAttackSFX()
+    {
+        audioSource.PlayOneShot(slimeAttackSFX, sfxVolume);
     }
 
     public void set_attack_damage(int attack_damage)
