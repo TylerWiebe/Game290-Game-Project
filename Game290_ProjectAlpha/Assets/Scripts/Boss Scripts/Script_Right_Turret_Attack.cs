@@ -8,11 +8,22 @@ public class Script_Right_Turret_Attack : MonoBehaviour
     //player game object
     GameObject target = null;
 
+    //gameobject's audio player
+    AudioSource audioSource;
+
+    //turret shoot sound
+    public AudioClip turretShootingSFX;
+
+    //SFX volume
+    public float sfxVolume;
+
     // Start is called before the first frame update
     void Start()
     {
         //set enemy game object variable
         target = GameObject.FindGameObjectWithTag("Player");
+        //set audioSource to the gameobject's "audio controller"
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -73,5 +84,11 @@ public class Script_Right_Turret_Attack : MonoBehaviour
         targetPosition.x = targetPosition.x - this.gameObject.transform.position.x;
         targetPosition.y = targetPosition.y - this.gameObject.transform.position.y;
         return (Mathf.Atan2(targetPosition.y, targetPosition.x) * Mathf.Rad2Deg) - 10;
+    }
+
+    //play turret shooting sound
+    public void playTurretShootingSFX()
+    {
+        audioSource.PlayOneShot(turretShootingSFX, sfxVolume);
     }
 }
