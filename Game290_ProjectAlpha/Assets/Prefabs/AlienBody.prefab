@@ -80,10 +80,6 @@ MonoBehaviour:
   alien_spriteq: {fileID: 0}
   speed: 0.05
   playerAlive: 1
-  Max_Health: 100
-  Current_Health: 100
-  num_ranged_charges: 4
-  current_ranged_charges: 4
   cameraSize: 10
   rigidBodyBody: {fileID: 3179349462814011422}
   animHead: {fileID: 6399150236129906075}
@@ -378,7 +374,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   morphSFX: {fileID: 8300000, guid: af66aa2ad031b4a4dab2ebdaf02f9c11, type: 3}
-  morphVolume: 0.7
+  sfxVolume: 0.7
+  dieB: {fileID: 8300000, guid: 02d028e5677e9a6419acd953837c7530, type: 3}
+  dieA: {fileID: 8300000, guid: 2e8969e793914b2468a576bfc0d661a6, type: 3}
+  dieS: {fileID: 8300000, guid: 6364e5197961a484a86d8000c9db0247, type: 3}
+  attackB: {fileID: 8300000, guid: bc661e0587258e848b2ac3a61cf667ec, type: 3}
+  attackA: {fileID: 8300000, guid: 36fab7466fcb23c4a8c457880eb33ac9, type: 3}
+  attackS: {fileID: 8300000, guid: 71916145ba21e4f4ba348e346770b1c5, type: 3}
+  hurtB: {fileID: 8300000, guid: f00ff298fcca65449a2ffada07b36ee9, type: 3}
+  hurtA: {fileID: 8300000, guid: 290dc48e7b869df479fcfa8d8b90ed05, type: 3}
+  hurtS: {fileID: 8300000, guid: 9c53ef8e4c3773f40ba474c00fe2fd5d, type: 3}
 --- !u!82 &753809384572968029
 AudioSource:
   m_ObjectHideFlags: 0

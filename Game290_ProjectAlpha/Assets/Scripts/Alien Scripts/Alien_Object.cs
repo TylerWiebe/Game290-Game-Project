@@ -485,6 +485,22 @@ public class Alien_Object : MonoBehaviour
     public void Deal_Damage_To_Alien(int damage)
     {
 
+        if (Current_Class == 0)
+        {
+
+            transform.parent.GetComponent<SFX_Controller>().AssassinHurt();
+        }
+        else if (Current_Class == 1)
+        {
+
+            transform.parent.GetComponent<SFX_Controller>().BruiserHurt();
+        }
+        else if (Current_Class == 2)
+        {
+
+            transform.parent.GetComponent<SFX_Controller>().SniperHurt();
+        }
+
         float FDamage = (float) damage;
 
         Current_Health -= FDamage;
@@ -501,7 +517,7 @@ public class Alien_Object : MonoBehaviour
         if (Current_Class == 2)
         {
             animHead.SetBool("Is_attacking", true);
-        }
+            transform.parent.GetComponent<SFX_Controller>().SniperAttack();        }
         animBody.SetBool("isAttacking", true);
 
     }
