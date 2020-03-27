@@ -1598,6 +1598,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theta: 0
+  flameThrowerSFX: {fileID: 8300000, guid: 2ab657283053faa4987e05d5d471ebc3, type: 3}
+  sfxVolume: 0.7
 --- !u!50 &1171866317
 Rigidbody2D:
   serializedVersion: 4
