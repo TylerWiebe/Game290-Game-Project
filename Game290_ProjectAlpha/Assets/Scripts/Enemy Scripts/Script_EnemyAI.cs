@@ -319,6 +319,18 @@ public class Script_EnemyAI : MonoBehaviour
         }
     }
 
+    private void playDeathSFX()
+    {
+        if (this.gameObject.tag == "RangedEnemy")
+        {
+            this.transform.GetComponentInChildren<Script_Ranged_Enemy_Object>().playRangedGuardDamagedSFX();
+        }
+        else
+        {
+            
+        }
+    }
+
     //make enemy attack
     private void Attack()
     {

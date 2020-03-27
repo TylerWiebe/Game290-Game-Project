@@ -12,11 +12,22 @@ public class Script_Ranged_Enemy_Attack : MonoBehaviour
     private GameObject target;
     public float stoppingDistance = 7f;
 
+    //gameobject's audio player
+    AudioSource audioSource;
+
+    //slime death sound
+    public AudioClip rangedGuardAttackSFX;
+
+    //SFX volume
+    public float sfxVolume;
+
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
-    }
 
+        //set audioSource to the gameobject's "audio controller"
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -62,5 +73,12 @@ public class Script_Ranged_Enemy_Attack : MonoBehaviour
         this.transform.parent.gameObject.GetComponent<Script_EnemyAI>().canMove = true;
         //stop attacking, if the play does not leave the attack range, another attakc will be launched right away
         this.transform.GetComponentInParent<Animator>().SetBool("isAttacking", false);
+        playRangedGuardAttackSFX();
+    }
+
+    //play slime attacking sound
+    public void playRangedGuardAttackSFX()
+    {
+        audioSource.PlayOneShot(rangedGuardAttackSFX, sfxVolume);
     }
 }

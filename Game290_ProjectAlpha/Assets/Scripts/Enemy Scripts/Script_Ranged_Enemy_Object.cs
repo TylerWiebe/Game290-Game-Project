@@ -15,6 +15,16 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
     private GameObject enemy_body;
     private GameObject enemy_attack_cone;
 
+
+    //gameobject's audio player
+    AudioSource audioSource;
+
+    //guard hurt sound
+    public AudioClip rangedGuardDamagedSFX;
+
+    //SFX volume
+    public float sfxVolume;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +60,7 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
 
     public void attacked(float damage)
     {
-        Debug.Log("GotHit");
+        //Debug.Log("GotHit");
         hit_points -= damage;
         if (hit_points <= 0)
         {
@@ -69,6 +79,12 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
             //call the death animation
             this.transform.GetComponentInParent<Animator>().SetBool("isDead", true);
         }
+    }
+
+    //play slime attacking sound
+    public void playRangedGuardDamagedSFX()
+    {
+        audioSource.PlayOneShot(rangedGuardDamagedSFX, sfxVolume);
     }
 
     public void destroy()

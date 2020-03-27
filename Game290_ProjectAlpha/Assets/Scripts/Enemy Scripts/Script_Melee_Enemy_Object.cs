@@ -40,11 +40,9 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
     public void attacked(float damage)
     {
 
-        Debug.Log("GotHitMelee");
+        //Debug.Log("GotHitMelee");
         hit_points -= damage;
-
-        playSlimeAttackSFX();
-
+        playSlimeDamagedSFX();
         if (hit_points <= 0)
         {
             //stop enemy from moving when dead
@@ -65,7 +63,7 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
     }
 
     //play slime attacking sound
-    public void playSlimeAttackSFX()
+    public void playSlimeDamagedSFX()
     {
         audioSource.PlayOneShot(slimeDeathSFX, sfxVolume);
     }
