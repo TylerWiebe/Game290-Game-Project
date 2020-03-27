@@ -314,7 +314,9 @@ public class Script_EnemyAI : MonoBehaviour
             this.transform.GetComponentInChildren<Script_Ranged_Enemy_Object>().destroy();
         }
         else
+        {
             this.transform.GetComponentInChildren<Script_Melee_Enemy_Object>().destroy();
+        }
     }
 
     //make enemy attack
