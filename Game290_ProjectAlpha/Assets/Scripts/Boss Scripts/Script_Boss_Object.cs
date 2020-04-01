@@ -5,7 +5,7 @@ using UnityEngine;
 public class Script_Boss_Object : MonoBehaviour
 {
     private GameObject gate;
-    public float maxHitPoints = 1000;
+    public float maxHitPoints = 2000;
     private float hitPoints;
     private AudioSource bossSting;
     private AudioSource bossMusicIdle;
@@ -47,7 +47,7 @@ public class Script_Boss_Object : MonoBehaviour
     //damage boss
     public void damageBoss(float damage)
     {
-        //Debug.Log("current Boss HP: " + hitPoints.ToString());
+        Debug.Log("current Boss HP: " + hitPoints.ToString());
         hitPoints -= damage;
         playBossDamagedSFX();
         if (hitPoints <= 0)
