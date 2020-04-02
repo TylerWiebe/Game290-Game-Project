@@ -62,10 +62,10 @@ public class Script_BossAI : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         //start left turret attack
-        InvokeRepeating("leftTurretAttack", 0f, 5f);
+        InvokeRepeating("leftTurretAttack", 5f, 5f);
 
         //start right turret attack
-        InvokeRepeating("rightTurretAttack", 2.5f, 5f);
+        InvokeRepeating("rightTurretAttack", 7.5f, 5f);
 
         //resume flame thrower attack
         InvokeRepeating("resumeFlameThrowerAttack", 0f, 20f);
