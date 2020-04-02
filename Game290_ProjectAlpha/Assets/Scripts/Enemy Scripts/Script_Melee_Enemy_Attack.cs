@@ -17,11 +17,16 @@ public class Script_Melee_Enemy_Attack : Script_Melee_Enemy_Object
     //SFX volume
     public float sfxVolume;
 
+    private int damageMultiplier = 2;
+
     // Start is called before the first frame update
     void Start()
     {
         //set audioSource to the gameobject's "audio controller"
         audioSource = GetComponent<AudioSource>();
+
+        //seed attack damage
+        attack_damage = 20 + damageMultiplier * GameObject.Find("GameManager").GetComponent<Script_Enemy_Controller>().levelNumber;
     }
 
     //when a collision with player occurs, trigger attacks
@@ -66,6 +71,6 @@ public class Script_Melee_Enemy_Attack : Script_Melee_Enemy_Object
 
     public void set_attack_damage(int attack_damage)
     {
-        this.attack_damage = attack_damage;
+        //this.attack_damage = attack_damage;
     }
 }

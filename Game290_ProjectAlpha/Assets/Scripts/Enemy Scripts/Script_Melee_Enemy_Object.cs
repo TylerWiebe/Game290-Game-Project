@@ -19,12 +19,16 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
     //SFX volume
     public float sfxVolume;
 
+    public int healthMultiplier = 10;
+
     void Start()
     {
         swapMusicScript = GameObject.Find("Music").GetComponent<Script_SwapMusic>();
-
         //set audioSource to the gameobject's "audio controller"
         audioSource = GetComponent<AudioSource>();
+
+        //seed hit points
+        hit_points = 100 + healthMultiplier * GameObject.Find("GameManager").GetComponent<Script_Enemy_Controller>().levelNumber;
     }
 
     public void set_hit_points(float hit_points)

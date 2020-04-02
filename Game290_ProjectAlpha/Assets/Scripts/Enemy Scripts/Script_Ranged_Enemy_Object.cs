@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Script_Ranged_Enemy_Object : MonoBehaviour
 {
-    public int attack_damage = 50;
-    public float hit_points = 50;
+    public int attack_damage;
+    public int damageMultiplier = 4;
+
+    public float hit_points;
+    public int healthMultiplier = 5;
 
     //stat orb spawn chance
     private int spawnChance = 20;
@@ -36,6 +39,13 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         swapMusicScript = GameObject.Find("Music").GetComponent<Script_SwapMusic>();
+
+        //seed hit points
+        hit_points = 50 + healthMultiplier * GameObject.Find("GameManager").GetComponent<Script_Enemy_Controller>().levelNumber;
+
+        //seed attack damage
+        attack_damage = 50 + damageMultiplier * GameObject.Find("GameManager").GetComponent<Script_Enemy_Controller>().levelNumber;
+
     }
 
     // Update is called once per frame

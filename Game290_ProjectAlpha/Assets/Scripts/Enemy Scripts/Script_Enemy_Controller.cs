@@ -6,6 +6,7 @@ public class Script_Enemy_Controller : MonoBehaviour
 {
     private int spawnChance = 100;
     private Script_SwapMusic swapMusicScript;
+    public int levelNumber;
 
     // Start is called before the first frame update
     void Start()
