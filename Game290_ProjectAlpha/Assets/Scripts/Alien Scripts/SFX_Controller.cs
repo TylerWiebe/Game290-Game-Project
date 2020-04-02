@@ -27,6 +27,8 @@ public class SFX_Controller : MonoBehaviour
     public AudioClip hurtA;
     public AudioClip hurtS;
 
+    private bool notDead = true;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -35,37 +37,52 @@ public class SFX_Controller : MonoBehaviour
 
     public void BruiserDied()
     {
-        if (myScript.get_current_health() <= 0)
+        if (notDead)
         {
-            audioSource.PlayOneShot(dieB, sfxVolume);
-        }
-        else
-        {
-            audioSource.PlayOneShot(morphSFX, sfxVolume);
+
+            if (myScript.get_current_health() <= 0)
+            {
+                audioSource.PlayOneShot(dieB, sfxVolume);
+                notDead = false;
+            }
+            else
+            {
+                audioSource.PlayOneShot(morphSFX, sfxVolume);
+            }
         }
     }
     public void AssassinDied()
     {
-        if (myScript.get_current_health() <= 0)
+        if (notDead)
         {
-            audioSource.PlayOneShot(dieA, sfxVolume);
-        }
-        else
-        {
-            audioSource.PlayOneShot(morphSFX, sfxVolume);
+            if (myScript.get_current_health() <= 0)
+            {
+                audioSource.PlayOneShot(dieA, sfxVolume);
+                notDead = false;
+            }
+            else
+            {
+                audioSource.PlayOneShot(morphSFX, sfxVolume);
+            }
+
         }
     }
     public void SniperDied()
     {
-        Debug.Log("calledSniperDied");
-        if (myScript.get_current_health() <= 0)
+        if (notDead)
         {
-            audioSource.PlayOneShot(dieS, sfxVolume);
+            Debug.Log("calledSniperDied");
+            if (myScript.get_current_health() <= 0)
+            {
+                audioSource.PlayOneShot(dieS, sfxVolume);
+                notDead = false;
+            }
+            else
+            {
+                audioSource.PlayOneShot(morphSFX, sfxVolume);
+            }
         }
-        else
-        {
-            audioSource.PlayOneShot(morphSFX, sfxVolume);
-        }
+       
     }
 
     public void BruiserAttack()
@@ -83,16 +100,28 @@ public class SFX_Controller : MonoBehaviour
 
     public void BruiserHurt()
     {
-        audioSource.PlayOneShot(hurtB, sfxVolume);
+        if (notDead)
+        {
+            audioSource.PlayOneShot(hurtB, sfxVolume);
+
+        }
     }
     public void AssassinHurt()
     {
-        audioSource.PlayOneShot(hurtA, sfxVolume);
+        if (notDead)
+        {
+            audioSource.PlayOneShot(hurtA, sfxVolume);
+
+        }
 
     }
     public void SniperHurt()
     {
-        audioSource.PlayOneShot(hurtS, sfxVolume);
+        if (notDead)
+        {
+            audioSource.PlayOneShot(hurtS, sfxVolume);
+
+        }
 
     }
 

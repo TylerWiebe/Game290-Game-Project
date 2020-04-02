@@ -61,6 +61,7 @@ public class Alien_Object : MonoBehaviour
     public static float current_ranged_charges = 4;
 
     private static int charge_size = 25;
+    private static int charges = 0;
 
     //Variable Stats
     private static int strength = 0;
@@ -84,6 +85,7 @@ public class Alien_Object : MonoBehaviour
 
     //rigidbody for movement
     public Rigidbody2D rigidBodyBody;
+
 
     //Animations
     public Animator animHead;
@@ -437,24 +439,33 @@ public class Alien_Object : MonoBehaviour
             //increase vitality
             case 0:
                 vitality += 1;
+                Text mytext = GameObject.Find("statup1").GetComponent<Text>();
+                mytext.text = "Current Vitality: " + vitality.ToString();
                 Debug.Log("Vitality Up");
                 break;
 
             //increase strength
             case 1:
                 strength += 1;
+                Text mytext2 = GameObject.Find("statup2").GetComponent<Text>();
+                mytext2.text = "Current Strength: " + strength.ToString();
                 Debug.Log("Strength Up");
                 break;
 
             //increase number of ranged charges
             case 2:
                 num_ranged_charges += 1;
+                Text mytext3 = GameObject.Find("statup3").GetComponent<Text>();
+                mytext3.text = "Charges Increased: " + (num_ranged_charges - 4).ToString();
                 Debug.Log("Ranged Charges Up");
                 break;
 
             //increase charge size
             case 3:
-                charge_size += 1;
+                charges += 1;
+                charge_size = 25 + (charges *10);
+                Text mytext4 = GameObject.Find("statup4").GetComponent<Text>();
+                mytext4.text = "Increase Charge: " + charges.ToString();
                 Debug.Log("Charge Size Up");
                 break;
 

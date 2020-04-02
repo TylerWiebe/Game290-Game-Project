@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   morphSFX: {fileID: 8300000, guid: af66aa2ad031b4a4dab2ebdaf02f9c11, type: 3}
-  sfxVolume: 0.7
+  sfxVolume: 1
   dieB: {fileID: 8300000, guid: 02d028e5677e9a6419acd953837c7530, type: 3}
   dieA: {fileID: 8300000, guid: 2e8969e793914b2468a576bfc0d661a6, type: 3}
   dieS: {fileID: 8300000, guid: 6364e5197961a484a86d8000c9db0247, type: 3}
