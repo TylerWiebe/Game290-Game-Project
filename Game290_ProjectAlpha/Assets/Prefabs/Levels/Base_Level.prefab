@@ -5175,6 +5175,21 @@ PrefabInstance:
       propertyPath: sceneTransitionManager
       value: 
       objectReference: {fileID: 2966150782268960477}
+    - target: {fileID: 3685848181861318863, guid: f94bb6d2053e6ea4bbf3e4acef71a986,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685848181861318863, guid: f94bb6d2053e6ea4bbf3e4acef71a986,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685848181861318863, guid: f94bb6d2053e6ea4bbf3e4acef71a986,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.64
+      objectReference: {fileID: 0}
     - target: {fileID: 3685848181861318896, guid: f94bb6d2053e6ea4bbf3e4acef71a986,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5229,6 +5244,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685848181861318897, guid: f94bb6d2053e6ea4bbf3e4acef71a986,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: aabf3f16835cf6849ae3114d58149e80,
+        type: 3}
+    - target: {fileID: 3685848181861318897, guid: f94bb6d2053e6ea4bbf3e4acef71a986,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -418005737
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685848181861318897, guid: f94bb6d2053e6ea4bbf3e4acef71a986,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 3685848181861318898, guid: f94bb6d2053e6ea4bbf3e4acef71a986,
         type: 3}
