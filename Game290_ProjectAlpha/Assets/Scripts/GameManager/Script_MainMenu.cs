@@ -25,6 +25,10 @@ public class Script_MainMenu : MonoBehaviour
     [SerializeField]
     private GameObject optionsMenu = null;
 
+    //holds scene transition manager object
+    [SerializeField]
+    private GameObject tutorial = null;
+
     void Start ()
     {
         //on start store available resolutions in an array
@@ -139,6 +143,38 @@ public class Script_MainMenu : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             mainMenu.SetActive(true);
             optionsMenu.SetActive(false);
+        }
+    }
+
+    /*
+     * Tutorial Menu
+     */
+
+    public void OnTutorialClick()
+    {
+        StartCoroutine(TutorialWait(0));
+    }
+
+    public void OnTutorialBackClick()
+    {
+        StartCoroutine(TutorialWait(1));
+    }
+
+    //add pause for options button clicks
+    IEnumerator TutorialWait(int i)
+    {
+        if (i == 0)
+        {
+            yield return new WaitForSeconds(0.2f);
+            mainMenu.SetActive(false);
+            tutorial.SetActive(true);
+        }
+
+        if (i == 1)
+        {
+            yield return new WaitForSeconds(0.2f);
+            mainMenu.SetActive(true);
+            tutorial.SetActive(false);
         }
     }
 }

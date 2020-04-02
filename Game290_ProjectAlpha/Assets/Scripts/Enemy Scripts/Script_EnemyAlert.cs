@@ -13,12 +13,32 @@ public class Script_EnemyAlert : MonoBehaviour
 
     private Vector3 position;
 
+    //gameobject's audio player
+    AudioSource audioSource;
+
+    //guard spots player sound
+    public AudioClip rangedGuardAlert;
+
+    //SFX volume
+    public float sfxVolume;
+    
+    void Start()
+    {
+        //set audioSource to the gameobject's "audio controller"
+        audioSource = GetComponent<AudioSource>();
+    }
+
     //on entering enemy alert range cause trigger event
     private void OnTriggerEnter2D (Collider2D other)
     {
         //check if the collision was with the player and player hasn't been seen by enemy before
         if (((other.tag == "player") || (other.tag == "Player")) && (gameObject.GetComponentInParent<Script_EnemyAI>().playerNotSeen == true))
         {
+            Debug.Log(this.gameObject.transform.parent.gameObject.tag);
+
+            if (this.gameObject.transform.parent.gameObject.tag == "RangedEnemy")
+                playRangedGuardAlert();
+
             //create alert indicator above enemy's head
             position = transform.position;
             position.y += 3;
@@ -32,4 +52,12 @@ public class Script_EnemyAlert : MonoBehaviour
             gameObject.GetComponentInParent<Script_EnemyAI>().reachedBounds = false;
         }
     }
+
+    //play ranged guard alerted sound
+    public void playRangedGuardAlert()
+    {
+        audioSource.PlayOneShot(rangedGuardAlert, sfxVolume);
+    }
+
+
 }

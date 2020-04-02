@@ -30,8 +30,11 @@ public class Script_BossAI : MonoBehaviour
     //gameobject's audio player
     AudioSource audioSource;
 
-    //turret shoot sound
+    //flame thrower fire sound
     public AudioClip flameThrowerSFX;
+
+    //flame thrower fire sound
+    public AudioClip buzz;
 
     //SFX volume
     public float sfxVolume;
@@ -61,20 +64,22 @@ public class Script_BossAI : MonoBehaviour
         //set audioSource to the gameobject's "audio controller"
         audioSource = GetComponent<AudioSource>();
 
+        audioSource.PlayOneShot(buzz, sfxVolume);
+
         //start left turret attack
-        InvokeRepeating("leftTurretAttack", 0f, 5f);
+        InvokeRepeating("leftTurretAttack", 5f + 8f, 5f);
 
         //start right turret attack
-        InvokeRepeating("rightTurretAttack", 2.5f, 5f);
+        InvokeRepeating("rightTurretAttack", 7.5f + 8f, 5f);
 
         //resume flame thrower attack
-        InvokeRepeating("resumeFlameThrowerAttack", 0f, 20f);
+        InvokeRepeating("resumeFlameThrowerAttack", 0f + 8f, 20f);
 
         //suspend flame thrower attack
-        InvokeRepeating("suspendFlameThrowerAttack", 10f, 20f);
+        InvokeRepeating("suspendFlameThrowerAttack", 10f + 8f, 20f);
 
         //summon enemies
-        InvokeRepeating("summonEnemies", 0f, 30f);
+        InvokeRepeating("summonEnemies", 0f + 8f, 30f);
     }
     
     //shoot left turret

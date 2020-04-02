@@ -66,6 +66,8 @@ public class Script_EnemyAI : MonoBehaviour
     //script responsible for swapping music from between idle & combat
     private Script_SwapMusic swapMusicScript;
 
+    public bool collided = false;
+
     void Start()
     {
         //assign the object with tag "Player" to be the enemy's target 
@@ -89,41 +91,45 @@ public class Script_EnemyAI : MonoBehaviour
     //control behaviour type
     void Update()
     {
-        //If enemy reaches the boundary of its room
-        if (reachedBounds)
+
+        if (collided)
         {
-            //Start return to center behaviour
-            StartCoroutine(ReturnToCenter());
-        }
-        //If is walking within the boundary of its room
-        else
-        {
-            //Player has not been see, so operate enemy in passive behaviour
-            if (playerNotSeen == true)
+            //If enemy reaches the boundary of its room
+            if (reachedBounds)
             {
-                //Start passive behaviour
-                StartCoroutine(PassiveBehaviour());
+                //Start return to center behaviour
+                StartCoroutine(ReturnToCenter());
             }
-            //Player has been seen, so operate enemy in aggressive behaviour
+            //If is walking within the boundary of its room
             else
             {
-                
-                //Music stuff
-                if (swapMusicScript != null && needToAddToEnemyCount)
+                //Player has not been see, so operate enemy in passive behaviour
+                if (playerNotSeen == true)
                 {
-                    swapMusicScript.alertedEnemiesCount += 1;
-                    needToAddToEnemyCount = false;
+                    //Start passive behaviour
+                    StartCoroutine(PassiveBehaviour());
                 }
-                //change to combat music
-                if (swapMusicScript != null && (swapMusicScript.isPlayingCombatMusic == false) & (swapMusicScript.alertedEnemiesCount >= 1))
+                //Player has been seen, so operate enemy in aggressive behaviour
+                else
                 {
-                    swapMusicScript.isPlayingCombatMusic = true;
-                    swapMusicScript.PlayCombatMusic();
-                }
-                
 
-                //Start aggressive behaviour
-                StartCoroutine(AggressiveBehaviour());
+                    //Music stuff
+                    if (swapMusicScript != null && needToAddToEnemyCount)
+                    {
+                        swapMusicScript.alertedEnemiesCount += 1;
+                        needToAddToEnemyCount = false;
+                    }
+                    //change to combat music
+                    if (swapMusicScript != null && (swapMusicScript.isPlayingCombatMusic == false) & (swapMusicScript.alertedEnemiesCount >= 1))
+                    {
+                        swapMusicScript.isPlayingCombatMusic = true;
+                        swapMusicScript.PlayCombatMusic();
+                    }
+
+
+                    //Start aggressive behaviour
+                    StartCoroutine(AggressiveBehaviour());
+                }
             }
         }
     }

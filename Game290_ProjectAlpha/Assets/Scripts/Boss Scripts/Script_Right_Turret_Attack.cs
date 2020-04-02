@@ -29,7 +29,20 @@ public class Script_Right_Turret_Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //fade in boss
+        StartCoroutine("Fade");
+    }
 
+    //fade in boss
+    IEnumerator Fade()
+    {
+        float alpha = 0;
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / 8f)
+        {
+            Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, 1f, t));
+            transform.GetComponent<Renderer>().material.color = newColor;
+            yield return null;
+        }
     }
 
     //call shooting animation for the right turret attack
@@ -41,17 +54,56 @@ public class Script_Right_Turret_Attack : MonoBehaviour
     //shoot five projectiles in a line
     public void shootRightTurret()
     {
+        int number = UnityEngine.Random.Range(1, 3);
+
+        spawnAndShootProject("boss_turret_right_barrel", -38);
         spawnAndShootProject("boss_turret_right_barrel", -36);
+        spawnAndShootProject("boss_turret_right_barrel", -34);
+        spawnAndShootProject("boss_turret_right_barrel", -32);
         spawnAndShootProject("boss_turret_right_barrel", -30);
+        spawnAndShootProject("boss_turret_right_barrel", -28);
         spawnAndShootProject("boss_turret_right_barrel", -26);
+        spawnAndShootProject("boss_turret_right_barrel", -24);
+        spawnAndShootProject("boss_turret_right_barrel", -22);
+        spawnAndShootProject("boss_turret_right_barrel", -20);
+        spawnAndShootProject("boss_turret_right_barrel", -18);
+        spawnAndShootProject("boss_turret_right_barrel", -16);
+        spawnAndShootProject("boss_turret_right_barrel", -14);
+        if(number == 1)
+        {
+            spawnAndShootProject("boss_turret_right_barrel", -12);
+            spawnAndShootProject("boss_turret_right_barrel", -10);
+            spawnAndShootProject("boss_turret_right_barrel", -8);
+            spawnAndShootProject("boss_turret_right_barrel", -6);
+            spawnAndShootProject("boss_turret_right_barrel", -4);
+        }
 
-        spawnAndShootProject("boss_turret_right_barrel", -4);
+        spawnAndShootProject("boss_turret_right_barrel", -2);
         spawnAndShootProject("boss_turret_right_barrel", 0);
-        spawnAndShootProject("boss_turret_right_barrel", 4);
+        spawnAndShootProject("boss_turret_right_barrel", 2);
+        if (number == 2)
+        {
+            spawnAndShootProject("boss_turret_right_barrel", 4);
+            spawnAndShootProject("boss_turret_right_barrel", 6);
+            spawnAndShootProject("boss_turret_right_barrel", 8);
+            spawnAndShootProject("boss_turret_right_barrel", 10);
+            spawnAndShootProject("boss_turret_right_barrel", 12);
+        }
 
+        spawnAndShootProject("boss_turret_right_barrel", 14);
+        spawnAndShootProject("boss_turret_right_barrel", 16);
+        spawnAndShootProject("boss_turret_right_barrel", 18);
+        spawnAndShootProject("boss_turret_right_barrel", 20);
+        spawnAndShootProject("boss_turret_right_barrel", 22);
+        spawnAndShootProject("boss_turret_right_barrel", 24);
         spawnAndShootProject("boss_turret_right_barrel", 26);
+        spawnAndShootProject("boss_turret_right_barrel", 28);
         spawnAndShootProject("boss_turret_right_barrel", 30);
+        spawnAndShootProject("boss_turret_right_barrel", 32);
         spawnAndShootProject("boss_turret_right_barrel", 34);
+        spawnAndShootProject("boss_turret_right_barrel", 36);
+        spawnAndShootProject("boss_turret_right_barrel", 38);
+
         this.transform.GetComponent<Animator>().SetBool("rightTurretAttacking", false);
     }
 
@@ -68,7 +120,7 @@ public class Script_Right_Turret_Attack : MonoBehaviour
         //float theta = calculateAngle() * Mathf.Deg2Rad;
         float theta = (this.gameObject.GetComponentInParent<Script_BossAI>().theta - 90 + shift) * Mathf.Deg2Rad;
         //calculate the velocity vector of the boi
-        Vector3 vector = new Vector3((float)(10 * Math.Cos(theta)), (float)(10 * Math.Sin(theta)), 0f); //create a vector of x and y velocities
+        Vector3 vector = new Vector3((float)(8 * Math.Cos(theta)), (float)(8 * Math.Sin(theta)), 0f); //create a vector of x and y velocities
         //set damage of the projectile
         projectile_instance.GetComponent<Script_Ranged_Enemy_Projectile>().set_damage(10);
         //set rotatopm of the projectile

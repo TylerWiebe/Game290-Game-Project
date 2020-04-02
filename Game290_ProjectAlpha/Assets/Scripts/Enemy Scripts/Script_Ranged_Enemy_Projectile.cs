@@ -15,7 +15,7 @@ public class Script_Ranged_Enemy_Projectile : MonoBehaviour
 
     void Update()
     {
-        if ((DateTime.Now.Ticks / 10000) - start_time >= 1500)
+        if ((DateTime.Now.Ticks / 10000) - start_time >= 2500)
         {
             Destroy(this.gameObject);
         }

@@ -50,12 +50,6 @@ public class Script_Spawn_Enemies : MonoBehaviour
         //get Script_Ranged_Enemy_Object inorder to seed thje stats of the ranged enemy
         Script_Melee_Enemy_Object temp_script = temp_instance.GetComponent<Script_Melee_Enemy_Object>(); //get ranged_enemy_object script
 
-        //set attack damage
-        temp_script.GetComponentInChildren<Script_Melee_Enemy_Attack>().set_attack_damage(base_melee_attack_damage + (melee_attack_damage_modifier * level_sequence_number));
-
-        //set hit points
-        temp_script.set_hit_points(base_melee_hit_points + (melee_hit_points_modifier * level_sequence_number));
-
         //aggro enemy right away
         temp_instance.GetComponent<Script_EnemyAI>().playerNotSeen = false;
         temp_instance.GetComponent<Script_EnemyAI>().reachedBounds = false;
@@ -83,12 +77,6 @@ public class Script_Spawn_Enemies : MonoBehaviour
         //get Script_Ranged_Enemy_Object inorder to seed thje stats of the ranged enemy
         Script_Ranged_Enemy_Object temp_script = temp_instance.GetComponent<Script_Ranged_Enemy_Object>();
         
-        //set attack damage
-        temp_script.set_attack_damage(base_ranged_attack_damage + (ranged_attack_damage_modifier * level_sequence_number));
-        
-        //set hit points
-        temp_script.set_hit_points(base_ranged_hit_points + (ranged_hit_points_modifier * level_sequence_number));
-
         //aggro enemy right away
         temp_instance.GetComponent<Script_EnemyAI>().playerNotSeen = false;
         temp_instance.GetComponent<Script_EnemyAI>().reachedBounds = false;

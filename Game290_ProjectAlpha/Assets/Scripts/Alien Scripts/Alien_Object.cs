@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class Alien_Object : MonoBehaviour
 {
+    //class of alien when he dies
+    public static int alienFormDuringDeath = 0;
+
     //hold reference to object holding Script_SceneTransition
     private GameObject sceneTransitionManager;
     private GameObject gameManager;
@@ -415,6 +418,8 @@ public class Alien_Object : MonoBehaviour
         //play fade out animation
         sceneTransitionManager.GetComponent<Script_SceneTransition>().TransitionCall(1);
 
+        //store the form of the alien when he dies
+        alienFormDuringDeath = getCurrentClass();
 
         //wait for animation(1 second)
         yield return new WaitForSeconds(5);
