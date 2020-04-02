@@ -56,8 +56,8 @@ public class Alien_Object : MonoBehaviour
     public static float Current_Health = 100; //This is the amount of health, numeric value
 
     //Damage Stats
-    private static int damage = 10;
-    public static int num_ranged_charges = 4;
+    private static int damage = 40;
+    public static int num_ranged_charges = 25;
     public static float current_ranged_charges = 4;
 
     private static int charge_size = 25;
@@ -479,7 +479,7 @@ public class Alien_Object : MonoBehaviour
     /// </summary>
     public int getDamage()
     {
-        return damage * ((strength + 1) * 10);
+        return damage + ((strength) * 10);
     }
 
     public void setDoMouseRotation(bool temp)

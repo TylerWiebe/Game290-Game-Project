@@ -12,6 +12,7 @@ public class meleeAttack : MonoBehaviour
 
     //assassin attack variables
     public GameObject assassinHitPoint;
+    private float AssassinDmgMultiplier = 3;
     public float assassinAttackRadius;
 
     //bruiser attack variables
@@ -39,19 +40,19 @@ public class meleeAttack : MonoBehaviour
         {
             if (collider.gameObject.tag == "MeleeEnemy" && temp)
             {
-                collider.gameObject.GetComponent<Script_Melee_Enemy_Object>().attacked(alienHead.GetComponent<Alien_Object>().getDamage());
+                collider.gameObject.GetComponent<Script_Melee_Enemy_Object>().attacked(alienHead.GetComponent<Alien_Object>().getDamage()* AssassinDmgMultiplier);
                 temp = false;
             }
             else if (collider.gameObject.tag == "RangedEnemy" && temp)
             {
-                collider.gameObject.GetComponent<Script_Ranged_Enemy_Object>().attacked(alienHead.GetComponent<Alien_Object>().getDamage());
+                collider.gameObject.GetComponent<Script_Ranged_Enemy_Object>().attacked(alienHead.GetComponent<Alien_Object>().getDamage()* AssassinDmgMultiplier);
                 temp = false;
             }
             else if (collider.gameObject.tag == "Boss" && temp)
             {
                
                 Debug.Log("hitBoss");
-                collider.gameObject.GetComponent<Script_Boss_Object>().damageBoss(alienHead.GetComponent<Alien_Object>().getDamage());
+                collider.gameObject.GetComponent<Script_Boss_Object>().damageBoss(alienHead.GetComponent<Alien_Object>().getDamage()* AssassinDmgMultiplier);
                 temp = false;
             }
         }
