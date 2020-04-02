@@ -36,22 +36,39 @@ public class Script_Boss_Object : MonoBehaviour
 
         //set audioSource to the gameobject's "audio controller"
         audioSource = GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        //fade in boss
+        StartCoroutine("Fade");
+    }
 
+    //fade in boss
+    IEnumerator Fade()
+    {
+        float alpha = 0;
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / 8f)
+        {
+            Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, 1f, t));
+            transform.GetComponent<Renderer>().material.color = newColor;
+            yield return null;
+        }
     }
 
     //damage boss
     public void damageBoss(float damage)
     {
-        Debug.Log("current Boss HP: " + hitPoints.ToString());
-        hitPoints -= damage;
-        playBossDamagedSFX();
-        if (hitPoints <= 0)
-            destroyBoss();
+        Debug.Log(transform.GetComponent<Renderer>().material.color.a);
+        if (transform.GetComponent<Renderer>().material.color.a >= 0.99)
+        {
+            hitPoints -= damage;
+            playBossDamagedSFX();
+            if (hitPoints <= 0)
+                destroyBoss();
+        }
     }
 
     //called by destruction/dying animation upon completion of animation

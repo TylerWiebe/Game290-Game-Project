@@ -29,7 +29,20 @@ public class Script_Left_Turret_Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //fade in boss
+        StartCoroutine("Fade");
+    }
+
+    //fade in boss
+    IEnumerator Fade()
+    {
+        float alpha = 0;
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / 8f)
+        {
+            Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, 1f, t));
+            transform.GetComponent<Renderer>().material.color = newColor;
+            yield return null;
+        }
     }
 
     //call shooting animation for the left turret attack
@@ -42,7 +55,6 @@ public class Script_Left_Turret_Attack : MonoBehaviour
     private void shootLeftTurret()
     {
         int number = UnityEngine.Random.Range(1, 3);
-        Debug.Log("number = " + number);
 
         spawnAndShootProject("boss_turret_left_barrel", -38);
         spawnAndShootProject("boss_turret_left_barrel", -36);

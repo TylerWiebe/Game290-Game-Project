@@ -20,7 +20,20 @@ public class Script_Flame_Thrower_Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //fade in boss
+        StartCoroutine("Fade");
+    }
+
+    //fade in boss
+    IEnumerator Fade()
+    {
+        float alpha = 0;
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / 8f)
+        {
+            Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, 1f, t));
+            transform.GetComponent<Renderer>().material.color = newColor;
+            yield return null;
+        }
     }
 
     //stop attack
