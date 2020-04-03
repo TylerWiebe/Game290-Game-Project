@@ -466,10 +466,10 @@ public class Alien_Object : MonoBehaviour
             case 3:
                 charges += 0.1f;
                 //update variable in Script_ProjectileCharges
-                Script_ProjectileCharges.regen += (0.25f * charges);
+                Script_ProjectileCharges.regen += (0.15f * charges);
 
                 //update local copy
-                ranged_charges_regen += (0.25f * charges);
+                ranged_charges_regen += (0.15f * charges);
 
 
                 Text mytext4 = GameObject.Find("statup4").GetComponent<Text>();

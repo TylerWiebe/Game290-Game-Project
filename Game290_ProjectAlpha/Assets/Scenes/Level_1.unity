@@ -13545,6 +13545,13 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: IncreaseStat
       objectReference: {fileID: 0}
+    - target: {fileID: 8536586903763444579, guid: c48305ff06fe6b34aabb2cff1f7d82cc,
+        type: 3}
+      propertyPath: m_Text
+      value: 'Charge
+
+        Regen'
+      objectReference: {fileID: 0}
     - target: {fileID: 8536586903950141722, guid: c48305ff06fe6b34aabb2cff1f7d82cc,
         type: 3}
       propertyPath: m_WholeNumbers

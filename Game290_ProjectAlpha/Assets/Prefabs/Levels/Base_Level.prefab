@@ -1673,7 +1673,7 @@ GameObject:
   - component: {fileID: 875478119780524943}
   - component: {fileID: 2002685504022887914}
   m_Layer: 5
-  m_Name: UpChargeSizeButton (3)
+  m_Name: UpRangedChargeRegenButton (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4421,7 +4421,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Charge Size
+  m_Text: "Ranged Charge \nRegeneration"
 --- !u!1 &8536586903835841868
 GameObject:
   m_ObjectHideFlags: 0
