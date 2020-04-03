@@ -9,14 +9,10 @@ public class Script_ProjectileCharges : MonoBehaviour
     [SerializeField]
     private Slider slider = null;
 
-    //public float currentRangedCharges;
-    //public int maxRangedCharges;
-    private int regen = 4;
-
-    private float timer = 0;
-
     private GameObject player;
     private Alien_Object playerScript;
+
+    public static float regen;
 
     void Start()
     {
@@ -25,6 +21,8 @@ public class Script_ProjectileCharges : MonoBehaviour
         Debug.Log(playerScript);
         SetCharge(playerScript.get_Current_ranged_charges());
         SetMaxCharge(playerScript.get_num_ranged_charges());
+
+        regen = Alien_Object.ranged_charges_regen;
     }
 
     // Update is called once per frame
@@ -33,16 +31,10 @@ public class Script_ProjectileCharges : MonoBehaviour
         //regen shots
         if ((playerScript.get_Current_ranged_charges()) < (playerScript.get_num_ranged_charges()) && (Script_PauseMenu.gameIsPaused == false))
         {
-            //timer
-            timer += regen * Time.deltaTime;
-
-            if (timer >= 0.1f)
-            {
-                playerScript.set_Current_ranged_charges(0.02f);
-                SetCharge(playerScript.get_Current_ranged_charges());
-
-                timer = 0;
-            }
+            //add value to current charges
+            playerScript.set_Current_ranged_charges(regen * Time.deltaTime);
+            //set slider value
+            SetCharge(playerScript.get_Current_ranged_charges());
         }
 
         //use attack on click

@@ -60,8 +60,10 @@ public class Alien_Object : MonoBehaviour
     public static int num_ranged_charges = 25;
     public static float current_ranged_charges = 4;
 
-    private static int charge_size = 25;
-    private static int charges = 0;
+    public static float ranged_charges_regen = 0.15f;
+
+    //regen rate multiplier(scales with points put in "ranged_charges_regen")
+    private static float charges = 1f;
 
     //Variable Stats
     private static int strength = 0;
@@ -460,10 +462,16 @@ public class Alien_Object : MonoBehaviour
                 Debug.Log("Ranged Charges Up");
                 break;
 
-            //increase charge size
+            //increase charge regen rate
             case 3:
-                charges += 1;
-                charge_size = 25 + (charges *10);
+                charges += 0.1f;
+                //update variable in Script_ProjectileCharges
+                Script_ProjectileCharges.regen += (0.15f * charges);
+
+                //update local copy
+                ranged_charges_regen += (0.15f * charges);
+
+
                 Text mytext4 = GameObject.Find("statup4").GetComponent<Text>();
                 mytext4.text = "Increase Charge: " + charges.ToString();
                 Debug.Log("Charge Size Up");
@@ -594,7 +602,7 @@ public class Alien_Object : MonoBehaviour
         num_ranged_charges = 4;
         current_ranged_charges = 4;
 
-        charge_size = 25;
+        ranged_charges_regen = 4;
 
         //Variable Stats
         strength = 0;

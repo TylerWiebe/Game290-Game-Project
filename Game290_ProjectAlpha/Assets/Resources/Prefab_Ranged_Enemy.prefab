@@ -522,6 +522,7 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   canMove: 1
   canRotate: 1
+  collided: 0
 --- !u!114 &5781563052975181942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,7 +536,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack_damage: 50
+  damageMultiplier: 4
   hit_points: 50
+  healthMultiplier: 5
   rangedGuardDamagedSFX: {fileID: 8300000, guid: bf2924c1c8c83e349a5857a4e799c637,
     type: 3}
   rangedGuardDeath1SFX: {fileID: 8300000, guid: 68208be1530e54747a766d0c7addab3b,
@@ -572,9 +575,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1000000
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 10000
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

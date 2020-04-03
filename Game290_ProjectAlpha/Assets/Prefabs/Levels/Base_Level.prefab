@@ -1673,7 +1673,7 @@ GameObject:
   - component: {fileID: 875478119780524943}
   - component: {fileID: 2002685504022887914}
   m_Layer: 5
-  m_Name: UpChargeSizeButton (3)
+  m_Name: UpRangedChargeRegenButton (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4421,7 +4421,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Charge Size
+  m_Text: "Ranged Charge \nRegeneration"
 --- !u!1 &8536586903835841868
 GameObject:
   m_ObjectHideFlags: 0
@@ -5189,6 +5189,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685848181861318863, guid: f94bb6d2053e6ea4bbf3e4acef71a986,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.018661737
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685848181861318863, guid: f94bb6d2053e6ea4bbf3e4acef71a986,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 2.5191169
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685848181861318863, guid: f94bb6d2053e6ea4bbf3e4acef71a986,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.041241765
+      objectReference: {fileID: 0}
+    - target: {fileID: 3685848181861318863, guid: f94bb6d2053e6ea4bbf3e4acef71a986,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2.107742
       objectReference: {fileID: 0}
     - target: {fileID: 3685848181861318896, guid: f94bb6d2053e6ea4bbf3e4acef71a986,
         type: 3}
