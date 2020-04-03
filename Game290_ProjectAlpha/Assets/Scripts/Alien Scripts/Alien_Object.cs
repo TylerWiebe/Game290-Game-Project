@@ -92,6 +92,7 @@ public class Alien_Object : MonoBehaviour
     //Animations
     public Animator animHead;
     public Animator animBody;
+    private bool isNotMorphing = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -269,16 +270,22 @@ public class Alien_Object : MonoBehaviour
     /// </summary>
     private void morph_right()
     {
-        int temp = Class_Order[2];
-        Class_Order[2] = Class_Order[1];
-        Class_Order[1] = Class_Order[0];
-        Class_Order[0] = temp;
+        if (isNotMorphing)
+        {
+            isNotMorphing = false;
 
-        Current_Class = Class_Order[1];
+            int temp = Class_Order[2];
+            Class_Order[2] = Class_Order[1];
+            Class_Order[1] = Class_Order[0];
+            Class_Order[0] = temp;
 
-        morphQueue.GetComponent<Script_Morph_UI>().MorphRight();
-        updateAlienStats();
-        morph_animation();
+            Current_Class = Class_Order[1];
+
+            morphQueue.GetComponent<Script_Morph_UI>().MorphRight();
+            updateAlienStats();
+            morph_animation();
+
+        }
     }
 
     /// <summary>
@@ -288,18 +295,22 @@ public class Alien_Object : MonoBehaviour
     /// </summary>
     private void morph_left()
     {
+        if (isNotMorphing)
+        {
+            isNotMorphing = false;
+            int temp = Class_Order[0];
+            Class_Order[0] = Class_Order[1];
+            Class_Order[1] = Class_Order[2];
+            Class_Order[2] = temp;
 
-        int temp = Class_Order[0];
-        Class_Order[0] = Class_Order[1];
-        Class_Order[1] = Class_Order[2];
-        Class_Order[2] = temp;
-
-        Current_Class = Class_Order[1];
+            Current_Class = Class_Order[1];
 
 
-        morphQueue.GetComponent<Script_Morph_UI>().MorphLeft();
-        updateAlienStats();
-        morph_animation();
+            morphQueue.GetComponent<Script_Morph_UI>().MorphLeft();
+            updateAlienStats();
+            morph_animation();
+        }
+       
     }
 
 
@@ -315,6 +326,10 @@ public class Alien_Object : MonoBehaviour
         animBody.SetInteger("CurrentClass", Current_Class);
     }
 
+    public void setIsNotMorphingTrue()
+    {
+        isNotMorphing = true;
+    }
 
     private void updateAlienStats()
     {
@@ -333,7 +348,7 @@ public class Alien_Object : MonoBehaviour
             healthBar.GetComponent<Script_HealthBar>().SetMaxHealth(maxHP);
             healthBar.GetComponent<Script_HealthBar>().SetHealth(curHP);
 
-            animHead.SetInteger("IsRanged", 0);
+            //animHead.SetInteger("IsRanged", 0);
 
             //turn off charge bar
             chargeBar.SetActive(false);
@@ -361,7 +376,7 @@ public class Alien_Object : MonoBehaviour
             healthBar.GetComponent<Script_HealthBar>().SetHealth(curHP);
 
 
-            animHead.SetInteger("IsRanged", 0);
+            //animHead.SetInteger("IsRanged", 0);
 
             //turn off charge bar
             chargeBar.SetActive(false);
@@ -380,8 +395,8 @@ public class Alien_Object : MonoBehaviour
             Current_Health = (float)(Max_Health * (Current_Health_Percentage));
             speed = 0.050f * 2f;
 
-            animHead.SetBool("isRanged", true);
-            animHead.SetInteger("IsRanged", 1);
+            //animHead.SetBool("isRanged", true);
+            //animHead.SetInteger("IsRanged", 1);
 
             int maxHP = (int)Max_Health;
             int curHP = (int)Current_Health;
