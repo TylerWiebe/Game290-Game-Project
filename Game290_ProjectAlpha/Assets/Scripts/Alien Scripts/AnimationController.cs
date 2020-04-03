@@ -47,22 +47,27 @@ public class AnimationController : MonoBehaviour
     public void morph_ended()
     {
         bool temp = true;
+        myAlienObject.setIsNotMorphingTrue();
         int currentClass = myAlienObject.getCurrentClass();
-
+        if (currentClass == 2)
+        {
+            animHead.SetInteger("IsRanged", 1);
+        }
         myAlienObject.setCanMove(temp);
     }
 
     public void morphRanged()
     {
         int currentClass = myAlienObject.getCurrentClass();
-        if (currentClass == 2)
+        /*if (currentClass == 2)
         {
-            animHead.SetBool("isRanged", true);
+            animHead.SetInteger("IsRanged", 1);
         }
         else
         {
-            animHead.SetBool("isRanged", false);
+            animHead.SetInteger("IsRanged", 0);
         }
+        */
     }
 
     private void ranged_cannon_morph_anim_sync()
@@ -77,9 +82,14 @@ public class AnimationController : MonoBehaviour
         int currentClass = myAlienObject.getCurrentClass();
         if (currentClass != 2)
         {
-            animHead.SetBool("isRanged", false);
+            animHead.SetInteger("IsRanged", 0);
 
         }
+        /*
+        else
+        {
+            animHead.SetInteger("IsRanged", 1);
+        }*/
         Debug.Log("morphStarted");
         myAlienObject.setCanMove(false);
     }
