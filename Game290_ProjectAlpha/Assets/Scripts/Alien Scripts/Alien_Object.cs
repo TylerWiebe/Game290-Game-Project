@@ -50,10 +50,10 @@ public class Alien_Object : MonoBehaviour
     public bool playerAlive = true;
     //ALIEN STATS
     //Health Stats
-    public static float Max_Health = 100;// actual maximum health
-    private static float HEALTH_SCALE_CONST = 100; //this is the health constant between the three classes, the max health will be scaled off of this value
+    public static float Max_Health = 300;// actual maximum health
+    private static float HEALTH_SCALE_CONST = 300; //this is the health constant between the three classes, the max health will be scaled off of this value
     private static float Current_Health_Percentage = 1; //this is the amount of health the player has left in percentage
-    public static float Current_Health = 100; //This is the amount of health, numeric value
+    public static float Current_Health = 300; //This is the amount of health, numeric value
 
     //Damage Stats
     private static int damage = 40;
