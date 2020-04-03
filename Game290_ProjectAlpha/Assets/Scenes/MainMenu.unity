@@ -3042,6 +3042,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2834135388948698772, guid: d0341cbc83b2ea3488a22fef458559e2,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3598723109337604905, guid: d0341cbc83b2ea3488a22fef458559e2,
         type: 3}
       propertyPath: slider
@@ -3664,6 +3669,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1500802902 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2576242923709678893, guid: d0341cbc83b2ea3488a22fef458559e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1195272110}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &1500802904
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500802902}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &1547641220
 GameObject:
   m_ObjectHideFlags: 0

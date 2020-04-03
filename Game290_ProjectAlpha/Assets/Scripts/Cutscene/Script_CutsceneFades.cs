@@ -33,7 +33,7 @@ public class Script_CutsceneFades : MonoBehaviour
             temp += 0.01f;
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
 
         //fade out
         while (temp > 0)
@@ -43,7 +43,7 @@ public class Script_CutsceneFades : MonoBehaviour
             temp -= 0.01f;
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.8f);
 
         //fade in
         while (temp < 1f)
