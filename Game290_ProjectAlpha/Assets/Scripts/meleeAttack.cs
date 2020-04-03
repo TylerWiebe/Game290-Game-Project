@@ -10,6 +10,8 @@ public class meleeAttack : MonoBehaviour
     //a reference to the alien head to get alien damage
     private GameObject alienHead;
 
+    public GameObject crack;
+
     //assassin attack variables
     public GameObject assassinHitPoint;
     private float AssassinDmgMultiplier = 3;
@@ -69,6 +71,7 @@ public class meleeAttack : MonoBehaviour
 
     public void attackBruiser()
     {
+        Instantiate(crack, bruiserHitPoint.transform.position, bruiserHitPoint.transform.rotation);
         Debug.Log("triedAttacking");
         Collider2D[] collisions = Physics2D.OverlapCircleAll(bruiserHitPoint.transform.position, bruiserAttackRadius, enemies);
         foreach (Collider2D collider in collisions)

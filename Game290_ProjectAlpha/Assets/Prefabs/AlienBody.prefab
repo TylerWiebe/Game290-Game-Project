@@ -357,6 +357,7 @@ MonoBehaviour:
   enemies:
     serializedVersion: 2
     m_Bits: 256
+  crack: {fileID: 2764559679209079923, guid: f48166c020073db48813b86cd192cf3d, type: 3}
   assassinHitPoint: {fileID: 723962903423910267}
   assassinAttackRadius: 0.25
   bruiserHitPoint: {fileID: 8752252584088674661}
