@@ -125,6 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hit_points: 100
   slimeDeathSFX: {fileID: 0}
+  deathPrefab_Sllime: {fileID: 0}
   sfxVolume: 0.7
   healthMultiplier: 10
   attack_damage: 20
@@ -343,6 +344,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hit_points: 105
   slimeDeathSFX: {fileID: 8300000, guid: 080d89004bc043b4f9dffed79c869754, type: 3}
+  deathPrefab_Sllime: {fileID: 8179117952601646155, guid: a63cce2c7cb5c8246b932f641c981ddb,
+    type: 3}
   sfxVolume: 0.7
   healthMultiplier: 10
 --- !u!114 &6012400469325524881

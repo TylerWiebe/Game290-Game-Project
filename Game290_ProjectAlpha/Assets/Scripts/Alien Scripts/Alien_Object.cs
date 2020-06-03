@@ -50,7 +50,7 @@ public class Alien_Object : MonoBehaviour
     public bool playerAlive = true;
     //ALIEN STATS
     //Health Stats
-    public static float Max_Health = 300;// actual maximum health
+    public static float Max_Health = 300;// actual maximum health`  1
     private static float HEALTH_SCALE_CONST = 300; //this is the health constant between the three classes, the max health will be scaled off of this value
     private static float Current_Health_Percentage = 1; //this is the amount of health the player has left in percentage
     public static float Current_Health = 300; //This is the amount of health, numeric value
@@ -88,6 +88,7 @@ public class Alien_Object : MonoBehaviour
     //rigidbody for movement
     public Rigidbody2D rigidBodyBody;
 
+    private static bool gameJustStarted = true;
 
     //Animations
     public Animator animHead;
@@ -96,6 +97,13 @@ public class Alien_Object : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (gameJustStarted)
+        {
+            resetAlien();
+            animHead.SetInteger("IsRanged", 1);
+            Debug.Log("reset alien");
+            gameJustStarted = false;
+        }
         Debug.Log(vitality);
         //Finding the desired GameObjects
         gameManager = GameObject.Find("GameManager");
@@ -116,63 +124,13 @@ public class Alien_Object : MonoBehaviour
         animHead = AlienHead.GetComponent<Animator>();
         animBody = alienBody.GetComponent<Animator>();
 
-        resetAlien();
+        //resetAlien();
         //Class_Order = new int[] { 0, 2, 1 };
         //Current_Class = 2;
         //morphQueue.GetComponent<Script_Morph_UI>().SetQueue(1);
-        animHead.SetInteger("IsRanged", 1);
         updateAlienStats();
 
-        //Initializing Character
-        /*
-        System.Random rand = new System.Random();
-        switch (rand.Next(0, 6))
-        {
-            case 0:
-                Class_Order = new int[] { 0, 1, 2 };
-                Current_Class = 1;
-                morphQueue.GetComponent<Script_Morph_UI>().SetQueue(0);
-                animHead.SetInteger("IsRanged", 0);
-                updateAlienStats();
-                break;
-            case 1:
-                Class_Order = new int[] { 0, 2, 1 };
-                Current_Class = 2;
-                morphQueue.GetComponent<Script_Morph_UI>().SetQueue(1);
-                animHead.SetInteger("IsRanged", 1);
-                updateAlienStats();
-                break;
-            case 2:
-                Class_Order = new int[] { 1, 0, 2 };
-                Current_Class = 0;
-                morphQueue.GetComponent<Script_Morph_UI>().SetQueue(2);
-                animHead.SetInteger("IsRanged", 0);
-                updateAlienStats();
-                break;
-            case 3:
-                Class_Order = new int[] { 1, 2, 0 };
-                Current_Class = 2;
-                morphQueue.GetComponent<Script_Morph_UI>().SetQueue(3);
-                animHead.SetInteger("IsRanged", 1);
-                updateAlienStats();
-                break;
-            case 4:
-                Class_Order = new int[] { 2, 1, 0 };
-                Current_Class = 1;
-                morphQueue.GetComponent<Script_Morph_UI>().SetQueue(4);
-                animHead.SetInteger("IsRanged", 0);
-                updateAlienStats();
-                break;
-            default:
-                Class_Order = new int[] { 2, 0, 1 };
-                Current_Class = 0;
-                morphQueue.GetComponent<Script_Morph_UI>().SetQueue(5);
-                animHead.SetInteger("IsRanged", 0);
-
-                updateAlienStats();
-                break;
-        }
-        */
+        
     }
 
 
@@ -607,10 +565,10 @@ public class Alien_Object : MonoBehaviour
     {
         //ALIEN STATS RESET
         //Health Stats
-        Max_Health = 100;
-        HEALTH_SCALE_CONST = 100; 
+        Max_Health = 300;
+        HEALTH_SCALE_CONST = 300; 
         Current_Health_Percentage = 1; 
-        Current_Health = 100; 
+        Current_Health = 300; 
 
         //Damage Stats
         damage = 10;

@@ -16,6 +16,8 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
     //slime death sound
     public AudioClip slimeDeathSFX;
 
+    public GameObject deathPrefab_Sllime;
+
     //SFX volume
     public float sfxVolume;
 
@@ -49,6 +51,9 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
         playSlimeDamagedSFX();
         if (hit_points <= 0)
         {
+            Instantiate(deathPrefab_Sllime, transform.position, transform.rotation);
+            destroy();
+            /*
             //stop enemy from moving when dead
             this.transform.GetComponentInParent<Script_EnemyAI>().canMove = false;
 
@@ -63,6 +68,7 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
 
             //call the death animation
             this.transform.GetComponentInParent<Animator>().SetBool("isDead", true);
+            */
         }
     }
 
