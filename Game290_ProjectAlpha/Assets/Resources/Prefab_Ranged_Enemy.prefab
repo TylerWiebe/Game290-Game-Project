@@ -318,7 +318,8 @@ AudioSource:
   m_GameObject: {fileID: 960598955677639028}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 57bbf438637fb6446b2e1581d5e45b64,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -539,6 +540,8 @@ MonoBehaviour:
   damageMultiplier: 4
   hit_points: 50
   healthMultiplier: 5
+  deathPrefab_Ranged_enemy: {fileID: 7638466139809904270, guid: 03030875b128add46a5087dcd52598e6,
+    type: 3}
   rangedGuardDamagedSFX: {fileID: 8300000, guid: bf2924c1c8c83e349a5857a4e799c637,
     type: 3}
   rangedGuardDeath1SFX: {fileID: 8300000, guid: 68208be1530e54747a766d0c7addab3b,
@@ -625,7 +628,8 @@ AudioSource:
   m_GameObject: {fileID: 5174167463473005377}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 57bbf438637fb6446b2e1581d5e45b64,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

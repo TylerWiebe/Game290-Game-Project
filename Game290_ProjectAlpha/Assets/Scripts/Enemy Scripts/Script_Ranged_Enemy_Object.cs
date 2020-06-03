@@ -17,6 +17,10 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
     private GameObject enemy_body;
     private GameObject enemy_attack_cone;
 
+    //Death object Prefab
+    //spawned on death of enemy
+    public GameObject deathPrefab_Ranged_enemy;
+
     //gameobject's audio player
     AudioSource audioSource;
 
@@ -86,6 +90,7 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
         //if ded
         if (hit_points <= 0)
         {
+
             //play the SFX when the guard dies
             int random = UnityEngine.Random.Range(1, 3);
             if (random == 1)
@@ -93,6 +98,10 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
             else
                 playRangedGuardDeath2SFX();
 
+            Instantiate(deathPrefab_Ranged_enemy, transform.position, transform.rotation);
+            destroy();
+
+        /*
                 //stop enemy from moving when dead
                 this.transform.GetComponentInParent<Script_EnemyAI>().canMove = false;
 
@@ -107,6 +116,7 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
 
             //call the death animation
             this.transform.GetComponentInParent<Animator>().SetBool("isDead", true);
+            */
         }
     }
 
