@@ -11,6 +11,8 @@ public class Script_Boss_Object : MonoBehaviour
     private AudioSource bossMusicIdle;
     private AudioSource bossMusicCombat;
 
+    private bool isDead = false;
+
     //gameobject's audio player
     AudioSource audioSource;
 
@@ -61,13 +63,13 @@ public class Script_Boss_Object : MonoBehaviour
     //damage boss
     public void damageBoss(float damage)
     {
-        Debug.Log(transform.GetComponent<Renderer>().material.color.a);
         if (transform.GetComponent<Renderer>().material.color.a >= 0.99)
         {
             hitPoints -= damage;
             playBossDamagedSFX();
             if (hitPoints <= 0)
                 destroyBoss();
+            print(hitPoints);
         }
     }
 
@@ -85,6 +87,14 @@ public class Script_Boss_Object : MonoBehaviour
 
         //fade out music
         InvokeRepeating("FadeOutMusic", 0, 0.25f);
+
+        //boss is dead
+        isDead = true;
+    }
+
+    public bool isBossDead()
+    {
+        return isDead;
     }
 
     //music stuff

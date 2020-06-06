@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Threading;
+using System.Runtime.InteropServices;
 
 //This script must be attached to the attackRange game object and must also be a child of the "enemy" game object.
 public class Script_Ranged_Enemy_Attack : MonoBehaviour
@@ -39,7 +40,7 @@ public class Script_Ranged_Enemy_Attack : MonoBehaviour
     {
         if (((other.tag == "player") || (other.tag == "Player")) && !this.gameObject.GetComponentInParent<Script_EnemyAI>().playerNotSeen)
         {
-            InvokeRepeating("AttackSetUp", 1f, 1.5f);
+            InvokeRepeating("AttackSetUp", 1.0f, 2.0f);
         }
     }
 
@@ -79,7 +80,7 @@ public class Script_Ranged_Enemy_Attack : MonoBehaviour
         //rotate projectile to face the direction it is being shootedededed
         projectile_instance.transform.rotation = Quaternion.Euler(0, 0, theta * Mathf.Rad2Deg + 90);
         //set the damage of the projectile   
-        projectile_instance.GetComponent<Script_Ranged_Enemy_Projectile>().set_damage(this.gameObject.GetComponentInParent<Script_Ranged_Enemy_Object>().get_attack_damage());
+        projectile_instance.GetComponent<Script_Boss_Projectile>().set_damage(this.gameObject.GetComponentInParent<Script_Ranged_Enemy_Object>().get_attack_damage());        
 
         //allow enemy to move
         this.transform.parent.gameObject.GetComponent<Script_EnemyAI>().canMove = true;

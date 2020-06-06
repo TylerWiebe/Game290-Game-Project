@@ -80,7 +80,7 @@ public class Alien_Object : MonoBehaviour
     //control variables
     private bool alienCanMove = true;
     private bool doMouseRotate = true;
-
+    
     //Camera Settings
     public int cameraSize;
 

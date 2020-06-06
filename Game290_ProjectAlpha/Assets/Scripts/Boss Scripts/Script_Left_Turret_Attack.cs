@@ -104,20 +104,6 @@ public class Script_Left_Turret_Attack : MonoBehaviour
         spawnAndShootProject("boss_turret_left_barrel", 36);
         spawnAndShootProject("boss_turret_left_barrel", 38);
 
-        /*
-        spawnAndShootProject("boss_turret_left_barrel", -34);
-        spawnAndShootProject("boss_turret_left_barrel", -30);
-        spawnAndShootProject("boss_turret_left_barrel", -26);
-
-        spawnAndShootProject("boss_turret_left_barrel", -4);
-        spawnAndShootProject("boss_turret_left_barrel", 0);
-        spawnAndShootProject("boss_turret_left_barrel", 4);
-
-        spawnAndShootProject("boss_turret_left_barrel", 26);
-        spawnAndShootProject("boss_turret_left_barrel", 30);
-        spawnAndShootProject("boss_turret_left_barrel", 36);
-        */
-
         this.transform.GetComponent<Animator>().SetBool("leftTurretAttacking", false);
     }
 
@@ -136,7 +122,7 @@ public class Script_Left_Turret_Attack : MonoBehaviour
         //calculate the velocity vector of the boi
         Vector3 vector = new Vector3((float)(8 * Math.Cos(theta)), (float)(8 * Math.Sin(theta)), 0f); //create a vector of x and y velocities
         //set damage of the projectile
-        projectile_instance.GetComponent<Script_Ranged_Enemy_Projectile>().set_damage(10);
+        projectile_instance.GetComponent<Script_Boss_Projectile>().set_damage(10);
         //set rotatopm of the projectile
         projectile_instance.transform.rotation = Quaternion.Euler(0, 0, theta * Mathf.Rad2Deg + 90);
         //set velocity of the projectile

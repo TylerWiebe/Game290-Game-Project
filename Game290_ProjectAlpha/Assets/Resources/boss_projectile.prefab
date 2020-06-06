@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 109605457445455282}
   - component: {fileID: 109605457445455283}
   - component: {fileID: 109605457445456460}
-  - component: {fileID: 109605457445456461}
   - component: {fileID: 109605457445456462}
   - component: {fileID: 109605457445456463}
+  - component: {fileID: 5708051781380479332}
   m_Layer: 0
   m_Name: boss_projectile
   m_TagString: Untagged
@@ -101,18 +101,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.5, y: 2.3}
   m_Direction: 0
---- !u!114 &109605457445456461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 109605457445456456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ef4d661c4cbf454193b57f36da7f3e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &109605457445456462
 Rigidbody2D:
   serializedVersion: 4
@@ -153,3 +141,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5708051781380479332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109605457445456456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2c03618219c63d4685f235d0ea02cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

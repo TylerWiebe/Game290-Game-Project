@@ -79,7 +79,7 @@ public class Script_BossAI : MonoBehaviour
         InvokeRepeating("suspendFlameThrowerAttack", 10f + 8f, 20f);
 
         //summon enemies
-        InvokeRepeating("summonEnemies", 0f + 8f, 30f);
+       // InvokeRepeating("summonEnemies", 0f + 8f, 30f);
     }
     
     //shoot left turret
