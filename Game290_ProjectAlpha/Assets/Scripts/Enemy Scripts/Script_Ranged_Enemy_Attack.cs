@@ -34,19 +34,31 @@ public class Script_Ranged_Enemy_Attack : MonoBehaviour
 
     }
 
-    //when a collision with player occurs, trigger attacks
-    //IEnumerator OnTriggerEnter2D(Collider2D other)
-    IEnumerator OnTriggerStay2D(Collider2D other)
+    //When the player enters the ranged enemy's attack radius
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (((other.tag == "player") || (other.tag == "Player")) && !this.gameObject.GetComponentInParent<Script_EnemyAI>().playerNotSeen)
         {
-            //stop the enemy from moving
-            this.transform.parent.gameObject.GetComponent<Script_EnemyAI>().canMove = false;
-            //wait time for attack
-            yield return new WaitForSeconds(0.25f);
-            //call animation
-            this.transform.GetComponentInParent<Animator>().SetBool("isAttacking", true);
+            InvokeRepeating("AttackSetUp", 1f, 1.5f);
         }
+    }
+
+    //When the player leaves the ranged enemy's attack radius
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if (((other.tag == "player") || (other.tag == "Player")) && !this.gameObject.GetComponentInParent<Script_EnemyAI>().playerNotSeen)
+        {
+            CancelInvoke("AttackSetUp");
+        }
+    }
+
+
+    public void AttackSetUp()
+    {
+        //stop the enemy from moving
+        this.transform.parent.gameObject.GetComponent<Script_EnemyAI>().canMove = false;
+        //call animation
+        this.transform.GetComponentInParent<Animator>().SetBool("isAttacking", true);
     }
 
     //attack function called by animation

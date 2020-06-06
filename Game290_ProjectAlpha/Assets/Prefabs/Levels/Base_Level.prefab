@@ -5435,10 +5435,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8536586902857156173}
     m_Modifications:
+    - target: {fileID: 723962903423910267, guid: 5f28ef9ebc15ba94798e9369011c5851,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 2993240488515180726, guid: 5f28ef9ebc15ba94798e9369011c5851,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3179349462814011410, guid: 5f28ef9ebc15ba94798e9369011c5851,
         type: 3}
@@ -5514,6 +5519,11 @@ PrefabInstance:
         type: 3}
       propertyPath: animHead
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8752252584088674661, guid: 5f28ef9ebc15ba94798e9369011c5851,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f28ef9ebc15ba94798e9369011c5851, type: 3}
