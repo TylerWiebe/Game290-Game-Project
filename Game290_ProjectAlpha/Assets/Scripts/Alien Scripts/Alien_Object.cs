@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
+using System.Globalization;
 
 public class Alien_Object : MonoBehaviour
 {
@@ -95,6 +96,11 @@ public class Alien_Object : MonoBehaviour
     public Animator animBody;
     private bool isNotMorphing = true;
     // Start is called before the first frame update
+
+    public Text myText1;
+    public Text myText2;
+    public Text myText3;
+    public Text myText4;
     void Start()
     {
         if (gameJustStarted)
@@ -375,7 +381,23 @@ public class Alien_Object : MonoBehaviour
             //add skill
         }
         this.gameObject.GetComponent<Animator>().SetInteger("CurrentClass", Current_Class);
-        //Debug.Log(Current_Health);
+
+
+        //vitality text updates
+        //Text myText1 = GameObject.Find("statup1").GetComponent<Text>();
+        myText1.text = "Current Vitality: " + vitality.ToString();
+
+        //Strength Text Updates
+        //Text myText2 = GameObject.Find("statup2").GetComponent<Text>();
+        myText2.text = "Current Strength: " + strength.ToString();
+
+        //Num. Charges Text Updates
+        //Text myText3 = GameObject.Find("statup3").GetComponent<Text>();
+        myText3.text = "Charges Increased: " + (num_ranged_charges - 4).ToString();
+
+        //Max. Charge stored Text Update
+        //Text myText4 = GameObject.Find("statup4").GetComponent<Text>();
+        myText4.text = "Increase Charge: " + charges.ToString();
     }
     private void RangedStartSetFalse()
     {
@@ -414,24 +436,19 @@ public class Alien_Object : MonoBehaviour
             //increase vitality
             case 0:
                 vitality += 1;
-                Text mytext = GameObject.Find("statup1").GetComponent<Text>();
-                mytext.text = "Current Vitality: " + vitality.ToString();
                 Debug.Log("Vitality Up");
                 break;
 
             //increase strength
             case 1:
                 strength += 1;
-                Text mytext2 = GameObject.Find("statup2").GetComponent<Text>();
-                mytext2.text = "Current Strength: " + strength.ToString();
+                
                 Debug.Log("Strength Up");
                 break;
 
             //increase number of ranged charges
             case 2:
                 num_ranged_charges += 1;
-                Text mytext3 = GameObject.Find("statup3").GetComponent<Text>();
-                mytext3.text = "Charges Increased: " + (num_ranged_charges - 4).ToString();
                 Debug.Log("Ranged Charges Up");
                 break;
 
@@ -445,8 +462,6 @@ public class Alien_Object : MonoBehaviour
                 ranged_charges_regen += (0.15f * charges);
 
 
-                Text mytext4 = GameObject.Find("statup4").GetComponent<Text>();
-                mytext4.text = "Increase Charge: " + charges.ToString();
                 Debug.Log("Charge Size Up");
                 break;
 

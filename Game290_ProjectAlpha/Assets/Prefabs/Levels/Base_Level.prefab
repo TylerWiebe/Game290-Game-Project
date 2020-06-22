@@ -5505,6 +5505,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5302087596766911556, guid: 5f28ef9ebc15ba94798e9369011c5851,
+        type: 3}
+      propertyPath: myText1
+      value: 
+      objectReference: {fileID: 7279616630475701529}
+    - target: {fileID: 5302087596766911556, guid: 5f28ef9ebc15ba94798e9369011c5851,
+        type: 3}
+      propertyPath: myText2
+      value: 
+      objectReference: {fileID: 4498885704149109071}
+    - target: {fileID: 5302087596766911556, guid: 5f28ef9ebc15ba94798e9369011c5851,
+        type: 3}
+      propertyPath: myText3
+      value: 
+      objectReference: {fileID: 5916456789555917771}
+    - target: {fileID: 5302087596766911556, guid: 5f28ef9ebc15ba94798e9369011c5851,
+        type: 3}
+      propertyPath: myText4
+      value: 
+      objectReference: {fileID: 7870429707620542159}
     - target: {fileID: 6122084364445526854, guid: 5f28ef9ebc15ba94798e9369011c5851,
         type: 3}
       propertyPath: m_SortingLayerID
