@@ -12,6 +12,8 @@ public class Script_CutSceneManager : MonoBehaviour
     [SerializeField]
     private AudioSource winAudio;
 
+    private static bool IsLevel1 = false;
+
     private bool hasCollided = false;
 
     /*
@@ -36,6 +38,8 @@ public class Script_CutSceneManager : MonoBehaviour
         //play fade out animation
         sceneTransitionManager.GetComponent<Script_SceneTransition>().TransitionCall(4);
 
+        //Set the level to level one, such that the alien will reset from main menu.
+        IsLevel1 = true;
 
         // ensure game is not paused (for transition play)
         Time.timeScale = 1f;
@@ -61,11 +65,13 @@ public class Script_CutSceneManager : MonoBehaviour
         //play fade out animation
         sceneTransitionManager.GetComponent<Script_SceneTransition>().TransitionCall(4);
 
+        //Set a Boolean such that the Alien will reset itself
+        IsLevel1 = true;
+
         //wait for animation(1 second)
         yield return new WaitForSeconds(2);
 
         SceneManager.LoadScene("Level_1");
-        //GameObject.Find("AlienHead").GetComponent<Alien_Object>().resetAlien();
     }
 
 
@@ -82,5 +88,15 @@ public class Script_CutSceneManager : MonoBehaviour
             //play fade out animation & final cutscene
             sceneTransitionManager.GetComponent<Script_SceneTransition>().NextSceneCall(4);
         }
+    }
+
+    public bool getIsLevel1()
+    {
+        return IsLevel1;
+    }
+
+    public void setIsLevel1False()
+    {
+        IsLevel1 = false;
     }
 }

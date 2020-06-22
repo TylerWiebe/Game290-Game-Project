@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using System.Security.Permissions;
 
 public class Script_SceneTransition : MonoBehaviour
 {

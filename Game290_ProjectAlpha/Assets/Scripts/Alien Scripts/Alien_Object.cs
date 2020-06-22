@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
 using System.Globalization;
+using System.Diagnostics;
 
 public class Alien_Object : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Alien_Object : MonoBehaviour
     //hold reference to object holding Script_SceneTransition
     private GameObject sceneTransitionManager;
     private GameObject gameManager;
+    private GameObject cutSceneManager;
 
     //PlayerUI_Canvas
     private GameObject playerUICanvas;
@@ -103,17 +105,20 @@ public class Alien_Object : MonoBehaviour
     public Text myText4;
     void Start()
     {
+
         if (gameJustStarted)
         {
             resetAlien();
             animHead.SetInteger("IsRanged", 1);
-            Debug.Log("reset alien");
+            UnityEngine.Debug.Log("reset alien");
             gameJustStarted = false;
         }
-        Debug.Log(vitality);
+
+        UnityEngine.Debug.Log(vitality);
         //Finding the desired GameObjects
         gameManager = GameObject.Find("GameManager");
         sceneTransitionManager = GameObject.Find("SceneTransitionManager");
+        cutSceneManager = GameObject.Find("CutSceneManager");
         playerUICanvas = GameObject.Find("PlayerUI_Canvas");
         healthBar = playerUICanvas.transform.Find("HealthBar").gameObject;
         chargeBar = playerUICanvas.transform.Find("ProjectileCharges").gameObject;
@@ -130,13 +135,21 @@ public class Alien_Object : MonoBehaviour
         animHead = AlienHead.GetComponent<Animator>();
         animBody = alienBody.GetComponent<Animator>();
 
-        //resetAlien();
-        //Class_Order = new int[] { 0, 2, 1 };
-        //Current_Class = 2;
-        //morphQueue.GetComponent<Script_Morph_UI>().SetQueue(1);
+        
+       
+
         updateAlienStats();
 
-        
+        if (Current_Class == 1)
+        {
+            morphQueue.GetComponent<Script_Morph_UI>().MorphLeft();
+
+        }
+        if (Current_Class == 0)
+        {
+            morphQueue.GetComponent<Script_Morph_UI>().MorphRight();
+
+        }
     }
 
 
@@ -297,6 +310,15 @@ public class Alien_Object : MonoBehaviour
 
     private void updateAlienStats()
     {
+        //If the alien is revived then we reset the alien stats
+        if (cutSceneManager.GetComponent<Script_CutSceneManager>().getIsLevel1())
+        {
+            resetAlien();
+            animHead.SetInteger("IsRanged", 1);
+            UnityEngine.Debug.Log("reset alien");
+            cutSceneManager.GetComponent<Script_CutSceneManager>().setIsLevel1False();
+        }
+
         //Debug.Log(Current_Health_Percentage);
         //assassin
         if (Current_Class == 0)
@@ -436,20 +458,20 @@ public class Alien_Object : MonoBehaviour
             //increase vitality
             case 0:
                 vitality += 1;
-                Debug.Log("Vitality Up");
+                UnityEngine.Debug.Log("Vitality Up");
                 break;
 
             //increase strength
             case 1:
                 strength += 1;
-                
-                Debug.Log("Strength Up");
+
+                UnityEngine.Debug.Log("Strength Up");
                 break;
 
             //increase number of ranged charges
             case 2:
                 num_ranged_charges += 1;
-                Debug.Log("Ranged Charges Up");
+                UnityEngine.Debug.Log("Ranged Charges Up");
                 break;
 
             //increase charge regen rate
@@ -462,11 +484,11 @@ public class Alien_Object : MonoBehaviour
                 ranged_charges_regen += (0.15f * charges);
 
 
-                Debug.Log("Charge Size Up");
+                UnityEngine.Debug.Log("Charge Size Up");
                 break;
 
             default:
-                Debug.Log("Invalid StatIndex on stat pickup");
+                UnityEngine.Debug.Log("Invalid StatIndex on stat pickup");
                 break;
         }
         updateAlienStats();
@@ -583,8 +605,11 @@ public class Alien_Object : MonoBehaviour
         Max_Health = 300;
         HEALTH_SCALE_CONST = 300; 
         Current_Health_Percentage = 1; 
-        Current_Health = 300; 
+        Current_Health = 300;
 
+        UnityEngine.
+        Debug.Log("Reset Alien Called");
+        
         //Damage Stats
         damage = 10;
         num_ranged_charges = 4;
