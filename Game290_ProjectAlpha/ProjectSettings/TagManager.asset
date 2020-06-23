@@ -53,6 +53,12 @@ TagManager:
   - name: props
     uniqueID: 3876961559
     locked: 0
+  - name: EnemiesDead
+    uniqueID: 3300802597
+    locked: 0
+  - name: StatOrb
+    uniqueID: 3508818821
+    locked: 0
   - name: Enemy
     uniqueID: 2134885053
     locked: 0
