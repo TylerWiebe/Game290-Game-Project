@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 8201943440944722034}
   - component: {fileID: 6399150236129906075}
   - component: {fileID: 1681231652806342921}
+  - component: {fileID: 1615006044005069388}
   m_Layer: 0
   m_Name: AlienHead
   m_TagString: Untagged
@@ -176,6 +177,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1615006044005069388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2993240488515180726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552bb78d2d5860e45869668a5d56c375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statOrb: {fileID: 6866704549077001977, guid: 0fd407f8b7809334ca958fdaf926cc1c, type: 3}
+  cloneOrb: {fileID: 6866704549077001977, guid: 0fd407f8b7809334ca958fdaf926cc1c,
+    type: 3}
 --- !u!1 &3179349462814011410
 GameObject:
   m_ObjectHideFlags: 0

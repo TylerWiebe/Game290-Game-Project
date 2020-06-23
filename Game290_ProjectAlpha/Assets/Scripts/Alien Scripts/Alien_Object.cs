@@ -666,5 +666,7 @@ public class Alien_Object : MonoBehaviour
         //Class reordering
         Class_Order = new int[] { 0, 2, 1 };
         Current_Class = 2;
+
+        gameObject.GetComponent<Script_SpawnStatOrb>().resetOrbsDropped();
     }
 }

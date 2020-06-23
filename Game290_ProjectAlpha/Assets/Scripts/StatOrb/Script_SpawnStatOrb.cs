@@ -10,14 +10,22 @@ public class Script_SpawnStatOrb : MonoBehaviour
 
     public GameObject cloneOrb;
 
+    private static int orbsDropped = 0;
+
     //when called determine whether to spawn a stat orb
     public void SpawnStatOrb(int spawnChance, Vector3 position)
     {
         //5% chance of spawn
-        if (Random.Range(0, 100) <= spawnChance)
+        if (Random.Range(0, 100) <= spawnChance - orbsDropped)
         {
+            orbsDropped++;
             //instantiate statOrb
             GameObject cloneOrb = Instantiate(statOrb, position, this.transform.rotation);
         }
+    }
+
+    public void resetOrbsDropped()
+    {
+        orbsDropped = 0;
     }
 }
