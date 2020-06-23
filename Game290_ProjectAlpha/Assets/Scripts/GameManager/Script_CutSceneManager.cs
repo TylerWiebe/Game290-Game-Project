@@ -16,6 +16,9 @@ public class Script_CutSceneManager : MonoBehaviour
 
     private bool hasCollided = false;
 
+    //Music script to be used to quiet the music when moving to next room
+    private Script_SwapMusic myScript_Music;
+
     /*
     * Bring player end cutscene
     */
@@ -81,6 +84,11 @@ public class Script_CutSceneManager : MonoBehaviour
         //check if the collision was with the player
         if (((other.tag == "player") || (other.tag == "Player")) & (hasCollided == false))
         {
+            myScript_Music = GameObject.Find("Music").GetComponent<Script_SwapMusic>();
+            myScript_Music.fadeOutMusic();
+
+            GameObject.Find("AlienHead").GetComponent<Alien_Object>().AlienCanMove = false;
+
             hasCollided = true;
 
             winAudio.Play();

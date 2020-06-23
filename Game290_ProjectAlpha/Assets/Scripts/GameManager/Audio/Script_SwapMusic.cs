@@ -51,6 +51,14 @@ public class Script_SwapMusic : MonoBehaviour
         }
     }
 
+    public void fadeOutMusic()
+    {
+        {
+            InvokeRepeating("FadeOutCombatMusic", 0, 0.25f);
+            InvokeRepeating("FadeOutIdleMusic", 0, 0.25f);
+        }
+    }
+
 
     //Idle Music Functions
 

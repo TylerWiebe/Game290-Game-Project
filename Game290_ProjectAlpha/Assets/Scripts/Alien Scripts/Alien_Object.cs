@@ -98,19 +98,21 @@ public class Alien_Object : MonoBehaviour
 
     //rigidbody for movement
     public Rigidbody2D rigidBodyBody;
-
     private static bool gameJustStarted = true;
 
     //Animations
     public Animator animHead;
     public Animator animBody;
     private bool isNotMorphing = true;
-    // Start is called before the first frame update
 
+    // Start is called before the first frame update
     public Text myText1;
     public Text myText2;
     public Text myText3;
     public Text myText4;
+
+    public bool AlienCanMove { get => alienCanMove; set => alienCanMove = value; }
+
     void Start()
     {
 
@@ -143,8 +145,8 @@ public class Alien_Object : MonoBehaviour
         animHead = AlienHead.GetComponent<Animator>();
         animBody = alienBody.GetComponent<Animator>();
 
-        
-       
+
+        AlienCanMove = true;
 
         updateAlienStats();
 
@@ -200,7 +202,7 @@ public class Alien_Object : MonoBehaviour
     /// </summary>
     private void moveAlien()
     {
-        if (alienCanMove)
+        if (AlienCanMove)
         {
             //Alien Movement and Aiming
             mouse_position = Input.mousePosition;
@@ -579,7 +581,7 @@ public class Alien_Object : MonoBehaviour
     }
     public void setCanMove(bool temp)
     {
-        alienCanMove = temp;
+        AlienCanMove = temp;
     }
 
     /// <summary>
