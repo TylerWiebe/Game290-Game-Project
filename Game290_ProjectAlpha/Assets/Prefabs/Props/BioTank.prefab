@@ -215,3 +215,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PL: {fileID: 4049363950062429932}
+  maxIntensity: 0.5
+  minIntensity: 0.25
