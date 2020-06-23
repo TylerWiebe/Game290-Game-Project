@@ -12,6 +12,9 @@ public class Alien_Object : MonoBehaviour
     //class of alien when he dies
     public static int alienFormDuringDeath = 0;
 
+    // a boolean to state whether the alien is alive or dead.
+    private bool AlienAlive = true;
+
     //hold reference to object holding Script_SceneTransition
     private GameObject sceneTransitionManager;
     private GameObject gameManager;
@@ -38,11 +41,14 @@ public class Alien_Object : MonoBehaviour
     //Alien Sprite
     public Sprite alien_spriteq;
 
+
     //Alien Movement variables
     Vector3 mouse_position = new Vector3();
     Vector3 alien_sprite_position = new Vector3();
     float HeadAngle = 0f;
     float BodyAngle = 0f;
+
+
 
     //Attached objects
     private GameObject AlienHead;
@@ -51,6 +57,8 @@ public class Alien_Object : MonoBehaviour
     public float speed;
 
     public bool playerAlive = true;
+
+
     //ALIEN STATS
     //Health Stats
     public static float Max_Health = 300;// actual maximum health`  1
@@ -436,6 +444,8 @@ public class Alien_Object : MonoBehaviour
         animBody.SetBool("hasDied", true);
         animBody.SetBool("morph", true);
 
+        
+
         //play fade out animation
         sceneTransitionManager.GetComponent<Script_SceneTransition>().TransitionCall(1);
 
@@ -494,6 +504,75 @@ public class Alien_Object : MonoBehaviour
         updateAlienStats();
     }
 
+
+    public void Deal_Damage_To_Alien(int damage)
+    {
+
+        float FDamage = (float)damage;
+
+        Current_Health -= FDamage;
+
+        Current_Health_Percentage = (Current_Health / Max_Health);
+
+        int curHP = (int)Current_Health;
+
+        healthBar.GetComponent<Script_HealthBar>().SetHealth(curHP);
+        //play the correct audio clip for death and taking damage which depends upon which alien the user is currently
+        if (Current_Class == 0)
+        {
+
+            if (Current_Health <= 0 && AlienAlive)
+            {
+                transform.parent.GetComponent<SFX_Controller>().AssassinDied();
+                AlienAlive = false;
+            }
+            else
+            {
+                transform.parent.GetComponent<SFX_Controller>().AssassinHurt();
+            }
+        }
+        else if (Current_Class == 1)
+        {
+            if (Current_Health <= 0 && AlienAlive)
+            {
+                transform.parent.GetComponent<SFX_Controller>().BruiserDied();
+                AlienAlive = false;
+            }
+            else
+            {
+                transform.parent.GetComponent<SFX_Controller>().BruiserHurt();
+            }
+        }
+        else if (Current_Class == 2)
+        {
+            if (Current_Health <= 0 && AlienAlive)
+            {
+                transform.parent.GetComponent<SFX_Controller>().SniperDied();
+                AlienAlive = false;
+            }
+            else
+            {
+                transform.parent.GetComponent<SFX_Controller>().SniperHurt();
+            }
+        }
+
+    }
+
+    public void attack()
+    {
+        if (Current_Class == 2)
+        {
+            animHead.SetBool("Is_attacking", true);
+            transform.parent.GetComponent<SFX_Controller>().SniperAttack();        }
+        animBody.SetBool("isAttacking", true);
+
+    }
+    
+    public void finishAttack()
+    {
+        animHead.SetBool("Is_attacking", false);
+    }
+
     public int getCurrentClass()
     {
         return Current_Class;
@@ -506,59 +585,22 @@ public class Alien_Object : MonoBehaviour
     /// <summary>
     /// On mouse1 down do some attack sequence
     /// </summary>
-    public int getDamage()
-    {
-        return damage + ((strength) * 10);
-    }
 
     public void setDoMouseRotation(bool temp)
     {
         doMouseRotate = temp;
     }
 
-    public void Deal_Damage_To_Alien(int damage)
+    public int getDamage()
     {
-
-        if (Current_Class == 0)
-        {
-
-            transform.parent.GetComponent<SFX_Controller>().AssassinHurt();
-        }
-        else if (Current_Class == 1)
-        {
-
-            transform.parent.GetComponent<SFX_Controller>().BruiserHurt();
-        }
-        else if (Current_Class == 2)
-        {
-
-            transform.parent.GetComponent<SFX_Controller>().SniperHurt();
-        }
-
-        float FDamage = (float) damage;
-
-        Current_Health -= FDamage;
-
-        Current_Health_Percentage = (Current_Health / Max_Health);
-
-        int curHP = (int)Current_Health;
-
-        healthBar.GetComponent<Script_HealthBar>().SetHealth(curHP);
+        return damage + ((strength) * 10);
     }
 
-    public void attack()
+    public bool isNotDead()
     {
-        if (Current_Class == 2)
-        {
-            animHead.SetBool("Is_attacking", true);
-            transform.parent.GetComponent<SFX_Controller>().SniperAttack();        }
-        animBody.SetBool("isAttacking", true);
+        return AlienAlive;
+    }
 
-    }
-    public void finishAttack()
-    {
-        animHead.SetBool("Is_attacking", false);
-    }
     public float getBodyAngle()
     {
         return BodyAngle;

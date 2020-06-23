@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class SFX_Controller : MonoBehaviour
@@ -27,6 +28,10 @@ public class SFX_Controller : MonoBehaviour
     public AudioClip hurtA;
     public AudioClip hurtS;
 
+    //Stings
+    //Sting_Lose is to be played on death
+    public GameObject sting_lose;
+
     private bool notDead = true;
 
     void Start()
@@ -35,54 +40,46 @@ public class SFX_Controller : MonoBehaviour
         myScript = gameObject.GetComponentInChildren<Alien_Object>();
     }
 
-    public void BruiserDied()
+    public void BruiserMorph()
     {
         if (notDead)
         {
-
-            if (myScript.get_current_health() <= 0)
-            {
-                audioSource.PlayOneShot(dieB, sfxVolume);
-                notDead = false;
-            }
-            else
-            {
-                audioSource.PlayOneShot(morphSFX, sfxVolume);
-            }
+            audioSource.PlayOneShot(morphSFX, sfxVolume);
         }
+    }
+    public void AssassinMorph()
+    {
+        if (notDead)
+        {
+            audioSource.PlayOneShot(morphSFX, sfxVolume);
+        }
+    }
+    public void SniperMorph()
+    {
+        if (notDead)
+        {
+            audioSource.PlayOneShot(morphSFX, sfxVolume);
+        }
+       
+    }
+
+    public void BruiserDied()
+    {
+        audioSource.PlayOneShot(dieB, sfxVolume);
+        Instantiate(sting_lose);
+        notDead = false;
     }
     public void AssassinDied()
     {
-        if (notDead)
-        {
-            if (myScript.get_current_health() <= 0)
-            {
-                audioSource.PlayOneShot(dieA, sfxVolume);
-                notDead = false;
-            }
-            else
-            {
-                audioSource.PlayOneShot(morphSFX, sfxVolume);
-            }
-
-        }
+        audioSource.PlayOneShot(dieA, sfxVolume);
+        Instantiate(sting_lose);
+        notDead = false;
     }
     public void SniperDied()
     {
-        if (notDead)
-        {
-            Debug.Log("calledSniperDied");
-            if (myScript.get_current_health() <= 0)
-            {
-                audioSource.PlayOneShot(dieS, sfxVolume);
-                notDead = false;
-            }
-            else
-            {
-                audioSource.PlayOneShot(morphSFX, sfxVolume);
-            }
-        }
-       
+        audioSource.PlayOneShot(dieS, sfxVolume);
+        Instantiate(sting_lose);
+        notDead = false;
     }
 
     public void BruiserAttack()

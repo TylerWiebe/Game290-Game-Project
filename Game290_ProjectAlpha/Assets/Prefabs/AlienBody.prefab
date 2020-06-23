@@ -84,6 +84,10 @@ MonoBehaviour:
   rigidBodyBody: {fileID: 3179349462814011422}
   animHead: {fileID: 6399150236129906075}
   animBody: {fileID: -3640405606799898791}
+  myText1: {fileID: 0}
+  myText2: {fileID: 0}
+  myText3: {fileID: 0}
+  myText4: {fileID: 0}
 --- !u!114 &8201943440944722034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,6 +389,8 @@ MonoBehaviour:
   hurtB: {fileID: 8300000, guid: f00ff298fcca65449a2ffada07b36ee9, type: 3}
   hurtA: {fileID: 8300000, guid: 290dc48e7b869df479fcfa8d8b90ed05, type: 3}
   hurtS: {fileID: 8300000, guid: 9c53ef8e4c3773f40ba474c00fe2fd5d, type: 3}
+  sting_lose: {fileID: 7424026197802104378, guid: 241fa92bd9c8b3e46a164c75af847404,
+    type: 3}
 --- !u!82 &753809384572968029
 AudioSource:
   m_ObjectHideFlags: 0

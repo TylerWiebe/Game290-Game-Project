@@ -9,6 +9,7 @@ using System;
 
 public class Script_EnemyAI : MonoBehaviour
 {
+    #region Atributes
     //control condition in update function allowing only 1 enemy to be added to count
     private bool needToAddToEnemyCount = true;
 
@@ -68,10 +69,18 @@ public class Script_EnemyAI : MonoBehaviour
 
     public bool collided = false;
 
+    //Reference to the AlienHead script
+    public Alien_Object AlienHead;
+
+    #endregion
+    #region Methods
+
     void Start()
     {
         //assign the object with tag "Player" to be the enemy's target 
         target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        AlienHead = GameObject.Find("AlienHead").GetComponent<Alien_Object>();
 
         //Get rigidbody
         rigidBody = this.gameObject.GetComponent<Rigidbody2D>();
@@ -103,33 +112,37 @@ public class Script_EnemyAI : MonoBehaviour
             //If is walking within the boundary of its room
             else
             {
-                //Player has not been see, so operate enemy in passive behaviour
-                if (playerNotSeen == true)
+                if (AlienHead.isNotDead())
                 {
-                    //Start passive behaviour
-                    StartCoroutine(PassiveBehaviour());
-                }
-                //Player has been seen, so operate enemy in aggressive behaviour
-                else
-                {
-
-                    //Music stuff
-                    if (swapMusicScript != null && needToAddToEnemyCount)
+                    //Player has not been see, so operate enemy in passive behaviour
+                    if (playerNotSeen == true)
                     {
-                        swapMusicScript.alertedEnemiesCount += 1;
-                        needToAddToEnemyCount = false;
+                        //Start passive behaviour
+                        StartCoroutine(PassiveBehaviour());
                     }
-                    //change to combat music
-                    if (swapMusicScript != null && (swapMusicScript.isPlayingCombatMusic == false) & (swapMusicScript.alertedEnemiesCount >= 1))
+                    //Player has been seen, so operate enemy in aggressive behaviour
+                    else
                     {
-                        swapMusicScript.isPlayingCombatMusic = true;
-                        swapMusicScript.PlayCombatMusic();
+
+                        //Music stuff
+                        if (swapMusicScript != null && needToAddToEnemyCount)
+                        {
+                            swapMusicScript.alertedEnemiesCount += 1;
+                            needToAddToEnemyCount = false;
+                        }
+                        //change to combat music
+                        if (swapMusicScript != null && (swapMusicScript.isPlayingCombatMusic == false) & (swapMusicScript.alertedEnemiesCount >= 1))
+                        {
+                            swapMusicScript.isPlayingCombatMusic = true;
+                            swapMusicScript.PlayCombatMusic();
+                        }
+
+
+                        //Start aggressive behaviour
+                        StartCoroutine(AggressiveBehaviour());
                     }
-
-
-                    //Start aggressive behaviour
-                    StartCoroutine(AggressiveBehaviour());
                 }
+                
             }
         }
     }
@@ -347,4 +360,5 @@ public class Script_EnemyAI : MonoBehaviour
         else
             this.transform.GetComponentInChildren<Script_Melee_Enemy_Attack>().Attack();
     }
+    #endregion  
 }
