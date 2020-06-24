@@ -28,6 +28,11 @@ public class Script_Boss_Object : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (GameObject.Find("Boss1ID") && GameObject.Find("AlienHead").GetComponent<Alien_Object>().AlienHasNotAttacked)
+        {
+            LocalPlayerStats.Instance.localPlayerData.hasReachedBossOneWithoutAttacking = true;
+        }
+
         hitPoints = maxHitPoints;
         gate = GameObject.Find("Gate");
 
@@ -76,6 +81,21 @@ public class Script_Boss_Object : MonoBehaviour
     //called by destruction/dying animation upon completion of animation
     public void destroyBoss()
     {
+
+        if (GameObject.Find("Boss1ID"))
+        {
+            LocalPlayerStats.Instance.localPlayerData.hasBeatenBossOne = true;
+        }
+        if (GameObject.Find("Boss2ID"))
+        {
+            LocalPlayerStats.Instance.localPlayerData.hasBeatenBossTwo = true;
+        }
+        if (GameObject.Find("Boss3ID"))
+        {
+            LocalPlayerStats.Instance.localPlayerData.hasBeatenBossThree = true;
+        }
+
+
         //remove gate
         gate.SetActive(false);
 

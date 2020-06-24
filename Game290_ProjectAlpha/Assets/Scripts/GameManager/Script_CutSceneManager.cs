@@ -33,11 +33,20 @@ public class Script_CutSceneManager : MonoBehaviour
     //Called by signal
     public void ReturnToMenuCall()
     {
+        //Save the game statistics
+        AchieveManager AM = new AchieveManager();
+        AM.SaveData();
+        //Head back to menu
         StartCoroutine(ReturnToMenu());
     }
 
     IEnumerator ReturnToMenu()
     {
+
+        //Save the game statistics
+        AchieveManager AM = new AchieveManager();
+        AM.SaveData();
+
         //play fade out animation
         sceneTransitionManager.GetComponent<Script_SceneTransition>().TransitionCall(4);
 
@@ -45,6 +54,7 @@ public class Script_CutSceneManager : MonoBehaviour
         IsLevel1 = true;
 
         // ensure game is not paused (for transition play)
+        Script_PauseMenu.gameIsPaused = false;
         Time.timeScale = 1f;
 
         //wait for animation(1 second)
@@ -60,6 +70,10 @@ public class Script_CutSceneManager : MonoBehaviour
     //Called by signal
     public void ReviveCall()
     {
+        //Save the game statistics
+        AchieveManager AM = new AchieveManager();
+        AM.SaveData();
+        //Start Revive call
         StartCoroutine(Revive());
     }
 

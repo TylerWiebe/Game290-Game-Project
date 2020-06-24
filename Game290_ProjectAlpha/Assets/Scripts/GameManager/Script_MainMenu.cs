@@ -31,6 +31,11 @@ public class Script_MainMenu : MonoBehaviour
 
     void Start ()
     {
+        //Load achievement stats
+        AchieveManager AM = new AchieveManager();
+        AM.LoadData();
+        LocalPlayerStats.Instance.localPlayerData = AM.LocalCopyOfData;
+
         //on start store available resolutions in an array
         resolutions = Screen.resolutions;
 
@@ -77,6 +82,8 @@ public class Script_MainMenu : MonoBehaviour
     //Call coroutine Exit
     public void ExitGame()
     {
+        AchieveManager AM = new AchieveManager();
+        AM.SaveData();
         StartCoroutine(Exit());
     }
 
@@ -91,6 +98,7 @@ public class Script_MainMenu : MonoBehaviour
         //exit game
         Application.Quit();
     }
+
 
     /*
      * Options Menu

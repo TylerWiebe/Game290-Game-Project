@@ -19,6 +19,8 @@ public class Script_StatOrb : MonoBehaviour
         //check if the collision was with the player
         if ((other.tag == "player") || (other.tag == "Player"))
         {
+            LocalPlayerStats.Instance.localPlayerData.statOrbsUsed++;
+
             Script_PauseMenu.gameIsPaused = true;
 
             //freeze time

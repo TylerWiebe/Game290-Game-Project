@@ -91,6 +91,8 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
         if (hit_points <= 0)
         {
 
+            LocalPlayerStats.Instance.localPlayerData.enemiesKilled++;
+
             //play the SFX when the guard dies
             int random = UnityEngine.Random.Range(1, 3);
             if (random == 1)

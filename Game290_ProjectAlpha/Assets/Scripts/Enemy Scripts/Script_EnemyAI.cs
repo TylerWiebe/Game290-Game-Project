@@ -328,6 +328,7 @@ public class Script_EnemyAI : MonoBehaviour
     //destroy enemy when it's hitpoints fall below 1
     private void destroyEnemy()
     {
+        LocalPlayerStats.Instance.localPlayerData.enemiesKilled++;
         if (this.gameObject.tag == "RangedEnemy")
         {
             this.transform.GetComponentInChildren<Script_Ranged_Enemy_Object>().destroy();

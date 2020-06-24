@@ -51,6 +51,9 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
         playSlimeDamagedSFX();
         if (hit_points <= 0)
         {
+
+            LocalPlayerStats.Instance.localPlayerData.enemiesKilled++;
+
             Instantiate(deathPrefab_Sllime, transform.position, transform.rotation);
             destroy();
             /*

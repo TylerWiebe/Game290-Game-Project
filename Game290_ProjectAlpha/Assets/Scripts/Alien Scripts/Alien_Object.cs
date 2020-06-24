@@ -57,7 +57,11 @@ public class Alien_Object : MonoBehaviour
     private GameObject myCamera;
     public float speed;
 
+    //Current State of Alien available actions
     public bool playerAlive = true;
+
+    //A boolean that is true if the player has yet to have attacked, false if the player has attacked
+    public bool AlienHasNotAttacked;
 
 
     //ALIEN STATS
@@ -115,6 +119,9 @@ public class Alien_Object : MonoBehaviour
 
 
     #endregion
+
+    #region Methods
+
     #region monobehaviourMethods
     void Start()
     {
@@ -545,6 +552,7 @@ public class Alien_Object : MonoBehaviour
             if (Current_Health <= 0 && AlienAlive)
             {
                 transform.parent.GetComponent<SFX_Controller>().AssassinDied();
+                LocalPlayerStats.Instance.localPlayerData.timesDied++;
                 AlienAlive = false;
             }
             else
@@ -557,6 +565,7 @@ public class Alien_Object : MonoBehaviour
             if (Current_Health <= 0 && AlienAlive)
             {
                 transform.parent.GetComponent<SFX_Controller>().BruiserDied();
+                LocalPlayerStats.Instance.localPlayerData.timesDied++;
                 AlienAlive = false;
             }
             else
@@ -569,6 +578,7 @@ public class Alien_Object : MonoBehaviour
             if (Current_Health <= 0 && AlienAlive)
             {
                 transform.parent.GetComponent<SFX_Controller>().SniperDied();
+                LocalPlayerStats.Instance.localPlayerData.timesDied++;
                 AlienAlive = false;
             }
             else
@@ -581,10 +591,13 @@ public class Alien_Object : MonoBehaviour
 
     public void attack()
     {
+        AlienHasNotAttacked = false;
+
         if (Current_Class == 2)
         {
             animHead.SetBool("Is_attacking", true);
-            transform.parent.GetComponent<SFX_Controller>().SniperAttack();        }
+            transform.parent.GetComponent<SFX_Controller>().SniperAttack();        
+        }
         animBody.SetBool("isAttacking", true);
 
     }
@@ -689,8 +702,14 @@ public class Alien_Object : MonoBehaviour
         current_ranged_charges = 4;
         charges = 0;
 
-
+        //number of charges that can be shot - 1
         ranged_charges_regen = 4;
+
+        //reset AlienHasNotAttacked (achievement boolean)
+        AlienHasNotAttacked = true;
+
+        //allow the alien to move
+        alienCanMove = true;
 
         //Variable Stats
         strength = 0;
@@ -702,5 +721,7 @@ public class Alien_Object : MonoBehaviour
 
         gameObject.GetComponent<Script_SpawnStatOrb>().resetOrbsDropped();
     }
+    #endregion
+
     #endregion
 }
