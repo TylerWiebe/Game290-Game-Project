@@ -255,6 +255,10 @@ public class Alien_Object : MonoBehaviour
             //meleeAttack.transform.position = new Vector3(nextX+deltaX, nextY+deltaY, 0);
 
         }
+        else
+        {
+            animBody.SetBool("isWalking", false);
+        }
     }
 
     /// <summary>
