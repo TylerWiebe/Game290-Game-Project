@@ -511,7 +511,7 @@ public class Alien_Object : MonoBehaviour
                 ranged_charges_regen += (0.15f * charges);
 
 
-                UnityEngine.Debug.Log("Charge Size Up");
+                UnityEngine.Debug.Log("Charge REgen Up");
                 break;
 
             default:

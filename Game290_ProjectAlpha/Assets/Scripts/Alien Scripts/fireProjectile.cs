@@ -26,8 +26,12 @@ public class fireProjectile : MonoBehaviour
         chargeBar = UI_Object.transform.Find("ProjectileCharges").gameObject;
         myAlienObjectScript = this.gameObject.GetComponent<Alien_Object>();
         myChargeScript = chargeBar.GetComponent<Script_ProjectileCharges>();
-        if (myChargeScript.getRangedCharges() > 0)
+
+        if (myChargeScript.getRangedCharges() >=2)
         {
+            myAlienObjectScript.set_Current_ranged_charges(-1);
+            myChargeScript.SetCharge(myAlienObjectScript.get_Current_ranged_charges());
+
             GameObject myProjectile = (GameObject)Instantiate(projectile, shootLocation.position, shootLocation.rotation);
             Rigidbody2D rb = myProjectile.GetComponent<Rigidbody2D>();
             rb.AddForce(shootLocation.up * bulletForce, ForceMode2D.Impulse);

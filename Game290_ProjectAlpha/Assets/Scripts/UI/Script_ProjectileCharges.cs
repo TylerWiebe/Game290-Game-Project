@@ -37,8 +37,9 @@ public class Script_ProjectileCharges : MonoBehaviour
             SetCharge(playerScript.get_Current_ranged_charges());
         }
 
+        /*
         //use attack on click
-        if ((Input.GetKeyUp(KeyCode.Mouse0)) && (playerScript.get_Current_ranged_charges() >= 1) && (Script_PauseMenu.gameIsPaused == false))
+        if ((Input.GetKeyUp(KeyCode.Mouse0)) && (playerScript.get_Current_ranged_charges() >= 2) && (Script_PauseMenu.gameIsPaused == false))
         {
             //decrease total charges
             playerScript.set_Current_ranged_charges(-1);
@@ -47,6 +48,7 @@ public class Script_ProjectileCharges : MonoBehaviour
             //useSkill
             //Debug.Log("Use Ranged Attack");
         }
+        */
     }
 
     //sets maximumCharges for the chargebar
