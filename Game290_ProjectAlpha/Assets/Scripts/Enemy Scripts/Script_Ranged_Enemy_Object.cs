@@ -11,7 +11,7 @@ public class Script_Ranged_Enemy_Object : MonoBehaviour
     public int healthMultiplier = 5;
 
     //stat orb spawn chance
-    private int spawnChance = 20;
+    private int spawnChance = 5;
     private Script_SwapMusic swapMusicScript;
 
     private GameObject enemy_body;

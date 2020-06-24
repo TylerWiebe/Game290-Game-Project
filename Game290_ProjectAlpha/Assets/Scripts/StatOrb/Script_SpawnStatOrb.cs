@@ -16,7 +16,7 @@ public class Script_SpawnStatOrb : MonoBehaviour
     public void SpawnStatOrb(int spawnChance, Vector3 position)
     {
         //5% chance of spawn
-        if (Random.Range(0, 100) <= spawnChance - orbsDropped)
+        if (Random.Range(0, 100) <= (spawnChance - orbsDropped))
         {
             orbsDropped++;
             //instantiate statOrb

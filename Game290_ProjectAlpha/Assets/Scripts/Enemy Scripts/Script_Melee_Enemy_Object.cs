@@ -7,7 +7,7 @@ public class Script_Melee_Enemy_Object : MonoBehaviour
     public float hit_points;
 
     //stat orb spawn chance
-    private int spawnChance = 15;
+    private int spawnChance = 5;
     private Script_SwapMusic swapMusicScript;
 
     //gameobject's audio player
