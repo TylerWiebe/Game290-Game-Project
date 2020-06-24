@@ -75,7 +75,7 @@ public class Alien_Object : MonoBehaviour
     public static float ranged_charges_regen = 0.15f;
 
     //regen rate multiplier(scales with points put in "ranged_charges_regen")
-    private static float charges = 1f;
+    private static float charges = 0f;
 
     //Variable Stats
     private static int strength = 0;
@@ -202,8 +202,10 @@ public class Alien_Object : MonoBehaviour
     }
 
     #endregion
+
     #region ActionMethods
 
+    #region AlienMovementMethods
     /// <summary>
     /// Movement and rotation of the alien body and head
     /// </summary>
@@ -311,7 +313,9 @@ public class Alien_Object : MonoBehaviour
        
     }
 
+    #endregion
 
+    #region OtherAlienActionMethods
     /// <summary>
     /// This function is used to do a morph animation from one class into another
     /// </summary>
@@ -499,9 +503,9 @@ public class Alien_Object : MonoBehaviour
 
             //increase charge regen rate
             case 3:
-                charges += 0.1f;
+                charges += 1;
                 //update variable in Script_ProjectileCharges
-                Script_ProjectileCharges.regen += (0.15f * charges);
+                Script_ProjectileCharges.regen += (0.15f * ((charges*0.1f) + 1));
 
                 //update local copy
                 ranged_charges_regen += (0.15f * charges);
@@ -589,6 +593,8 @@ public class Alien_Object : MonoBehaviour
     {
         animHead.SetBool("Is_attacking", false);
     }
+
+    #endregion
 
     #endregion
 
@@ -681,6 +687,8 @@ public class Alien_Object : MonoBehaviour
         damage = 10;
         num_ranged_charges = 4;
         current_ranged_charges = 4;
+        charges = 0;
+
 
         ranged_charges_regen = 4;
 
