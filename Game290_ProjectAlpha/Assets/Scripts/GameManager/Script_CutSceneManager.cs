@@ -88,6 +88,7 @@ public class Script_CutSceneManager : MonoBehaviour
             myScript_Music.fadeOutMusic();
 
             GameObject.Find("AlienHead").GetComponent<Alien_Object>().AlienCanMove = false;
+            GameObject.Find("AlienHead").GetComponent<Alien_Object>().AlienTouchedStairs1 = true;
 
             hasCollided = true;
 

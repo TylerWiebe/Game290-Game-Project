@@ -9,6 +9,7 @@ using System.Diagnostics;
 
 public class Alien_Object : MonoBehaviour
 {
+    #region attributes
     //class of alien when he dies
     public static int alienFormDuringDeath = 0;
 
@@ -90,6 +91,7 @@ public class Alien_Object : MonoBehaviour
 
     //control variables
     private bool alienCanMove = true;
+    private bool AlienTouchedStairs = false;
     private bool doMouseRotate = true;
     
     //Camera Settings
@@ -111,8 +113,9 @@ public class Alien_Object : MonoBehaviour
     public Text myText3;
     public Text myText4;
 
-    public bool AlienCanMove { get => alienCanMove; set => alienCanMove = value; }
 
+    #endregion
+    #region monobehaviourMethods
     void Start()
     {
 
@@ -147,6 +150,7 @@ public class Alien_Object : MonoBehaviour
 
 
         AlienCanMove = true;
+        AlienTouchedStairs = false;
 
         updateAlienStats();
 
@@ -196,6 +200,9 @@ public class Alien_Object : MonoBehaviour
             moveAlien();
         }
     }
+
+    #endregion
+    #region ActionMethods
 
     /// <summary>
     /// Movement and rotation of the alien body and head
@@ -510,15 +517,19 @@ public class Alien_Object : MonoBehaviour
     public void Deal_Damage_To_Alien(int damage)
     {
 
-        float FDamage = (float)damage;
+        if (!AlienTouchedStairs)
+        {
+            float FDamage = (float)damage;
 
-        Current_Health -= FDamage;
+            Current_Health -= FDamage;
 
-        Current_Health_Percentage = (Current_Health / Max_Health);
+            Current_Health_Percentage = (Current_Health / Max_Health);
 
-        int curHP = (int)Current_Health;
+            int curHP = (int)Current_Health;
 
-        healthBar.GetComponent<Script_HealthBar>().SetHealth(curHP);
+            healthBar.GetComponent<Script_HealthBar>().SetHealth(curHP);
+        }
+        
         //play the correct audio clip for death and taking damage which depends upon which alien the user is currently
         if (Current_Class == 0)
         {
@@ -574,7 +585,8 @@ public class Alien_Object : MonoBehaviour
     {
         animHead.SetBool("Is_attacking", false);
     }
-
+    #endregion
+    #region GettersAndSetters
     public int getCurrentClass()
     {
         return Current_Class;
@@ -602,6 +614,9 @@ public class Alien_Object : MonoBehaviour
     {
         return AlienAlive;
     }
+
+    public bool AlienCanMove { get => alienCanMove; set => alienCanMove = value; }
+    public bool AlienTouchedStairs1 { get => AlienTouchedStairs; set => AlienTouchedStairs = value; }
 
     public float getBodyAngle()
     {
@@ -640,8 +655,8 @@ public class Alien_Object : MonoBehaviour
     {
         Current_Health += x;
     }
-
-
+    #endregion
+    #region Reset
     public void resetAlien()
     {
         //ALIEN STATS RESET
@@ -671,4 +686,5 @@ public class Alien_Object : MonoBehaviour
 
         gameObject.GetComponent<Script_SpawnStatOrb>().resetOrbsDropped();
     }
+    #endregion
 }
