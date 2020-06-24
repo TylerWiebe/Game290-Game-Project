@@ -585,8 +585,11 @@ public class Alien_Object : MonoBehaviour
     {
         animHead.SetBool("Is_attacking", false);
     }
+
     #endregion
+
     #region GettersAndSetters
+
     public int getCurrentClass()
     {
         return Current_Class;
@@ -656,6 +659,7 @@ public class Alien_Object : MonoBehaviour
         Current_Health += x;
     }
     #endregion
+
     #region Reset
     public void resetAlien()
     {
