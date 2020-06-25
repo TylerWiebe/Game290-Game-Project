@@ -1555,10 +1555,10 @@ MonoBehaviour:
     type: 3}
   Sprite_Pacifist: {fileID: 21300000, guid: c0d1008411b329a4b899e677452fae61, type: 3}
   Sprite_Hidden: {fileID: 21300000, guid: 39a0936a7dfeeb641847f50cc5966b7a, type: 3}
-  Requirements_Killer: 250
-  Requirements_Dying: 100
-  Requirements_Stats_Are_Important: 20
-  Requirements_You_Will_Get_Them_Next_Time: 20
+  Requirements_Killer: 25
+  Requirements_Dying: 5
+  Requirements_Stats_Are_Important: 5
+  Requirements_You_Will_Get_Them_Next_Time: 5
   Requirements_too_Easy: 1
   Requirements_No_Life: 5
 --- !u!1 &429278848
@@ -4340,7 +4340,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1264477302
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6694,7 +6694,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Reset Achievements
 --- !u!222 &1878104580
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7547,7 +7547,7 @@ MonoBehaviour:
     timesDied: 0
     statOrbsUsed: 0
     numberOfAttempts: 0
-    timesWon: 0
+    timesWon: 5
     hasBeatenBossOne: 0
     hasBeatenBossTwo: 0
     hasBeatenBossThree: 0
@@ -7921,7 +7921,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2134655752
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8036,12 +8036,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1490748675}
-        m_MethodName: 
+      - m_Target: {fileID: 1490748676}
+        m_MethodName: resetAchievements
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -8098,12 +8098,12 @@ PrefabInstance:
     - target: {fileID: 4564038499864449537, guid: 8e841c0e67d05f04784e4121ffc20b62,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4564038499864449537, guid: 8e841c0e67d05f04784e4121ffc20b62,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4564038500080812804, guid: 8e841c0e67d05f04784e4121ffc20b62,
         type: 3}
@@ -8239,17 +8239,17 @@ PrefabInstance:
     - target: {fileID: 4564038501378264873, guid: 8e841c0e67d05f04784e4121ffc20b62,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4564038501378264873, guid: 8e841c0e67d05f04784e4121ffc20b62,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4564038501378264873, guid: 8e841c0e67d05f04784e4121ffc20b62,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e841c0e67d05f04784e4121ffc20b62, type: 3}
