@@ -12,6 +12,7 @@ public class AchieveManager : MonoBehaviour
 
     public void SaveData()
     {
+
         if (!Directory.Exists("Saves"))
             Directory.CreateDirectory("Saves");
 
@@ -25,9 +26,24 @@ public class AchieveManager : MonoBehaviour
         saveFile.Close();
     }
 
+    public void ResetAchievements()
+    {
+
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream saveFile = File.Create("Saves/save.binary");
+
+        LocalCopyOfData = new PlayerStatistics();
+
+        formatter.Serialize(saveFile, LocalCopyOfData);
+
+        saveFile.Close();
+        LocalPlayerStats.Instance.localPlayerData = LocalCopyOfData;
+    }
+
     public void LoadData()
     {
 
+        UnityEngine.Debug.Log("LoadedGame");
         if (!File.Exists("Saves/save.binary"))
         {
             this.SaveData();

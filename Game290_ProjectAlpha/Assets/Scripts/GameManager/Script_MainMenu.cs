@@ -29,6 +29,9 @@ public class Script_MainMenu : MonoBehaviour
     [SerializeField]
     private GameObject tutorial = null;
 
+    [SerializeField]
+    private GameObject achievement = null;
+
     void Start ()
     {
         //Load achievement stats
@@ -123,7 +126,11 @@ public class Script_MainMenu : MonoBehaviour
         Screen.fullScreen = isFullscreen;
     }
 
-
+    public void resetAchievements()
+    {
+        AchieveManager AM = new AchieveManager();
+        AM.ResetAchievements();
+    }
 
 
     public void OnOptionsClick()
@@ -183,6 +190,40 @@ public class Script_MainMenu : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             mainMenu.SetActive(true);
             tutorial.SetActive(false);
+        }
+    }
+
+
+
+    /*
+     * achievement Menu
+     */
+
+    public void OnAchievementClick()
+    {
+        StartCoroutine(AchievementWait(0));
+    }
+
+    public void OnAchievementBackClick()
+    {
+        StartCoroutine(AchievementWait(1));
+    }
+
+    //add pause for options button clicks
+    IEnumerator AchievementWait(int i)
+    {
+        if (i == 0)
+        {
+            yield return new WaitForSeconds(0.2f);
+            mainMenu.SetActive(false);
+            achievement.SetActive(true);
+        }
+
+        if (i == 1)
+        {
+            yield return new WaitForSeconds(0.2f);
+            mainMenu.SetActive(true);
+            achievement.SetActive(false);
         }
     }
 }

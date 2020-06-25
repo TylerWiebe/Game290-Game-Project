@@ -61,7 +61,7 @@ public class Alien_Object : MonoBehaviour
     public bool playerAlive = true;
 
     //A boolean that is true if the player has yet to have attacked, false if the player has attacked
-    public bool AlienHasNotAttacked;
+    private static bool AlienHasNotAttacked;
 
 
     //ALIEN STATS
@@ -134,7 +134,6 @@ public class Alien_Object : MonoBehaviour
             gameJustStarted = false;
         }
 
-        UnityEngine.Debug.Log(vitality);
         //Finding the desired GameObjects
         gameManager = GameObject.Find("GameManager");
         sceneTransitionManager = GameObject.Find("SceneTransitionManager");
@@ -177,6 +176,7 @@ public class Alien_Object : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UnityEngine.Debug.Log("alien has not attacked: " + AlienHasNotAttacked1);
         Camera myCam = GameObject.Find("MainCamera").GetComponent<Camera>();
         myCam.orthographicSize = cameraSize;
         if ((Current_Health <= 0) && (playerAlive))
@@ -591,7 +591,8 @@ public class Alien_Object : MonoBehaviour
 
     public void attack()
     {
-        AlienHasNotAttacked = false;
+        UnityEngine.Debug.Log("Alien has Attacked");
+        AlienHasNotAttacked1 = false;
 
         if (Current_Class == 2)
         {
@@ -643,6 +644,7 @@ public class Alien_Object : MonoBehaviour
 
     public bool AlienCanMove { get => alienCanMove; set => alienCanMove = value; }
     public bool AlienTouchedStairs1 { get => AlienTouchedStairs; set => AlienTouchedStairs = value; }
+    public bool AlienHasNotAttacked1 { get => AlienHasNotAttacked; set => AlienHasNotAttacked = value; }
 
     public float getBodyAngle()
     {
@@ -686,6 +688,8 @@ public class Alien_Object : MonoBehaviour
     #region Reset
     public void resetAlien()
     {
+        LocalPlayerStats.Instance.localPlayerData.numberOfAttempts++;
+
         //ALIEN STATS RESET
         //Health Stats
         Max_Health = 300;
@@ -706,7 +710,7 @@ public class Alien_Object : MonoBehaviour
         ranged_charges_regen = 4;
 
         //reset AlienHasNotAttacked (achievement boolean)
-        AlienHasNotAttacked = true;
+        AlienHasNotAttacked1 = true;
 
         //allow the alien to move
         alienCanMove = true;

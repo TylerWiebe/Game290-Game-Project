@@ -28,7 +28,7 @@ public class Script_Boss_Object : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (GameObject.Find("Boss1ID") && GameObject.Find("AlienHead").GetComponent<Alien_Object>().AlienHasNotAttacked)
+        if (GameObject.Find("Boss1ID") && GameObject.Find("AlienHead").GetComponent<Alien_Object>().AlienHasNotAttacked1)
         {
             LocalPlayerStats.Instance.localPlayerData.hasReachedBossOneWithoutAttacking = true;
         }
