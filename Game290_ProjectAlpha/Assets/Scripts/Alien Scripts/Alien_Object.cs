@@ -165,6 +165,10 @@ public class Alien_Object : MonoBehaviour
             morphQueue.GetComponent<Script_Morph_UI>().MorphLeft();
 
         }
+        if (Current_Class == 2)
+        {
+            animHead.SetInteger("IsRanged", 1);
+        }
         if (Current_Class == 0)
         {
             morphQueue.GetComponent<Script_Morph_UI>().MorphRight();
