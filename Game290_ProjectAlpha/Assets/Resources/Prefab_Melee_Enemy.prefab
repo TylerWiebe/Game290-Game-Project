@@ -376,6 +376,7 @@ MonoBehaviour:
   canMove: 1
   canRotate: 1
   collided: 0
+  AlienHead: {fileID: 0}
 --- !u!58 &6012400469325524880
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -418,7 +419,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1000000
+  m_Mass: 10
   m_LinearDrag: 1
   m_AngularDrag: 10000
   m_GravityScale: 0

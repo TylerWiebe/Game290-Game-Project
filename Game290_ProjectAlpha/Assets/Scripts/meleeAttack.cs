@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEngine;
 
 public class meleeAttack : MonoBehaviour
@@ -11,6 +12,11 @@ public class meleeAttack : MonoBehaviour
     private GameObject alienHead;
 
     public GameObject crack;
+
+    //knockback Force
+    public float knockbackForce;
+    Vector3 myVector = new Vector3();
+
 
     //assassin attack variables
     public GameObject assassinHitPoint;
@@ -43,11 +49,15 @@ public class meleeAttack : MonoBehaviour
             if (collider.gameObject.tag == "MeleeEnemy" && temp)
             {
                 collider.gameObject.GetComponent<Script_Melee_Enemy_Object>().attacked(alienHead.GetComponent<Alien_Object>().getDamage()* AssassinDmgMultiplier);
+                myVector = this.gameObject.transform.position - collider.gameObject.transform.position;
+                collider.gameObject.GetComponent<Rigidbody2D>().AddForce(myVector * knockbackForce, ForceMode2D.Impulse);
                 temp = false;
             }
             else if (collider.gameObject.tag == "RangedEnemy" && temp)
             {
                 collider.gameObject.GetComponent<Script_Ranged_Enemy_Object>().attacked(alienHead.GetComponent<Alien_Object>().getDamage()* AssassinDmgMultiplier);
+                myVector = this.gameObject.transform.position - collider.gameObject.transform.position;
+                collider.gameObject.GetComponent<Rigidbody2D>().AddForce(myVector * knockbackForce, ForceMode2D.Impulse);
                 temp = false;
             }
             else if (collider.gameObject.tag == "Boss" && temp)
