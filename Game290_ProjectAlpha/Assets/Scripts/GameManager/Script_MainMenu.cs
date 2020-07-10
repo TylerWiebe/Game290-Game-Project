@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -31,6 +32,22 @@ public class Script_MainMenu : MonoBehaviour
 
     [SerializeField]
     private GameObject achievement = null;
+
+    [SerializeField]
+    private Image tutorialImage = null;
+
+    [SerializeField]
+    private Sprite tutorialImage1 = null;
+
+    [SerializeField]
+    private Sprite tutorialImage2 = null;
+
+    [SerializeField]
+    private GameObject tutorialContinueButton = null;
+
+    [SerializeField]
+    private GameObject tutorialExitButton = null;
+
 
     void Start ()
     {
@@ -175,6 +192,13 @@ public class Script_MainMenu : MonoBehaviour
         StartCoroutine(TutorialWait(1));
     }
 
+    public void OnTutorialContinueClick()
+    {
+        tutorialImage.sprite = tutorialImage2;
+        tutorialContinueButton.SetActive(false);
+        tutorialExitButton.SetActive(true);
+    }
+
     //add pause for options button clicks
     IEnumerator TutorialWait(int i)
     {
@@ -183,6 +207,11 @@ public class Script_MainMenu : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             mainMenu.SetActive(false);
             tutorial.SetActive(true);
+            tutorialImage.sprite = tutorialImage1;
+            tutorialContinueButton.SetActive(true);
+            tutorialExitButton.SetActive(false);
+
+
         }
 
         if (i == 1)

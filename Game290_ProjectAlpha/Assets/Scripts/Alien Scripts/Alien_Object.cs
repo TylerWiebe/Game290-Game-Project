@@ -6,6 +6,7 @@ using System;
 using UnityEngine.SceneManagement;
 using System.Globalization;
 using System.Diagnostics;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class Alien_Object : MonoBehaviour
 {
@@ -49,7 +50,8 @@ public class Alien_Object : MonoBehaviour
     float HeadAngle = 0f;
     float BodyAngle = 0f;
 
-
+    //Light2D
+    public Light2D visionLight;
 
     //Attached objects
     private GameObject AlienHead;
@@ -359,6 +361,8 @@ public class Alien_Object : MonoBehaviour
         //assassin
         if (Current_Class == 0)
         {
+            visionLight.pointLightOuterRadius = 12.5f;
+
             Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1) * 0.5);
             Current_Health = (int)(Max_Health * (Current_Health_Percentage));
             speed = 0.075f * 2f; //0.075
@@ -379,13 +383,14 @@ public class Alien_Object : MonoBehaviour
 
             //turn on skill box
             //assassinAttackBox.SetActive(true);
-
+            
             //add skill
 
         }
         //bruiser
         else if (Current_Class == 1)
         {
+            visionLight.pointLightOuterRadius = 10;
             Max_Health = (int)Math.Round(HEALTH_SCALE_CONST * (vitality + 1) * 2.0);
             Current_Health = (int)(Max_Health * (Current_Health_Percentage));
             speed = 0.025f * 2f; //0.025
@@ -413,6 +418,7 @@ public class Alien_Object : MonoBehaviour
         //ranged
         else
         {
+            visionLight.pointLightOuterRadius = 15;
             Max_Health = (float)Math.Round(HEALTH_SCALE_CONST * (vitality + 1.0));
             Current_Health = (float)(Max_Health * (Current_Health_Percentage));
             speed = 0.050f * 2f;

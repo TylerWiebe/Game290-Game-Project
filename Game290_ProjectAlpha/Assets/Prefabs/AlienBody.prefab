@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alien_spriteq: {fileID: 0}
+  visionLight: {fileID: 4292343007376033430}
   speed: 0.05
   playerAlive: 1
   cameraSize: 10
